@@ -1,0 +1,44 @@
+Theano:
+-Released 04/02/2009
+-“Theano is a compiler for mathematical expressions in Python that combines the convenience of NumPy’s syntax with the speed of optimized native machine language.”
+-Created by a small academic team, development has grown significantly. ~22,000 commits, 211 contributors. Qualitatively, high community driven development.
+-Built on top of other open source projects, BSD license here: http://deeplearning.net/software/theano/LICENSE.html
+-No commit license, copyright consolidated.
+
+Caffe:
+-Based off of older project “caffeine”, released github on Sept 8, 2013.
+-Developed at Berkley vision and learning center, with community driven development at the outset. Designed for modularity. 
+-Licensed under BSD 2-Clause : https://github.com/BVLC/caffe/blob/master/LICENSE
+-~3,500 commits, 177 contributors. Qualitatively, smaller, but more involved community.
+-No commit license, shared copyright model.
+
+Torch7:
+-Latest iteration of torch ML project (After Torch3, 4, and 5), released on github on Jan 22nd, 2012. (Torch3 released in 2002)
+-Major contributors and maintainers from across industry and academia, with community driven package interfaces with Torch core. 
+-BSD licensed: https://github.com/torch/torch7/blob/master/COPYRIGHT.txt
+-~1000 commits, 78 contributors. Qualitatively very small core group of involved contributors. 
+-No commit license. 
+
+CNTK:
+-Originally released on codeplex: https://cntk.codeplex.com/ on April 2014 with more restrictive license, then on Github on January 25th, 2016. 
+-Released open source “Out of necessity” to speed up development.
+-Custom license: https://github.com/Microsoft/CNTK/blob/master/LICENSE.md
+-Contributor License Agreement required, copyright consolidated : https://cla.microsoft.com/cladoc/microsoft-contribution-license-agreement.pdf
+-~4000 commits, 49 contributors. Almost entire community has multiple commits, seem involved. 
+
+TensorFlow:
+-Released November 1st, 2015.
+-Based on caffe, tensorflow was designed with open source development at the core. “We hope to build an active open source community that drives the future of this library, both by providing feedback and by actively contributing to the source code.”
+-Apache 2.0 licensed: https://github.com/tensorflow/tensorflow/blob/master/LICENSE
+-CLA required, for individuals and companies: https://cla.developers.google.com/about/google-individual?csw=1 (General google CLA)
+-~1500 commits, 100 contributors. Slightly wider community involvement than CNTK.
+
+Other Interesting Candidates:
+
+Deeplearning4j: https://github.com/deeplearning4j/deeplearning4j
+
+
+Useful links:
+https://en.wikipedia.org/wiki/Comparison_of_deep_learning_software
+
+
