@@ -1,6 +1,0 @@
-caffe.txt
-CNTK.txt
-tensorflow.txt
-Theano.txt
-torch7.txt
-deeplearning4j.txt

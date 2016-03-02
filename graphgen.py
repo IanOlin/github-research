@@ -1,19 +1,20 @@
 import numpy as np
 import networkx as netx
 #csv file = csv
-names = open('files.txt','r').read()
+dir = 'mlcontrib/'
+names = open(dir+'files.txt','r').read()
 filelist = names.split()
 print filelist
 allcommon = []
-f = open('ml-collaborators.txt', 'w')
+f = open(dir+'ml-collaborators.txt', 'w')
 allCollaborators = {}
 projects = []
 matrix = []
 allcommon = []
 for i in range(len(filelist)):
-    projectName = filelist[i][:-4]
+    projectName = filelist[i].split('contributors')[0]
     projects.append(projectName)
-    data1 = open(filelist[i], 'r').read()
+    data1 = open(dir+filelist[i], 'r').read()
     data1 = data1.split()
     matrix.append([0]*len(allCollaborators))
     for c in data1:
@@ -30,7 +31,7 @@ for i in range(len(filelist)):
         #if j <= i: #not taking any common pairs
         #name = tuple(filelist[i],filelist[j-i])
         
-        data2 = open(filelist[j], 'r').read()
+        data2 = open(dir+filelist[j], 'r').read()
 
 
         #data2 - file.open(filelist[j-(i+1), 'r'])
