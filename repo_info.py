@@ -16,11 +16,11 @@ repo_collabs = [('Theano', 'Theano'), ('caffe', 'BVLC'), ('CNTK', 'Microsoft'), 
 
 for collabs in repo_collabs:
 	repo_contributors = []
-	URL_str = 'https://api.github.com/repos/{}/{}/contributors'.format(collabs[1], collabs[0])
+	URL_str = 'https://api.github.com/repos/{}/{}/stats/contributors'.format(collabs[1], collabs[0])
 	new_URL = pattern.web.URL(URL_str).download()
 	contributor_data = json.loads(new_URL)
 	for contributor in contributor_data:
-		repo_contributors.append(contributor['login'])
+		repo_contributors.append(contributor['author']['login'])
 	f = open(collabs[0] + '.txt', 'w')
 	for contributor in repo_contributors:
 		f.write(contributor + '\n')
