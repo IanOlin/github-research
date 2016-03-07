@@ -28,19 +28,30 @@ def contributors(repos,dirName):
 	filenames = []
 	for collabs in repos:
 		repo_contributors = []
-		URL_str = 'https://api.github.com/repos/{}/{}/contributors?page=6'.format(collabs[1], collabs[0])
-		new_URL = requests.get(URL_str)#pattern.web.URL(URL_str).download()
-		print new_URL.headers
-		contributor_data = json.loads(new_URL.text)
-		for contributor in contributor_data:
-			repo_contributors.append(contributor['login'])
+		page = 1
+
+		while page>0:
+
+			URL_str = 'https://api.github.com/repos/{}/{}/contributors?page={}'.format(collabs[1], collabs[0],page)
+			new_URL = requests.get(URL_str)#pattern.web.URL(URL_str).download()
+			print new_URL.headers
+			header_json = json.loads(str(new_URL.headers).strip('CaseInsensitiveDict()'))
+			links = header_json['Link']
+			index = links.find('rel="next"')
+			if index<0:
+				page = -1
+			else
+				page+=1
+			contributor_data = json.loads(new_URL.text)
+			for contributor in contributor_data:
+				repo_contributors.append(contributor['login'])
 		fname = collabs[0] + 'contributors.txt'
 		filenames.append(fname)
 		f = open(dirName+'/'+fname, 'w')
 		for contributor in repo_contributors:
 			f.write(contributor + '\n')
 		f.close()
-		return new_URL.headers
+		
 	f = open(dirName+'/'+'files.txt','w')
 	for n in filenames:
 		f.write(n+'\n')
