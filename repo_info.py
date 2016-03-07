@@ -31,7 +31,8 @@ def contributors(repos,dirName):
 		URL_str = 'https://api.github.com/repos/{}/{}/contributors?page=6'.format(collabs[1], collabs[0])
 		new_URL = requests.get(URL_str)#pattern.web.URL(URL_str).download()
 		#print new_URL.headers
-		headers = Message(StringIO(new_URL.headers))
+		#headers = Message(StringIO(new_URL.headers))
+		next = str(new_URL.headers)
 		print type(headers)
 		contributor_data = json.loads(new_URL.text)
 		for contributor in contributor_data:
