@@ -7,6 +7,9 @@ Writes each repo's data to a separate file in a given directory
 import pattern.web
 import json
 import os
+import requests
+from mimetools import Message
+from StringIO import StringIO
 #Generate a list of repos & username associated with that particular repo: list = [(repo1, un1), (repo2, un2), etc.]
 
 repo_collabs = [('Theano', 'Theano'), ('caffe', 'BVLC'), ('CNTK', 'Microsoft'), ('tensorflow', 'tensorflow'), ('torch7', 'torch'), ('deeplearning4j', 'deeplearning4j')]
@@ -25,21 +28,26 @@ def contributors(repos,dirName):
 	filenames = []
 	for collabs in repos:
 		repo_contributors = []
-		URL_str = 'https://api.github.com/repos/{}/{}/stats/contributors'.format(collabs[1], collabs[0])
-		new_URL = pattern.web.URL(URL_str).download()
-		contributor_data = json.loads(new_URL)
+		URL_str = 'https://api.github.com/repos/{}/{}/contributors?page=6'.format(collabs[1], collabs[0])
+		new_URL = requests.get(URL_str)#pattern.web.URL(URL_str).download()
+		#print new_URL.headers
+		headers = Message(StringIO(new_URL.headers))
+		print type(headers)
+		contributor_data = json.loads(new_URL.text)
 		for contributor in contributor_data:
-			repo_contributors.append(contributor['author']['login'])
+			repo_contributors.append(contributor['login'])
 		fname = collabs[0] + 'contributors.txt'
 		filenames.append(fname)
 		f = open(dirName+'/'+fname, 'w')
 		for contributor in repo_contributors:
 			f.write(contributor + '\n')
 		f.close()
+		return new_URL.headers
 	f = open(dirName+'/'+'files.txt','w')
 	for n in filenames:
 		f.write(n+'\n')
 	f.close()
+	
 	
 def collaborators(repos,dirName):
 	if not os.path.exists(dirName):
@@ -84,7 +92,7 @@ def forks(repos,dirName):
 	for n in filenames:
 		f.write(n+'\n')
 	f.close()
-if __name__=='__main__':
-	contributors(repo_collabs,'mlcontrib')
-	collaborators(repo_collabs,'mlcollabs')
-	forks(repo_collabs,'mlforks')
+#if __name__=='__main__':
+h=contributors(repo_collabs,'mlcontrib')
+	# collaborators(repo_collabs,'mlcollabs')
+	# forks(repo_collabs,'mlforks')

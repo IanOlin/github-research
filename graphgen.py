@@ -1,5 +1,6 @@
 import numpy as np
-import networkx as netx
+#import networkx as netx
+
 #csv file = csv
 dir = 'mlcontrib/'
 names = open(dir+'files.txt','r').read()
