@@ -17,7 +17,7 @@ repo_collabs = [('Theano', 'Theano'), ('caffe', 'BVLC'), ('CNTK', 'Microsoft'), 
 
 #Use that list's info to get api info/obtain list of collaborators
 
-#Obtain json stuffz from api info 
+#Obtain json stuffz from api info
 
 #grab specific pieces of data & store it
 
@@ -32,7 +32,7 @@ def contributors(repos,dirName):
 		new_URL = requests.get(URL_str)#pattern.web.URL(URL_str).download()
 		#print new_URL.headers
 		headers = Message(StringIO(new_URL.headers))
-		print type(headers)
+		print new_URL.headers
 		contributor_data = json.loads(new_URL.text)
 		for contributor in contributor_data:
 			repo_contributors.append(contributor['login'])
@@ -47,8 +47,8 @@ def contributors(repos,dirName):
 	for n in filenames:
 		f.write(n+'\n')
 	f.close()
-	
-	
+
+
 def collaborators(repos,dirName):
 	if not os.path.exists(dirName):
 		os.mkdir(dirName)
