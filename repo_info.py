@@ -35,12 +35,10 @@ def contributors(repos,dirName):
 			URL_str = 'https://api.github.com/repos/{}/{}/contributors?page={}'.format(collabs[1], collabs[0],page)
 			new_URL = requests.get(URL_str)#pattern.web.URL(URL_str).download()
 			print new_URL.headers
-			header_json = json.loads(str(new_URL.headers).strip('CaseInsensitiveDict()'))
-			links = header_json['Link']
-			index = links.find('rel="next"')
+			index=str(new_URL.headers).find('rel="next"')
 			if index<0:
 				page = -1
-			else
+			else:
 				page+=1
 			contributor_data = json.loads(new_URL.text)
 			for contributor in contributor_data:
@@ -51,7 +49,7 @@ def contributors(repos,dirName):
 		for contributor in repo_contributors:
 			f.write(contributor + '\n')
 		f.close()
-		
+
 	f = open(dirName+'/'+'files.txt','w')
 	for n in filenames:
 		f.write(n+'\n')
