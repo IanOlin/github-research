@@ -26,6 +26,7 @@ def contributors(repos,dirName):
 	if not os.path.exists(dirName):
 		os.mkdir(dirName)
 	filenames = []
+	all_repos = {}
 	for collabs in repos:
 		repo_contributors = []
 		page = 1
@@ -49,11 +50,16 @@ def contributors(repos,dirName):
 		for contributor in repo_contributors:
 			f.write(contributor + '\n')
 		f.close()
+		all_repos[collabs[0]] = repo_contributors
+		
 
 	f = open(dirName+'/'+'files.txt','w')
 	for n in filenames:
 		f.write(n+'\n')
 	f.close()
+	
+
+	return all_repos
 
 
 def collaborators(repos,dirName):
@@ -99,7 +105,56 @@ def forks(repos,dirName):
 	for n in filenames:
 		f.write(n+'\n')
 	f.close()
+
+def get_repos(users, dirName=None):
+	"""Gets all the repos of a user"""
+	if dirName!=None:
+		if not os.path.exists(dirName):
+			os.mkdir(dirName)
+	filenames = []
+	all_repos = {}
+
+	for u in users:
+		repos = []
+		forked = []
+		page = 1
+
+		while page>0:
+
+			URL_str = 'https://api.github.com/users/{}}/repos'.format(collabs)
+			new_URL = requests.get(URL_str)
+			print new_URL.headers
+			index=str(new_URL.headers).find('rel="next"')
+			if index<0:
+				page = -1
+			else:
+				page+=1
+
+			repo_data = json.loads(new_URL.text)
+			for repo in repo_data:
+				repos.append(repo['name'])
+				if repos['fork']:
+					forked.append(repo['name'])
+		fname = u + 'repos.txt'
+		filenames.append(fname)
+		if dirName != None:
+			f = open(dirName+'/'+fname, 'w')
+			for contributor in repo_contributors:
+				f.write(contributor + '\n')
+			f.close()
+		all_repos[u] = (repos,forked)
+		
+	if dirName!=None:
+		f = open(dirName+'/'+'files.txt','w')
+		for n in filenames:
+			f.write(n+'\n')
+		f.close()
+	
+	return all_repos
+
+
 #if __name__=='__main__':
-h=contributors(repo_collabs,'mlcontrib')
+#h=contributors(repo_collabs,'mlcontrib')
 	# collaborators(repo_collabs,'mlcollabs')
 	# forks(repo_collabs,'mlforks')
+print get_repos('poosomooso')
