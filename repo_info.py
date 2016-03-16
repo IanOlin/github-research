@@ -13,7 +13,9 @@ from StringIO import StringIO
 #Generate a list of repos & username associated with that particular repo: list = [(repo1, un1), (repo2, un2), etc.]
 
 repo_collabs = [('Theano', 'Theano'), ('caffe', 'BVLC'), ('CNTK', 'Microsoft'), ('tensorflow', 'tensorflow'), ('torch7', 'torch'), ('deeplearning4j', 'deeplearning4j')]
-
+keyfile = open('keyfile.txt')
+KEY = keyfile.read()
+keyfile.close()
 
 #Use that list's info to get api info/obtain list of collaborators
 
@@ -121,9 +123,9 @@ def get_repos(users, dirName=None):
 
 		while page>0:
 
-			URL_str = 'https://api.github.com/users/{}}/repos'.format(collabs)
-			new_URL = requests.get(URL_str)
-			print new_URL.headers
+			URL_str = 'https://api.github.com/users/{}/repos'.format(u)
+			new_URL = requests.get(URL_str, params={'page':page, 'access_token':KEY, 'per_page':100})
+			# print page
 			index=str(new_URL.headers).find('rel="next"')
 			if index<0:
 				page = -1
@@ -133,7 +135,7 @@ def get_repos(users, dirName=None):
 			repo_data = json.loads(new_URL.text)
 			for repo in repo_data:
 				repos.append(repo['name'])
-				if repos['fork']:
+				if repo['fork']:
 					forked.append(repo['name'])
 		fname = u + 'repos.txt'
 		filenames.append(fname)
@@ -153,8 +155,9 @@ def get_repos(users, dirName=None):
 	return all_repos
 
 
-#if __name__=='__main__':
+if __name__=='__main__':
+	pass
 #h=contributors(repo_collabs,'mlcontrib')
 	# collaborators(repo_collabs,'mlcollabs')
 	# forks(repo_collabs,'mlforks')
-print get_repos('poosomooso')
+	# print get_repos(['poosomooso'])
