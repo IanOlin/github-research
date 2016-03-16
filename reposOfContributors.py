@@ -3,7 +3,8 @@ import json
 
 dir = 'mlcontrib/'
 names = open(dir+'files.txt','r').read()
-filelist = names.split()
+#filelist = names.split()
+filelist = ['Theanocontributors.txt']
 print filelist
 
 #dictionary: 
