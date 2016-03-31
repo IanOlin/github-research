@@ -2,8 +2,6 @@
 With a given list of repos, has methods to extract the list of collaborators, contributors, or forks
 Writes each repo's data to a separate file in a given directory
 """
-#Save the file
-
 import pattern.web
 import json
 import os
@@ -11,124 +9,22 @@ import requests
 from mimetools import Message
 from StringIO import StringIO
 import time
-#Generate a list of repos & username associated with that particular repo: list = [(repo1, un1), (repo2, un2), etc.]
 
 repo_collabs = [('Theano', 'Theano'), ('caffe', 'BVLC'), ('CNTK', 'Microsoft'), ('tensorflow', 'tensorflow'), ('torch7', 'torch'), ('deeplearning4j', 'deeplearning4j')]
+
 keyfile = open('keyfile.txt')
 KEY = keyfile.read()
 keyfile.close()
 
 API_DOMAIN = 'https://api.github.com'
 
-#Use that list's info to get api info/obtain list of collaborators
+CONTRIBUTORS = 0
+FORKERS = 1
+#DOES NOT WORK UNLESS YOU HAVE PUSH ACCESS
+COLLABORATORS = 10
 
-#Obtain json stuffz from api info
-
-#grab specific pieces of data & store it
-
-"""list of repos with the format (reponame, ownername)"""
-def contributors(repos,dirName=None):
-	#print repos
-	if dirName!=None:
-		if not os.path.exists(dirName):
-			os.mkdir(dirName)
-	filenames = []
-	all_repos = {}
-	for collabs in repos:
-		repo_contributors = []
-		page = 1
-
-		while page>0:
-
-			URL_str = 'https://api.github.com/repos/{}/{}/contributors'.format(collabs[1], collabs[0])
-			new_URL = api_get(base_URL=URL_str, parameters={'page':page, 'access_token':KEY, 'per_page':100})
-
-			index=str(new_URL.headers).find('rel="next"')
-			if index<0:
-				page = -1
-			else:
-				page+=1
-			contributor_data = json.loads(new_URL.text)
-			try:
-				for contributor in contributor_data:
-					# print 'start'
-					# for k in contributor.keys():
-					# 	print '{} {}'.format(k, contributor[k])
-					# print ''
-					repo_contributors.append(contributor['login'])
-			except (KeyError, TypeError) as e:
-				if "Repository access blocked" in contributor_data['message']:
-					continue
-				try:
-					errorfile = open('ERROR.txt', 'w')
-					errorfile.write(json.dumps(contributor_data))
-					errorfile.close()
-				except:
-					print 'could not write to file'
-				raise e
-
-		fname = collabs[0] + 'contributors.txt'
-		filenames.append(fname)
-		if dirName != None:
-			f = open(dirName+'/'+fname, 'w')
-			for contributor in repo_contributors:
-				f.write(contributor + '\n')
-			f.close()
-
-		all_repos[collabs] = repo_contributors
-
-	if dirName!=None:
-		f = open(dirName+'/'+'files.txt','w')
-		for n in filenames:
-			f.write(n+'\n')
-		f.close()
-	
-	return all_repos
-
-
-def collaborators(repos,dirName):
-	if not os.path.exists(dirName):
-		os.mkdir(dirName)
-	filenames = []
-	for collabs in repos:
-		repo_contributors = []
-		URL_str = 'https://api.github.com/repos/{}/{}/contributors'.format(collabs[1], collabs[0])
-		new_URL = pattern.web.URL(URL_str).download()
-		contributor_data = json.loads(new_URL)
-		for contributor in contributor_data:
-			repo_contributors.append(contributor['login'])
-		fname = collabs[0] + 'collaborators.txt'
-		filenames.append(fname)
-		f = open(dirName+'/'+fname, 'w')
-		for contributor in repo_contributors:
-			f.write(contributor + '\n')
-		f.close()
-	f = open(dirName+'/'+'files.txt','w')
-	for n in filenames:
-		f.write(n+'\n')
-	f.close()
-
-def forks(repos,dirName):
-	if not os.path.exists(dirName):
-		os.mkdir(dirName)
-	filenames = []
-	for collabs in repos:
-		repo_contributors = []
-		URL_str = 'https://api.github.com/repos/{}/{}/forks'.format(collabs[1], collabs[0])
-		new_URL = pattern.web.URL(URL_str).download()
-		contributor_data = json.loads(new_URL)
-		for contributor in contributor_data:
-			repo_contributors.append(contributor['owner']['login'])
-		fname = collabs[0] + 'forks.txt'
-		filenames.append(fname)
-		f = open(dirName+'/'+fname, 'w')
-		for contributor in repo_contributors:
-			f.write(contributor + '\n')
-		f.close()
-	f = open(dirName+'/'+'files.txt','w')
-	for n in filenames:
-		f.write(n+'\n')
-	f.close()
+URL_PATH = {CONTRIBUTORS:'contributors', COLLABORATORS:'collaborators', FORKERS:'forks'}
+JSON_PATH = {CONTRIBUTORS:('login',), COLLABORATORS:('login',), FORKERS:('owner', 'login')}
 
 def get_repos(users, dirName=None):
 	"""Gets all the repos of a user"""
@@ -196,7 +92,7 @@ def get_contributions(users, dirName = None):
 		while page>0:
 
 			URL_str = '{}/users/{}/repos'.format(API_DOMAIN, u)
-			new_URL = api_get(base_URL=URL_str, parameters={'page':page, 'access_token':KEY, 'per_page':100})
+			new_URL = api_get(baseURL=URL_str, parameters={'page':page, 'access_token':KEY, 'per_page':100})
 			# print page
 			index=str(new_URL.headers).find('rel="next"')
 			if index<0:
@@ -230,7 +126,7 @@ def get_contributions(users, dirName = None):
 		for fork in repos:
 			"""check for contributor"""
 			repo_URL = "{}/repos/{}/{}".format(API_DOMAIN, u,fork)
-			page = json.loads(api_get(base_URL=repo_URL, parameters={'access_token':KEY}).text)
+			page = json.loads(api_get(baseURL=repo_URL, parameters={'access_token':KEY}).text)
 			try:
 				parent_repo = (page['parent']['name'], page['parent']['owner']['login'])
 			except (KeyError, TypeError) as e:
@@ -259,10 +155,11 @@ def get_contributions(users, dirName = None):
 	
 	return all_repos
 
-def api_get(base_URL, parameters = {}, min_remaining=1):
+def api_get(baseURL, parameters = {}, minRemaining=1):
 	"""If there are not enough calls remaining, wait until they refresh"""
 	while True:
 		try:
+			#get rate limit
 			URL_str = "https://api.github.com/rate_limit"
 			response = requests.get(URL_str, params={'access_token':KEY})
 			try:
@@ -275,21 +172,96 @@ def api_get(base_URL, parameters = {}, min_remaining=1):
 				except:
 					print 'could not write to file'
 				raise e
-
-			if remaining < min_remaining:
+			#if there are not enough calls left
+			if remaining < minRemaining:
 				print 'waiting'
 				time_sec = int(json.loads(response.text)['resources']['core']['reset'])
 				time.sleep(time_sec+5-int(time.time()))
 				print 'done waiting'
-			return requests.get(base_URL, params=parameters)
+			#return original request
+			return requests.get(baseURL, params=parameters)
+
 		except requests.exceptions.ConnectionError:
 			print 'ConnectionError, trying again'
 			continue
 		break
 
+def JSON_access(jsonString, keyTuple):
+	"""
+	returns the element or json object from the tuple of keys
+	returns None if repo is blocked
+	"""
+	try:
+		breakdown = jsonString
+		#grabbing each section--subsequent keys will be nested in the parent keys
+		for key in keyTuple:
+			breakdown = breakdown[key]
+		return breakdown
+	except (KeyError, TypeError) as e:
+		#if repository is blocked, return nothing
+		try:
+			if "Repository access blocked" in responsePage['message']:
+				return None
+		except:
+			pass
+		#key errors
+		try:
+			errorFile = open('ERROR.txt', 'w')
+			errorFile.write(json.dumps(jsonString))
+			errorFile.close()
+		except:
+			print 'COULD NOT WRITE TO FILE'
+		raise e
+
+"""list of repos with the format (reponame, ownername)"""
+def repoPeople(repos,group=CONTRIBUTORS,dirName=None):
+	#print repos
+	if dirName!=None:
+		if not os.path.exists(dirName):
+			os.mkdir(dirName)
+	filenames = []
+	all_repos = {}
+	for collabs in repos:
+		people = []
+		page = 1
+
+		while page>0:
+
+			URLstr = 'https://api.github.com/repos/{}/{}/{}'.format(collabs[1], collabs[0], URL_PATH[group])
+			newURL = api_get(baseURL=URLstr, parameters={'page':page, 'access_token':KEY, 'per_page':100})
+			index=str(newURL.headers).find('rel="next"')
+			if index<0:
+				page = -1
+			else:
+				page+=1
+
+			responsePage = json.loads(newURL.text)
+
+			for contributor in responsePage:
+				username = JSON_access(contributor, JSON_PATH[group])
+				if username != None:
+					people.append(username)
+		#continue here
+		fname = collabs[0] + URL_PATH[group] + '.txt'
+		filenames.append(fname)
+		if dirName != None:
+			f = open(dirName+'/'+fname, 'w')
+			for contributor in people:
+				f.write(contributor + '\n')
+			f.close()
+
+		all_repos[collabs] = people
+
+	if dirName!=None:
+		f = open(dirName+'/'+'files.txt','w')
+		for n in filenames:
+			f.write(n+'\n')
+		f.close()
+	
+	return all_repos
 
 if __name__=='__main__':
-	print get_contributions(['Yangqing'])
+	print repoPeople([repo_collabs[0]], group=CONTRIBUTORS)
 	pass
 
 #h=contributors(repo_collabs,'mlcontrib')

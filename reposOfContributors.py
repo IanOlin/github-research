@@ -14,11 +14,6 @@ repo_collabs = {'Theano': 'Theano','caffe': 'BVLC','CNTK': 'Microsoft','tensorfl
 #     print x
 #     print repo_collabs[x]
 
-#dictionary: 
-#base repo name : list of forked repos
-#maybe?? 
-
-
 #all collaborators mapped name:index
 #collaborator name : index in matrix
 allCollaborators = {}
