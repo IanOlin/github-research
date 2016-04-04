@@ -12,7 +12,6 @@ not included:
 dir = 'mlcontrib/'
 names = open(dir+'files.txt','r').read()
 filelist = names.split()
-filelist = ['CNTKcontributors.txt']
 print filelist
 
 repo_collabs = {'Theano': 'Theano','caffe': 'BVLC','CNTK': 'Microsoft','tensorflow': 'tensorflow', 'torch7': 'torch', 'deeplearning4j': 'deeplearning4j'}
@@ -40,7 +39,7 @@ def addCol(adjMatrix):
 
 
 for i in range(len(filelist)):
-    print 'repo'
+    print '\nrepo'
     allContribRepos = {}
     projectName = filelist[i].split('contributors')[0]
     projects[(projectName, repo_collabs[projectName])]=i

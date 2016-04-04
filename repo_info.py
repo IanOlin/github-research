@@ -9,11 +9,17 @@ import requests
 from mimetools import Message
 from StringIO import StringIO
 import time
+import sys
+
 
 repo_collabs = [('Theano', 'Theano'), ('caffe', 'BVLC'), ('CNTK', 'Microsoft'), ('tensorflow', 'tensorflow'), ('torch7', 'torch'), ('deeplearning4j', 'deeplearning4j')]
 
 keyfile = open('keyfile.txt')
-KEY = keyfile.read()
+KEY_LIST = keyfile.readlines()
+for k in range(len(KEY_LIST)):
+	KEY_LIST[k] = KEY_LIST[k].strip()
+KEY = KEY_LIST[0]
+print KEY
 keyfile.close()
 
 API_DOMAIN = 'https://api.github.com'
@@ -90,18 +96,23 @@ def parent_repo(repo,user):
 	"""check for contributor"""
 	repo_URL = "{}/repos/{}/{}".format(API_DOMAIN, user, repo)
 	page = json.loads(api_get(baseURL=repo_URL, parameters={'access_token':KEY}).text)
-
-	name = JSON_access(page,('parent','name'))
-	owner = JSON_access(page, ('parent','owner','login'))
-	if name != None and owner != None:
-		parent_repo = (name, owner)
+	if JSON_access(page, ('fork',)):
+		name = JSON_access(page,('parent','name'))
+		owner = JSON_access(page, ('parent','owner','login'))
+		if name != None and owner != None:
+			parent_repo = (name, owner)
+		else:
+			parent_repo = None
 	else:
-		parent_repo = None
+		parent_repo=None
 
 	return parent_repo
 
 def api_get(baseURL, parameters = {}, minRemaining=1):
 	"""If there are not enough calls remaining, wait until they refresh"""
+	"""Need to implement multiple keys"""
+	initIndex = None
+	global KEY
 	while True:
 		try:
 			#get rate limit
@@ -119,17 +130,31 @@ def api_get(baseURL, parameters = {}, minRemaining=1):
 				raise e
 			#if there are not enough calls left
 			if remaining < minRemaining:
-				print 'waiting'
-				time_sec = int(json.loads(response.text)['resources']['core']['reset'])
-				time.sleep(time_sec+5-int(time.time()))
-				print 'done waiting'
-			#return original request
-			return requests.get(baseURL, params=parameters)
+				if initIndex == None:
+					initIndex = KEY_LIST.index(KEY)
+					continue
+				else:
+					currIndex = (KEY_LIST.index(KEY)+1)%len(KEY_LIST)
+					if currIndex!=initIndex:
+
+						KEY = KEY_LIST[currIndex]
+						print 'KEYSWITCH '+str(KEY)
+						continue
+					else:
+						print 'waiting', 
+						sys.stdout.flush()
+						time_sec = int(json.loads(response.text)['resources']['core']['reset'])
+						time.sleep(abs(time_sec+5-int(time.time())))
+						print 'done waiting', 
+						sys.stdout.flush()
+			else:
+				#return original request
+				parameters['access_token'] = KEY
+				return requests.get(baseURL, params=parameters)
 
 		except requests.exceptions.ConnectionError:
 			print 'ConnectionError, trying again'
 			continue
-		break
 
 def JSON_access(jsonString, keyTuple):
 	"""
@@ -148,7 +173,7 @@ def JSON_access(jsonString, keyTuple):
 			if "blocked" in jsonString['message']:
 				return None
 		except:
-			print 'not blocked'
+			print 'not blocked' 
 		#key errors
 		try:
 			errorFile = open('ERROR.txt', 'w')
@@ -189,7 +214,7 @@ def repoPeople(repos,group=CONTRIBUTORS,dirName=None):
 					print newURL.text
 					raise e
 			#print responsePage
-			if type(responsePage) is not list and 'Not Found' in responsePage['message']:
+			if type(responsePage) is not list: #and 'Not Found' in responsePage['message']:
 				print URLstr
 				continue
 
@@ -217,5 +242,7 @@ def repoPeople(repos,group=CONTRIBUTORS,dirName=None):
 	return all_repos
 
 if __name__=='__main__':
+	print parent_repo('ReadingJournal', 'poosomooso')
 	print repoPeople([('EmptyTest','poosomooso')], group=CONTRIBUTORS)
+	print repoPeople([('Codestellation2015', 'IanOlin')], group=CONTRIBUTORS)
 	pass
