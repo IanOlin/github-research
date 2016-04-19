@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     16633,        491]
-NotebookOptionsPosition[     15463,        445]
-NotebookOutlinePosition[     15832,        461]
-CellTagsIndexPosition[     15789,        458]
+NotebookDataLength[     17533,        507]
+NotebookOptionsPosition[     16361,        461]
+NotebookOutlinePosition[     16730,        477]
+CellTagsIndexPosition[     16687,        474]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -25,37 +25,40 @@ Cell["Import and processing", "Section",
 
 Cell[CellGroupData[{
 
-Cell[BoxData[{
+Cell[BoxData[
  RowBox[{
-  RowBox[{"SetDirectory", "[", "$InitialDirectory", "]"}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"rawdata", " ", "=", " ", 
+  RowBox[{"(*", 
    RowBox[{
-   "Import", "[", 
-    "\"\</data1/user_data/github/github-research/snowballcontrib/\
+    RowBox[{"SetDirectory", "[", "$InitialDirectory", "]"}], ";"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"rawdata", " ", "=", " ", 
+     RowBox[{
+     "Import", "[", 
+      "\"\</data1/user_data/github/github-research/snowballcontrib/\
 extendedcontributorsnew.txt\>\"", "]"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"maybe", " ", "=", " ", 
-   RowBox[{"StringSplit", "[", 
-    RowBox[{"rawdata", ",", "\"\<\\n\>\""}], "]"}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"moremaybe", " ", "=", " ", 
-   RowBox[{"maybe", "[", 
-    RowBox[{"[", 
-     RowBox[{"6", ";;", 
-      RowBox[{"Length", "@", "maybe"}]}], "]"}], "]"}]}], ";"}], "\n", 
- RowBox[{
-  RowBox[{"array", " ", "=", " ", 
-   RowBox[{"StringSplit", "/@", "moremaybe"}]}], ";"}], "\n", 
- RowBox[{"Dimensions", "[", "array", "]"}], "\n", 
- RowBox[{
-  RowBox[{"goodarray", " ", "=", " ", 
-   RowBox[{"ToExpression", "/@", "array"}]}], ";"}], "\n", 
- RowBox[{
-  RowBox[{"tarray", " ", "=", " ", 
-   RowBox[{"Transpose", "[", "goodarray", "]"}]}], ";"}]}], "Input",
+   RowBox[{
+    RowBox[{"maybe", " ", "=", " ", 
+     RowBox[{"StringSplit", "[", 
+      RowBox[{"rawdata", ",", "\"\<\\n\>\""}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"moremaybe", " ", "=", " ", 
+     RowBox[{"maybe", "[", 
+      RowBox[{"[", 
+       RowBox[{"6", ";;", 
+        RowBox[{"Length", "@", "maybe"}]}], "]"}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"array", " ", "=", " ", 
+     RowBox[{"StringSplit", "/@", "moremaybe"}]}], ";"}], "\n", 
+   RowBox[{"Dimensions", "[", "array", "]"}], "\n", 
+   RowBox[{
+    RowBox[{"goodarray", " ", "=", " ", 
+     RowBox[{"ToExpression", "/@", "array"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"tarray", " ", "=", " ", 
+     RowBox[{"Transpose", "[", "goodarray", "]"}]}], ";"}]}]}]], "Input",
  CellChangeTimes->{
   3.668898313074898*^9, {3.66889836438266*^9, 3.668898391067797*^9}, {
    3.668898438703042*^9, 3.668898460255658*^9}, 3.668898516111128*^9, {
@@ -63,7 +66,7 @@ extendedcontributorsnew.txt\>\"", "]"}]}], ";"}], "\[IndentingNewLine]",
    3.6688986246575885`*^9}, {3.668898667627737*^9, 3.668898671623393*^9}, {
    3.6688987268903284`*^9, 3.668898745216876*^9}, {3.668898779316113*^9, 
    3.668898779733423*^9}, {3.6689105613756933`*^9, 3.6689105798142934`*^9}, {
-   3.668959070325732*^9, 3.6689591113651323`*^9}}],
+   3.668959070325732*^9, 3.6689591113651323`*^9}, 3.6700241226123343`*^9}],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -71,7 +74,7 @@ Cell[BoxData[
  CellChangeTimes->{
   3.668898944649396*^9, 3.6688992259164667`*^9, 3.668910637696493*^9, 
    3.668958226308032*^9, 3.6689591380767317`*^9, {3.669960982855668*^9, 
-   3.669961011098688*^9}}]
+   3.669961011098688*^9}, 3.6700241379241714`*^9}]
 }, Open  ]]
 }, Open  ]],
 
@@ -416,31 +419,44 @@ Cell["Ego Test", "Section",
 
 Cell[BoxData[{
  RowBox[{
-  RowBox[{"fist", " ", "=", " ", 
-   RowBox[{"Edgelist", "[", 
-    RowBox[{"peoplevis", ",", " ", 
-     RowBox[{"608", "\[UndirectedEdge]", "_"}]}], "]"}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"vert", " ", "=", " ", 
-   RowBox[{"VertexList", "[", "fist", "]"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"novert", " ", "=", " ", 
-   RowBox[{"Complement", "[", 
+  RowBox[{"egoGraph", "[", 
+   RowBox[{"node_", ",", "graph_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"links", ",", "nodes", ",", "other", ",", "result"}], "}"}], ",",
+     "\[IndentingNewLine]", "\[IndentingNewLine]", 
     RowBox[{
-     RowBox[{"VertexList", "[", "peoplevis", "]"}], ",", "vert"}], "]"}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{"egogittergraph", "=", 
-  RowBox[{"VertexDelete", "[", 
-   RowBox[{"peoplevis", ",", 
-    RowBox[{"_", "?", 
-     RowBox[{"(", 
-      RowBox[{
-       RowBox[{"MemberQ", "[", 
-        RowBox[{"novert", ",", "#"}], "]"}], "&"}], ")"}]}]}], 
-   "]"}]}]}], "Input",
+     RowBox[{"links", " ", "=", " ", 
+      RowBox[{"EdgeList", "[", 
+       RowBox[{"graph", ",", " ", 
+        RowBox[{"node", "\[UndirectedEdge]", "_"}]}], "]"}]}], ";", "\n", 
+     RowBox[{"nodes", " ", "=", " ", 
+      RowBox[{"VertexList", "[", "links", "]"}]}], ";", "\n", 
+     RowBox[{"other", " ", "=", " ", 
+      RowBox[{"Complement", "[", 
+       RowBox[{
+        RowBox[{"VertexList", "[", "graph", "]"}], ",", "nodes"}], "]"}]}], 
+     ";", "\n", 
+     RowBox[{"result", "=", 
+      RowBox[{"VertexDelete", "[", 
+       RowBox[{"graph", ",", 
+        RowBox[{"_", "?", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"MemberQ", "[", 
+            RowBox[{"other", ",", "#"}], "]"}], "&"}], ")"}]}]}], "]"}]}]}]}],
+    "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"egogittergraph", "=", 
+   RowBox[{"egoGraph", "[", 
+    RowBox[{"608", ",", "peoplevis"}], "]"}]}], ";"}]}], "Input",
  CellChangeTimes->{{3.669960953694586*^9, 3.6699609712402363`*^9}, 
-   3.66996103574207*^9}]
+   3.66996103574207*^9, {3.6700258174077253`*^9, 3.6700258720252256`*^9}, {
+   3.6700259605252256`*^9, 3.6700260438052254`*^9}, {3.6700261285767255`*^9, 
+   3.6700262110517254`*^9}, {3.6700262711667256`*^9, 
+   3.6700262815967255`*^9}, {3.6700263181892257`*^9, 
+   3.6700263321767254`*^9}, {3.670026402026726*^9, 3.670026408031726*^9}}]
 }, Open  ]]
 },
 Evaluator->"Deepthought",
@@ -463,35 +479,35 @@ Notebook[{
 Cell[CellGroupData[{
 Cell[580, 22, 106, 1, 70, "Section"],
 Cell[CellGroupData[{
-Cell[711, 27, 1590, 38, 192, "Input"],
-Cell[2304, 67, 270, 6, 31, "Output"]
+Cell[711, 27, 1717, 41, 192, "Input"],
+Cell[2431, 70, 294, 6, 31, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[2623, 79, 103, 1, 70, "Section"],
-Cell[2729, 82, 1519, 37, 172, "Input"]
+Cell[2774, 82, 103, 1, 70, "Section"],
+Cell[2880, 85, 1519, 37, 172, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[4285, 124, 175, 2, 70, "Section"],
-Cell[4463, 128, 955, 22, 72, "Input"]
+Cell[4436, 127, 175, 2, 70, "Section"],
+Cell[4614, 131, 955, 22, 72, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[5455, 155, 104, 1, 70, "Section"],
+Cell[5606, 158, 104, 1, 70, "Section"],
 Cell[CellGroupData[{
-Cell[5584, 160, 2609, 70, 172, "Input"],
-Cell[8196, 232, 3350, 94, 582, "Output"],
-Cell[11549, 328, 255, 6, 31, "Output"],
-Cell[11807, 336, 1581, 46, 117, "Output"]
+Cell[5735, 163, 2609, 70, 172, "Input"],
+Cell[8347, 235, 3350, 94, 582, "Output"],
+Cell[11700, 331, 255, 6, 31, "Output"],
+Cell[11958, 339, 1581, 46, 117, "Output"]
 }, Open  ]],
-Cell[13403, 385, 87, 1, 52, "Input"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[13527, 391, 106, 1, 70, "Section"],
-Cell[13636, 394, 776, 14, 52, "Input"]
+Cell[13554, 388, 87, 1, 52, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[14449, 413, 93, 1, 70, "Section"],
-Cell[14545, 416, 902, 26, 92, "Input"]
+Cell[13678, 394, 106, 1, 70, "Section"],
+Cell[13787, 397, 776, 14, 52, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14600, 416, 93, 1, 70, "Section"],
+Cell[14696, 419, 1649, 39, 205, "Input"]
 }, Open  ]]
 }
 ]
