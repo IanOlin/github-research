@@ -53,6 +53,7 @@ def get_repos(users, dirName=None, forks=False):
 
 			URLstr = 'https://api.github.com/users/{}/repos'.format(u)
 			newURL = api_get(URLstr, parameters={'page':page, 'access_token':KEY, 'per_page':100})
+
 			# print page
 			index=str(newURL.headers).find('rel="next"')
 			if index<0:
@@ -61,6 +62,9 @@ def get_repos(users, dirName=None, forks=False):
 				page+=1
 
 			repo_data = json.loads(newURL.text)
+			if type(repo_data) is not list: #and 'Not Found' in responsePage['message']:
+				print URLstr
+				break
 			for repo in repo_data:
 				#get name of the repo
 				repoName = JSON_access(repo, ('name',))
@@ -96,6 +100,9 @@ def parent_repo(repo,user):
 	"""check for contributor"""
 	repo_URL = "{}/repos/{}/{}".format(API_DOMAIN, user, repo)
 	page = json.loads(api_get(baseURL=repo_URL, parameters={'access_token':KEY}).text)
+	if type(page) is not dict: #and 'Not Found' in responsePage['message']:
+			print repo_URL
+			parent_repo = None
 	if JSON_access(page, ('fork',)):
 		name = JSON_access(page,('parent','name'))
 		owner = JSON_access(page, ('parent','owner','login'))
@@ -245,4 +252,5 @@ if __name__=='__main__':
 	print parent_repo('ReadingJournal', 'poosomooso')
 	print repoPeople([('EmptyTest','poosomooso')], group=CONTRIBUTORS)
 	print repoPeople([('Codestellation2015', 'IanOlin')], group=CONTRIBUTORS)
+	print get_repos(("poosomooso", ))
 	pass

@@ -100,8 +100,8 @@ for matrixRepo in projects.keys():
 f=open('extendedcontributorsnew.txt','w')
 f.write("dl nr={} nc={} format=fullmatrix\n".format(len(projects),len(allCollaborators)))
 f.write("row labels:\n")
-for p in projects:
-    f.write('{}:{} '.format(p[0],p[1]))
+for p in sorted(projects.items(),key=lambda x:x[1]):
+    f.write('{}:{} '.format(p[0][0],p[0][1]))
 f.write('\n')
 f.write('column labels:\n')
 for x in sorted(allCollaborators.items(),key=lambda x:x[1]):
