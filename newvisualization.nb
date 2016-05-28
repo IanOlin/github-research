@@ -1,0 +1,516 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     17533,        507]
+NotebookOptionsPosition[     16361,        461]
+NotebookOutlinePosition[     16730,        477]
+CellTagsIndexPosition[     16687,        474]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Import and processing", "Section",
+ CellChangeTimes->{{3.668960358668632*^9, 3.668960362025132*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"SetDirectory", "[", "$InitialDirectory", "]"}], ";"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"rawdata", " ", "=", " ", 
+     RowBox[{
+     "Import", "[", 
+      "\"\</data1/user_data/github/github-research/snowballcontrib/\
+extendedcontributorsnew.txt\>\"", "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"maybe", " ", "=", " ", 
+     RowBox[{"StringSplit", "[", 
+      RowBox[{"rawdata", ",", "\"\<\\n\>\""}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"moremaybe", " ", "=", " ", 
+     RowBox[{"maybe", "[", 
+      RowBox[{"[", 
+       RowBox[{"6", ";;", 
+        RowBox[{"Length", "@", "maybe"}]}], "]"}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"array", " ", "=", " ", 
+     RowBox[{"StringSplit", "/@", "moremaybe"}]}], ";"}], "\n", 
+   RowBox[{"Dimensions", "[", "array", "]"}], "\n", 
+   RowBox[{
+    RowBox[{"goodarray", " ", "=", " ", 
+     RowBox[{"ToExpression", "/@", "array"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"tarray", " ", "=", " ", 
+     RowBox[{"Transpose", "[", "goodarray", "]"}]}], ";"}]}]}]], "Input",
+ CellChangeTimes->{
+  3.668898313074898*^9, {3.66889836438266*^9, 3.668898391067797*^9}, {
+   3.668898438703042*^9, 3.668898460255658*^9}, 3.668898516111128*^9, {
+   3.6688985489751124`*^9, 3.668898568985836*^9}, {3.668898619452498*^9, 
+   3.6688986246575885`*^9}, {3.668898667627737*^9, 3.668898671623393*^9}, {
+   3.6688987268903284`*^9, 3.668898745216876*^9}, {3.668898779316113*^9, 
+   3.668898779733423*^9}, {3.6689105613756933`*^9, 3.6689105798142934`*^9}, {
+   3.668959070325732*^9, 3.6689591113651323`*^9}, 3.6700241226123343`*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"32795", ",", "675"}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.668898944649396*^9, 3.6688992259164667`*^9, 3.668910637696493*^9, 
+   3.668958226308032*^9, 3.6689591380767317`*^9, {3.669960982855668*^9, 
+   3.669961011098688*^9}, 3.6700241379241714`*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Array Generation", "Section",
+ CellChangeTimes->{{3.668960365316732*^9, 3.6689603677815323`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"peopleList", " ", "=", " ", 
+   RowBox[{"StringSplit", "[", 
+    RowBox[{"maybe", "[", 
+     RowBox[{"[", "5", "]"}], "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"RepoList", " ", "=", " ", 
+   RowBox[{"StringSplit", "[", 
+    RowBox[{"maybe", "[", 
+     RowBox[{"[", "3", "]"}], "]"}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"sparse$array", "=", 
+   RowBox[{"SparseArray", "@", "goodarray"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"sparse$tarray", "=", 
+   RowBox[{"SparseArray", "@", "tarray"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"projectarray", "=", 
+   RowBox[{"SparseArray", "[", 
+    RowBox[{"sparse$array", ".", "sparse$tarray"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"peoplearray", "=", 
+   RowBox[{"SparseArray", "[", 
+    RowBox[{"sparse$tarray", ".", "sparse$array"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"noself$sparse$projectarray", " ", "=", " ", 
+   RowBox[{"UpperTriangularize", "[", 
+    RowBox[{"projectarray", ",", "1"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"noself$sparse$peoplearray", " ", "=", " ", 
+   RowBox[{"UpperTriangularize", "[", 
+    RowBox[{"peoplearray", ",", "1"}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.6688988746755934`*^9, 3.6688988750430346`*^9}, {
+  3.6689592974332323`*^9, 3.668959332775432*^9}, {3.668959400737232*^9, 
+  3.6689594088960323`*^9}, {3.6689602260708323`*^9, 3.668960265666232*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["People Visualization (w/ export test)", "Section",
+ CellChangeTimes->{{3.668960372133932*^9, 3.668960374177532*^9}, {
+  3.6689604134503317`*^9, 3.6689604474222317`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"peoplevis", " ", "=", " ", 
+   RowBox[{"AdjacencyGraph", "[", 
+    RowBox[{"noself$sparse$peoplearray", ",", 
+     RowBox[{"DirectedEdges", "\[Rule]", "False"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"Export", "[", 
+     RowBox[{
+     "\"\</data1/user_data/github/github-research/peoplevis.gml\>\"", ",", 
+      "peoplevis"}], "]"}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+    "Import", "[", 
+     "\"\</data1/user_data/github/github-research/peoplevis.gml\>\"", "]"}]}],
+    "*)"}]}]}], "Input",
+ CellChangeTimes->{{3.6688996388023124`*^9, 3.6688996580271187`*^9}, {
+   3.668958263452932*^9, 3.668958274201332*^9}, {3.668958505657832*^9, 
+   3.668958532130432*^9}, {3.668958581182232*^9, 3.668958632714332*^9}, {
+   3.668958788914432*^9, 3.668958799210432*^9}, {3.668958934397732*^9, 
+   3.668958952158732*^9}, 3.668960319699132*^9, 3.6699609353189063`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Centrality Measures", "Section",
+ CellChangeTimes->{{3.668960422827232*^9, 3.668960427398032*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"peopleCentrality", " ", "=", " ", 
+   RowBox[{"Rescale", "[", 
+    RowBox[{"BetweennessCentrality", "[", "peoplevis", "]"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"bigPos", " ", "=", " ", 
+   RowBox[{"Flatten", "[", 
+    RowBox[{"Position", "[", 
+     RowBox[{"peopleCentrality", ",", " ", 
+      RowBox[{"_", "?", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"#", ">", ".1"}], "&"}], ")"}]}]}], "]"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"TableForm", "[", 
+  RowBox[{"labels", " ", "=", " ", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"i", " ", "\[Rule]", " ", 
+      RowBox[{
+       RowBox[{"peopleList", "[", 
+        RowBox[{"[", "i", "]"}], "]"}], "<>", " ", "\"\< \>\"", "<>", 
+       RowBox[{"ToString", "[", " ", 
+        RowBox[{"peopleCentrality", "[", 
+         RowBox[{"[", "i", "]"}], "]"}], "]"}]}]}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", " ", "bigPos"}], "}"}]}], "]"}]}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"biggestPos", " ", "=", " ", 
+  RowBox[{"Flatten", "[", 
+   RowBox[{"Position", "[", 
+    RowBox[{"peopleCentrality", ",", " ", 
+     RowBox[{"_", "?", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"#", ">", ".4"}], "&"}], ")"}]}]}], "]"}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"TableForm", "[", 
+  RowBox[{"labels2", " ", "=", " ", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"i", " ", "\[Rule]", " ", 
+      RowBox[{"Placed", "[", 
+       RowBox[{
+        RowBox[{"peopleList", "[", 
+         RowBox[{"[", "i", "]"}], "]"}], ",", "Right"}], "]"}]}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", " ", "biggestPos"}], "}"}]}], "]"}]}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"HighlightGraph", "[", 
+   RowBox[{"peoplevis", ",", " ", 
+    RowBox[{"VertexList", "[", "peoplevis", "]"}], ",", " ", 
+    RowBox[{"VertexSize", "\[Rule]", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"i", "\[Rule]", " ", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Rescale", "[", 
+           RowBox[{"BetweennessCentrality", "[", "peoplevis", "]"}], "]"}], 
+          "[", 
+          RowBox[{"[", "i", "]"}], "]"}], "*", "20"}]}], ",", " ", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "675"}], "}"}]}], "]"}]}], ",", " ", 
+    RowBox[{"VertexLabels", "\[Rule]", " ", "labels2"}], ",", 
+    RowBox[{"DirectedEdges", "\[Rule]", "False"}]}], "]"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.668899878767624*^9, 3.6688999127517776`*^9}, {
+   3.668958302149732*^9, 3.6689583058625317`*^9}, 3.6689603036460323`*^9}],
+
+Cell[BoxData[
+ TagBox[
+  TagBox[GridBox[{
+     {
+      RowBox[{"39", "\[Rule]", "\<\"bartvm 0.181185\"\>"}]},
+     {
+      RowBox[{"60", "\[Rule]", "\<\"AlOa 0.255836\"\>"}]},
+     {
+      RowBox[{"70", "\[Rule]", "\<\"nicholas-leonard 0.18861\"\>"}]},
+     {
+      RowBox[{"89", "\[Rule]", "\<\"yosinski 0.262765\"\>"}]},
+     {
+      RowBox[{"100", "\[Rule]", "\<\"kashif 0.510494\"\>"}]},
+     {
+      RowBox[{"115", "\[Rule]", "\<\"MartinThoma 0.264364\"\>"}]},
+     {
+      RowBox[{"135", "\[Rule]", "\<\"hojonathanho 0.261788\"\>"}]},
+     {
+      RowBox[{"136", "\[Rule]", "\<\"Kaixhin 0.14969\"\>"}]},
+     {
+      RowBox[{"137", "\[Rule]", "\<\"viirya 0.318239\"\>"}]},
+     {
+      RowBox[{"172", "\[Rule]", "\<\"huyng 0.255836\"\>"}]},
+     {
+      RowBox[{"177", "\[Rule]", "\<\"jfsantos 0.631517\"\>"}]},
+     {
+      RowBox[{"189", "\[Rule]", "\<\"pra85 0.860337\"\>"}]},
+     {
+      RowBox[{"195", "\[Rule]", "\<\"shaibagon 0.254882\"\>"}]},
+     {
+      RowBox[{"197", "\[Rule]", "\<\"vikkamath 0.259913\"\>"}]},
+     {
+      RowBox[{"201", "\[Rule]", "\<\"yaroslavvb 0.361987\"\>"}]},
+     {
+      RowBox[{"202", "\[Rule]", "\<\"frankyjuang 0.361987\"\>"}]},
+     {
+      RowBox[{"206", "\[Rule]", "\<\"eulerreich 0.222399\"\>"}]},
+     {
+      RowBox[{"214", "\[Rule]", "\<\"Yangqing 0.218118\"\>"}]},
+     {
+      RowBox[{"216", "\[Rule]", "\<\"sguada 0.117462\"\>"}]},
+     {
+      RowBox[{"228", "\[Rule]", "\<\"dgolden1 0.201367\"\>"}]},
+     {
+      RowBox[{"235", "\[Rule]", "\<\"jyegerlehner 0.201367\"\>"}]},
+     {
+      RowBox[{"249", "\[Rule]", "\<\"pluskid 0.961388\"\>"}]},
+     {
+      RowBox[{"266", "\[Rule]", "\<\"bamos 0.311268\"\>"}]},
+     {
+      RowBox[{"288", "\[Rule]", "\<\"eerwitt 0.212424\"\>"}]},
+     {
+      RowBox[{"295", "\[Rule]", "\<\"akiomik 0.219683\"\>"}]},
+     {
+      RowBox[{"347", "\[Rule]", "\<\"SaganBolliger 0.201367\"\>"}]},
+     {
+      RowBox[{"370", "\[Rule]", "\<\"Lewuathe 0.802027\"\>"}]},
+     {
+      RowBox[{"372", "\[Rule]", "\<\"panmari 0.20432\"\>"}]},
+     {
+      RowBox[{"410", "\[Rule]", "\<\"stonebig 0.342555\"\>"}]},
+     {
+      RowBox[{"425", "\[Rule]", "\<\"felixonmars 0.163276\"\>"}]},
+     {
+      RowBox[{"428", "\[Rule]", "\<\"samjabrahams 0.526326\"\>"}]},
+     {
+      RowBox[{"454", "\[Rule]", "\<\"izeye 0.299202\"\>"}]},
+     {
+      RowBox[{"476", "\[Rule]", "\<\"ppwwyyxx 0.255347\"\>"}]},
+     {
+      RowBox[{"521", "\[Rule]", "\<\"ogrisel 0.117059\"\>"}]},
+     {
+      RowBox[{"537", "\[Rule]", "\<\"emmjaykay 0.288245\"\>"}]},
+     {
+      RowBox[{"568", "\[Rule]", "\<\"borisfom 0.205073\"\>"}]},
+     {
+      RowBox[{"608", "\[Rule]", "\<\"gitter-badger 1.\"\>"}]},
+     {
+      RowBox[{"636", "\[Rule]", "\<\"JoostvDoorn 0.20709\"\>"}]}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.5599999999999999]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}],
+   Column],
+  Function[BoxForm`e$, 
+   TableForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{3.668899921370422*^9, 3.668910804891693*^9, 
+  3.668958325678932*^9, 3.6699611092924857`*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "100", ",", "177", ",", "189", ",", "249", ",", "370", ",", "428", ",", 
+   "608"}], "}"}]], "Output",
+ CellChangeTimes->{3.668899921370422*^9, 3.668910804891693*^9, 
+  3.668958325678932*^9, 3.669961109304986*^9}],
+
+Cell[BoxData[
+ TagBox[
+  TagBox[GridBox[{
+     {
+      RowBox[{"100", "\[Rule]", 
+       RowBox[{"Placed", "[", 
+        RowBox[{"\<\"kashif\"\>", ",", "Right"}], "]"}]}]},
+     {
+      RowBox[{"177", "\[Rule]", 
+       RowBox[{"Placed", "[", 
+        RowBox[{"\<\"jfsantos\"\>", ",", "Right"}], "]"}]}]},
+     {
+      RowBox[{"189", "\[Rule]", 
+       RowBox[{"Placed", "[", 
+        RowBox[{"\<\"pra85\"\>", ",", "Right"}], "]"}]}]},
+     {
+      RowBox[{"249", "\[Rule]", 
+       RowBox[{"Placed", "[", 
+        RowBox[{"\<\"pluskid\"\>", ",", "Right"}], "]"}]}]},
+     {
+      RowBox[{"370", "\[Rule]", 
+       RowBox[{"Placed", "[", 
+        RowBox[{"\<\"Lewuathe\"\>", ",", "Right"}], "]"}]}]},
+     {
+      RowBox[{"428", "\[Rule]", 
+       RowBox[{"Placed", "[", 
+        RowBox[{"\<\"samjabrahams\"\>", ",", "Right"}], "]"}]}]},
+     {
+      RowBox[{"608", "\[Rule]", 
+       RowBox[{"Placed", "[", 
+        RowBox[{"\<\"gitter-badger\"\>", ",", "Right"}], "]"}]}]}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.5599999999999999]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}],
+   Column],
+  Function[BoxForm`e$, 
+   TableForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{3.668899921370422*^9, 3.668910804891693*^9, 
+  3.668958325678932*^9, 3.6699611093124866`*^9}]
+}, Open  ]],
+
+Cell[BoxData["\[IndentingNewLine]"], "Input",
+ CellChangeTimes->{3.668951473794232*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Project visualization", "Section",
+ CellChangeTimes->{{3.668960432961632*^9, 3.668960438691832*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"projectvis", "=", 
+    RowBox[{"AdjacencyGraph", "[", 
+     RowBox[{"noself$sparse$projectarray", ",", 
+      RowBox[{"DirectedEdges", "\[Rule]", "False"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.6689010299657006`*^9, 3.66890103116687*^9}, {
+   3.6689016818917866`*^9, 3.6689016846374044`*^9}, {3.6689017439740877`*^9, 
+   3.668901776633299*^9}, 3.6689105923736935`*^9, {3.668951531755232*^9, 
+   3.6689516027284317`*^9}, {3.668958351466432*^9, 3.668958353978032*^9}, {
+   3.668959745254032*^9, 3.6689597900030317`*^9}, {3.668959978150632*^9, 
+   3.6689600156462317`*^9}, {3.668960051296132*^9, 3.668960076803432*^9}, {
+   3.668960124193832*^9, 3.668960181084032*^9}, 3.668960333223732*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Ego Test", "Section",
+ CellChangeTimes->{{3.668960347003532*^9, 3.668960351199932*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"egoGraph", "[", 
+   RowBox[{"node_", ",", "graph_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"links", ",", "nodes", ",", "other", ",", "result"}], "}"}], ",",
+     "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"links", " ", "=", " ", 
+      RowBox[{"EdgeList", "[", 
+       RowBox[{"graph", ",", " ", 
+        RowBox[{"node", "\[UndirectedEdge]", "_"}]}], "]"}]}], ";", "\n", 
+     RowBox[{"nodes", " ", "=", " ", 
+      RowBox[{"VertexList", "[", "links", "]"}]}], ";", "\n", 
+     RowBox[{"other", " ", "=", " ", 
+      RowBox[{"Complement", "[", 
+       RowBox[{
+        RowBox[{"VertexList", "[", "graph", "]"}], ",", "nodes"}], "]"}]}], 
+     ";", "\n", 
+     RowBox[{"result", "=", 
+      RowBox[{"VertexDelete", "[", 
+       RowBox[{"graph", ",", 
+        RowBox[{"_", "?", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"MemberQ", "[", 
+            RowBox[{"other", ",", "#"}], "]"}], "&"}], ")"}]}]}], "]"}]}]}]}],
+    "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"egogittergraph", "=", 
+   RowBox[{"egoGraph", "[", 
+    RowBox[{"608", ",", "peoplevis"}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.669960953694586*^9, 3.6699609712402363`*^9}, 
+   3.66996103574207*^9, {3.6700258174077253`*^9, 3.6700258720252256`*^9}, {
+   3.6700259605252256`*^9, 3.6700260438052254`*^9}, {3.6700261285767255`*^9, 
+   3.6700262110517254`*^9}, {3.6700262711667256`*^9, 
+   3.6700262815967255`*^9}, {3.6700263181892257`*^9, 
+   3.6700263321767254`*^9}, {3.670026402026726*^9, 3.670026408031726*^9}}]
+}, Open  ]]
+},
+Evaluator->"Deepthought",
+WindowSize->{944, 1022},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"10.3 for Microsoft Windows (64-bit) (October 9, 2015)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 106, 1, 70, "Section"],
+Cell[CellGroupData[{
+Cell[711, 27, 1717, 41, 192, "Input"],
+Cell[2431, 70, 294, 6, 31, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2774, 82, 103, 1, 70, "Section"],
+Cell[2880, 85, 1519, 37, 172, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4436, 127, 175, 2, 70, "Section"],
+Cell[4614, 131, 955, 22, 72, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5606, 158, 104, 1, 70, "Section"],
+Cell[CellGroupData[{
+Cell[5735, 163, 2609, 70, 172, "Input"],
+Cell[8347, 235, 3350, 94, 582, "Output"],
+Cell[11700, 331, 255, 6, 31, "Output"],
+Cell[11958, 339, 1581, 46, 117, "Output"]
+}, Open  ]],
+Cell[13554, 388, 87, 1, 52, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[13678, 394, 106, 1, 70, "Section"],
+Cell[13787, 397, 776, 14, 52, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14600, 416, 93, 1, 70, "Section"],
+Cell[14696, 419, 1649, 39, 205, "Input"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
