@@ -2,7 +2,7 @@ import repo_info
 import json
 
 """
-Gets the repos each of the 675 contributors owns + fored repos
+Gets the repos each of the 675 contributors owns + forked repos
 matrix contains owned repos and parent repos of the repos the contributors forked
 not included:
     local forks of repos
