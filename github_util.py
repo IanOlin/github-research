@@ -94,6 +94,14 @@ def JSON_access(jsonObject, keyTuple):
         error_dump(json.dumps(jsonString))
         raise e
 
+def has_next_page(response):
+    try:
+        pageLinks = response.headers["link"]
+        return pageLinks.find('rel="next"') > 0
+    except KeyError:
+        return False
+
+
 def error_dump(errorMessage):
     try:
         errorfile = open('ERROR.txt', 'w')

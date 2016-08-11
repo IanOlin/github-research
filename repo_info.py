@@ -33,20 +33,13 @@ JSON_PATH = {CONTRIBUTORS:('login',), COLLABORATORS:('login',), FORKERS:('owner'
 #####
 # METHODS
 #####
+"""
+Gets all the repos of the users
+Returns dictionary {user:reponamelist}
+or if forks is True, returns {user:(nonforknamelist, forknamelist)}
+"""
+def get_repos(users, forks=False):
 
-def get_repos(users, dirName=None, forks=False):
-	"""
-	Gets all the repos of the users
-	Returns dictionary {user:reponamelist}
-	or if forks is True, returns {user:(nonforknamelist, forknamelist)}
-	"""
-	#if writing to a file, use this directory
-	if dirName!=None:
-		if not os.path.exists(dirName):
-			os.mkdir(dirName)
-
-	#a list of filenames to write to -- each user gets their own file?
-	filenames = []
 	#a dictionary to store all the {users:repos}
 	all_repos = {}
 
@@ -61,12 +54,10 @@ def get_repos(users, dirName=None, forks=False):
 			URLstr = 'https://api.github.com/users/{}/repos'.format(u)
 			response = api_get(URLstr, parameters={'page':page, 'per_page':100})
 
-			#if there is a next page, increment, else make the page -1 (break out of the loop)
-			index=str(response.headers).find('rel="next"')
-			if index<0:
-				page = -1
+			if has_next_page(response):
+				page += 1
 			else:
-				page+=1
+				page = -1
 
 			#read the data of the current page
 			repo_data = json.loads(response.text)
@@ -83,37 +74,18 @@ def get_repos(users, dirName=None, forks=False):
 					forked.append(repoName)
 				else:
 					repos.append(repoName)
-		#writes each user's repo into a different file
-		#TODO: figure out how to make this more intuitive and less cluttered
-		fname = u + 'repos.txt'
-		filenames.append(fname)
-		if dirName != None:
-			f = open(dirName+'/'+fname, 'w')
-			for contributor in repo_contributors:
-				f.write(contributor + '\n')
-			f.close()
 		#add to the allRepos dictionary
 		if forks:
 			all_repos[u] = (repos,forked)
 		else:
 			all_repos[u] = repos
 	
-	#write the names of all the files
-	if dirName!=None:
-		f = open(dirName+'/'+'files.txt','w')
-		for n in filenames:
-			f.write(n+'\n')
-		f.close()
-	
 	return all_repos
 
-"""list of repos with the format (reponame, ownername)"""
+"""
+list of repos with the format (reponame, ownername)
+"""
 def repoPeople(repos,group=CONTRIBUTORS,dirName=None):
-	#print repos
-	if dirName!=None:
-		if not os.path.exists(dirName):
-			os.mkdir(dirName)
-	filenames = []
 	all_repos = {}
 	for collabs in repos:
 		people = []
@@ -121,21 +93,21 @@ def repoPeople(repos,group=CONTRIBUTORS,dirName=None):
 
 		while page>0:
 			URLstr = 'https://api.github.com/repos/{}/{}/{}'.format(collabs[1], collabs[0], URL_PATH[group])
-			newURL = api_get(baseURL=URLstr, parameters={'page':page,'per_page':100})
-			index=str(newURL.headers).find('rel="next"')
-			if index<0:
-				page = -1
+			response = api_get(baseURL=URLstr, parameters={'page':page,'per_page':100})
+
+			if has_next_page(response):
+				page += 1
 			else:
-				page+=1
+				page = -1
 
 			try:
-				responsePage = json.loads(newURL.text)
+				responsePage = json.loads(response.text)
 			except ValueError:
-				if len(newURL.text) == 0:
+				if len(response.text) == 0:
 					continue
 				else:
-					print newURL
-					print newURL.text
+					print response
+					print response.text
 					raise e
 			#print responsePage
 			if type(responsePage) is not list: #and 'Not Found' in responsePage['message']:
@@ -147,29 +119,17 @@ def repoPeople(repos,group=CONTRIBUTORS,dirName=None):
 				if username != None:
 					people.append(username)
 
-		fname = collabs[0] + URL_PATH[group] + '.txt'
-		filenames.append(fname)
-		if dirName != None:
-			f = open(dirName+'/'+fname, 'w')
-			for contributor in people:
-				f.write(contributor + '\n')
-			f.close()
-
 		all_repos[collabs] = people
 
-	if dirName!=None:
-		f = open(dirName+'/'+'files.txt','w')
-		for n in filenames:
-			f.write(n+'\n')
-		f.close()
 	
 	return all_repos
 
+"""
+check if a repo is forked, and if so, return the parent repo in a tuple (reponame, ownername)
+else, return None
+"""
 def parent_repo(repo,user):
-    """
-    check if a repo is forked, and if so, return the parent repo in a tuple (reponame, ownername)
-    else, return None
-    """
+
     repoURL = "https://api.github.com/repos/{}/{}".format(user, repo)
     page = json.loads(api_get(baseURL=repoURL).text)
     if type(page) is not dict: #and 'Not Found' in responsePage['message']:
@@ -197,4 +157,8 @@ if __name__=='__main__':
 	print repoPeople([('EmptyTest','poosomooso')], group=CONTRIBUTORS)
 	print repoPeople([('Codestellation2015', 'IanOlin')], group=CONTRIBUTORS)
 	print get_repos(("poosomooso", ))
+	repos = get_repos(("sindresorhus", )) #guy's got a lot of repos
+	print repos
+	print len(repos["sindresorhus"]) #over 700
+
 	pass
