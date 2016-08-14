@@ -5,111 +5,123 @@ import json
 Gets the repos each of the 675 contributors owns + forked repos
 matrix contains owned repos and parent repos of the repos the contributors forked
 not included:
-    local forks of repos
-    repos where user has contributed via collaborator commit rights, but nobody ahs forked
+    contributions to forks of repos
+    repos where user has contributed via collaborator commit rights, but nobody in this set has owned or forked
     organization repos
 """
 dir = 'mlcontrib/'
-names = open(dir+'files.txt','r').read()
-filelist = names.split()
-print filelist
+names = open(dir+"testFiles.txt", 'r').read()
+mlFileNames = names.split()
+print mlFileNames
 
-repo_collabs = {'Theano': 'Theano','caffe': 'BVLC','CNTK': 'Microsoft','tensorflow': 'tensorflow', 'torch7': 'torch', 'deeplearning4j': 'deeplearning4j'}
-
-#all collaborators mapped name:index
-#collaborator name : index in matrix
-allCollaborators = {}
-#names of all projects, indexes corresponding with the index in matrix
-#project name : index in matrix
-projects = {}
-#{parentrepo:[list of repos froked from parent]}
-forkFamilyTree = {}
 #matrix of projects (rows) and contributors (columns)
 matrix = []
-for i in range(len(filelist)):
-	matrix.append([0]*len(allCollaborators))
-#index of the next new repo introduced via contributor
-extraIndexes = len(filelist)
 
-def addCol(adjMatrix):
-    """Adds a column to the end of adjMatrix and returns the index of the comlumn that was added"""
+#collaborator name : index in matrix
+allContributors = {}
+
+#(project name, projectOwner) : index in matrix
+projects = {}
+
+#parentrepo : [list of repos forked from parent]
+forkFamilyTree = {}
+
+###
+# HELPER METHODS
+###
+
+"""
+Adds a column to the end of adjMatrix and returns the index of the column that was added
+"""
+def add_col(adjMatrix):
     for j in range(len(adjMatrix)):
         adjMatrix[j].append(0)
     return len(adjMatrix[0])-1
 
+"""
+Takes a tuple (projectname, ownername), the same as the keys to the projects dictionary
+If the repo is registered in the projects dict, do nothing, else add a new row
+"""
+def add_project_to_matrix(repo):
+    if repo not in projects:
+        projects[repo] = len(matrix)
+        matrix.append([0]*len(allContributors.keys()))
 
-for i in range(len(filelist)):
-    print '\nrepo'
+"""
+for a given tuple of lists (ownedRepos, forkedRepos), make sure that the owned repos and the parents of the
+forked repos are in the matrix
+"""
+def register_repos(repos, contributor):
+    ownedRepos = repos[0]
+    forkedRepos = repos[1]
+
+    for owned in ownedRepos:
+        add_project_to_matrix((owned, contributor))
+
+    for fork in forkedRepos:
+        parent = repo_info.parent_repo(fork, contributor)
+        if parent != None:
+            forkFamilyTree[parent] = forkFamilyTree.get(parent, [])+[fork]
+            add_project_to_matrix(parent)
+
+"""
+gets the contributors of a repo that also appear in the setToChooseFrom
+"""
+def get_actual_contributors(repo, setToChooseFrom = None):
+    if setToChooseFrom == None:
+        setToChooseFrom = set(allContributors.keys())
+
+    repoContributors = repo_info.repoPeople([repo], group = repo_info.CONTRIBUTORS)[repo]
+    usefulConributors = set(repoContributors).intersection(setToChooseFrom)
+    return usefulConributors
+
+def sort_by_value(dictionaryToSort):
+    return sorted(dictionaryToSort.items(), key=lambda x:x[1])
+
+
+###
+# ACTUAL SCRIPT
+###
+
+for i in range(len(mlFileNames)): #number of ml repos
+    matrix.append([0]*len(allContributors))
+
+for i in range(len(mlFileNames)):
+    projectName = mlFileNames[i].split('contributors', 1)[0]
+    projectOwner = repo_info.mlRepos[projectName]
+    projects[(projectName, projectOwner)] = i
+    print '\n{}'.format(projectName)
+
+    contributors = open(dir+mlFileNames[i], 'r').read()
+    contributors = contributors.split()
+
     allContribRepos = {}
-    projectName = filelist[i].split('contributors')[0]
-    projects[(projectName, repo_collabs[projectName])]=i
-    data1 = open(dir+filelist[i], 'r').read()
-    data1 = data1.split()
-    for c in data1:
-        #collaboartor index in matrix
-        if c not in allCollaborators:
-            allCollaborators[c] = addCol(matrix)#next index
-        matrix[i][allCollaborators[c]] = 1
+    for person in contributors:
+        #get collaborator index in matrix
+        if person not in allContributors:
+            allContributors[person] = add_col(matrix)#next index
 
-        individualRepos = repo_info.get_repos([c], forks=True)[c] # get all the repos the person has
-        owned = individualRepos[0]
-        forked = individualRepos[1]
+            individualRepos = repo_info.get_repos([person], forks=True)[person] # get all the repos the person has
+            register_repos(individualRepos, person)
+            allContribRepos[person] = individualRepos
 
-        for own in owned:
-            index = extraIndexes
-            if (own,c) in projects.keys():
-                index = projects[(own, c)]
-            else:
-                extraIndexes+=1
-                projects[(own, c)]=index
-                matrix.append([0]*len(allCollaborators.keys()))
-            #matrix[projects[fork]][allCollaborators[c]] = 1
-            #^^^do it at the end?
+        matrix[i][allContributors[person]] = 1
 
-        for fork in forked:
-            parent = repo_info.parent_repo(fork, c)
-            if parent != None:
-                forkFamilyTree[parent] = forkFamilyTree.get(parent, [])+[fork]
-            	index = extraIndexes
-            	if parent in projects.keys():
-            		index = projects[parent]
-            	else:
-            		extraIndexes+=1
-            		projects[parent]=index
-            		matrix.append([0]*len(allCollaborators.keys()))
-        	#matrix[projects[fork]][allCollaborators[c]] = 1
-            #^^^same here
-
-        allContribRepos[c] = individualRepos
-
-    #write contributor's repos
+    #write a file with all the repos that a ml repo's contributors also own
     rawfile = open(projectName+'ContribRepos', 'w')
     json.dump(obj=allContribRepos,fp=rawfile)
     rawfile.close()
 
 #build matrix
-fileset = set(filelist)
-for matrixRepo in projects.keys():
-    if matrixRepo not in fileset:
-        contributors = set(repo_info.repoPeople([matrixRepo], group = repo_info.CONTRIBUTORS)[matrixRepo])
-        usefulConributors = contributors.intersection(set(allCollaborators.keys()))
-        for c in usefulConributors:
-            matrix[projects[matrixRepo]][allCollaborators[c]] = 1
+fileset = set(mlFileNames)
+for repo in projects.keys():
+    if repo not in fileset:
+        usefulConributors = get_actual_contributors(repo)
+        
+        for person in usefulConributors:
+            matrix[projects[repo]][allContributors[person]] = 1
 
-#write matrix
-f=open('extendedcontributorsnew.txt','w')
-f.write("dl nr={} nc={} format=fullmatrix\n".format(len(projects),len(allCollaborators)))
-f.write("row labels:\n")
+projectLabels = ['{}:{}'.format(p[0][0],p[0][1]) for p in sort_by_value(projects)]
+contributorLabels = [c[0] for c in sort_by_value(allContributors)]
 
-for p in sorted(projects.items(),key=lambda x:x[1]):
-    f.write('{}:{} '.format(p[0][0],p[0][1]))
-f.write('\n')
-f.write('column labels:\n')
-for x in sorted(allCollaborators.items(),key=lambda x:x[1]):
-    f.write(x[0]+' ')
-f.write('\n')
-for row in matrix:
-    for i in row:
-        f.write(str(i)+' ')
-    f.write('\n')
-f.close()
+repo_info.write_dl_file('extendedcontributorsnew.txt', projectLabels, contributorLabels, matrix)
