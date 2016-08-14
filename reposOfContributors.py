@@ -10,7 +10,7 @@ not included:
     organization repos
 """
 dir = 'mlcontrib/'
-names = open(dir+"testFiles.txt", 'r').read()
+names = open(dir+"files.txt", 'r').read()
 mlFileNames = names.split()
 print mlFileNames
 
