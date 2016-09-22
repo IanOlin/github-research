@@ -145,6 +145,32 @@ def parent_repo(repo,user):
 
     return parentRepo
 
+"""
+Returns all the commits of a given repo
+"""
+def get_all_commits(repo, user):
+    URLstr = "https://api.github.com/repos/{}/{}/commits".format(user, repo)
+    commits = []
+    page = 1
+    while page>0:
+        response = api_get(baseURL=URLstr, parameters={'page':page,'per_page':100})
+        if not is_successful_response(response):
+            print "{}\n{}\n{}\n".format(URLstr, response.status_code, response.text)
+            break
+
+        if has_next_page(response):
+            page += 1
+        else:
+            page = -1
+
+        try:
+            responsePage = json.loads(response.text)
+        except:
+            error_dump("{}\n{}\n{}".format(response, URLstr, response.text))
+            raise e
+        commits.extend(responsePage)
+    return commits
+
 #####
 # TESTS
 # make sure I didn't break anything
@@ -158,5 +184,5 @@ if __name__=='__main__':
     print get_repos(("poosomooso", ))
     repos = get_repos(("sindresorhus", )) #guy's got a lot of repos
     print len(repos["sindresorhus"]) #over 700
-
+    print len(get_all_commits('CNTK', 'Microsoft')) #check on github for actual number; as of 9/22/16 7899
     pass
