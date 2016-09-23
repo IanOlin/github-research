@@ -16,7 +16,20 @@ import sys
 #####
 
 # the repos we are looking at
-mlRepos = {'Theano': 'Theano','caffe': 'BVLC','CNTK': 'Microsoft','tensorflow': 'tensorflow', 'torch7': 'torch', 'deeplearning4j': 'deeplearning4j'}
+mlRepos = {'Theano' : 'Theano',
+    'caffe' : 'BVLC',
+    'CNTK' : 'Microsoft',
+    'tensorflow' : 'tensorflow', 
+    'torch7' : 'torch', 
+    'deeplearning4j': 'deeplearning4j'}
+stackRepos = {'cinder' : 'openstack', 
+    'glance' : 'openstack', 
+    'horizon' : 'openstack', 
+    'keystone' : 'openstack', 
+    'nova' : 'openstack', 
+    'neutron' : 'openstack', 
+    'swift' : 'openstack',
+    'cloudstack' : 'apache'}
 
 #constants to specify parameters when calling methods
 CONTRIBUTORS = 0

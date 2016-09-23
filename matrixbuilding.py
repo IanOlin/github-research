@@ -1,6 +1,12 @@
 import repo_info
 import json
 
+"""
+Deprecated
+Snowballs, but I think this only grabs the repos that a user forked. And it's not particularly accurate either. 
+See snowballing.py
+"""
+
 dir = 'mlcontrib/'
 names = open(dir+'files.txt','r').read()
 filelist = names.split()
