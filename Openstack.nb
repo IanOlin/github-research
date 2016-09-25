@@ -1,0 +1,3834 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[    152937,       3826]
+NotebookOptionsPosition[    149218,       3698]
+NotebookOutlinePosition[    149562,       3713]
+CellTagsIndexPosition[    149519,       3710]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["Here\[CloseCurlyQuote]s the windowing stuff so far:", "Text",
+ CellChangeTimes->{{3.6838174601665654`*^9, 3.6838174728715653`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Import:", "Subsection",
+ CellChangeTimes->{{3.6838174801785655`*^9, 3.6838174820925655`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"data$raw", "=", 
+  RowBox[{"Import", "[", 
+   RowBox[{
+   "\"\<P:\\\\+Research\\\\GitWood\\\\stackCommits\\\\glance-openstack-\
+commits.json\>\"", ",", "\"\<Data\>\""}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.683758939515915*^9, 3.6837590365266056`*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  TagBox[
+   FrameBox[GridBox[{
+      {
+       ItemBox[
+        TagBox[
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"\<\"author\"\>", "\[Rule]", "Null"}], ",", 
+             TemplateBox[{"6"},
+              "OutputSizeLimit`Skeleton",
+              DisplayFunction->(FrameBox[
+                
+                RowBox[{
+                 "\" \[CenterEllipsis]\"", #, "\"\[CenterEllipsis] \""}], 
+                Background -> GrayLevel[0.75], 
+                BaseStyle -> {
+                 "Deploy", FontColor -> GrayLevel[1], FontSize -> Smaller, 
+                  ShowStringCharacters -> False}, BaselinePosition -> 
+                Baseline, ContentPadding -> False, 
+                FrameMargins -> {{1, 1}, {1, 2}}, FrameStyle -> None, 
+                RoundingRadius -> 7]& )], ",", 
+             RowBox[{"\<\"commit\"\>", "\[Rule]", 
+              RowBox[{"{", 
+               RowBox[{
+                
+                RowBox[{"\<\"message\"\>", 
+                 "\[Rule]", "\<\"Merge \\\"Add note to docs on release notes \
+prelude section\\\"\"\>"}], ",", 
+                TemplateBox[{"4"},
+                 "OutputSizeLimit`Skeleton",
+                 DisplayFunction->(FrameBox[
+                   
+                   RowBox[{
+                    "\" \[CenterEllipsis]\"", #, "\"\[CenterEllipsis] \""}], 
+                   Background -> GrayLevel[0.75], 
+                   BaseStyle -> {
+                    "Deploy", FontColor -> GrayLevel[1], FontSize -> Smaller, 
+                    ShowStringCharacters -> False}, BaselinePosition -> 
+                   Baseline, ContentPadding -> False, 
+                   FrameMargins -> {{1, 1}, {1, 2}}, FrameStyle -> None, 
+                   RoundingRadius -> 7]& )], ",", 
+                RowBox[{"\<\"tree\"\>", "\[Rule]", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"\<\"url\"\>", "\[Rule]", 
+                    
+                    RowBox[{"\<\"https://api.github.com/repos/openstac\"\>", 
+                    "\[Ellipsis]", \
+"\<\"6a3954ac1174efac60cb2b0391f7ba872592db\"\>"}]}], ",", 
+                   RowBox[{"\<\"sha\"\>", "\[Rule]", 
+                    TemplateBox[{"42"},
+                    "OutputSizeLimit`Skeleton",
+                    DisplayFunction->(FrameBox[
+                    
+                    RowBox[{
+                    "\" \[CenterEllipsis]\"", #, "\"\[CenterEllipsis] \""}], 
+                    Background -> GrayLevel[0.75], 
+                    BaseStyle -> {
+                    "Deploy", FontColor -> GrayLevel[1], FontSize -> Smaller, 
+                    ShowStringCharacters -> False}, BaselinePosition -> 
+                    Baseline, ContentPadding -> False, 
+                    FrameMargins -> {{1, 1}, {1, 2}}, FrameStyle -> None, 
+                    RoundingRadius -> 7]& )]}]}], "}"}]}]}], "}"}]}]}], "}"}],
+            ",", 
+           TemplateBox[{"5570"},
+            "OutputSizeLimit`Skeleton",
+            DisplayFunction->(FrameBox[
+              RowBox[{"\" \[CenterEllipsis]\"", #, "\"\[CenterEllipsis] \""}],
+               Background -> GrayLevel[0.75], 
+              BaseStyle -> {
+               "Deploy", FontColor -> GrayLevel[1], FontSize -> Smaller, 
+                ShowStringCharacters -> False}, BaselinePosition -> Baseline, 
+              ContentPadding -> False, FrameMargins -> {{1, 1}, {1, 2}}, 
+              FrameStyle -> None, RoundingRadius -> 7]& )], ",", 
+           RowBox[{"{", 
+            TemplateBox[{"1"},
+             "OutputSizeLimit`Skeleton",
+             DisplayFunction->(FrameBox[
+               
+               RowBox[{
+                "\" \[CenterEllipsis]\"", #, "\"\[CenterEllipsis] \""}], 
+               Background -> GrayLevel[0.75], 
+               BaseStyle -> {
+                "Deploy", FontColor -> GrayLevel[1], FontSize -> Smaller, 
+                 ShowStringCharacters -> False}, BaselinePosition -> Baseline,
+                ContentPadding -> False, FrameMargins -> {{1, 1}, {1, 2}}, 
+               FrameStyle -> None, RoundingRadius -> 7]& )], "}"}]}], "}"}],
+         Short[#, 5]& ],
+        BaseStyle->{Deployed -> False},
+        StripOnInput->False]},
+      {GridBox[{
+         {
+          TagBox[
+           TooltipBox[
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource[
+                "FEStrings", "sizeBriefExplanation"], StandardForm],
+               ImageSizeCache->{65., {3., 9.}}],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarCategory",
+             StripOnInput->False],
+            StyleBox[
+             DynamicBox[
+              ToBoxes[
+               FEPrivate`FrontEndResource["FEStrings", "sizeExplanation"], 
+               StandardForm]], DynamicUpdating -> True, StripOnInput -> 
+             False]],
+           Annotation[#, 
+            Style[
+             Dynamic[
+              FEPrivate`FrontEndResource["FEStrings", "sizeExplanation"]], 
+             DynamicUpdating -> True], "Tooltip"]& ], 
+          ButtonBox[
+           PaneSelectorBox[{False->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeShowLess"], 
+                StandardForm],
+               ImageSizeCache->{52., {1., 9.}}],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarControl",
+             StripOnInput->False], True->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeShowLess"], 
+                StandardForm],
+               ImageSizeCache->{52., {1., 9.}}],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarControlActive",
+             StripOnInput->False]}, Dynamic[
+             CurrentValue["MouseOver"]],
+            Alignment->Center,
+            FrameMargins->0,
+            ImageSize->{Automatic, 25}],
+           Appearance->None,
+           
+           ButtonFunction:>OutputSizeLimit`ButtonFunction[
+            OutputSizeLimit`Defer, 5, 26776501492145863150, 5/2],
+           Enabled->True,
+           Evaluator->Automatic,
+           Method->"Queued"], 
+          ButtonBox[
+           PaneSelectorBox[{False->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeShowMore"], 
+                StandardForm],
+               ImageSizeCache->{62., {1., 9.}}],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarControl",
+             StripOnInput->False], True->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeShowMore"], 
+                StandardForm],
+               ImageSizeCache->{62., {1., 9.}}],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarControlActive",
+             StripOnInput->False]}, Dynamic[
+             CurrentValue["MouseOver"]],
+            Alignment->Center,
+            FrameMargins->0,
+            ImageSize->{Automatic, 25}],
+           Appearance->None,
+           
+           ButtonFunction:>OutputSizeLimit`ButtonFunction[
+            OutputSizeLimit`Defer, 5, 26776501492145863150, 5 2],
+           Enabled->True,
+           Evaluator->Automatic,
+           Method->"Queued"], 
+          ButtonBox[
+           PaneSelectorBox[{False->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeShowAll"], 
+                StandardForm],
+               ImageSizeCache->{44., {1., 9.}}],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarControl",
+             StripOnInput->False], True->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeShowAll"], 
+                StandardForm],
+               ImageSizeCache->{44., {1., 9.}}],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarControlActive",
+             StripOnInput->False]}, Dynamic[
+             CurrentValue["MouseOver"]],
+            Alignment->Center,
+            FrameMargins->0,
+            ImageSize->{Automatic, 25}],
+           Appearance->None,
+           
+           ButtonFunction:>OutputSizeLimit`ButtonFunction[
+            OutputSizeLimit`Defer, 5, 26776501492145863150, Infinity],
+           Enabled->True,
+           Evaluator->Automatic,
+           Method->"Queued"], 
+          ButtonBox[
+           PaneSelectorBox[{False->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeChangeLimit"], 
+                StandardForm],
+               ImageSizeCache->{78., {1., 9.}}],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarControl",
+             StripOnInput->False], True->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeChangeLimit"], 
+                StandardForm],
+               ImageSizeCache->{78., {1., 9.}}],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarControlActive",
+             StripOnInput->False]}, Dynamic[
+             CurrentValue["MouseOver"]],
+            Alignment->Center,
+            FrameMargins->0,
+            ImageSize->{Automatic, 25}],
+           Appearance->None,
+           ButtonFunction:>FrontEndExecute[{
+              FrontEnd`SetOptions[
+              FrontEnd`$FrontEnd, 
+               FrontEnd`PreferencesSettings -> {"Page" -> "Evaluation"}], 
+              FrontEnd`FrontEndToken["PreferencesDialog"]}],
+           Evaluator->None,
+           Method->"Preemptive"]}
+        },
+        AutoDelete->False,
+        FrameStyle->GrayLevel[0.85],
+        GridBoxDividers->{"Columns" -> {False, {True}}},
+        GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+        GridBoxSpacings->{"Columns" -> {{2}}}]}
+     },
+     DefaultBaseStyle->"Column",
+     GridBoxAlignment->{
+      "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+       "RowsIndexed" -> {}},
+     GridBoxDividers->{
+      "Columns" -> {{False}}, "ColumnsIndexed" -> {}, "Rows" -> {{False}}, 
+       "RowsIndexed" -> {}},
+     GridBoxItemSize->{
+      "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+       "RowsIndexed" -> {}},
+     GridBoxSpacings->{"Columns" -> {
+         Offset[0.27999999999999997`], {
+          Offset[0.5599999999999999]}, 
+         Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+         Offset[0.2], 
+         Offset[1.2], {
+          Offset[0.4]}, 
+         Offset[0.2]}, "RowsIndexed" -> {}}],
+    Background->RGBColor[0.9657, 0.9753, 0.9802],
+    FrameMargins->{{12, 12}, {0, 15}},
+    FrameStyle->GrayLevel[0.85],
+    RoundingRadius->5,
+    StripOnInput->False],
+   Deploy,
+   DefaultBaseStyle->"Deploy"],
+  Out[5]]], "Output",
+ CellChangeTimes->{{3.683758974399915*^9, 3.6837590483897915`*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Example Data:", "Subsection",
+ CellChangeTimes->{{3.6838174866775656`*^9, 3.6838174896085653`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"data$raw", "[", 
+  RowBox[{"[", "1", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6837594194868975`*^9, 3.6837594240163507`*^9}, {
+  3.6837601727329006`*^9, 3.6837601933879657`*^9}, {3.683762702498866*^9, 
+  3.683762702662882*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"\<\"author\"\>", "\[Rule]", "Null"}], ",", 
+   RowBox[{"\<\"url\"\>", 
+    "\[Rule]", \
+"\<\"https://api.github.com/repos/openstack/glance/commits/\
+d8461e5528c78e0c8c49a8e51c4f51a182c58ecd\"\>"}], ",", 
+   RowBox[{"\<\"committer\"\>", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"\<\"events_url\"\>", 
+       "\[Rule]", \
+"\<\"https://api.github.com/users/openstack-gerrit/events{/privacy}\"\>"}], 
+      ",", 
+      RowBox[{"\<\"following_url\"\>", 
+       "\[Rule]", \
+"\<\"https://api.github.com/users/openstack-gerrit/following{/other_user}\"\>\
+"}], ",", 
+      RowBox[{"\<\"avatar_url\"\>", 
+       "\[Rule]", \
+"\<\"https://avatars.githubusercontent.com/u/903479?v=3\"\>"}], ",", 
+      RowBox[{"\<\"site_admin\"\>", "\[Rule]", "False"}], ",", 
+      RowBox[{"\<\"login\"\>", "\[Rule]", "\<\"openstack-gerrit\"\>"}], ",", 
+      RowBox[{"\<\"gravatar_id\"\>", "\[Rule]", "\<\"\"\>"}], ",", 
+      RowBox[{"\<\"url\"\>", 
+       "\[Rule]", "\<\"https://api.github.com/users/openstack-gerrit\"\>"}], 
+      ",", 
+      RowBox[{"\<\"organizations_url\"\>", 
+       "\[Rule]", \
+"\<\"https://api.github.com/users/openstack-gerrit/orgs\"\>"}], ",", 
+      RowBox[{"\<\"gists_url\"\>", 
+       "\[Rule]", \
+"\<\"https://api.github.com/users/openstack-gerrit/gists{/gist_id}\"\>"}], 
+      ",", 
+      RowBox[{"\<\"received_events_url\"\>", 
+       "\[Rule]", \
+"\<\"https://api.github.com/users/openstack-gerrit/received_events\"\>"}], 
+      ",", 
+      RowBox[{"\<\"html_url\"\>", 
+       "\[Rule]", "\<\"https://github.com/openstack-gerrit\"\>"}], ",", 
+      RowBox[{"\<\"repos_url\"\>", 
+       "\[Rule]", \
+"\<\"https://api.github.com/users/openstack-gerrit/repos\"\>"}], ",", 
+      RowBox[{"\<\"subscriptions_url\"\>", 
+       "\[Rule]", \
+"\<\"https://api.github.com/users/openstack-gerrit/subscriptions\"\>"}], ",", 
+      RowBox[{"\<\"starred_url\"\>", 
+       "\[Rule]", \
+"\<\"https://api.github.com/users/openstack-gerrit/starred{/owner}{/repo}\"\>\
+"}], ",", 
+      RowBox[{"\<\"type\"\>", "\[Rule]", "\<\"User\"\>"}], ",", 
+      RowBox[{"\<\"id\"\>", "\[Rule]", "903479"}], ",", 
+      RowBox[{"\<\"followers_url\"\>", 
+       "\[Rule]", \
+"\<\"https://api.github.com/users/openstack-gerrit/followers\"\>"}]}], 
+     "}"}]}], ",", 
+   RowBox[{"\<\"html_url\"\>", 
+    "\[Rule]", \
+"\<\"https://github.com/openstack/glance/commit/\
+d8461e5528c78e0c8c49a8e51c4f51a182c58ecd\"\>"}], ",", 
+   RowBox[{"\<\"sha\"\>", 
+    "\[Rule]", "\<\"d8461e5528c78e0c8c49a8e51c4f51a182c58ecd\"\>"}], ",", 
+   RowBox[{"\<\"comments_url\"\>", 
+    "\[Rule]", \
+"\<\"https://api.github.com/repos/openstack/glance/commits/\
+d8461e5528c78e0c8c49a8e51c4f51a182c58ecd/comments\"\>"}], ",", 
+   RowBox[{"\<\"parents\"\>", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"\<\"url\"\>", 
+         "\[Rule]", \
+"\<\"https://api.github.com/repos/openstack/glance/commits/\
+b9237e33f7aa61c0f880e482b1c55301723c7efc\"\>"}], ",", 
+        RowBox[{"\<\"html_url\"\>", 
+         "\[Rule]", \
+"\<\"https://github.com/openstack/glance/commit/\
+b9237e33f7aa61c0f880e482b1c55301723c7efc\"\>"}], ",", 
+        RowBox[{"\<\"sha\"\>", 
+         "\[Rule]", "\<\"b9237e33f7aa61c0f880e482b1c55301723c7efc\"\>"}]}], 
+       "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"\<\"url\"\>", 
+         "\[Rule]", \
+"\<\"https://api.github.com/repos/openstack/glance/commits/\
+a75ddd4112f2d7297ffa5aad45b450246dadcae5\"\>"}], ",", 
+        RowBox[{"\<\"html_url\"\>", 
+         "\[Rule]", \
+"\<\"https://github.com/openstack/glance/commit/\
+a75ddd4112f2d7297ffa5aad45b450246dadcae5\"\>"}], ",", 
+        RowBox[{"\<\"sha\"\>", 
+         "\[Rule]", "\<\"a75ddd4112f2d7297ffa5aad45b450246dadcae5\"\>"}]}], 
+       "}"}]}], "}"}]}], ",", 
+   RowBox[{"\<\"commit\"\>", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"\<\"message\"\>", 
+       "\[Rule]", "\<\"Merge \\\"Add note to docs on release notes prelude \
+section\\\"\"\>"}], ",", 
+      RowBox[{"\<\"author\"\>", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"\<\"email\"\>", 
+          "\[Rule]", "\<\"jenkins@review.openstack.org\"\>"}], ",", 
+         RowBox[{"\<\"date\"\>", "\[Rule]", "\<\"2016-09-23T17:06:03Z\"\>"}], 
+         ",", 
+         RowBox[{"\<\"name\"\>", "\[Rule]", "\<\"Jenkins\"\>"}]}], "}"}]}], 
+      ",", 
+      RowBox[{"\<\"url\"\>", 
+       "\[Rule]", \
+"\<\"https://api.github.com/repos/openstack/glance/git/commits/\
+d8461e5528c78e0c8c49a8e51c4f51a182c58ecd\"\>"}], ",", 
+      RowBox[{"\<\"committer\"\>", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"\<\"email\"\>", "\[Rule]", "\<\"review@openstack.org\"\>"}],
+          ",", 
+         RowBox[{"\<\"date\"\>", "\[Rule]", "\<\"2016-09-23T17:06:03Z\"\>"}], 
+         ",", 
+         RowBox[{"\<\"name\"\>", "\[Rule]", "\<\"Gerrit Code Review\"\>"}]}], 
+        "}"}]}], ",", 
+      RowBox[{"\<\"comment_count\"\>", "\[Rule]", "0"}], ",", 
+      RowBox[{"\<\"tree\"\>", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"\<\"url\"\>", 
+          "\[Rule]", \
+"\<\"https://api.github.com/repos/openstack/glance/git/trees/\
+cb6a3954ac1174efac60cb2b0391f7ba872592db\"\>"}], ",", 
+         RowBox[{"\<\"sha\"\>", 
+          "\[Rule]", "\<\"cb6a3954ac1174efac60cb2b0391f7ba872592db\"\>"}]}], 
+        "}"}]}]}], "}"}]}]}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.6837594244143906`*^9, {3.683760173360963*^9, 3.683760193722999*^9}, 
+   3.6837627031159277`*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Rule Replacement:", "Subsection",
+ CellChangeTimes->{{3.6838175211495657`*^9, 3.683817525190565*^9}}],
+
+Cell[BoxData[
+ RowBox[{"r1", "=", 
+  RowBox[{
+   RowBox[{"data$raw", "[", 
+    RowBox[{"[", "1", "]"}], "]"}], "[", 
+   RowBox[{"[", "5", "]"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.6837594760525537`*^9, 3.683759536312579*^9}, {
+  3.6837595955375013`*^9, 3.6837596084317904`*^9}, {3.683759833174183*^9, 
+  3.6837598418851833`*^9}, {3.683759879172183*^9, 3.6837599128531833`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\"\<sha\>\"", "\[Rule]", 
+  "\"\<d8461e5528c78e0c8c49a8e51c4f51a182c58ecd\>\""}]], "Input",
+ CellChangeTimes->{3.6837599355631833`*^9}],
+
+Cell[BoxData[
+ RowBox[{"\<\"sha\"\>", 
+  "\[Rule]", "\<\"d8461e5528c78e0c8c49a8e51c4f51a182c58ecd\"\>"}]], "Output",
+ CellChangeTimes->{3.683759935693183*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Replace", "[", 
+  RowBox[{"\"\<sha\>\"", ",", "r1"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6837595467266207`*^9, 3.683759644222369*^9}, {
+  3.683759919216183*^9, 3.6837599432841835`*^9}, {3.6838175123195653`*^9, 
+  3.6838175135415654`*^9}}],
+
+Cell[BoxData["\<\"d8461e5528c78e0c8c49a8e51c4f51a182c58ecd\"\>"], "Output",
+ CellChangeTimes->{{3.6837595433452826`*^9, 3.6837595689638443`*^9}, {
+   3.683759612249172*^9, 3.6837596446384106`*^9}, {3.6837599200621834`*^9, 
+   3.683759943856183*^9}, 3.6838175140935655`*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Dates:", "Subsection",
+ CellChangeTimes->{{3.6837608327332597`*^9, 3.68376083470426*^9}, {
+  3.6838175512515655`*^9, 3.6838175537135653`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"date$test", "=", 
+  RowBox[{"\"\<date\>\"", "/.", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"\"\<author\>\"", "/.", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"{", "\"\<commit\>\"", "}"}], "/.", 
+          RowBox[{"data$raw", "[", 
+           RowBox[{"[", "1", "]"}], "]"}]}], ")"}], "[", 
+        RowBox[{"[", "1", "]"}], "]"}], "[", 
+       RowBox[{"[", "2", "]"}], "]"}]}], ")"}], "[", 
+    RowBox[{"[", "2", "]"}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.683759952926183*^9, 3.683760032634183*^9}, {
+  3.6837600663072586`*^9, 3.68376007841847*^9}, {3.6837607558992596`*^9, 
+  3.6837608517412596`*^9}, {3.6837609734552593`*^9, 3.6837610312222595`*^9}, {
+  3.6837610978712597`*^9, 3.6837611039532595`*^9}}],
+
+Cell[BoxData["\<\"2016-09-23T17:06:03Z\"\>"], "Output",
+ CellChangeTimes->{{3.6837608267782593`*^9, 3.68376085349926*^9}, 
+   3.6837610316732597`*^9, 3.68376110488826*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"DateObject", "[", "date$test", "]"}]], "Input",
+ CellChangeTimes->{{3.6837610687022595`*^9, 3.6837611359152594`*^9}, {
+   3.6837611995402594`*^9, 3.6837612178452597`*^9}, {3.6837617473833637`*^9, 
+   3.683761755808206*^9}, 3.683761865137138*^9, {3.6838175446535654`*^9, 
+   3.6838175469355655`*^9}}],
+
+Cell[BoxData[
+ TemplateBox[{RowBox[{"\"Fri 23 Sep 2016 17:06:03\"", 
+     StyleBox[
+      RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+        RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+   RowBox[{"DateObject", "[", 
+     RowBox[{
+       RowBox[{"{", 
+         RowBox[{"2016", ",", "9", ",", "23"}], "}"}], ",", 
+       RowBox[{"TimeObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"17", ",", "6", ",", "3.`"}], "}"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", 
+             RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+       RowBox[{"TimeZone", "\[Rule]", 
+         RowBox[{"-", "4.`"}]}]}], "]"}]},
+  "DateObject",
+  Editable->False]], "Output",
+ CellChangeTimes->{3.6837617562692523`*^9, 3.6838175473645654`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"\"\<date\>\"", "/.", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"\"\<author\>\"", "/.", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"{", "\"\<commit\>\"", "}"}], "/.", "#"}], ")"}], "[", 
+           RowBox[{"[", "1", "]"}], "]"}], "[", 
+          RowBox[{"[", "2", "]"}], "]"}]}], ")"}], "[", 
+       RowBox[{"[", "2", "]"}], "]"}]}], ",", 
+     RowBox[{"\"\<sha\>\"", "/.", 
+      RowBox[{"#", "[", 
+       RowBox[{"[", "5", "]"}], "]"}]}]}], "}"}], "&"}], "/@", 
+  RowBox[{"data$raw", "[", 
+   RowBox[{"[", "#", "]"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.68376188085771*^9, 3.683761903749999*^9}, {
+  3.683761936453269*^9, 3.683762022036826*^9}}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Part","pkspec1",
+   "\"The expression \\!\\(\\*RowBox[{\\\"#1\\\"}]\\) cannot be used as a \
+part specification.\"",2,63,63,26776501492145863150,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.6837620225918818`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Part","partw",
+   "\"Part \\!\\(\\*RowBox[{\\\"2\\\"}]\\) of \\!\\(\\*RowBox[{\\\"{\\\", \
+RowBox[{\\\"{\\\", RowBox[{RowBox[{\\\"\\\\\\\"message\\\\\\\"\\\", \\\"\
+\[Rule]\\\", \\\"\\\\\\\"Merge \\\\\\\\\\\\\\\"Add note to docs on release \
+notes prelude section\\\\\\\\\\\\\\\"\\\\\\\"\\\"}], \\\",\\\", \
+RowBox[{\\\"\\\\\\\"author\\\\\\\"\\\", \\\"\[Rule]\\\", RowBox[{\\\"{\\\", \
+RowBox[{\\\"\[LeftSkeleton]\\\", \\\"1\\\", \\\"\[RightSkeleton]\\\"}], \\\"}\
+\\\"}]}], \\\",\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\"1\\\", \\\"\
+\[RightSkeleton]\\\"}], \\\",\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \
+\\\"1\\\", \\\"\[RightSkeleton]\\\"}], \\\",\\\", \
+RowBox[{\\\"\\\\\\\"comment_count\\\\\\\"\\\", \\\"\[Rule]\\\", \\\"0\\\"}], \
+\\\",\\\", RowBox[{\\\"\\\\\\\"tree\\\\\\\"\\\", \\\"\[Rule]\\\", \
+RowBox[{\\\"{\\\", RowBox[{RowBox[{\\\"\\\\\\\"url\\\\\\\"\\\", \\\"\[Rule]\\\
+\", \\\"\\\\\\\"https://api.github.com/repos/openstack/glance/git/trees/\
+cb6a3954ac1174efac60cb2b0391f7ba872592db\\\\\\\"\\\"}], \\\",\\\", RowBox[{\\\
+\"\\\\\\\"sha\\\\\\\"\\\", \\\"\[Rule]\\\", \
+\\\"\\\\\\\"cb6a3954ac1174efac60cb2b0391f7ba872592db\\\\\\\"\\\"}]}], \\\"}\\\
+\"}]}]}], \\\"}\\\"}], \\\"}\\\"}]\\) does not exist.\"",2,63,64,
+   26776501492145863150,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.6837620226958923`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "ReplaceAll","reps",
+   "\"\\!\\(\\*RowBox[{\\\"{\\\", RowBox[{RowBox[{\\\"{\\\", \
+RowBox[{\\\"{\\\", RowBox[{RowBox[{\\\"\\\\\\\"message\\\\\\\"\\\", \\\"\
+\[Rule]\\\", \\\"\\\\\\\"Merge \\\\\\\\\\\\\\\"Add note to docs on release \
+notes prelude section\\\\\\\\\\\\\\\"\\\\\\\"\\\"}], \\\",\\\", RowBox[{\\\"\
+\[LeftSkeleton]\\\", \\\"4\\\", \\\"\[RightSkeleton]\\\"}], \\\",\\\", \
+RowBox[{\\\"\\\\\\\"tree\\\\\\\"\\\", \\\"\[Rule]\\\", RowBox[{\\\"{\\\", \
+RowBox[{RowBox[{\\\"\\\\\\\"url\\\\\\\"\\\", \\\"\[Rule]\\\", \
+\\\"\\\\\\\"https://api.github.com/repos/openstack/glance/git/trees/\
+cb6a3954ac1174efac60cb2b0391f7ba872592db\\\\\\\"\\\"}], \\\",\\\", RowBox[{\\\
+\"\\\\\\\"sha\\\\\\\"\\\", \\\"\[Rule]\\\", \
+\\\"\\\\\\\"cb6a3954ac1174efac60cb2b0391f7ba872592db\\\\\\\"\\\"}]}], \\\"}\\\
+\"}]}]}], \\\"}\\\"}], \\\"}\\\"}], \\\"\[LeftDoubleBracket]\\\", \\\"2\\\", \
+\\\"\[RightDoubleBracket]\\\"}], \\\"}\\\"}]\\) is neither a list of \
+replacement rules nor a valid dispatch table, and so cannot be used for \
+replacing.\"",2,63,65,26776501492145863150,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.6837620227689*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "ReplaceAll","reps",
+   "\"\\!\\(\\*RowBox[{\\\"{\\\", RowBox[{RowBox[{\\\"{\\\", \
+RowBox[{\\\"{\\\", RowBox[{RowBox[{\\\"\\\\\\\"message\\\\\\\"\\\", \\\"\
+\[Rule]\\\", \\\"\\\\\\\"Merge \\\\\\\\\\\\\\\"Add note to docs on release \
+notes prelude section\\\\\\\\\\\\\\\"\\\\\\\"\\\"}], \\\",\\\", RowBox[{\\\"\
+\[LeftSkeleton]\\\", \\\"4\\\", \\\"\[RightSkeleton]\\\"}], \\\",\\\", \
+RowBox[{\\\"\\\\\\\"tree\\\\\\\"\\\", \\\"\[Rule]\\\", RowBox[{\\\"{\\\", \
+RowBox[{RowBox[{\\\"\\\\\\\"url\\\\\\\"\\\", \\\"\[Rule]\\\", \
+\\\"\\\\\\\"https://api.github.com/repos/openstack/glance/git/trees/\
+cb6a3954ac1174efac60cb2b0391f7ba872592db\\\\\\\"\\\"}], \\\",\\\", RowBox[{\\\
+\"\\\\\\\"sha\\\\\\\"\\\", \\\"\[Rule]\\\", \
+\\\"\\\\\\\"cb6a3954ac1174efac60cb2b0391f7ba872592db\\\\\\\"\\\"}]}], \\\"}\\\
+\"}]}]}], \\\"}\\\"}], \\\"}\\\"}], \\\"\[LeftDoubleBracket]\\\", \\\"2\\\", \
+\\\"\[RightDoubleBracket]\\\"}], \\\"}\\\"}]\\) is neither a list of \
+replacement rules nor a valid dispatch table, and so cannot be used for \
+replacing.\"",2,63,66,26776501492145863150,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.6837620228299055`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "ReplaceAll","reps",
+   "\"\\!\\(\\*RowBox[{\\\"{\\\", \\\"#1\\\", \\\"}\\\"}]\\) is neither a \
+list of replacement rules nor a valid dispatch table, and so cannot be used \
+for replacing.\"",2,63,67,26776501492145863150,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.6837620228519077`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General","stop",
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"ReplaceAll\\\", \
+\\\"::\\\", \\\"reps\\\"}], \\\"MessageName\\\"]\\) will be suppressed during \
+this calculation.\"",2,63,68,26776501492145863150,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.68376202287191*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Part","partw",
+   "\"Part \\!\\(\\*RowBox[{\\\"2\\\"}]\\) of \\!\\(\\*RowBox[{\\\"{\\\", \
+\\\"\\\\\\\"commit\\\\\\\"\\\", \\\"}\\\"}]\\) does not exist.\"",2,63,69,
+   26776501492145863150,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.683762022892912*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Part","partw",
+   "\"Part \\!\\(\\*RowBox[{\\\"5\\\"}]\\) of \
+\\!\\(\\*RowBox[{\\\"#1\\\"}]\\) does not exist.\"",2,63,70,
+   26776501492145863150,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.683762022914914*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General","stop",
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"Part\\\", \\\"::\\\", \
+\\\"partw\\\"}], \\\"MessageName\\\"]\\) will be suppressed during this \
+calculation.\"",2,63,71,26776501492145863150,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.6837620229329157`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Part","pkspec1",
+   "\"The expression \\!\\(\\*RowBox[{\\\"{\\\", \
+RowBox[{RowBox[{\\\"\\\\\\\"date\\\\\\\"\\\", \\\"/.\\\", \
+\\\"\[VeryThinSpace]\\\", RowBox[{RowBox[{\\\"{\\\", \\\"\\\\\\\"commit\\\\\\\
+\"\\\", \\\"}\\\"}], \\\"\[LeftDoubleBracket]\\\", \\\"2\\\", \\\"\
+\[RightDoubleBracket]\\\"}]}], \\\",\\\", \
+RowBox[{\\\"\\\\\\\"sha\\\\\\\"\\\", \\\"/.\\\", \\\"\[VeryThinSpace]\\\", \
+RowBox[{\\\"#1\\\", \\\"\[LeftDoubleBracket]\\\", \\\"5\\\", \\\"\
+\[RightDoubleBracket]\\\"}]}]}], \\\"}\\\"}]\\) cannot be used as a part \
+specification.\"",2,63,72,26776501492145863150,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.683762022952918*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"\<\"date\"\>", "/.", "\[VeryThinSpace]", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"\<\"message\"\>", 
+          "\[Rule]", "\<\"Merge \\\"Add note to docs on release notes prelude \
+section\\\"\"\>"}], ",", 
+         RowBox[{"\<\"author\"\>", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{
+            
+            RowBox[{"\<\"email\"\>", 
+             "\[Rule]", "\<\"jenkins@review.openstack.org\"\>"}], ",", 
+            
+            RowBox[{"\<\"date\"\>", 
+             "\[Rule]", "\<\"2016-09-23T17:06:03Z\"\>"}], ",", 
+            RowBox[{"\<\"name\"\>", "\[Rule]", "\<\"Jenkins\"\>"}]}], "}"}]}],
+          ",", 
+         RowBox[{"\<\"url\"\>", 
+          "\[Rule]", \
+"\<\"https://api.github.com/repos/openstack/glance/git/commits/\
+d8461e5528c78e0c8c49a8e51c4f51a182c58ecd\"\>"}], ",", 
+         RowBox[{"\<\"committer\"\>", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{
+            
+            RowBox[{"\<\"email\"\>", 
+             "\[Rule]", "\<\"review@openstack.org\"\>"}], ",", 
+            
+            RowBox[{"\<\"date\"\>", 
+             "\[Rule]", "\<\"2016-09-23T17:06:03Z\"\>"}], ",", 
+            
+            RowBox[{"\<\"name\"\>", 
+             "\[Rule]", "\<\"Gerrit Code Review\"\>"}]}], "}"}]}], ",", 
+         RowBox[{"\<\"comment_count\"\>", "\[Rule]", "0"}], ",", 
+         RowBox[{"\<\"tree\"\>", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{
+            
+            RowBox[{"\<\"url\"\>", 
+             "\[Rule]", \
+"\<\"https://api.github.com/repos/openstack/glance/git/trees/\
+cb6a3954ac1174efac60cb2b0391f7ba872592db\"\>"}], ",", 
+            
+            RowBox[{"\<\"sha\"\>", 
+             "\[Rule]", \
+"\<\"cb6a3954ac1174efac60cb2b0391f7ba872592db\"\>"}]}], "}"}]}]}], "}"}], 
+       "}"}], "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}]}], 
+    ",", "\<\"1bbddb7ae3c5258c1b8b300dd0d8d06d48d2b7ee\"\>"}], "}"}], 
+  "\[LeftDoubleBracket]", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"\<\"date\"\>", "/.", "\[VeryThinSpace]", 
+     RowBox[{
+      RowBox[{"{", "\<\"commit\"\>", "}"}], "\[LeftDoubleBracket]", "2", 
+      "\[RightDoubleBracket]"}]}], ",", 
+    RowBox[{"\<\"sha\"\>", "/.", "\[VeryThinSpace]", 
+     RowBox[{"#1", "\[LeftDoubleBracket]", "5", "\[RightDoubleBracket]"}]}]}],
+    "}"}], "\[RightDoubleBracket]"}]], "Output",
+ CellChangeTimes->{3.6837620229709196`*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Filter Func:", "Section",
+ CellChangeTimes->{{3.6838175640595655`*^9, 3.6838175700425653`*^9}}],
+
+Cell["\<\
+Generates a list of commit objects with the structure {time, sha, email, name}\
+\>", "Text",
+ CellChangeTimes->{{3.6838175738575654`*^9, 3.683817613044565*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"filter", "[", "n_", "]"}], ":=", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"DateObject", "[", 
+     RowBox[{"\"\<date\>\"", "/.", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"\"\<author\>\"", "/.", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"{", "\"\<commit\>\"", "}"}], "/.", 
+             RowBox[{"data$raw", "[", 
+              RowBox[{"[", "n", "]"}], "]"}]}], ")"}], "[", 
+           RowBox[{"[", "1", "]"}], "]"}], "[", 
+          RowBox[{"[", "2", "]"}], "]"}]}], ")"}], "[", 
+       RowBox[{"[", "2", "]"}], "]"}]}], "]"}], ",", 
+    RowBox[{"\"\<sha\>\"", "/.", 
+     RowBox[{
+      RowBox[{"data$raw", "[", 
+       RowBox[{"[", "n", "]"}], "]"}], "[", 
+      RowBox[{"[", "5", "]"}], "]"}]}], ",", 
+    RowBox[{"\"\<email\>\"", "/.", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"\"\<author\>\"", "/.", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"{", "\"\<commit\>\"", "}"}], "/.", 
+            RowBox[{"data$raw", "[", 
+             RowBox[{"[", "n", "]"}], "]"}]}], ")"}], "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "[", 
+         RowBox[{"[", "2", "]"}], "]"}]}], ")"}], "[", 
+      RowBox[{"[", "1", "]"}], "]"}]}], ",", 
+    RowBox[{"\"\<name\>\"", "/.", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"\"\<author\>\"", "/.", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"{", "\"\<commit\>\"", "}"}], "/.", 
+            RowBox[{"data$raw", "[", 
+             RowBox[{"[", "n", "]"}], "]"}]}], ")"}], "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "[", 
+         RowBox[{"[", "2", "]"}], "]"}]}], ")"}], "[", 
+      RowBox[{"[", "3", "]"}], "]"}]}]}], "}"}]}]], "Input",
+ CellChangeTimes->{{3.683762043004923*^9, 3.683762133794001*^9}, {
+   3.6837621688495064`*^9, 3.6837621978924103`*^9}, {3.683762768827498*^9, 
+   3.6837627762222376`*^9}, 3.6837636689156494`*^9, {3.6837641019148073`*^9, 
+   3.683764143509967*^9}, {3.683764201761791*^9, 3.683764209183533*^9}, {
+   3.6837645236359754`*^9, 3.6837645335749693`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Length", "@", "data$raw"}]], "Input",
+ CellChangeTimes->{{3.683762232183839*^9, 3.6837622383774586`*^9}}],
+
+Cell[BoxData["5572"], "Output",
+ CellChangeTimes->{3.6837622387704973`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"list", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"filter", "[", "#", "]"}], "&"}], "/@", 
+   RowBox[{"Range", "[", "5572", "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.683762208803501*^9, 3.68376224329395*^9}, {
+  3.683763675748649*^9, 3.6837636768286495`*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  TagBox[
+   FrameBox[GridBox[{
+      {
+       ItemBox[
+        TagBox[
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             TemplateBox[{RowBox[{"\"Fri 23 Sep 2016 17:06:03\"", 
+                 StyleBox[
+                  RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+                    RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+               RowBox[{"DateObject", "[", 
+                 RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{"2016", ",", "9", ",", "23"}], "}"}], ",", 
+                   RowBox[{"TimeObject", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"17", ",", "6", ",", "3.`"}], "}"}], ",", 
+                    RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+                   RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}]},
+              "DateObject",
+              Editable->False], 
+             ",", "\<\"d8461e5528c78e0c8c49a8e51c4f51a182c58ecd\"\>", 
+             ",", "\<\"jenkins@review.openstack.org\"\>", 
+             ",", "\<\"Jenkins\"\>"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             TemplateBox[{RowBox[{"\"Thu 22 Sep 2016 20:12:42\"", 
+                 StyleBox[
+                  RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+                    RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+               RowBox[{"DateObject", "[", 
+                 RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{"2016", ",", "9", ",", "22"}], "}"}], ",", 
+                   RowBox[{"TimeObject", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"20", ",", "12", ",", "42.`"}], "}"}], ",", 
+                    RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+                   RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}]},
+              "DateObject",
+              Editable->False], 
+             ",", "\<\"b9237e33f7aa61c0f880e482b1c55301723c7efc\"\>", 
+             ",", "\<\"openstack-infra@lists.openstack.org\"\>", 
+             ",", "\<\"OpenStack Proposal Bot\"\>"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             TemplateBox[{RowBox[{"\"Thu 22 Sep 2016 07:15:32\"", 
+                 StyleBox[
+                  RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+                    RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+               RowBox[{"DateObject", "[", 
+                 RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{"2016", ",", "9", ",", "22"}], "}"}], ",", 
+                   RowBox[{"TimeObject", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"7", ",", "15", ",", "32.`"}], "}"}], ",", 
+                    RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+                   RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}]},
+              "DateObject",
+              Editable->False], 
+             ",", "\<\"51e532124b90355ad3511c32c2a5c2d31d7ee19e\"\>", 
+             ",", "\<\"clint@fewbar.com\"\>", ",", "\<\"Clint Byrum\"\>"}], 
+            "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             TemplateBox[{RowBox[{"\"Wed 21 Sep 2016 07:45:42\"", 
+                 StyleBox[
+                  RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+                    RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+               RowBox[{"DateObject", "[", 
+                 RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{"2016", ",", "9", ",", "21"}], "}"}], ",", 
+                   RowBox[{"TimeObject", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"7", ",", "45", ",", "42.`"}], "}"}], ",", 
+                    RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+                   RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}]},
+              "DateObject",
+              Editable->False], 
+             ",", "\<\"dedb1a83c6052e03858fc0e5dc59c1b0ffbf1604\"\>", 
+             ",", "\<\"jenkins@review.openstack.org\"\>", 
+             ",", "\<\"Jenkins\"\>"}], "}"}], ",", 
+           TemplateBox[{"5565"},
+            "OutputSizeLimit`Skeleton",
+            DisplayFunction->(FrameBox[
+              RowBox[{"\" \[CenterEllipsis]\"", #, "\"\[CenterEllipsis] \""}],
+               Background -> GrayLevel[0.75], 
+              BaseStyle -> {
+               "Deploy", FontColor -> GrayLevel[1], FontSize -> Smaller, 
+                ShowStringCharacters -> False}, BaselinePosition -> Baseline, 
+              ContentPadding -> False, FrameMargins -> {{1, 1}, {1, 2}}, 
+              FrameStyle -> None, RoundingRadius -> 7]& )], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             TemplateBox[{RowBox[{"\"Thu 12 Aug 2010 01:17:56\"", 
+                 StyleBox[
+                  RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+                    RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+               RowBox[{"DateObject", "[", 
+                 RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{"2010", ",", "8", ",", "12"}], "}"}], ",", 
+                   RowBox[{"TimeObject", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", "17", ",", "56.`"}], "}"}], ",", 
+                    RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+                   RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}]},
+              "DateObject",
+              Editable->False], 
+             ",", "\<\"545efb517a67c1e63220379cb266a216e1084388\"\>", 
+             ",", "\<\"cory.wright@rackspace.com\"\>", 
+             ",", "\<\"Cory Wright\"\>"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             TemplateBox[{RowBox[{"\"Wed 11 Aug 2010 22:54:34\"", 
+                 StyleBox[
+                  RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+                    RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+               RowBox[{"DateObject", "[", 
+                 RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{"2010", ",", "8", ",", "11"}], "}"}], ",", 
+                   RowBox[{"TimeObject", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"22", ",", "54", ",", "34.`"}], "}"}], ",", 
+                    RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+                   RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}]},
+              "DateObject",
+              Editable->False], 
+             ",", "\<\"80715f835259bae33974f532a992c92696313b1b\"\>", 
+             ",", "\<\"cory.wright@rackspace.com\"\>", 
+             ",", "\<\"Cory Wright\"\>"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             TemplateBox[{RowBox[{"\"Fri 6 Aug 2010 03:06:42\"", 
+                 StyleBox[
+                  RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+                    RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+               RowBox[{"DateObject", "[", 
+                 RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{"2010", ",", "8", ",", "6"}], "}"}], ",", 
+                   RowBox[{"TimeObject", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"3", ",", "6", ",", "42.`"}], "}"}], ",", 
+                    RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+                   RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}]},
+              "DateObject",
+              Editable->False], 
+             ",", "\<\"78b45ee909994eef9fbdeba59bb91d9fc955272b\"\>", 
+             ",", "\<\"rick@quasar.racklabs.com\"\>", 
+             ",", "\<\"Rick Harris\"\>"}], "}"}]}], "}"}],
+         Short[#, 5]& ],
+        BaseStyle->{Deployed -> False},
+        StripOnInput->False]},
+      {GridBox[{
+         {
+          TagBox[
+           TooltipBox[
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource[
+                "FEStrings", "sizeBriefExplanation"], StandardForm],
+               ImageSizeCache->{65., {3., 9.}}],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarCategory",
+             StripOnInput->False],
+            StyleBox[
+             DynamicBox[
+              ToBoxes[
+               FEPrivate`FrontEndResource["FEStrings", "sizeExplanation"], 
+               StandardForm]], DynamicUpdating -> True, StripOnInput -> 
+             False]],
+           Annotation[#, 
+            Style[
+             Dynamic[
+              FEPrivate`FrontEndResource["FEStrings", "sizeExplanation"]], 
+             DynamicUpdating -> True], "Tooltip"]& ], 
+          ButtonBox[
+           PaneSelectorBox[{False->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeShowLess"], 
+                StandardForm],
+               ImageSizeCache->{52., {1., 9.}}],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarControl",
+             StripOnInput->False], True->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeShowLess"], 
+                StandardForm]],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarControlActive",
+             StripOnInput->False]}, Dynamic[
+             CurrentValue["MouseOver"]],
+            Alignment->Center,
+            FrameMargins->0,
+            ImageSize->{Automatic, 25}],
+           Appearance->None,
+           
+           ButtonFunction:>OutputSizeLimit`ButtonFunction[
+            OutputSizeLimit`Defer, 109, 26776501492145863150, 5/2],
+           Enabled->True,
+           Evaluator->Automatic,
+           Method->"Queued"], 
+          ButtonBox[
+           PaneSelectorBox[{False->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeShowMore"], 
+                StandardForm],
+               ImageSizeCache->{62., {1., 9.}}],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarControl",
+             StripOnInput->False], True->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeShowMore"], 
+                StandardForm],
+               ImageSizeCache->{62., {1., 9.}}],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarControlActive",
+             StripOnInput->False]}, Dynamic[
+             CurrentValue["MouseOver"]],
+            Alignment->Center,
+            FrameMargins->0,
+            ImageSize->{Automatic, 25}],
+           Appearance->None,
+           
+           ButtonFunction:>OutputSizeLimit`ButtonFunction[
+            OutputSizeLimit`Defer, 109, 26776501492145863150, 5 2],
+           Enabled->True,
+           Evaluator->Automatic,
+           Method->"Queued"], 
+          ButtonBox[
+           PaneSelectorBox[{False->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeShowAll"], 
+                StandardForm],
+               ImageSizeCache->{44., {1., 9.}}],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarControl",
+             StripOnInput->False], True->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeShowAll"], 
+                StandardForm]],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarControlActive",
+             StripOnInput->False]}, Dynamic[
+             CurrentValue["MouseOver"]],
+            Alignment->Center,
+            FrameMargins->0,
+            ImageSize->{Automatic, 25}],
+           Appearance->None,
+           
+           ButtonFunction:>OutputSizeLimit`ButtonFunction[
+            OutputSizeLimit`Defer, 109, 26776501492145863150, Infinity],
+           Enabled->True,
+           Evaluator->Automatic,
+           Method->"Queued"], 
+          ButtonBox[
+           PaneSelectorBox[{False->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeChangeLimit"], 
+                StandardForm],
+               ImageSizeCache->{78., {1., 9.}}],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarControl",
+             StripOnInput->False], True->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeChangeLimit"], 
+                StandardForm],
+               ImageSizeCache->{78., {1., 9.}}],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarControlActive",
+             StripOnInput->False]}, Dynamic[
+             CurrentValue["MouseOver"]],
+            Alignment->Center,
+            FrameMargins->0,
+            ImageSize->{Automatic, 25}],
+           Appearance->None,
+           ButtonFunction:>FrontEndExecute[{
+              FrontEnd`SetOptions[
+              FrontEnd`$FrontEnd, 
+               FrontEnd`PreferencesSettings -> {"Page" -> "Evaluation"}], 
+              FrontEnd`FrontEndToken["PreferencesDialog"]}],
+           Evaluator->None,
+           Method->"Preemptive"]}
+        },
+        AutoDelete->False,
+        FrameStyle->GrayLevel[0.85],
+        GridBoxDividers->{"Columns" -> {False, {True}}},
+        GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+        GridBoxSpacings->{"Columns" -> {{2}}}]}
+     },
+     DefaultBaseStyle->"Column",
+     GridBoxAlignment->{
+      "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+       "RowsIndexed" -> {}},
+     GridBoxDividers->{
+      "Columns" -> {{False}}, "ColumnsIndexed" -> {}, "Rows" -> {{False}}, 
+       "RowsIndexed" -> {}},
+     GridBoxItemSize->{
+      "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+       "RowsIndexed" -> {}},
+     GridBoxSpacings->{"Columns" -> {
+         Offset[0.27999999999999997`], {
+          Offset[0.5599999999999999]}, 
+         Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+         Offset[0.2], 
+         Offset[1.2], {
+          Offset[0.4]}, 
+         Offset[0.2]}, "RowsIndexed" -> {}}],
+    Background->RGBColor[0.9657, 0.9753, 0.9802],
+    FrameMargins->{{12, 12}, {0, 15}},
+    FrameStyle->GrayLevel[0.85],
+    RoundingRadius->5,
+    StripOnInput->False],
+   Deploy,
+   DefaultBaseStyle->"Deploy"],
+  Out[109]]], "Output",
+ CellChangeTimes->{{3.683762211881809*^9, 3.6837622534119616`*^9}, 
+   3.6837627879416494`*^9, 3.6837636868593063`*^9, {3.683764127560372*^9, 
+   3.6837641572843437`*^9}, 3.6837642209487095`*^9, 3.683764549276539*^9}]
+}, Open  ]],
+
+Cell["Now filtering out anything commited by jenkins:", "Text",
+ CellChangeTimes->{{3.6838176227385654`*^9, 3.683817638329565*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"list$filtered", "=", 
+  RowBox[{"Select", "[", 
+   RowBox[{"list", ",", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"#", "[", 
+       RowBox[{"[", "4", "]"}], "]"}], "\[NotEqual]", "\"\<Jenkins\>\""}], 
+     "&"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.6837642888955035`*^9, 3.683764350124626*^9}, {
+  3.683764384598073*^9, 3.6837643912137346`*^9}, {3.6837645432199335`*^9, 
+  3.683764560011613*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  TagBox[
+   FrameBox[GridBox[{
+      {
+       ItemBox[
+        TagBox[
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             TemplateBox[{RowBox[{"\"Thu 22 Sep 2016 20:12:42\"", 
+                 StyleBox[
+                  RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+                    RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+               RowBox[{"DateObject", "[", 
+                 RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{"2016", ",", "9", ",", "22"}], "}"}], ",", 
+                   RowBox[{"TimeObject", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"20", ",", "12", ",", "42.`"}], "}"}], ",", 
+                    RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+                   RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}]},
+              "DateObject",
+              Editable->False], 
+             ",", "\<\"b9237e33f7aa61c0f880e482b1c55301723c7efc\"\>", 
+             ",", "\<\"openstack-infra@lists.openstack.org\"\>", 
+             ",", "\<\"OpenStack Proposal Bot\"\>"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             TemplateBox[{RowBox[{"\"Thu 22 Sep 2016 07:15:32\"", 
+                 StyleBox[
+                  RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+                    RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+               RowBox[{"DateObject", "[", 
+                 RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{"2016", ",", "9", ",", "22"}], "}"}], ",", 
+                   RowBox[{"TimeObject", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"7", ",", "15", ",", "32.`"}], "}"}], ",", 
+                    RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+                   RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}]},
+              "DateObject",
+              Editable->False], 
+             ",", "\<\"51e532124b90355ad3511c32c2a5c2d31d7ee19e\"\>", 
+             ",", "\<\"clint@fewbar.com\"\>", ",", "\<\"Clint Byrum\"\>"}], 
+            "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             TemplateBox[{RowBox[{"\"Fri 26 Aug 2016 07:10:29\"", 
+                 StyleBox[
+                  RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+                    RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+               RowBox[{"DateObject", "[", 
+                 RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{"2016", ",", "8", ",", "26"}], "}"}], ",", 
+                   RowBox[{"TimeObject", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"7", ",", "10", ",", "29.`"}], "}"}], ",", 
+                    RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+                   RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}]},
+              "DateObject",
+              Editable->False], 
+             ",", "\<\"1bbddb7ae3c5258c1b8b300dd0d8d06d48d2b7ee\"\>", 
+             ",", "\<\"hussain.chachuliya@nttdata.com\"\>", 
+             ",", "\<\"hussainchachuliya\"\>"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             TemplateBox[{RowBox[{"\"Fri 16 Sep 2016 17:32:44\"", 
+                 StyleBox[
+                  RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+                    RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+               RowBox[{"DateObject", "[", 
+                 RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{"2016", ",", "9", ",", "16"}], "}"}], ",", 
+                   RowBox[{"TimeObject", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"17", ",", "32", ",", "44.`"}], "}"}], ",", 
+                    RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+                   RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}]},
+              "DateObject",
+              Editable->False], 
+             ",", "\<\"eb7507ac9313bed8a3c3767d041dffd3a9aa778f\"\>", 
+             ",", "\<\"alexander.bashmakov@intel.com\"\>", 
+             ",", "\<\"Alexander Bashmakov\"\>"}], "}"}], ",", 
+           TemplateBox[{"3580"},
+            "OutputSizeLimit`Skeleton",
+            DisplayFunction->(FrameBox[
+              RowBox[{"\" \[CenterEllipsis]\"", #, "\"\[CenterEllipsis] \""}],
+               Background -> GrayLevel[0.75], 
+              BaseStyle -> {
+               "Deploy", FontColor -> GrayLevel[1], FontSize -> Smaller, 
+                ShowStringCharacters -> False}, BaselinePosition -> Baseline, 
+              ContentPadding -> False, FrameMargins -> {{1, 1}, {1, 2}}, 
+              FrameStyle -> None, RoundingRadius -> 7]& )], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             TemplateBox[{RowBox[{"\"Thu 12 Aug 2010 01:17:56\"", 
+                 StyleBox[
+                  RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+                    RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+               RowBox[{"DateObject", "[", 
+                 RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{"2010", ",", "8", ",", "12"}], "}"}], ",", 
+                   RowBox[{"TimeObject", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", "17", ",", "56.`"}], "}"}], ",", 
+                    RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+                   RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}]},
+              "DateObject",
+              Editable->False], 
+             ",", "\<\"545efb517a67c1e63220379cb266a216e1084388\"\>", 
+             ",", "\<\"cory.wright@rackspace.com\"\>", 
+             ",", "\<\"Cory Wright\"\>"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             TemplateBox[{RowBox[{"\"Wed 11 Aug 2010 22:54:34\"", 
+                 StyleBox[
+                  RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+                    RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+               RowBox[{"DateObject", "[", 
+                 RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{"2010", ",", "8", ",", "11"}], "}"}], ",", 
+                   RowBox[{"TimeObject", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"22", ",", "54", ",", "34.`"}], "}"}], ",", 
+                    RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+                   RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}]},
+              "DateObject",
+              Editable->False], 
+             ",", "\<\"80715f835259bae33974f532a992c92696313b1b\"\>", 
+             ",", "\<\"cory.wright@rackspace.com\"\>", 
+             ",", "\<\"Cory Wright\"\>"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             TemplateBox[{RowBox[{"\"Fri 6 Aug 2010 03:06:42\"", 
+                 StyleBox[
+                  RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+                    RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+               RowBox[{"DateObject", "[", 
+                 RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{"2010", ",", "8", ",", "6"}], "}"}], ",", 
+                   RowBox[{"TimeObject", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"3", ",", "6", ",", "42.`"}], "}"}], ",", 
+                    RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+                   RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}]},
+              "DateObject",
+              Editable->False], 
+             ",", "\<\"78b45ee909994eef9fbdeba59bb91d9fc955272b\"\>", 
+             ",", "\<\"rick@quasar.racklabs.com\"\>", 
+             ",", "\<\"Rick Harris\"\>"}], "}"}]}], "}"}],
+         Short[#, 5]& ],
+        BaseStyle->{Deployed -> False},
+        StripOnInput->False]},
+      {GridBox[{
+         {
+          TagBox[
+           TooltipBox[
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource[
+                "FEStrings", "sizeBriefExplanation"], StandardForm],
+               ImageSizeCache->{65., {3., 9.}}],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarCategory",
+             StripOnInput->False],
+            StyleBox[
+             DynamicBox[
+              ToBoxes[
+               FEPrivate`FrontEndResource["FEStrings", "sizeExplanation"], 
+               StandardForm]], DynamicUpdating -> True, StripOnInput -> 
+             False]],
+           Annotation[#, 
+            Style[
+             Dynamic[
+              FEPrivate`FrontEndResource["FEStrings", "sizeExplanation"]], 
+             DynamicUpdating -> True], "Tooltip"]& ], 
+          ButtonBox[
+           PaneSelectorBox[{False->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeShowLess"], 
+                StandardForm],
+               ImageSizeCache->{52., {1., 9.}}],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarControl",
+             StripOnInput->False], True->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeShowLess"], 
+                StandardForm],
+               ImageSizeCache->{52., {1., 9.}}],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarControlActive",
+             StripOnInput->False]}, Dynamic[
+             CurrentValue["MouseOver"]],
+            Alignment->Center,
+            FrameMargins->0,
+            ImageSize->{Automatic, 25}],
+           Appearance->None,
+           
+           ButtonFunction:>OutputSizeLimit`ButtonFunction[
+            OutputSizeLimit`Defer, 111, 26776501492145863150, 5/2],
+           Enabled->True,
+           Evaluator->Automatic,
+           Method->"Queued"], 
+          ButtonBox[
+           PaneSelectorBox[{False->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeShowMore"], 
+                StandardForm],
+               ImageSizeCache->{62., {1., 9.}}],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarControl",
+             StripOnInput->False], True->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeShowMore"], 
+                StandardForm],
+               ImageSizeCache->{62., {1., 9.}}],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarControlActive",
+             StripOnInput->False]}, Dynamic[
+             CurrentValue["MouseOver"]],
+            Alignment->Center,
+            FrameMargins->0,
+            ImageSize->{Automatic, 25}],
+           Appearance->None,
+           
+           ButtonFunction:>OutputSizeLimit`ButtonFunction[
+            OutputSizeLimit`Defer, 111, 26776501492145863150, 5 2],
+           Enabled->True,
+           Evaluator->Automatic,
+           Method->"Queued"], 
+          ButtonBox[
+           PaneSelectorBox[{False->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeShowAll"], 
+                StandardForm],
+               ImageSizeCache->{44., {1., 9.}}],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarControl",
+             StripOnInput->False], True->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeShowAll"], 
+                StandardForm],
+               ImageSizeCache->{44., {1., 9.}}],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarControlActive",
+             StripOnInput->False]}, Dynamic[
+             CurrentValue["MouseOver"]],
+            Alignment->Center,
+            FrameMargins->0,
+            ImageSize->{Automatic, 25}],
+           Appearance->None,
+           
+           ButtonFunction:>OutputSizeLimit`ButtonFunction[
+            OutputSizeLimit`Defer, 111, 26776501492145863150, Infinity],
+           Enabled->True,
+           Evaluator->Automatic,
+           Method->"Queued"], 
+          ButtonBox[
+           PaneSelectorBox[{False->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeChangeLimit"], 
+                StandardForm],
+               ImageSizeCache->{78., {1., 9.}}],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarControl",
+             StripOnInput->False], True->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeChangeLimit"], 
+                StandardForm],
+               ImageSizeCache->{78., {1., 9.}}],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarControlActive",
+             StripOnInput->False]}, Dynamic[
+             CurrentValue["MouseOver"]],
+            Alignment->Center,
+            FrameMargins->0,
+            ImageSize->{Automatic, 25}],
+           Appearance->None,
+           ButtonFunction:>FrontEndExecute[{
+              FrontEnd`SetOptions[
+              FrontEnd`$FrontEnd, 
+               FrontEnd`PreferencesSettings -> {"Page" -> "Evaluation"}], 
+              FrontEnd`FrontEndToken["PreferencesDialog"]}],
+           Evaluator->None,
+           Method->"Preemptive"]}
+        },
+        AutoDelete->False,
+        FrameStyle->GrayLevel[0.85],
+        GridBoxDividers->{"Columns" -> {False, {True}}},
+        GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+        GridBoxSpacings->{"Columns" -> {{2}}}]}
+     },
+     DefaultBaseStyle->"Column",
+     GridBoxAlignment->{
+      "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+       "RowsIndexed" -> {}},
+     GridBoxDividers->{
+      "Columns" -> {{False}}, "ColumnsIndexed" -> {}, "Rows" -> {{False}}, 
+       "RowsIndexed" -> {}},
+     GridBoxItemSize->{
+      "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+       "RowsIndexed" -> {}},
+     GridBoxSpacings->{"Columns" -> {
+         Offset[0.27999999999999997`], {
+          Offset[0.5599999999999999]}, 
+         Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+         Offset[0.2], 
+         Offset[1.2], {
+          Offset[0.4]}, 
+         Offset[0.2]}, "RowsIndexed" -> {}}],
+    Background->RGBColor[0.9657, 0.9753, 0.9802],
+    FrameMargins->{{12, 12}, {0, 15}},
+    FrameStyle->GrayLevel[0.85],
+    RoundingRadius->5,
+    StripOnInput->False],
+   Deploy,
+   DefaultBaseStyle->"Deploy"],
+  Out[111]]], "Output",
+ CellChangeTimes->{
+  3.683764359633577*^9, 3.6837643970073137`*^9, {3.6837645615427656`*^9, 
+   3.6837645669713087`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Transpose", "[", "list$filtered", "]"}], "[", 
+  RowBox[{"[", "1", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6837626378404007`*^9, 3.6837626456821847`*^9}, {
+  3.6837644045700703`*^9, 3.683764433108924*^9}, {3.6837645716577773`*^9, 
+  3.683764571796791*^9}, {3.683764606175228*^9, 3.683764626304241*^9}, {
+  3.6837646976933794`*^9, 3.6837647156581755`*^9}, {3.6837652075783625`*^9, 
+  3.683765207665372*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  TagBox[
+   FrameBox[GridBox[{
+      {
+       ItemBox[
+        TagBox[
+         RowBox[{"{", 
+          RowBox[{
+           TemplateBox[{RowBox[{"\"Thu 22 Sep 2016 20:12:42\"", 
+               StyleBox[
+                RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+                  RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+             RowBox[{"DateObject", "[", 
+               RowBox[{
+                 RowBox[{"{", 
+                   RowBox[{"2016", ",", "9", ",", "22"}], "}"}], ",", 
+                 RowBox[{"TimeObject", "[", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"20", ",", "12", ",", "42.`"}], "}"}], ",", 
+                    RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+                 RowBox[{"TimeZone", "\[Rule]", 
+                   RowBox[{"-", "4.`"}]}]}], "]"}]},
+            "DateObject",
+            Editable->False], ",", 
+           TemplateBox[{RowBox[{"\"Thu 22 Sep 2016 07:15:32\"", 
+               StyleBox[
+                RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+                  RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+             RowBox[{"DateObject", "[", 
+               RowBox[{
+                 RowBox[{"{", 
+                   RowBox[{"2016", ",", "9", ",", "22"}], "}"}], ",", 
+                 RowBox[{"TimeObject", "[", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"7", ",", "15", ",", "32.`"}], "}"}], ",", 
+                    RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+                 RowBox[{"TimeZone", "\[Rule]", 
+                   RowBox[{"-", "4.`"}]}]}], "]"}]},
+            "DateObject",
+            Editable->False], ",", 
+           TemplateBox[{RowBox[{"\"Fri 26 Aug 2016 07:10:29\"", 
+               StyleBox[
+                RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+                  RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+             RowBox[{"DateObject", "[", 
+               RowBox[{
+                 RowBox[{"{", 
+                   RowBox[{"2016", ",", "8", ",", "26"}], "}"}], ",", 
+                 RowBox[{"TimeObject", "[", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"7", ",", "10", ",", "29.`"}], "}"}], ",", 
+                    RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+                 RowBox[{"TimeZone", "\[Rule]", 
+                   RowBox[{"-", "4.`"}]}]}], "]"}]},
+            "DateObject",
+            Editable->False], ",", 
+           TemplateBox[{RowBox[{"\"Fri 16 Sep 2016 17:32:44\"", 
+               StyleBox[
+                RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+                  RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+             RowBox[{"DateObject", "[", 
+               RowBox[{
+                 RowBox[{"{", 
+                   RowBox[{"2016", ",", "9", ",", "16"}], "}"}], ",", 
+                 RowBox[{"TimeObject", "[", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"17", ",", "32", ",", "44.`"}], "}"}], ",", 
+                    RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+                 RowBox[{"TimeZone", "\[Rule]", 
+                   RowBox[{"-", "4.`"}]}]}], "]"}]},
+            "DateObject",
+            Editable->False], ",", 
+           TemplateBox[{RowBox[{"\"Fri 16 Sep 2016 07:54:09\"", 
+               StyleBox[
+                RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+                  RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+             RowBox[{"DateObject", "[", 
+               RowBox[{
+                 RowBox[{"{", 
+                   RowBox[{"2016", ",", "9", ",", "16"}], "}"}], ",", 
+                 RowBox[{"TimeObject", "[", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"7", ",", "54", ",", "9.`"}], "}"}], ",", 
+                    RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+                 RowBox[{"TimeZone", "\[Rule]", 
+                   RowBox[{"-", "4.`"}]}]}], "]"}]},
+            "DateObject",
+            Editable->False], ",", 
+           TemplateBox[{RowBox[{"\"Wed 7 Sep 2016 20:53:06\"", 
+               StyleBox[
+                RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+                  RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+             RowBox[{"DateObject", "[", 
+               RowBox[{
+                 RowBox[{"{", 
+                   RowBox[{"2016", ",", "9", ",", "7"}], "}"}], ",", 
+                 RowBox[{"TimeObject", "[", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"20", ",", "53", ",", "6.`"}], "}"}], ",", 
+                    RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+                 RowBox[{"TimeZone", "\[Rule]", 
+                   RowBox[{"-", "4.`"}]}]}], "]"}]},
+            "DateObject",
+            Editable->False], ",", 
+           TemplateBox[{RowBox[{"\"Fri 9 Sep 2016 16:03:53\"", 
+               StyleBox[
+                RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+                  RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+             RowBox[{"DateObject", "[", 
+               RowBox[{
+                 RowBox[{"{", 
+                   RowBox[{"2016", ",", "9", ",", "9"}], "}"}], ",", 
+                 RowBox[{"TimeObject", "[", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"16", ",", "3", ",", "53.`"}], "}"}], ",", 
+                    RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+                 RowBox[{"TimeZone", "\[Rule]", 
+                   RowBox[{"-", "4.`"}]}]}], "]"}]},
+            "DateObject",
+            Editable->False], ",", 
+           TemplateBox[{RowBox[{"\"Thu 8 Sep 2016 17:28:45\"", 
+               StyleBox[
+                RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+                  RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+             RowBox[{"DateObject", "[", 
+               RowBox[{
+                 RowBox[{"{", 
+                   RowBox[{"2016", ",", "9", ",", "8"}], "}"}], ",", 
+                 RowBox[{"TimeObject", "[", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"17", ",", "28", ",", "45.`"}], "}"}], ",", 
+                    RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+                 RowBox[{"TimeZone", "\[Rule]", 
+                   RowBox[{"-", "4.`"}]}]}], "]"}]},
+            "DateObject",
+            Editable->False], ",", 
+           TemplateBox[{RowBox[{"\"Thu 1 Sep 2016 00:45:22\"", 
+               StyleBox[
+                RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+                  RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+             RowBox[{"DateObject", "[", 
+               RowBox[{
+                 RowBox[{"{", 
+                   RowBox[{"2016", ",", "9", ",", "1"}], "}"}], ",", 
+                 RowBox[{"TimeObject", "[", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "45", ",", "22.`"}], "}"}], ",", 
+                    RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+                 RowBox[{"TimeZone", "\[Rule]", 
+                   RowBox[{"-", "4.`"}]}]}], "]"}]},
+            "DateObject",
+            Editable->False], ",", 
+           TemplateBox[{RowBox[{"\"Wed 7 Sep 2016 20:22:32\"", 
+               StyleBox[
+                RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+                  RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+             RowBox[{"DateObject", "[", 
+               RowBox[{
+                 RowBox[{"{", 
+                   RowBox[{"2016", ",", "9", ",", "7"}], "}"}], ",", 
+                 RowBox[{"TimeObject", "[", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"20", ",", "22", ",", "32.`"}], "}"}], ",", 
+                    RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+                 RowBox[{"TimeZone", "\[Rule]", 
+                   RowBox[{"-", "4.`"}]}]}], "]"}]},
+            "DateObject",
+            Editable->False], ",", 
+           TemplateBox[{RowBox[{"\"Wed 3 Aug 2016 22:17:47\"", 
+               StyleBox[
+                RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+                  RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+             RowBox[{"DateObject", "[", 
+               RowBox[{
+                 RowBox[{"{", 
+                   RowBox[{"2016", ",", "8", ",", "3"}], "}"}], ",", 
+                 RowBox[{"TimeObject", "[", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"22", ",", "17", ",", "47.`"}], "}"}], ",", 
+                    RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+                 RowBox[{"TimeZone", "\[Rule]", 
+                   RowBox[{"-", "4.`"}]}]}], "]"}]},
+            "DateObject",
+            Editable->False], ",", 
+           TemplateBox[{RowBox[{"\"Fri 2 Sep 2016 16:39:07\"", 
+               StyleBox[
+                RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+                  RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+             RowBox[{"DateObject", "[", 
+               RowBox[{
+                 RowBox[{"{", 
+                   RowBox[{"2016", ",", "9", ",", "2"}], "}"}], ",", 
+                 RowBox[{"TimeObject", "[", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"16", ",", "39", ",", "7.`"}], "}"}], ",", 
+                    RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+                 RowBox[{"TimeZone", "\[Rule]", 
+                   RowBox[{"-", "4.`"}]}]}], "]"}]},
+            "DateObject",
+            Editable->False], ",", 
+           TemplateBox[{RowBox[{"\"Sat 3 Sep 2016 12:18:50\"", 
+               StyleBox[
+                RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+                  RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+             RowBox[{"DateObject", "[", 
+               RowBox[{
+                 RowBox[{"{", 
+                   RowBox[{"2016", ",", "9", ",", "3"}], "}"}], ",", 
+                 RowBox[{"TimeObject", "[", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"12", ",", "18", ",", "50.`"}], "}"}], ",", 
+                    RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+                 RowBox[{"TimeZone", "\[Rule]", 
+                   RowBox[{"-", "4.`"}]}]}], "]"}]},
+            "DateObject",
+            Editable->False], ",", 
+           TemplateBox[{"3562"},
+            "OutputSizeLimit`Skeleton",
+            DisplayFunction->(FrameBox[
+              RowBox[{"\" \[CenterEllipsis]\"", #, "\"\[CenterEllipsis] \""}],
+               Background -> GrayLevel[0.75], 
+              BaseStyle -> {
+               "Deploy", FontColor -> GrayLevel[1], FontSize -> Smaller, 
+                ShowStringCharacters -> False}, BaselinePosition -> Baseline, 
+              ContentPadding -> False, FrameMargins -> {{1, 1}, {1, 2}}, 
+              FrameStyle -> None, RoundingRadius -> 7]& )], ",", 
+           TemplateBox[{RowBox[{"\"Mon 27 Sep 2010 15:46:52\"", 
+               StyleBox[
+                RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+                  RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+             RowBox[{"DateObject", "[", 
+               RowBox[{
+                 RowBox[{"{", 
+                   RowBox[{"2010", ",", "9", ",", "27"}], "}"}], ",", 
+                 RowBox[{"TimeObject", "[", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"15", ",", "46", ",", "52.`"}], "}"}], ",", 
+                    RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+                 RowBox[{"TimeZone", "\[Rule]", 
+                   RowBox[{"-", "4.`"}]}]}], "]"}]},
+            "DateObject",
+            Editable->False], ",", 
+           TemplateBox[{RowBox[{"\"Sun 26 Sep 2010 07:25:34\"", 
+               StyleBox[
+                RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+                  RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+             RowBox[{"DateObject", "[", 
+               RowBox[{
+                 RowBox[{"{", 
+                   RowBox[{"2010", ",", "9", ",", "26"}], "}"}], ",", 
+                 RowBox[{"TimeObject", "[", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"7", ",", "25", ",", "34.`"}], "}"}], ",", 
+                    RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+                 RowBox[{"TimeZone", "\[Rule]", 
+                   RowBox[{"-", "4.`"}]}]}], "]"}]},
+            "DateObject",
+            Editable->False], ",", 
+           TemplateBox[{RowBox[{"\"Sun 26 Sep 2010 07:17:54\"", 
+               StyleBox[
+                RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+                  RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+             RowBox[{"DateObject", "[", 
+               RowBox[{
+                 RowBox[{"{", 
+                   RowBox[{"2010", ",", "9", ",", "26"}], "}"}], ",", 
+                 RowBox[{"TimeObject", "[", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"7", ",", "17", ",", "54.`"}], "}"}], ",", 
+                    RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+                 RowBox[{"TimeZone", "\[Rule]", 
+                   RowBox[{"-", "4.`"}]}]}], "]"}]},
+            "DateObject",
+            Editable->False], ",", 
+           TemplateBox[{RowBox[{"\"Fri 24 Sep 2010 20:49:17\"", 
+               StyleBox[
+                RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+                  RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+             RowBox[{"DateObject", "[", 
+               RowBox[{
+                 RowBox[{"{", 
+                   RowBox[{"2010", ",", "9", ",", "24"}], "}"}], ",", 
+                 RowBox[{"TimeObject", "[", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"20", ",", "49", ",", "17.`"}], "}"}], ",", 
+                    RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+                 RowBox[{"TimeZone", "\[Rule]", 
+                   RowBox[{"-", "4.`"}]}]}], "]"}]},
+            "DateObject",
+            Editable->False], ",", 
+           TemplateBox[{RowBox[{"\"Fri 24 Sep 2010 20:36:31\"", 
+               StyleBox[
+                RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+                  RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+             RowBox[{"DateObject", "[", 
+               RowBox[{
+                 RowBox[{"{", 
+                   RowBox[{"2010", ",", "9", ",", "24"}], "}"}], ",", 
+                 RowBox[{"TimeObject", "[", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"20", ",", "36", ",", "31.`"}], "}"}], ",", 
+                    RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+                 RowBox[{"TimeZone", "\[Rule]", 
+                   RowBox[{"-", "4.`"}]}]}], "]"}]},
+            "DateObject",
+            Editable->False], ",", 
+           TemplateBox[{RowBox[{"\"Fri 24 Sep 2010 20:20:46\"", 
+               StyleBox[
+                RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+                  RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+             RowBox[{"DateObject", "[", 
+               RowBox[{
+                 RowBox[{"{", 
+                   RowBox[{"2010", ",", "9", ",", "24"}], "}"}], ",", 
+                 RowBox[{"TimeObject", "[", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"20", ",", "20", ",", "46.`"}], "}"}], ",", 
+                    RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+                 RowBox[{"TimeZone", "\[Rule]", 
+                   RowBox[{"-", "4.`"}]}]}], "]"}]},
+            "DateObject",
+            Editable->False], ",", 
+           TemplateBox[{RowBox[{"\"Wed 22 Sep 2010 19:01:55\"", 
+               StyleBox[
+                RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+                  RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+             RowBox[{"DateObject", "[", 
+               RowBox[{
+                 RowBox[{"{", 
+                   RowBox[{"2010", ",", "9", ",", "22"}], "}"}], ",", 
+                 RowBox[{"TimeObject", "[", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"19", ",", "1", ",", "55.`"}], "}"}], ",", 
+                    RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+                 RowBox[{"TimeZone", "\[Rule]", 
+                   RowBox[{"-", "4.`"}]}]}], "]"}]},
+            "DateObject",
+            Editable->False], ",", 
+           TemplateBox[{RowBox[{"\"Wed 25 Aug 2010 18:49:40\"", 
+               StyleBox[
+                RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+                  RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+             RowBox[{"DateObject", "[", 
+               RowBox[{
+                 RowBox[{"{", 
+                   RowBox[{"2010", ",", "8", ",", "25"}], "}"}], ",", 
+                 RowBox[{"TimeObject", "[", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"18", ",", "49", ",", "40.`"}], "}"}], ",", 
+                    RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+                 RowBox[{"TimeZone", "\[Rule]", 
+                   RowBox[{"-", "4.`"}]}]}], "]"}]},
+            "DateObject",
+            Editable->False], ",", 
+           TemplateBox[{RowBox[{"\"Tue 24 Aug 2010 04:32:57\"", 
+               StyleBox[
+                RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+                  RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+             RowBox[{"DateObject", "[", 
+               RowBox[{
+                 RowBox[{"{", 
+                   RowBox[{"2010", ",", "8", ",", "24"}], "}"}], ",", 
+                 RowBox[{"TimeObject", "[", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"4", ",", "32", ",", "57.`"}], "}"}], ",", 
+                    RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+                 RowBox[{"TimeZone", "\[Rule]", 
+                   RowBox[{"-", "4.`"}]}]}], "]"}]},
+            "DateObject",
+            Editable->False], ",", 
+           TemplateBox[{RowBox[{"\"Thu 12 Aug 2010 01:17:56\"", 
+               StyleBox[
+                RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+                  RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+             RowBox[{"DateObject", "[", 
+               RowBox[{
+                 RowBox[{"{", 
+                   RowBox[{"2010", ",", "8", ",", "12"}], "}"}], ",", 
+                 RowBox[{"TimeObject", "[", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", "17", ",", "56.`"}], "}"}], ",", 
+                    RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+                 RowBox[{"TimeZone", "\[Rule]", 
+                   RowBox[{"-", "4.`"}]}]}], "]"}]},
+            "DateObject",
+            Editable->False], ",", 
+           TemplateBox[{RowBox[{"\"Wed 11 Aug 2010 22:54:34\"", 
+               StyleBox[
+                RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+                  RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+             RowBox[{"DateObject", "[", 
+               RowBox[{
+                 RowBox[{"{", 
+                   RowBox[{"2010", ",", "8", ",", "11"}], "}"}], ",", 
+                 RowBox[{"TimeObject", "[", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"22", ",", "54", ",", "34.`"}], "}"}], ",", 
+                    RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+                 RowBox[{"TimeZone", "\[Rule]", 
+                   RowBox[{"-", "4.`"}]}]}], "]"}]},
+            "DateObject",
+            Editable->False], ",", 
+           TemplateBox[{RowBox[{"\"Fri 6 Aug 2010 03:06:42\"", 
+               StyleBox[
+                RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+                  RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+             RowBox[{"DateObject", "[", 
+               RowBox[{
+                 RowBox[{"{", 
+                   RowBox[{"2010", ",", "8", ",", "6"}], "}"}], ",", 
+                 RowBox[{"TimeObject", "[", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"3", ",", "6", ",", "42.`"}], "}"}], ",", 
+                    RowBox[{"TimeZone", "\[Rule]", 
+                    RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+                 RowBox[{"TimeZone", "\[Rule]", 
+                   RowBox[{"-", "4.`"}]}]}], "]"}]},
+            "DateObject",
+            Editable->False]}], "}"}],
+         Short[#, 5]& ],
+        BaseStyle->{Deployed -> False},
+        StripOnInput->False]},
+      {GridBox[{
+         {
+          TagBox[
+           TooltipBox[
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource[
+                "FEStrings", "sizeBriefExplanation"], StandardForm],
+               ImageSizeCache->{65., {3., 9.}}],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarCategory",
+             StripOnInput->False],
+            StyleBox[
+             DynamicBox[
+              ToBoxes[
+               FEPrivate`FrontEndResource["FEStrings", "sizeExplanation"], 
+               StandardForm]], DynamicUpdating -> True, StripOnInput -> 
+             False]],
+           Annotation[#, 
+            Style[
+             Dynamic[
+              FEPrivate`FrontEndResource["FEStrings", "sizeExplanation"]], 
+             DynamicUpdating -> True], "Tooltip"]& ], 
+          ButtonBox[
+           PaneSelectorBox[{False->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeShowLess"], 
+                StandardForm],
+               ImageSizeCache->{52., {1., 9.}}],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarControl",
+             StripOnInput->False], True->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeShowLess"], 
+                StandardForm],
+               ImageSizeCache->{52., {1., 9.}}],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarControlActive",
+             StripOnInput->False]}, Dynamic[
+             CurrentValue["MouseOver"]],
+            Alignment->Center,
+            FrameMargins->0,
+            ImageSize->{Automatic, 25}],
+           Appearance->None,
+           
+           ButtonFunction:>OutputSizeLimit`ButtonFunction[
+            OutputSizeLimit`Defer, 117, 26776501492145863150, 5/2],
+           Enabled->True,
+           Evaluator->Automatic,
+           Method->"Queued"], 
+          ButtonBox[
+           PaneSelectorBox[{False->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeShowMore"], 
+                StandardForm],
+               ImageSizeCache->{62., {1., 9.}}],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarControl",
+             StripOnInput->False], True->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeShowMore"], 
+                StandardForm],
+               ImageSizeCache->{62., {1., 9.}}],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarControlActive",
+             StripOnInput->False]}, Dynamic[
+             CurrentValue["MouseOver"]],
+            Alignment->Center,
+            FrameMargins->0,
+            ImageSize->{Automatic, 25}],
+           Appearance->None,
+           
+           ButtonFunction:>OutputSizeLimit`ButtonFunction[
+            OutputSizeLimit`Defer, 117, 26776501492145863150, 5 2],
+           Enabled->True,
+           Evaluator->Automatic,
+           Method->"Queued"], 
+          ButtonBox[
+           PaneSelectorBox[{False->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeShowAll"], 
+                StandardForm],
+               ImageSizeCache->{44., {1., 9.}}],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarControl",
+             StripOnInput->False], True->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeShowAll"], 
+                StandardForm]],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarControlActive",
+             StripOnInput->False]}, Dynamic[
+             CurrentValue["MouseOver"]],
+            Alignment->Center,
+            FrameMargins->0,
+            ImageSize->{Automatic, 25}],
+           Appearance->None,
+           
+           ButtonFunction:>OutputSizeLimit`ButtonFunction[
+            OutputSizeLimit`Defer, 117, 26776501492145863150, Infinity],
+           Enabled->True,
+           Evaluator->Automatic,
+           Method->"Queued"], 
+          ButtonBox[
+           PaneSelectorBox[{False->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeChangeLimit"], 
+                StandardForm],
+               ImageSizeCache->{78., {1., 9.}}],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarControl",
+             StripOnInput->False], True->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeChangeLimit"], 
+                StandardForm]],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarControlActive",
+             StripOnInput->False]}, Dynamic[
+             CurrentValue["MouseOver"]],
+            Alignment->Center,
+            FrameMargins->0,
+            ImageSize->{Automatic, 25}],
+           Appearance->None,
+           ButtonFunction:>FrontEndExecute[{
+              FrontEnd`SetOptions[
+              FrontEnd`$FrontEnd, 
+               FrontEnd`PreferencesSettings -> {"Page" -> "Evaluation"}], 
+              FrontEnd`FrontEndToken["PreferencesDialog"]}],
+           Evaluator->None,
+           Method->"Preemptive"]}
+        },
+        AutoDelete->False,
+        FrameStyle->GrayLevel[0.85],
+        GridBoxDividers->{"Columns" -> {False, {True}}},
+        GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+        GridBoxSpacings->{"Columns" -> {{2}}}]}
+     },
+     DefaultBaseStyle->"Column",
+     GridBoxAlignment->{
+      "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+       "RowsIndexed" -> {}},
+     GridBoxDividers->{
+      "Columns" -> {{False}}, "ColumnsIndexed" -> {}, "Rows" -> {{False}}, 
+       "RowsIndexed" -> {}},
+     GridBoxItemSize->{
+      "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+       "RowsIndexed" -> {}},
+     GridBoxSpacings->{"Columns" -> {
+         Offset[0.27999999999999997`], {
+          Offset[0.5599999999999999]}, 
+         Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+         Offset[0.2], 
+         Offset[1.2], {
+          Offset[0.4]}, 
+         Offset[0.2]}, "RowsIndexed" -> {}}],
+    Background->RGBColor[0.9657, 0.9753, 0.9802],
+    FrameMargins->{{12, 12}, {0, 15}},
+    FrameStyle->GrayLevel[0.85],
+    RoundingRadius->5,
+    StripOnInput->False],
+   Deploy,
+   DefaultBaseStyle->"Deploy"],
+  Out[117]]], "Output",
+ CellChangeTimes->{
+  3.6837644337019825`*^9, 3.683764572326844*^9, {3.6837646066992807`*^9, 
+   3.683764626939305*^9}, {3.683764698289439*^9, 3.6837647160262127`*^9}, 
+   3.683765213561961*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"(", 
+  RowBox[{
+   RowBox[{"{", "\"\<author\>\"", "}"}], "/.", 
+   RowBox[{"data$raw", "[", 
+    RowBox[{"[", "1", "]"}], "]"}]}], ")"}]], "Input",
+ CellChangeTimes->{{3.683762803149649*^9, 3.683762839741649*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", "Null", "}"}]], "Output",
+ CellChangeTimes->{{3.6837628234766493`*^9, 3.683762840064649*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(", 
+   RowBox[{"\"\<author\>\"", "/.", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"{", "\"\<commit\>\"", "}"}], "/.", 
+        RowBox[{"data$raw", "[", 
+         RowBox[{"[", "1", "]"}], "]"}]}], ")"}], "[", 
+      RowBox[{"[", "1", "]"}], "]"}], "[", 
+     RowBox[{"[", "2", "]"}], "]"}]}], ")"}], "[", 
+  RowBox[{"[", "3", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6837628688456492`*^9, 3.683762868916649*^9}, {
+  3.6837640688595023`*^9, 3.6837640839810143`*^9}, {3.683764512862898*^9, 
+  3.683764512913903*^9}}],
+
+Cell[BoxData[
+ RowBox[{"\<\"name\"\>", "\[Rule]", "\<\"Jenkins\"\>"}]], "Output",
+ CellChangeTimes->{
+  3.683762890208649*^9, {3.6837640692785444`*^9, 3.6837640847070866`*^9}, 
+   3.6837641876713824`*^9, 3.6837645133629484`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Position", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Transpose", "[", "list", "]"}], "[", 
+    RowBox[{"[", "2", "]"}], "]"}], ",", 
+   "\"\<a75ddd4112f2d7297ffa5aad45b450246dadcae5\>\""}], "]"}]], "Input",
+ CellChangeTimes->{{3.6837636883314533`*^9, 3.683763730473667*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"{", "22", "}"}], "}"}]], "Output",
+ CellChangeTimes->{3.683763700817702*^9, 3.683763731554775*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"list", "[", 
+  RowBox[{"[", "22", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6837637553901587`*^9, 3.683763759824602*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   TemplateBox[{RowBox[{"\"Fri 2 Sep 2016 16:39:07\"", 
+       StyleBox[
+        RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+          RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+     RowBox[{"DateObject", "[", 
+       RowBox[{
+         RowBox[{"{", 
+           RowBox[{"2016", ",", "9", ",", "2"}], "}"}], ",", 
+         RowBox[{"TimeObject", "[", 
+           RowBox[{
+             RowBox[{"{", 
+               RowBox[{"16", ",", "39", ",", "7.`"}], "}"}], ",", 
+             RowBox[{"TimeZone", "\[Rule]", 
+               RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+         RowBox[{"TimeZone", "\[Rule]", 
+           RowBox[{"-", "4.`"}]}]}], "]"}]},
+    "DateObject",
+    Editable->False], 
+   ",", "\<\"a75ddd4112f2d7297ffa5aad45b450246dadcae5\"\>"}], "}"}]], "Output",
+ CellChangeTimes->{3.68376376030665*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Windowing Test:", "Subsection",
+ CellChangeTimes->{{3.683817651400565*^9, 3.6838176571025653`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"window$test", "=", 
+  RowBox[{"Select", "[", 
+   RowBox[{"list$filtered", ",", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"DateObject", "[", 
+       RowBox[{"{", 
+        RowBox[{"2016", ",", "1"}], "}"}], "]"}], "<", 
+      RowBox[{"#", "[", 
+       RowBox[{"[", "1", "]"}], "]"}], "<", 
+      RowBox[{"DateObject", "[", 
+       RowBox[{"{", 
+        RowBox[{"2016", ",", "2"}], "}"}], "]"}]}], "&"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.6837650674783545`*^9, 3.6837651230999155`*^9}, {
+  3.6837651649470997`*^9, 3.6837652879954033`*^9}, {3.6837653203146353`*^9, 
+  3.6837653278463883`*^9}, {3.68376552458506*^9, 3.6837655256181636`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Fri 8 Jan 2016 16:01:18\"", 
+         StyleBox[
+          RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+            RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+       RowBox[{"DateObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"2016", ",", "1", ",", "8"}], "}"}], ",", 
+           RowBox[{"TimeObject", "[", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{"16", ",", "1", ",", "18.`"}], "}"}], ",", 
+               RowBox[{"TimeZone", "\[Rule]", 
+                 RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", 
+             RowBox[{"-", "4.`"}]}]}], "]"}]},
+      "DateObject",
+      Editable->False], 
+     ",", "\<\"38158e554560621fa85d36aa2c288c04a94fb527\"\>", 
+     ",", "\<\"stuart.mclaren@hp.com\"\>", ",", "\<\"Stuart McLaren\"\>"}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Sat 9 Jan 2016 16:05:09\"", 
+         StyleBox[
+          RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+            RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+       RowBox[{"DateObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"2016", ",", "1", ",", "9"}], "}"}], ",", 
+           RowBox[{"TimeObject", "[", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{"16", ",", "5", ",", "9.`"}], "}"}], ",", 
+               RowBox[{"TimeZone", "\[Rule]", 
+                 RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", 
+             RowBox[{"-", "4.`"}]}]}], "]"}]},
+      "DateObject",
+      Editable->False], 
+     ",", "\<\"0d97af65b49a60465a4fe0114c26789922d2b439\"\>", 
+     ",", "\<\"ting.wang@easystack.cn\"\>", ",", "\<\"ting.wang\"\>"}], "}"}],
+    ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Fri 29 Jan 2016 10:22:48\"", 
+         StyleBox[
+          RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+            RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+       RowBox[{"DateObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"2016", ",", "1", ",", "29"}], "}"}], ",", 
+           RowBox[{"TimeObject", "[", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{"10", ",", "22", ",", "48.`"}], "}"}], ",", 
+               RowBox[{"TimeZone", "\[Rule]", 
+                 RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", 
+             RowBox[{"-", "4.`"}]}]}], "]"}]},
+      "DateObject",
+      Editable->False], 
+     ",", "\<\"c686033348e7e90f9ef841552817bf9f07313310\"\>", 
+     ",", "\<\"dshakhray@mirantis.com\"\>", ",", "\<\"Darja Shakhray\"\>"}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Fri 8 Jan 2016 09:37:01\"", 
+         StyleBox[
+          RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+            RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+       RowBox[{"DateObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"2016", ",", "1", ",", "8"}], "}"}], ",", 
+           RowBox[{"TimeObject", "[", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{"9", ",", "37", ",", "1.`"}], "}"}], ",", 
+               RowBox[{"TimeZone", "\[Rule]", 
+                 RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", 
+             RowBox[{"-", "4.`"}]}]}], "]"}]},
+      "DateObject",
+      Editable->False], 
+     ",", "\<\"8a38f9ad5d22329af5ae3a6c21de4521f8fc8e1f\"\>", 
+     ",", "\<\"lin.a.yang@intel.com\"\>", ",", "\<\"Lin Yang\"\>"}], "}"}], 
+   ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Wed 6 Jan 2016 23:31:10\"", 
+         StyleBox[
+          RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+            RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+       RowBox[{"DateObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"2016", ",", "1", ",", "6"}], "}"}], ",", 
+           RowBox[{"TimeObject", "[", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{"23", ",", "31", ",", "10.`"}], "}"}], ",", 
+               RowBox[{"TimeZone", "\[Rule]", 
+                 RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", 
+             RowBox[{"-", "4.`"}]}]}], "]"}]},
+      "DateObject",
+      Editable->False], 
+     ",", "\<\"3ec69b5bd44e74c2b7c64a04fa973d66c4abac25\"\>", 
+     ",", "\<\"brianna.poulos@jhuapl.edu\"\>", 
+     ",", "\<\"Brianna Poulos\"\>"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Tue 19 Jan 2016 06:37:48\"", 
+         StyleBox[
+          RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+            RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+       RowBox[{"DateObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"2016", ",", "1", ",", "19"}], "}"}], ",", 
+           RowBox[{"TimeObject", "[", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{"6", ",", "37", ",", "48.`"}], "}"}], ",", 
+               RowBox[{"TimeZone", "\[Rule]", 
+                 RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", 
+             RowBox[{"-", "4.`"}]}]}], "]"}]},
+      "DateObject",
+      Editable->False], 
+     ",", "\<\"0d89611c1e80fad1757bd92db377c39841610b4a\"\>", 
+     ",", "\<\"wangxiyuan@huawei.com\"\>", ",", "\<\"wangxiyuan\"\>"}], "}"}],
+    ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Wed 13 Jan 2016 12:03:23\"", 
+         StyleBox[
+          RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+            RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+       RowBox[{"DateObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"2016", ",", "1", ",", "13"}], "}"}], ",", 
+           RowBox[{"TimeObject", "[", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{"12", ",", "3", ",", "23.`"}], "}"}], ",", 
+               RowBox[{"TimeZone", "\[Rule]", 
+                 RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", 
+             RowBox[{"-", "4.`"}]}]}], "]"}]},
+      "DateObject",
+      Editable->False], 
+     ",", "\<\"61ffb49f9e72ee53bee1fbc53fc54ca54d10eb3a\"\>", 
+     ",", "\<\"niall.bunting@hpe.com\"\>", ",", "\<\"Niall Bunting\"\>"}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Fri 29 Jan 2016 15:53:30\"", 
+         StyleBox[
+          RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+            RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+       RowBox[{"DateObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"2016", ",", "1", ",", "29"}], "}"}], ",", 
+           RowBox[{"TimeObject", "[", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{"15", ",", "53", ",", "30.`"}], "}"}], ",", 
+               RowBox[{"TimeZone", "\[Rule]", 
+                 RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", 
+             RowBox[{"-", "4.`"}]}]}], "]"}]},
+      "DateObject",
+      Editable->False], 
+     ",", "\<\"5062e1bb50b1bbae5f56e2f82f96e6484c12e824\"\>", 
+     ",", "\<\"kkushaev@mirantis.com\"\>", ",", "\<\"kairat_kushaev\"\>"}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Fri 15 Jan 2016 06:52:14\"", 
+         StyleBox[
+          RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+            RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+       RowBox[{"DateObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"2016", ",", "1", ",", "15"}], "}"}], ",", 
+           RowBox[{"TimeObject", "[", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{"6", ",", "52", ",", "14.`"}], "}"}], ",", 
+               RowBox[{"TimeZone", "\[Rule]", 
+                 RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", 
+             RowBox[{"-", "4.`"}]}]}], "]"}]},
+      "DateObject",
+      Editable->False], 
+     ",", "\<\"4fc9d7df5e1dc1f4d430871857317fa7cced7e68\"\>", 
+     ",", "\<\"leidong@unitedstack.com\"\>", ",", "\<\"zwei\"\>"}], "}"}], 
+   ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Tue 19 Jan 2016 13:37:05\"", 
+         StyleBox[
+          RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+            RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+       RowBox[{"DateObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"2016", ",", "1", ",", "19"}], "}"}], ",", 
+           RowBox[{"TimeObject", "[", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{"13", ",", "37", ",", "5.`"}], "}"}], ",", 
+               RowBox[{"TimeZone", "\[Rule]", 
+                 RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", 
+             RowBox[{"-", "4.`"}]}]}], "]"}]},
+      "DateObject",
+      Editable->False], 
+     ",", "\<\"6179e1e98808548f1c12a2b66784cac3c1e5ac0f\"\>", 
+     ",", "\<\"jokke@usr.fi\"\>", ",", "\<\"Erno Kuvaja\"\>"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Mon 25 Jan 2016 21:01:09\"", 
+         StyleBox[
+          RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+            RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+       RowBox[{"DateObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"2016", ",", "1", ",", "25"}], "}"}], ",", 
+           RowBox[{"TimeObject", "[", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{"21", ",", "1", ",", "9.`"}], "}"}], ",", 
+               RowBox[{"TimeZone", "\[Rule]", 
+                 RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", 
+             RowBox[{"-", "4.`"}]}]}], "]"}]},
+      "DateObject",
+      Editable->False], 
+     ",", "\<\"33ae05ee8687af39b3bddc5b448ace2a412dbf68\"\>", 
+     ",", "\<\"travis.tripp@hpe.com\"\>", ",", "\<\"Travis Tripp\"\>"}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Thu 28 Jan 2016 22:01:55\"", 
+         StyleBox[
+          RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+            RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+       RowBox[{"DateObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"2016", ",", "1", ",", "28"}], "}"}], ",", 
+           RowBox[{"TimeObject", "[", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{"22", ",", "1", ",", "55.`"}], "}"}], ",", 
+               RowBox[{"TimeZone", "\[Rule]", 
+                 RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", 
+             RowBox[{"-", "4.`"}]}]}], "]"}]},
+      "DateObject",
+      Editable->False], 
+     ",", "\<\"1ebbfd3dc1694dc4f26e763da9eee833bb5d2545\"\>", 
+     ",", "\<\"smurugesan@vmware.com\"\>", 
+     ",", "\<\"Sabari Kumar Murugesan\"\>"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Fri 8 Jan 2016 21:08:49\"", 
+         StyleBox[
+          RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+            RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+       RowBox[{"DateObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"2016", ",", "1", ",", "8"}], "}"}], ",", 
+           RowBox[{"TimeObject", "[", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{"21", ",", "8", ",", "49.`"}], "}"}], ",", 
+               RowBox[{"TimeZone", "\[Rule]", 
+                 RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", 
+             RowBox[{"-", "4.`"}]}]}], "]"}]},
+      "DateObject",
+      Editable->False], 
+     ",", "\<\"8f0d6ea9c535f6ab09fc9b2ae84cf0bef2401ee4\"\>", 
+     ",", "\<\"flaper87@gmail.com\"\>", ",", "\<\"Flavio Percoco\"\>"}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Mon 25 Jan 2016 21:17:52\"", 
+         StyleBox[
+          RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+            RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+       RowBox[{"DateObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"2016", ",", "1", ",", "25"}], "}"}], ",", 
+           RowBox[{"TimeObject", "[", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{"21", ",", "17", ",", "52.`"}], "}"}], ",", 
+               RowBox[{"TimeZone", "\[Rule]", 
+                 RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", 
+             RowBox[{"-", "4.`"}]}]}], "]"}]},
+      "DateObject",
+      Editable->False], 
+     ",", "\<\"6a16e10afc19ba24e9a1b298676933bd4e83d8a6\"\>", 
+     ",", "\<\"harlowja@yahoo-inc.com\"\>", ",", "\<\"Joshua Harlow\"\>"}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Tue 26 Jan 2016 23:22:58\"", 
+         StyleBox[
+          RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+            RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+       RowBox[{"DateObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"2016", ",", "1", ",", "26"}], "}"}], ",", 
+           RowBox[{"TimeObject", "[", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{"23", ",", "22", ",", "58.`"}], "}"}], ",", 
+               RowBox[{"TimeZone", "\[Rule]", 
+                 RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", 
+             RowBox[{"-", "4.`"}]}]}], "]"}]},
+      "DateObject",
+      Editable->False], 
+     ",", "\<\"fbe7a4f42a913eda58df1dc1ee3b6ed4dc17d150\"\>", 
+     ",", "\<\"openstack-infra@lists.openstack.org\"\>", 
+     ",", "\<\"OpenStack Proposal Bot\"\>"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Tue 26 Jan 2016 17:13:26\"", 
+         StyleBox[
+          RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+            RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+       RowBox[{"DateObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"2016", ",", "1", ",", "26"}], "}"}], ",", 
+           RowBox[{"TimeObject", "[", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{"17", ",", "13", ",", "26.`"}], "}"}], ",", 
+               RowBox[{"TimeZone", "\[Rule]", 
+                 RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", 
+             RowBox[{"-", "4.`"}]}]}], "]"}]},
+      "DateObject",
+      Editable->False], 
+     ",", "\<\"19aed25f5b837732a7b7152f5332f8f7a71d95e9\"\>", 
+     ",", "\<\"kstepniewski@vmware.com\"\>", 
+     ",", "\<\"Karol Stepniewski\"\>"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Fri 22 Jan 2016 20:13:35\"", 
+         StyleBox[
+          RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+            RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+       RowBox[{"DateObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"2016", ",", "1", ",", "22"}], "}"}], ",", 
+           RowBox[{"TimeObject", "[", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{"20", ",", "13", ",", "35.`"}], "}"}], ",", 
+               RowBox[{"TimeZone", "\[Rule]", 
+                 RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", 
+             RowBox[{"-", "4.`"}]}]}], "]"}]},
+      "DateObject",
+      Editable->False], 
+     ",", "\<\"eab1567d48a18fa968c7b66c3641dd037da1f84e\"\>", 
+     ",", "\<\"brianna.poulos@jhuapl.edu\"\>", 
+     ",", "\<\"Brianna Poulos\"\>"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Tue 19 Jan 2016 11:11:50\"", 
+         StyleBox[
+          RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+            RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+       RowBox[{"DateObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"2016", ",", "1", ",", "19"}], "}"}], ",", 
+           RowBox[{"TimeObject", "[", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{"11", ",", "11", ",", "50.`"}], "}"}], ",", 
+               RowBox[{"TimeZone", "\[Rule]", 
+                 RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", 
+             RowBox[{"-", "4.`"}]}]}], "]"}]},
+      "DateObject",
+      Editable->False], 
+     ",", "\<\"e1b5d6d0b9740d2097e54b0af1cbb82fb5d58832\"\>", 
+     ",", "\<\"abhishek.kekane@nttdata.com\"\>", 
+     ",", "\<\"abhishekkekane\"\>"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Mon 25 Jan 2016 20:29:14\"", 
+         StyleBox[
+          RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+            RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+       RowBox[{"DateObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"2016", ",", "1", ",", "25"}], "}"}], ",", 
+           RowBox[{"TimeObject", "[", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{"20", ",", "29", ",", "14.`"}], "}"}], ",", 
+               RowBox[{"TimeZone", "\[Rule]", 
+                 RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", 
+             RowBox[{"-", "4.`"}]}]}], "]"}]},
+      "DateObject",
+      Editable->False], 
+     ",", "\<\"8b6b94363574432a87ad390b0c35704055e9066f\"\>", 
+     ",", "\<\"harlowja@yahoo-inc.com\"\>", ",", "\<\"Joshua Harlow\"\>"}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Sun 24 Jan 2016 20:48:29\"", 
+         StyleBox[
+          RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+            RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+       RowBox[{"DateObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"2016", ",", "1", ",", "24"}], "}"}], ",", 
+           RowBox[{"TimeObject", "[", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{"20", ",", "48", ",", "29.`"}], "}"}], ",", 
+               RowBox[{"TimeZone", "\[Rule]", 
+                 RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", 
+             RowBox[{"-", "4.`"}]}]}], "]"}]},
+      "DateObject",
+      Editable->False], 
+     ",", "\<\"a2440202d3421d27b364b6f6cd0245ae19ab47db\"\>", 
+     ",", "\<\"openstack-infra@lists.openstack.org\"\>", 
+     ",", "\<\"OpenStack Proposal Bot\"\>"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Thu 21 Jan 2016 16:54:36\"", 
+         StyleBox[
+          RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+            RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+       RowBox[{"DateObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"2016", ",", "1", ",", "21"}], "}"}], ",", 
+           RowBox[{"TimeObject", "[", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{"16", ",", "54", ",", "36.`"}], "}"}], ",", 
+               RowBox[{"TimeZone", "\[Rule]", 
+                 RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", 
+             RowBox[{"-", "4.`"}]}]}], "]"}]},
+      "DateObject",
+      Editable->False], 
+     ",", "\<\"9526e05b96de510f548bb3c3a927a2e30f533b43\"\>", 
+     ",", "\<\"ronald.bradford@gmail.com\"\>", 
+     ",", "\<\"Ronald Bradford\"\>"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Thu 21 Jan 2016 20:40:03\"", 
+         StyleBox[
+          RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+            RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+       RowBox[{"DateObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"2016", ",", "1", ",", "21"}], "}"}], ",", 
+           RowBox[{"TimeObject", "[", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{"20", ",", "40", ",", "3.`"}], "}"}], ",", 
+               RowBox[{"TimeZone", "\[Rule]", 
+                 RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", 
+             RowBox[{"-", "4.`"}]}]}], "]"}]},
+      "DateObject",
+      Editable->False], 
+     ",", "\<\"0ab4869fe9952f05d646d6242246c751c22d70e6\"\>", 
+     ",", "\<\"harlowja@yahoo-inc.com\"\>", ",", "\<\"Joshua Harlow\"\>"}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Fri 22 Jan 2016 11:28:22\"", 
+         StyleBox[
+          RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+            RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+       RowBox[{"DateObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"2016", ",", "1", ",", "22"}], "}"}], ",", 
+           RowBox[{"TimeObject", "[", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{"11", ",", "28", ",", "22.`"}], "}"}], ",", 
+               RowBox[{"TimeZone", "\[Rule]", 
+                 RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", 
+             RowBox[{"-", "4.`"}]}]}], "]"}]},
+      "DateObject",
+      Editable->False], 
+     ",", "\<\"005526111dc2cfb90c53ea1577b2d847e19b1a40\"\>", 
+     ",", "\<\"bo.wang@easystack.cn\"\>", ",", "\<\"Bo Wang\"\>"}], "}"}], 
+   ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Fri 22 Jan 2016 04:03:25\"", 
+         StyleBox[
+          RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+            RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+       RowBox[{"DateObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"2016", ",", "1", ",", "22"}], "}"}], ",", 
+           RowBox[{"TimeObject", "[", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{"4", ",", "3", ",", "25.`"}], "}"}], ",", 
+               RowBox[{"TimeZone", "\[Rule]", 
+                 RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", 
+             RowBox[{"-", "4.`"}]}]}], "]"}]},
+      "DateObject",
+      Editable->False], 
+     ",", "\<\"561668db17fc462c3ef7c17b47eaa72c74d9dec3\"\>", 
+     ",", "\<\"openstack-infra@lists.openstack.org\"\>", 
+     ",", "\<\"OpenStack Proposal Bot\"\>"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Fri 22 Jan 2016 00:29:21\"", 
+         StyleBox[
+          RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+            RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+       RowBox[{"DateObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"2016", ",", "1", ",", "22"}], "}"}], ",", 
+           RowBox[{"TimeObject", "[", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{"0", ",", "29", ",", "21.`"}], "}"}], ",", 
+               RowBox[{"TimeZone", "\[Rule]", 
+                 RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", 
+             RowBox[{"-", "4.`"}]}]}], "]"}]},
+      "DateObject",
+      Editable->False], 
+     ",", "\<\"28becd1aadd3b6f3ed1c656f79470a2a988e2c72\"\>", 
+     ",", "\<\"travis.tripp@hpe.com\"\>", ",", "\<\"Travis Tripp\"\>"}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Thu 21 Jan 2016 20:47:26\"", 
+         StyleBox[
+          RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+            RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+       RowBox[{"DateObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"2016", ",", "1", ",", "21"}], "}"}], ",", 
+           RowBox[{"TimeObject", "[", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{"20", ",", "47", ",", "26.`"}], "}"}], ",", 
+               RowBox[{"TimeZone", "\[Rule]", 
+                 RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", 
+             RowBox[{"-", "4.`"}]}]}], "]"}]},
+      "DateObject",
+      Editable->False], 
+     ",", "\<\"948e467021d5f455526dadb1d028d388371ed924\"\>", 
+     ",", "\<\"harlowja@yahoo-inc.com\"\>", ",", "\<\"Joshua Harlow\"\>"}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Wed 20 Jan 2016 03:26:09\"", 
+         StyleBox[
+          RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+            RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+       RowBox[{"DateObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"2016", ",", "1", ",", "20"}], "}"}], ",", 
+           RowBox[{"TimeObject", "[", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{"3", ",", "26", ",", "9.`"}], "}"}], ",", 
+               RowBox[{"TimeZone", "\[Rule]", 
+                 RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", 
+             RowBox[{"-", "4.`"}]}]}], "]"}]},
+      "DateObject",
+      Editable->False], 
+     ",", "\<\"eb2e7c04fec2d4650add1b7fb4a9df970ffea962\"\>", 
+     ",", "\<\"bo.wang@easystack.cn\"\>", ",", "\<\"Bo Wang\"\>"}], "}"}], 
+   ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Wed 20 Jan 2016 03:49:49\"", 
+         StyleBox[
+          RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+            RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+       RowBox[{"DateObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"2016", ",", "1", ",", "20"}], "}"}], ",", 
+           RowBox[{"TimeObject", "[", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{"3", ",", "49", ",", "49.`"}], "}"}], ",", 
+               RowBox[{"TimeZone", "\[Rule]", 
+                 RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", 
+             RowBox[{"-", "4.`"}]}]}], "]"}]},
+      "DateObject",
+      Editable->False], 
+     ",", "\<\"5ef5b351c0e2479c61107642339e63f30df532a3\"\>", 
+     ",", "\<\"bo.wang@easystack.cn\"\>", ",", "\<\"Bo Wang\"\>"}], "}"}], 
+   ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Fri 15 Jan 2016 22:12:35\"", 
+         StyleBox[
+          RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+            RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+       RowBox[{"DateObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"2016", ",", "1", ",", "15"}], "}"}], ",", 
+           RowBox[{"TimeObject", "[", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{"22", ",", "12", ",", "35.`"}], "}"}], ",", 
+               RowBox[{"TimeZone", "\[Rule]", 
+                 RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", 
+             RowBox[{"-", "4.`"}]}]}], "]"}]},
+      "DateObject",
+      Editable->False], 
+     ",", "\<\"44629deb81d153b673d520af44d384b59bfb1a31\"\>", 
+     ",", "\<\"mitsuhiro.tanino@hds.com\"\>", 
+     ",", "\<\"Mitsuhiro Tanino\"\>"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Mon 18 Jan 2016 12:12:54\"", 
+         StyleBox[
+          RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+            RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+       RowBox[{"DateObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"2016", ",", "1", ",", "18"}], "}"}], ",", 
+           RowBox[{"TimeObject", "[", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{"12", ",", "12", ",", "54.`"}], "}"}], ",", 
+               RowBox[{"TimeZone", "\[Rule]", 
+                 RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", 
+             RowBox[{"-", "4.`"}]}]}], "]"}]},
+      "DateObject",
+      Editable->False], 
+     ",", "\<\"5814440bb900a13c8ceea7e2c1f3d3e1e98b31f6\"\>", 
+     ",", "\<\"kkushaev@mirantis.com\"\>", ",", "\<\"kairat_kushaev\"\>"}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Mon 18 Jan 2016 11:58:00\"", 
+         StyleBox[
+          RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+            RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+       RowBox[{"DateObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"2016", ",", "1", ",", "18"}], "}"}], ",", 
+           RowBox[{"TimeObject", "[", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{"11", ",", "58", ",", "0.`"}], "}"}], ",", 
+               RowBox[{"TimeZone", "\[Rule]", 
+                 RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", 
+             RowBox[{"-", "4.`"}]}]}], "]"}]},
+      "DateObject",
+      Editable->False], 
+     ",", "\<\"c59b164c41f650ceaefbd9220e590e05fa0d81ef\"\>", 
+     ",", "\<\"niall.bunting@hpe.com\"\>", ",", "\<\"Niall Bunting\"\>"}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Mon 18 Jan 2016 06:25:08\"", 
+         StyleBox[
+          RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+            RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+       RowBox[{"DateObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"2016", ",", "1", ",", "18"}], "}"}], ",", 
+           RowBox[{"TimeObject", "[", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{"6", ",", "25", ",", "8.`"}], "}"}], ",", 
+               RowBox[{"TimeZone", "\[Rule]", 
+                 RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", 
+             RowBox[{"-", "4.`"}]}]}], "]"}]},
+      "DateObject",
+      Editable->False], 
+     ",", "\<\"37440954d30368ae2a0fcbd45802d7075a45853e\"\>", 
+     ",", "\<\"openstack-infra@lists.openstack.org\"\>", 
+     ",", "\<\"OpenStack Proposal Bot\"\>"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Sat 16 Jan 2016 16:43:55\"", 
+         StyleBox[
+          RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+            RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+       RowBox[{"DateObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"2016", ",", "1", ",", "16"}], "}"}], ",", 
+           RowBox[{"TimeObject", "[", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{"16", ",", "43", ",", "55.`"}], "}"}], ",", 
+               RowBox[{"TimeZone", "\[Rule]", 
+                 RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", 
+             RowBox[{"-", "4.`"}]}]}], "]"}]},
+      "DateObject",
+      Editable->False], 
+     ",", "\<\"ded6a40153364bb0c67deefadf479b15ed669e41\"\>", 
+     ",", "\<\"aj@suse.com\"\>", ",", "\<\"Andreas Jaeger\"\>"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Thu 14 Jan 2016 17:20:33\"", 
+         StyleBox[
+          RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+            RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+       RowBox[{"DateObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"2016", ",", "1", ",", "14"}], "}"}], ",", 
+           RowBox[{"TimeObject", "[", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{"17", ",", "20", ",", "33.`"}], "}"}], ",", 
+               RowBox[{"TimeZone", "\[Rule]", 
+                 RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", 
+             RowBox[{"-", "4.`"}]}]}], "]"}]},
+      "DateObject",
+      Editable->False], 
+     ",", "\<\"3680735b96201e5051cfff4a66a842ce4823d6cf\"\>", 
+     ",", "\<\"bo.wang@easystack.cn\"\>", ",", "\<\"Bo Wang\"\>"}], "}"}], 
+   ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Thu 14 Jan 2016 06:55:46\"", 
+         StyleBox[
+          RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+            RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+       RowBox[{"DateObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"2016", ",", "1", ",", "14"}], "}"}], ",", 
+           RowBox[{"TimeObject", "[", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{"6", ",", "55", ",", "46.`"}], "}"}], ",", 
+               RowBox[{"TimeZone", "\[Rule]", 
+                 RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", 
+             RowBox[{"-", "4.`"}]}]}], "]"}]},
+      "DateObject",
+      Editable->False], 
+     ",", "\<\"000c7ff540602e37d714f6bfea993221babc19dc\"\>", 
+     ",", "\<\"openstack-infra@lists.openstack.org\"\>", 
+     ",", "\<\"OpenStack Proposal Bot\"\>"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Wed 13 Jan 2016 00:54:29\"", 
+         StyleBox[
+          RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+            RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+       RowBox[{"DateObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"2016", ",", "1", ",", "13"}], "}"}], ",", 
+           RowBox[{"TimeObject", "[", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{"0", ",", "54", ",", "29.`"}], "}"}], ",", 
+               RowBox[{"TimeZone", "\[Rule]", 
+                 RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", 
+             RowBox[{"-", "4.`"}]}]}], "]"}]},
+      "DateObject",
+      Editable->False], 
+     ",", "\<\"ca5cdb59e136a54862f8132bc5b3f9867ae44390\"\>", 
+     ",", "\<\"boris@pavlovic.me\"\>", ",", "\<\"Boris Pavlovic\"\>"}], "}"}],
+    ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Thu 7 Jan 2016 16:07:08\"", 
+         StyleBox[
+          RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+            RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+       RowBox[{"DateObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"2016", ",", "1", ",", "7"}], "}"}], ",", 
+           RowBox[{"TimeObject", "[", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{"16", ",", "7", ",", "8.`"}], "}"}], ",", 
+               RowBox[{"TimeZone", "\[Rule]", 
+                 RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", 
+             RowBox[{"-", "4.`"}]}]}], "]"}]},
+      "DateObject",
+      Editable->False], 
+     ",", "\<\"3ab790a720b3ec1e894f09f0fdcdde7943f8728e\"\>", 
+     ",", "\<\"niall.bunting@hpe.com\"\>", ",", "\<\"Niall Bunting\"\>"}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Thu 7 Jan 2016 17:12:47\"", 
+         StyleBox[
+          RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+            RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+       RowBox[{"DateObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"2016", ",", "1", ",", "7"}], "}"}], ",", 
+           RowBox[{"TimeObject", "[", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{"17", ",", "12", ",", "47.`"}], "}"}], ",", 
+               RowBox[{"TimeZone", "\[Rule]", 
+                 RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", 
+             RowBox[{"-", "4.`"}]}]}], "]"}]},
+      "DateObject",
+      Editable->False], 
+     ",", "\<\"ec172a10fef5f9b12bcdfa01e50d62f204cd71cc\"\>", 
+     ",", "\<\"openstack-infra@lists.openstack.org\"\>", 
+     ",", "\<\"OpenStack Proposal Bot\"\>"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Wed 6 Jan 2016 22:16:33\"", 
+         StyleBox[
+          RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+            RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+       RowBox[{"DateObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"2016", ",", "1", ",", "6"}], "}"}], ",", 
+           RowBox[{"TimeObject", "[", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{"22", ",", "16", ",", "33.`"}], "}"}], ",", 
+               RowBox[{"TimeZone", "\[Rule]", 
+                 RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", 
+             RowBox[{"-", "4.`"}]}]}], "]"}]},
+      "DateObject",
+      Editable->False], 
+     ",", "\<\"2752fd6e161944f5875e4f4d0b4cdf4e178d05cd\"\>", 
+     ",", "\<\"brianna.poulos@jhuapl.edu\"\>", 
+     ",", "\<\"Brianna Poulos\"\>"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Mon 4 Jan 2016 04:14:00\"", 
+         StyleBox[
+          RowBox[{"\"GMT\"", "\[InvisibleSpace]", 
+            RowBox[{"-", "4.`"}]}], FontColor -> GrayLevel[0.5]]}],
+       RowBox[{"DateObject", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"2016", ",", "1", ",", "4"}], "}"}], ",", 
+           RowBox[{"TimeObject", "[", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{"4", ",", "14", ",", "0.`"}], "}"}], ",", 
+               RowBox[{"TimeZone", "\[Rule]", 
+                 RowBox[{"-", "4.`"}]}]}], "]"}], ",", 
+           RowBox[{"TimeZone", "\[Rule]", 
+             RowBox[{"-", "4.`"}]}]}], "]"}]},
+      "DateObject",
+      Editable->False], 
+     ",", "\<\"515203eac7661a8823ba70a1e832f4a32d45b1d7\"\>", 
+     ",", "\<\"openstack-infra@lists.openstack.org\"\>", 
+     ",", "\<\"OpenStack Proposal Bot\"\>"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.6837652588744917`*^9, 3.6837652891355176`*^9, 
+  3.6837653296065645`*^9, 3.683765526823284*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["And Tallied:", "Subsection",
+ CellChangeTimes->{{3.6838176628725653`*^9, 3.6838176658715653`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Tally", "[", 
+  RowBox[{
+   RowBox[{"Transpose", "[", "window$test", "]"}], "[", 
+   RowBox[{"[", "4", "]"}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.683765276826287*^9, 3.683765278844489*^9}, {
+  3.683765336496253*^9, 3.6837654787604785`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"\<\"Stuart McLaren\"\>", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"ting.wang\"\>", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"Darja Shakhray\"\>", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"Lin Yang\"\>", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"Brianna Poulos\"\>", ",", "3"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"wangxiyuan\"\>", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"Niall Bunting\"\>", ",", "3"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"kairat_kushaev\"\>", ",", "2"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"zwei\"\>", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"Erno Kuvaja\"\>", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"Travis Tripp\"\>", ",", "2"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"Sabari Kumar Murugesan\"\>", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"Flavio Percoco\"\>", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"Joshua Harlow\"\>", ",", "4"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"OpenStack Proposal Bot\"\>", ",", "7"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"Karol Stepniewski\"\>", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"abhishekkekane\"\>", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"Ronald Bradford\"\>", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"Bo Wang\"\>", ",", "4"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"Mitsuhiro Tanino\"\>", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"Andreas Jaeger\"\>", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"Boris Pavlovic\"\>", ",", "1"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.6837654577283754`*^9, 3.6837654792195244`*^9}, 
+   3.6837655296195636`*^9}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Func:", "Section",
+ CellChangeTimes->{{3.683817669485565*^9, 3.6838176709045653`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"windows", "[", 
+   RowBox[{"list_", ",", "start_", ",", "end_", ",", "space_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"dates", ",", "datePairs", ",", "results"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"dates", "=", 
+      RowBox[{"DateRange", "[", 
+       RowBox[{"start", ",", "end", ",", "space"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"datePairs", "=", 
+      RowBox[{"Partition", "[", 
+       RowBox[{"dates", ",", "2", ",", "1"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"results", "=", 
+      RowBox[{"Select", "[", 
+       RowBox[{"list$filtered", ",", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"DateObject", "[", 
+           RowBox[{"{", 
+            RowBox[{"2016", ",", "1"}], "}"}], "]"}], "<", 
+          RowBox[{"#", "[", 
+           RowBox[{"[", "1", "]"}], "]"}], "<", 
+          RowBox[{"DateObject", "[", 
+           RowBox[{"{", 
+            RowBox[{"2016", ",", "2"}], "}"}], "]"}]}], "&"}]}], "]"}]}], ";",
+      "\[IndentingNewLine]", "Tally"}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.683765601267728*^9, 3.683765677364337*^9}, {
+  3.68376571390199*^9, 3.6837657489704967`*^9}, {3.683765785017101*^9, 
+  3.6837657953351326`*^9}, {3.683765957993248*^9, 3.683765979967248*^9}, {
+  3.683766319934248*^9, 3.683766330573248*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Partition", "[", 
+  RowBox[{
+   RowBox[{"DateRange", "[", 
+    RowBox[{
+     RowBox[{"DateObject", "[", 
+      RowBox[{"{", 
+       RowBox[{"2016", ",", "1"}], "}"}], "]"}], ",", 
+     RowBox[{"DateObject", "[", 
+      RowBox[{"{", 
+       RowBox[{"2016", ",", "12"}], "}"}], "]"}], ",", 
+     RowBox[{"Quantity", "[", 
+      RowBox[{"1", ",", "\"\<month\>\""}], "]"}]}], "]"}], ",", "2", ",", 
+   "1"}], "]"}]], "Input",
+ CellChangeTimes->{{3.683766055592248*^9, 3.683766129660248*^9}, {
+  3.683766174823248*^9, 3.683766183725248*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Fri 1 Jan 2016\""}],RowBox[{"DateObject", "[", 
+         RowBox[{"{", 
+           RowBox[{"2016", ",", "1", ",", "1"}], "}"}], "]"}]},
+      "DateObject",
+      Editable->False], ",", 
+     TemplateBox[{RowBox[{"\"Mon 1 Feb 2016\""}],RowBox[{"DateObject", "[", 
+         RowBox[{"{", 
+           RowBox[{"2016", ",", "2", ",", "1"}], "}"}], "]"}]},
+      "DateObject",
+      Editable->False]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Mon 1 Feb 2016\""}],RowBox[{"DateObject", "[", 
+         RowBox[{"{", 
+           RowBox[{"2016", ",", "2", ",", "1"}], "}"}], "]"}]},
+      "DateObject",
+      Editable->False], ",", 
+     TemplateBox[{RowBox[{"\"Tue 1 Mar 2016\""}],RowBox[{"DateObject", "[", 
+         RowBox[{"{", 
+           RowBox[{"2016", ",", "3", ",", "1"}], "}"}], "]"}]},
+      "DateObject",
+      Editable->False]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Tue 1 Mar 2016\""}],RowBox[{"DateObject", "[", 
+         RowBox[{"{", 
+           RowBox[{"2016", ",", "3", ",", "1"}], "}"}], "]"}]},
+      "DateObject",
+      Editable->False], ",", 
+     TemplateBox[{RowBox[{"\"Fri 1 Apr 2016\""}],RowBox[{"DateObject", "[", 
+         RowBox[{"{", 
+           RowBox[{"2016", ",", "4", ",", "1"}], "}"}], "]"}]},
+      "DateObject",
+      Editable->False]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Fri 1 Apr 2016\""}],RowBox[{"DateObject", "[", 
+         RowBox[{"{", 
+           RowBox[{"2016", ",", "4", ",", "1"}], "}"}], "]"}]},
+      "DateObject",
+      Editable->False], ",", 
+     TemplateBox[{RowBox[{"\"Sun 1 May 2016\""}],RowBox[{"DateObject", "[", 
+         RowBox[{"{", 
+           RowBox[{"2016", ",", "5", ",", "1"}], "}"}], "]"}]},
+      "DateObject",
+      Editable->False]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Sun 1 May 2016\""}],RowBox[{"DateObject", "[", 
+         RowBox[{"{", 
+           RowBox[{"2016", ",", "5", ",", "1"}], "}"}], "]"}]},
+      "DateObject",
+      Editable->False], ",", 
+     TemplateBox[{RowBox[{"\"Wed 1 Jun 2016\""}],RowBox[{"DateObject", "[", 
+         RowBox[{"{", 
+           RowBox[{"2016", ",", "6", ",", "1"}], "}"}], "]"}]},
+      "DateObject",
+      Editable->False]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Wed 1 Jun 2016\""}],RowBox[{"DateObject", "[", 
+         RowBox[{"{", 
+           RowBox[{"2016", ",", "6", ",", "1"}], "}"}], "]"}]},
+      "DateObject",
+      Editable->False], ",", 
+     TemplateBox[{RowBox[{"\"Fri 1 Jul 2016\""}],RowBox[{"DateObject", "[", 
+         RowBox[{"{", 
+           RowBox[{"2016", ",", "7", ",", "1"}], "}"}], "]"}]},
+      "DateObject",
+      Editable->False]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Fri 1 Jul 2016\""}],RowBox[{"DateObject", "[", 
+         RowBox[{"{", 
+           RowBox[{"2016", ",", "7", ",", "1"}], "}"}], "]"}]},
+      "DateObject",
+      Editable->False], ",", 
+     TemplateBox[{RowBox[{"\"Mon 1 Aug 2016\""}],RowBox[{"DateObject", "[", 
+         RowBox[{"{", 
+           RowBox[{"2016", ",", "8", ",", "1"}], "}"}], "]"}]},
+      "DateObject",
+      Editable->False]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Mon 1 Aug 2016\""}],RowBox[{"DateObject", "[", 
+         RowBox[{"{", 
+           RowBox[{"2016", ",", "8", ",", "1"}], "}"}], "]"}]},
+      "DateObject",
+      Editable->False], ",", 
+     TemplateBox[{RowBox[{"\"Thu 1 Sep 2016\""}],RowBox[{"DateObject", "[", 
+         RowBox[{"{", 
+           RowBox[{"2016", ",", "9", ",", "1"}], "}"}], "]"}]},
+      "DateObject",
+      Editable->False]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Thu 1 Sep 2016\""}],RowBox[{"DateObject", "[", 
+         RowBox[{"{", 
+           RowBox[{"2016", ",", "9", ",", "1"}], "}"}], "]"}]},
+      "DateObject",
+      Editable->False], ",", 
+     TemplateBox[{RowBox[{"\"Sat 1 Oct 2016\""}],RowBox[{"DateObject", "[", 
+         RowBox[{"{", 
+           RowBox[{"2016", ",", "10", ",", "1"}], "}"}], "]"}]},
+      "DateObject",
+      Editable->False]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Sat 1 Oct 2016\""}],RowBox[{"DateObject", "[", 
+         RowBox[{"{", 
+           RowBox[{"2016", ",", "10", ",", "1"}], "}"}], "]"}]},
+      "DateObject",
+      Editable->False], ",", 
+     TemplateBox[{RowBox[{"\"Tue 1 Nov 2016\""}],RowBox[{"DateObject", "[", 
+         RowBox[{"{", 
+           RowBox[{"2016", ",", "11", ",", "1"}], "}"}], "]"}]},
+      "DateObject",
+      Editable->False]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Tue 1 Nov 2016\""}],RowBox[{"DateObject", "[", 
+         RowBox[{"{", 
+           RowBox[{"2016", ",", "11", ",", "1"}], "}"}], "]"}]},
+      "DateObject",
+      Editable->False], ",", 
+     TemplateBox[{RowBox[{"\"Thu 1 Dec 2016\""}],RowBox[{"DateObject", "[", 
+         RowBox[{"{", 
+           RowBox[{"2016", ",", "12", ",", "1"}], "}"}], "]"}]},
+      "DateObject",
+      Editable->False]}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.6837661028392477`*^9, 3.6837661309512477`*^9}, {
+  3.683766175600248*^9, 3.6837661841812477`*^9}}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"Select", "[", 
+  RowBox[{"list$filtered", ","}], "]"}]], "Input",
+ CellChangeTimes->{3.683766261752248*^9}],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{3.6837663019592476`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"windows", "[", 
+   RowBox[{"list_", ",", "start_", ",", "end_", ",", "space_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"dates", ",", "datePairs", ",", "results", ",", "data$raw"}], 
+     "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"dates", "=", 
+      RowBox[{"DateRange", "[", 
+       RowBox[{"start", ",", "end", ",", "space"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"datePairs", "=", 
+      RowBox[{"Transpose", "@", 
+       RowBox[{"Partition", "[", 
+        RowBox[{"dates", ",", "2", ",", "1"}], "]"}]}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"results", "=", 
+      RowBox[{"MapThread", "[", 
+       RowBox[{"window", ",", 
+        RowBox[{"datePairs", "[", "1", "]"}], ",", 
+        RowBox[{"datePairs", "[", 
+         RowBox[{"[", "2", "]"}], "]"}], ",", "list"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Tally", "[", 
+      RowBox[{
+       RowBox[{"Transpose", "[", "results", "]"}], "[", 
+       RowBox[{"[", "4", "]"}], "]"}], "]"}]}]}], " ", "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.683766428851248*^9, 3.683766558401248*^9}, {
+   3.6837672154991603`*^9, 3.6837673014997597`*^9}, 3.683810419844201*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"window", "[", 
+   RowBox[{"start_", ",", "end_", ",", "list_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"Select", "[", 
+     RowBox[{"list", ",", 
+      RowBox[{
+       RowBox[{"start", "<", 
+        RowBox[{"#", "[", 
+         RowBox[{"[", "1", "]"}], "]"}], "<", "end"}], "&"}]}], "]"}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.6837670179964123`*^9, 3.683767058787491*^9}, {
+  3.6837670920838203`*^9, 3.683767152337845*^9}}]
+}, Open  ]]
+},
+WindowSize->{1920, 1038},
+WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (July 28, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 137, 1, 30, "Text"],
+Cell[CellGroupData[{
+Cell[720, 25, 99, 1, 49, "Subsection"],
+Cell[CellGroupData[{
+Cell[844, 30, 280, 6, 30, "Input"],
+Cell[1127, 38, 11399, 276, 91, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12575, 320, 105, 1, 49, "Subsection"],
+Cell[CellGroupData[{
+Cell[12705, 325, 256, 5, 30, "Input"],
+Cell[12964, 332, 5555, 137, 259, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18568, 475, 107, 1, 49, "Subsection"],
+Cell[18678, 478, 383, 8, 30, "Input"],
+Cell[CellGroupData[{
+Cell[19086, 490, 159, 3, 30, InheritFromParent],
+Cell[19248, 495, 158, 3, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[19443, 503, 266, 5, 30, "Input"],
+Cell[19712, 510, 273, 3, 30, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[20034, 519, 148, 2, 49, "Subsection"],
+Cell[CellGroupData[{
+Cell[20207, 525, 784, 19, 33, "Input"],
+Cell[20994, 546, 171, 2, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[21202, 553, 323, 5, 33, "Input"],
+Cell[21528, 560, 755, 19, 41, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[22320, 584, 803, 23, 30, "Input"],
+Cell[23126, 609, 271, 6, 21, "Message"],
+Cell[23400, 617, 1378, 22, 21, "Message"],
+Cell[24781, 641, 1188, 19, 39, "Message"],
+Cell[25972, 662, 1192, 19, 39, "Message"],
+Cell[27167, 683, 347, 7, 21, "Message"],
+Cell[27517, 692, 342, 7, 21, "Message"],
+Cell[27862, 701, 314, 7, 21, "Message"],
+Cell[28179, 710, 272, 7, 21, "Message"],
+Cell[28454, 719, 340, 7, 21, "Message"],
+Cell[28797, 728, 709, 13, 21, "Message"],
+Cell[29509, 743, 2473, 64, 69, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[32031, 813, 101, 1, 70, "Section"],
+Cell[32135, 816, 170, 3, 30, "Text"],
+Cell[32308, 821, 2163, 57, 55, "Input"],
+Cell[CellGroupData[{
+Cell[34496, 882, 129, 2, 30, "Input"],
+Cell[34628, 886, 75, 1, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[34740, 892, 282, 7, 30, "Input"],
+Cell[35025, 901, 15639, 365, 189, "Output"]
+}, Open  ]],
+Cell[50679, 1269, 131, 1, 30, "Text"],
+Cell[CellGroupData[{
+Cell[50835, 1274, 427, 11, 30, "Input"],
+Cell[51265, 1287, 15667, 367, 189, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[66969, 1659, 447, 8, 33, "Input"],
+Cell[67419, 1669, 29015, 655, 189, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[96471, 2329, 237, 6, 33, "Input"],
+Cell[96711, 2337, 121, 2, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[96869, 2344, 591, 16, 33, "Input"],
+Cell[97463, 2362, 228, 4, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[97728, 2371, 298, 7, 30, "Input"],
+Cell[98029, 2380, 138, 3, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[98204, 2388, 149, 3, 30, "Input"],
+Cell[98356, 2393, 859, 22, 41, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[99252, 2420, 105, 1, 49, "Subsection"],
+Cell[CellGroupData[{
+Cell[99382, 2425, 669, 16, 33, "Input"],
+Cell[100054, 2443, 37222, 922, 611, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[137325, 3371, 104, 1, 49, "Subsection"],
+Cell[CellGroupData[{
+Cell[137454, 3376, 274, 6, 33, "Input"],
+Cell[137731, 3384, 1894, 48, 50, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[139686, 3439, 92, 1, 70, "Section"],
+Cell[139781, 3442, 1435, 36, 132, "Input"],
+Cell[CellGroupData[{
+Cell[141241, 3482, 560, 15, 30, "Input"],
+Cell[141804, 3499, 5316, 136, 71, "Output"]
+}, Open  ]],
+Cell[147135, 3638, 131, 3, 33, "Input"],
+Cell[147269, 3643, 70, 1, 30, "Input"],
+Cell[147342, 3646, 1288, 32, 130, "Input"],
+Cell[148633, 3680, 569, 15, 69, "Input"]
+}, Open  ]]
+}
+]
+*)
+
