@@ -1,0 +1,8 @@
+cinder,5/12
+cloudstack,8/10
+glance,8/10
+horizon,1/11
+keystone,4/11
+neutron,1/11
+nova,5/10
+swift,7/10
