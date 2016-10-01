@@ -1,0 +1,277 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.4' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      9007,        269]
+NotebookOptionsPosition[      8161,        233]
+NotebookOutlinePosition[      8499,        248]
+CellTagsIndexPosition[      8456,        245]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Functions", "Title",
+ CellChangeTimes->{{3.684276113810198*^9, 3.684276136971569*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Filtering:", "Section",
+ CellChangeTimes->{{3.684276142984378*^9, 3.68427615491364*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"filter", "[", 
+   RowBox[{"i_", ",", " ", "list_"}], "]"}], ":=", 
+  RowBox[{"{", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"DateObject", "[", 
+     RowBox[{"\"\<date\>\"", "/.", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"\"\<author\>\"", "/.", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"{", "\"\<commit\>\"", "}"}], "/.", 
+             RowBox[{"list", "[", 
+              RowBox[{"[", "i", "]"}], "]"}]}], ")"}], "[", 
+           RowBox[{"[", "1", "]"}], "]"}], "[", 
+          RowBox[{"[", "2", "]"}], "]"}]}], ")"}], "[", 
+       RowBox[{"[", "2", "]"}], "]"}]}], "]"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"\"\<sha\>\"", "/.", 
+     RowBox[{
+      RowBox[{"list", "[", 
+       RowBox[{"[", "i", "]"}], "]"}], "[", 
+      RowBox[{"[", "5", "]"}], "]"}]}], ",", "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"\"\<email\>\"", "/.", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"\"\<author\>\"", "/.", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"{", "\"\<commit\>\"", "}"}], "/.", 
+              RowBox[{"list", "[", 
+               RowBox[{"[", "i", "]"}], "]"}]}], ")"}], "[", 
+            RowBox[{"[", "1", "]"}], "]"}], "[", 
+           RowBox[{"[", "2", "]"}], "]"}]}], ")"}], "[", 
+        RowBox[{"[", "1", "]"}], "]"}]}], ",", "\[IndentingNewLine]", 
+      RowBox[{"\"\<name\>\"", "/.", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"\"\<author\>\"", "/.", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"{", "\"\<commit\>\"", "}"}], "/.", 
+              RowBox[{"list", "[", 
+               RowBox[{"[", "i", "]"}], "]"}]}], ")"}], "[", 
+            RowBox[{"[", "1", "]"}], "]"}], "[", 
+           RowBox[{"[", "2", "]"}], "]"}]}], ")"}], "[", 
+        RowBox[{"[", "3", "]"}], "]"}]}]}], "}"}]}], "\[IndentingNewLine]", 
+   "}"}]}]], "Code",
+ CellChangeTimes->{{3.6842761810806847`*^9, 3.684276181469405*^9}, {
+   3.684276222233746*^9, 3.684276232188002*^9}, 3.6842762912313337`*^9, {
+   3.684276340765143*^9, 3.684276369981408*^9}, {3.684279242859179*^9, 
+   3.684279245190213*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Windowing:", "Section",
+ CellChangeTimes->{{3.6842764089214983`*^9, 3.6842764436432333`*^9}}],
+
+Cell["Tallies the number of commits per person per time window. ", "Text",
+ CellChangeTimes->{{3.684276446983285*^9, 3.68427645189007*^9}, {
+  3.684276491709106*^9, 3.684276528321403*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"windowsFor", "[", 
+   RowBox[{"list_", ",", "start_", ",", "end_", ",", "increment_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"dates", ",", "results", ",", "windowResults"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"Reap", "[", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"For", "[", 
+       RowBox[{
+        RowBox[{"i", "=", "start"}], ",", 
+        RowBox[{"i", "<", "end"}], ",", 
+        RowBox[{"i", "=", 
+         RowBox[{"DatePlus", "[", 
+          RowBox[{"i", ",", "increment"}], "]"}]}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"windowResults", "=", 
+          RowBox[{"Select", "[", 
+           RowBox[{"list", ",", 
+            RowBox[{
+             RowBox[{"i", "<", 
+              RowBox[{"#", "[", 
+               RowBox[{"[", "1", "]"}], "]"}], "<", 
+              RowBox[{"DatePlus", "[", 
+               RowBox[{"i", ",", 
+                RowBox[{"increment", "*", "2"}]}], "]"}]}], "&"}]}], "]"}]}], 
+         ";", "\[IndentingNewLine]", 
+         RowBox[{"Sow", "[", 
+          RowBox[{"Tally", "[", "\n", "\t", 
+           RowBox[{
+            RowBox[{"Transpose", "[", "windowResults", "]"}], "[", 
+            RowBox[{"[", "3", "]"}], "]"}], "\n", "]"}], "]"}], ";"}]}], 
+       "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", "]"}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Code",
+ CellChangeTimes->{{3.684276458107264*^9, 3.6842764840787153`*^9}, {
+  3.6842770321968946`*^9, 3.684277060726713*^9}, {3.6842787278023157`*^9, 
+  3.6842787914387608`*^9}, {3.684279122529993*^9, 3.6842791663140078`*^9}, {
+  3.68427925287146*^9, 3.684279255411612*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Output", "Title",
+ CellChangeTimes->{{3.684276542254936*^9, 3.6842765475843267`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"currentjson$raw", "=", 
+   RowBox[{"Import", "[", 
+    RowBox[{
+    "\"\</home/anne/Downloads/glance-openstack-commits.json\>\"", ",", 
+     "\"\<Data\>\""}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"list", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"filter", "[", 
+      RowBox[{"#", ",", " ", "currentjson$raw"}], "]"}], "&"}], "/@", 
+    RowBox[{"Range", "[", 
+     RowBox[{"Length", "@", "currentjson$raw"}], "]"}]}]}], ";"}]}], "Code",
+ CellChangeTimes->{{3.684276570591957*^9, 3.684276572590056*^9}, {
+   3.684276607616539*^9, 3.684276683542879*^9}, {3.6842767153973083`*^9, 
+   3.6842767838732967`*^9}, 3.684276854600378*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"final_windows", " ", "=", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"windowsFor", "[", 
+      RowBox[{"list", ",", " ", 
+       RowBox[{"(*", 
+        RowBox[{"DateObject", "[", 
+         RowBox[{"{", 
+          RowBox[{"2010", ",", " ", "5"}], "}"}], "]"}], "*)"}], 
+       RowBox[{"DateObject", "[", 
+        RowBox[{"{", 
+         RowBox[{"2012", ",", " ", "5"}], "}"}], "]"}], ",", " ", 
+       RowBox[{"DateObject", "[", 
+        RowBox[{"{", 
+         RowBox[{"2016", ",", " ", "9"}], "}"}], "]"}], ",", " ", 
+       RowBox[{"Quantity", "[", 
+        RowBox[{"1", ",", " ", "\"\<month\>\""}], "]"}]}], "]"}], "[", 
+     RowBox[{"[", "2", "]"}], "]"}], "[", 
+    RowBox[{"[", "1", "]"}], "]"}]}], ";"}]], "Code",
+ CellChangeTimes->{{3.6842768696379337`*^9, 3.684276987690816*^9}, {
+  3.6842770450650587`*^9, 3.684277055317584*^9}, {3.684277168288198*^9, 
+  3.684277201575892*^9}, {3.684278258672509*^9, 3.684278351010971*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Exporting", "Title",
+ CellChangeTimes->{{3.6842782005866747`*^9, 3.684278202089649*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Export", "[", 
+  RowBox[{"\"\</home/anne/Glance_Opensource.csv\>\"", ",", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"windowsFor", "[", 
+      RowBox[{"list", ",", " ", 
+       RowBox[{"(*", 
+        RowBox[{"DateObject", "[", 
+         RowBox[{"{", 
+          RowBox[{"2010", ",", " ", "5"}], "}"}], "]"}], "*)"}], 
+       RowBox[{"DateObject", "[", 
+        RowBox[{"{", 
+         RowBox[{"2012", ",", " ", "5"}], "}"}], "]"}], ",", " ", 
+       RowBox[{"DateObject", "[", 
+        RowBox[{"{", 
+         RowBox[{"2016", ",", " ", "9"}], "}"}], "]"}], ",", " ", 
+       RowBox[{"Quantity", "[", 
+        RowBox[{"1", ",", " ", "\"\<month\>\""}], "]"}]}], "]"}], "[", 
+     RowBox[{"[", "2", "]"}], "]"}], "[", 
+    RowBox[{"[", "1", "]"}], "]"}]}], "]"}]], "Code",
+ CellChangeTimes->{{3.6842782111531773`*^9, 3.684278241428397*^9}, {
+   3.6842793055759*^9, 3.68427933480974*^9}, 3.68428105482036*^9}],
+
+Cell[BoxData["\<\"/home/anne/Glance_Opensource.csv\"\>"], "Output",
+ CellChangeTimes->{3.684280094518301*^9, 3.684281831534892*^9}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1855, 1056},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"10.4 for Linux x86 (64-bit) (February 25, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 92, 1, 93, "Title"],
+Cell[CellGroupData[{
+Cell[697, 27, 94, 1, 65, "Section"],
+Cell[794, 30, 2289, 60, 148, "Code"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3120, 95, 99, 1, 65, "Section"],
+Cell[3222, 98, 188, 2, 33, "Text"],
+Cell[3413, 102, 1717, 41, 224, "Code"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5179, 149, 91, 1, 93, "Title"],
+Cell[5273, 152, 672, 17, 71, "Code"],
+Cell[5948, 171, 968, 23, 53, "Code"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6953, 199, 94, 1, 93, "Title"],
+Cell[CellGroupData[{
+Cell[7072, 204, 927, 22, 53, "Code"],
+Cell[8002, 228, 131, 1, 32, "Output"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
