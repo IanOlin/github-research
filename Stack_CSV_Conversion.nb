@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      9007,        269]
-NotebookOptionsPosition[      8161,        233]
-NotebookOutlinePosition[      8499,        248]
-CellTagsIndexPosition[      8456,        245]
+NotebookDataLength[     34143,        899]
+NotebookOptionsPosition[     32202,        833]
+NotebookOutlinePosition[     32546,        848]
+CellTagsIndexPosition[     32503,        845]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -54,41 +54,40 @@ Cell[BoxData[
       RowBox[{"list", "[", 
        RowBox[{"[", "i", "]"}], "]"}], "[", 
       RowBox[{"[", "5", "]"}], "]"}]}], ",", "\[IndentingNewLine]", 
-    RowBox[{"{", 
+    RowBox[{"\"\<email\>\"", "/.", 
      RowBox[{
-      RowBox[{"\"\<email\>\"", "/.", 
-       RowBox[{
-        RowBox[{"(", 
-         RowBox[{"\"\<author\>\"", "/.", 
-          RowBox[{
+      RowBox[{"(", 
+       RowBox[{"\"\<author\>\"", "/.", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
            RowBox[{
-            RowBox[{"(", 
-             RowBox[{
-              RowBox[{"{", "\"\<commit\>\"", "}"}], "/.", 
-              RowBox[{"list", "[", 
-               RowBox[{"[", "i", "]"}], "]"}]}], ")"}], "[", 
-            RowBox[{"[", "1", "]"}], "]"}], "[", 
-           RowBox[{"[", "2", "]"}], "]"}]}], ")"}], "[", 
-        RowBox[{"[", "1", "]"}], "]"}]}], ",", "\[IndentingNewLine]", 
-      RowBox[{"\"\<name\>\"", "/.", 
-       RowBox[{
-        RowBox[{"(", 
-         RowBox[{"\"\<author\>\"", "/.", 
-          RowBox[{
+            RowBox[{"{", "\"\<commit\>\"", "}"}], "/.", 
+            RowBox[{"list", "[", 
+             RowBox[{"[", "i", "]"}], "]"}]}], ")"}], "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "[", 
+         RowBox[{"[", "2", "]"}], "]"}]}], ")"}], "[", 
+      RowBox[{"[", "1", "]"}], "]"}]}], ",", "\[IndentingNewLine]", 
+    RowBox[{"\"\<name\>\"", "/.", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"\"\<author\>\"", "/.", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
            RowBox[{
-            RowBox[{"(", 
-             RowBox[{
-              RowBox[{"{", "\"\<commit\>\"", "}"}], "/.", 
-              RowBox[{"list", "[", 
-               RowBox[{"[", "i", "]"}], "]"}]}], ")"}], "[", 
-            RowBox[{"[", "1", "]"}], "]"}], "[", 
-           RowBox[{"[", "2", "]"}], "]"}]}], ")"}], "[", 
-        RowBox[{"[", "3", "]"}], "]"}]}]}], "}"}]}], "\[IndentingNewLine]", 
+            RowBox[{"{", "\"\<commit\>\"", "}"}], "/.", 
+            RowBox[{"list", "[", 
+             RowBox[{"[", "i", "]"}], "]"}]}], ")"}], "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "[", 
+         RowBox[{"[", "2", "]"}], "]"}]}], ")"}], "[", 
+      RowBox[{"[", "3", "]"}], "]"}]}]}], "\[IndentingNewLine]", 
    "}"}]}]], "Code",
  CellChangeTimes->{{3.6842761810806847`*^9, 3.684276181469405*^9}, {
    3.684276222233746*^9, 3.684276232188002*^9}, 3.6842762912313337`*^9, {
    3.684276340765143*^9, 3.684276369981408*^9}, {3.684279242859179*^9, 
-   3.684279245190213*^9}}]
+   3.684279245190213*^9}, {3.6845478322826357`*^9, 3.6845478410656357`*^9}, {
+   3.6852074652554426`*^9, 3.685207475452462*^9}}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -103,45 +102,95 @@ Cell["Tallies the number of commits per person per time window. ", "Text",
 Cell[BoxData[
  RowBox[{
   RowBox[{"windowsFor", "[", 
-   RowBox[{"list_", ",", "start_", ",", "end_", ",", "increment_"}], "]"}], ":=", 
+   RowBox[{
+   "list_", ",", " ", "start_", ",", " ", "end_", ",", " ", "increment_"}], 
+   "]"}], " ", ":=", " ", 
   RowBox[{"Module", "[", 
    RowBox[{
     RowBox[{"{", 
-     RowBox[{"dates", ",", "results", ",", "windowResults"}], "}"}], ",", 
-    "\[IndentingNewLine]", 
-    RowBox[{"Reap", "[", "\[IndentingNewLine]", 
+     RowBox[{"dates", ",", " ", "results", ",", " ", "windowResults"}], "}"}],
+     ",", "\[IndentingNewLine]", "\t", 
+    RowBox[{"Reap", "[", "\[IndentingNewLine]", "\t\t", 
      RowBox[{
       RowBox[{"For", "[", 
        RowBox[{
-        RowBox[{"i", "=", "start"}], ",", 
-        RowBox[{"i", "<", "end"}], ",", 
-        RowBox[{"i", "=", 
+        RowBox[{"i", " ", "=", " ", "start"}], ",", " ", 
+        RowBox[{"i", " ", "<", " ", "end"}], ",", " ", 
+        RowBox[{"i", " ", "=", " ", 
          RowBox[{"DatePlus", "[", 
-          RowBox[{"i", ",", "increment"}], "]"}]}], ",", 
-        "\[IndentingNewLine]", 
+          RowBox[{"i", ",", " ", "increment"}], "]"}]}], ",", 
+        "\[IndentingNewLine]", "\t\t\t", 
         RowBox[{
-         RowBox[{"windowResults", "=", 
+         RowBox[{"windowResults", " ", "=", " ", 
           RowBox[{"Select", "[", 
-           RowBox[{"list", ",", 
+           RowBox[{"list", ",", " ", 
             RowBox[{
-             RowBox[{"i", "<", 
+             RowBox[{"i", " ", "<", " ", 
               RowBox[{"#", "[", 
-               RowBox[{"[", "1", "]"}], "]"}], "<", 
+               RowBox[{"[", "1", "]"}], "]"}], " ", "<", " ", 
               RowBox[{"DatePlus", "[", 
-               RowBox[{"i", ",", 
-                RowBox[{"increment", "*", "2"}]}], "]"}]}], "&"}]}], "]"}]}], 
-         ";", "\[IndentingNewLine]", 
+               RowBox[{"i", ",", " ", 
+                RowBox[{"increment", "*", "2"}]}], "]"}]}], " ", "&"}]}], 
+           "]"}]}], ";", "\[IndentingNewLine]", "\t\t\t", 
          RowBox[{"Sow", "[", 
-          RowBox[{"Tally", "[", "\n", "\t", 
+          RowBox[{"Tally", "[", 
            RowBox[{
             RowBox[{"Transpose", "[", "windowResults", "]"}], "[", 
-            RowBox[{"[", "3", "]"}], "]"}], "\n", "]"}], "]"}], ";"}]}], 
-       "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", "]"}]}], 
-   "\[IndentingNewLine]", "]"}]}]], "Code",
+            RowBox[{"[", "3", "]"}], "]"}], "]"}], "]"}], ";"}]}], 
+       "\[IndentingNewLine]", "\t\t", "]"}], ";"}], "\[IndentingNewLine]", 
+     "\t", "]"}]}], "\[IndentingNewLine]", "]"}]}]], "Code",
  CellChangeTimes->{{3.684276458107264*^9, 3.6842764840787153`*^9}, {
   3.6842770321968946`*^9, 3.684277060726713*^9}, {3.6842787278023157`*^9, 
   3.6842787914387608`*^9}, {3.684279122529993*^9, 3.6842791663140078`*^9}, {
-  3.68427925287146*^9, 3.684279255411612*^9}}]
+  3.68427925287146*^9, 3.684279255411612*^9}, {3.6845441125294123`*^9, 
+  3.684544203441412*^9}, {3.684544255106412*^9, 3.6845443342654123`*^9}, {
+  3.685207588062722*^9, 3.6852075995978756`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"windowOp", "[", 
+    RowBox[{"list_", ",", " ", "datePair_"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", "}"}], ",", "\n", 
+     RowBox[{
+      RowBox[{"Select", "[", 
+       RowBox[{"list", ",", " ", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"datePair", "[", 
+           RowBox[{"[", "1", "]"}], "]"}], " ", "<", " ", 
+          RowBox[{"#", "[", 
+           RowBox[{"[", "1", "]"}], "]"}], " ", "<", " ", 
+          RowBox[{"datePair", "[", 
+           RowBox[{"[", "2", "]"}], "]"}]}], " ", "&"}]}], "]"}], ";"}]}], 
+    "\n", "]"}]}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"windowsThread", "[", 
+    RowBox[{"list_", ",", " ", "dates_"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", "windowResults", "}"}], ",", "\n", "\t", 
+     RowBox[{"Reap", "[", "\n", "\t\t", 
+      RowBox[{
+       RowBox[{"windowResults", " ", "=", " ", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"windowOp", "[", 
+           RowBox[{"list", ",", " ", "#"}], "]"}], " ", "&"}], " ", "/@", " ",
+          "dates"}]}], ";", "\n", "\t\t", 
+       RowBox[{"Sow", "[", 
+        RowBox[{"Tally", "[", 
+         RowBox[{
+          RowBox[{"Transpose", "[", "windowResults", "]"}], "[", 
+          RowBox[{"[", "3", "]"}], "]"}], "]"}], "]"}], ";"}], "\n", "\t", 
+      "]"}]}], "\n", "\n", "]"}]}], "\n"}], "\n"}], "Code",
+ CellChangeTimes->{{3.6845456329575624`*^9, 3.684545757158839*^9}, {
+   3.6845458002698393`*^9, 3.684545862101839*^9}, {3.6845459032338395`*^9, 
+   3.6845460684238396`*^9}, {3.684546671109377*^9, 3.684546782056837*^9}, 
+   3.685207751963111*^9}]
 }, Open  ]]
 }, Open  ]],
 
@@ -155,44 +204,462 @@ Cell[BoxData[{
   RowBox[{"currentjson$raw", "=", 
    RowBox[{"Import", "[", 
     RowBox[{
-    "\"\</home/anne/Downloads/glance-openstack-commits.json\>\"", ",", 
-     "\"\<Data\>\""}], "]"}]}], ";"}], "\n", 
+    "\"\<\\\\\\\\fsvs01\\\\Public\\\\+Research\\\\GitWood\\\\stackCommits\\\\\
+glance-openstack-commits.json\>\"", ",", "\"\<Data\>\""}], "]"}]}], 
+  ";"}], "\n", 
  RowBox[{
   RowBox[{"list", "=", 
    RowBox[{
     RowBox[{
      RowBox[{"filter", "[", 
-      RowBox[{"#", ",", " ", "currentjson$raw"}], "]"}], "&"}], "/@", 
+      RowBox[{"#", ",", " ", "currentjson$raw"}], "]"}], "&"}], " ", "/@", 
+    " ", 
     RowBox[{"Range", "[", 
      RowBox[{"Length", "@", "currentjson$raw"}], "]"}]}]}], ";"}]}], "Code",
  CellChangeTimes->{{3.684276570591957*^9, 3.684276572590056*^9}, {
    3.684276607616539*^9, 3.684276683542879*^9}, {3.6842767153973083`*^9, 
-   3.6842767838732967`*^9}, 3.684276854600378*^9}],
+   3.6842767838732967`*^9}, 3.684276854600378*^9, {3.684543748638412*^9, 
+   3.684543752410412*^9}, {3.684544350133412*^9, 3.6845443589824123`*^9}}],
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{"final_windows", " ", "=", " ", 
-   RowBox[{
+  RowBox[{
+   RowBox[{"finalWindows", " ", "=", " ", 
     RowBox[{
-     RowBox[{"windowsFor", "[", 
-      RowBox[{"list", ",", " ", 
-       RowBox[{"(*", 
+     RowBox[{
+      RowBox[{"windowsFor", "[", 
+       RowBox[{"list", ",", " ", 
+        RowBox[{"(*", 
+         RowBox[{"DateObject", "[", 
+          RowBox[{"{", 
+           RowBox[{"2010", ",", " ", "5"}], "}"}], "]"}], "*)"}], 
         RowBox[{"DateObject", "[", 
          RowBox[{"{", 
-          RowBox[{"2010", ",", " ", "5"}], "}"}], "]"}], "*)"}], 
-       RowBox[{"DateObject", "[", 
-        RowBox[{"{", 
-         RowBox[{"2012", ",", " ", "5"}], "}"}], "]"}], ",", " ", 
-       RowBox[{"DateObject", "[", 
-        RowBox[{"{", 
-         RowBox[{"2016", ",", " ", "9"}], "}"}], "]"}], ",", " ", 
-       RowBox[{"Quantity", "[", 
-        RowBox[{"1", ",", " ", "\"\<month\>\""}], "]"}]}], "]"}], "[", 
-     RowBox[{"[", "2", "]"}], "]"}], "[", 
-    RowBox[{"[", "1", "]"}], "]"}]}], ";"}]], "Code",
+          RowBox[{"2012", ",", " ", "5"}], "}"}], "]"}], ",", " ", 
+        RowBox[{"DateObject", "[", 
+         RowBox[{"{", 
+          RowBox[{"2016", ",", " ", "9"}], "}"}], "]"}], ",", " ", 
+        RowBox[{"Quantity", "[", 
+         RowBox[{"1", ",", " ", "\"\<month\>\""}], "]"}]}], "]"}], "[", 
+      RowBox[{"[", "2", "]"}], "]"}], "[", 
+     RowBox[{"[", "1", "]"}], "]"}]}], ";"}], "\n"}]], "Code",
  CellChangeTimes->{{3.6842768696379337`*^9, 3.684276987690816*^9}, {
-  3.6842770450650587`*^9, 3.684277055317584*^9}, {3.684277168288198*^9, 
-  3.684277201575892*^9}, {3.684278258672509*^9, 3.684278351010971*^9}}]
+   3.6842770450650587`*^9, 3.684277055317584*^9}, {3.684277168288198*^9, 
+   3.684277201575892*^9}, {3.684278258672509*^9, 3.684278351010971*^9}, {
+   3.684543780035412*^9, 3.684543785925412*^9}, {3.6845467956218367`*^9, 
+   3.6845468010388365`*^9}, 3.6845468716548367`*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"dateList", " ", "=", " ", 
+  RowBox[{"Partition", "[", 
+   RowBox[{
+    RowBox[{"DateRange", "[", 
+     RowBox[{
+      RowBox[{"DateObject", "[", 
+       RowBox[{"{", 
+        RowBox[{"2015", ",", "1"}], "}"}], "]"}], ",", " ", 
+      RowBox[{"DateObject", "[", 
+       RowBox[{"{", 
+        RowBox[{"2015", ",", "5"}], "}"}], "]"}], ",", " ", 
+      RowBox[{"Quantity", "[", 
+       RowBox[{"1", ",", "\"\<month\>\""}], "]"}]}], "]"}], ",", "2", ",", 
+    "1"}], "]"}]}], "\n", 
+ RowBox[{"finalWindows$test", "=", " ", 
+  RowBox[{"windowsThread", "[", 
+   RowBox[{"list", ",", " ", "dateList"}], "]"}]}]}], "Code",
+ CellChangeTimes->{{3.6845468742558365`*^9, 3.684547026367837*^9}, {
+  3.684547066645837*^9, 3.6845471459568615`*^9}, {3.6845473326205263`*^9, 
+  3.684547338399104*^9}, {3.684547388387102*^9, 3.684547390635327*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Thu 1 Jan 2015\""}],RowBox[{"DateObject", "[", 
+         RowBox[{"{", 
+           RowBox[{"2015", ",", "1", ",", "1"}], "}"}], "]"}]},
+      "DateObject",
+      Editable->False], ",", 
+     TemplateBox[{RowBox[{"\"Sun 1 Feb 2015\""}],RowBox[{"DateObject", "[", 
+         RowBox[{"{", 
+           RowBox[{"2015", ",", "2", ",", "1"}], "}"}], "]"}]},
+      "DateObject",
+      Editable->False]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Sun 1 Feb 2015\""}],RowBox[{"DateObject", "[", 
+         RowBox[{"{", 
+           RowBox[{"2015", ",", "2", ",", "1"}], "}"}], "]"}]},
+      "DateObject",
+      Editable->False], ",", 
+     TemplateBox[{RowBox[{"\"Sun 1 Mar 2015\""}],RowBox[{"DateObject", "[", 
+         RowBox[{"{", 
+           RowBox[{"2015", ",", "3", ",", "1"}], "}"}], "]"}]},
+      "DateObject",
+      Editable->False]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Sun 1 Mar 2015\""}],RowBox[{"DateObject", "[", 
+         RowBox[{"{", 
+           RowBox[{"2015", ",", "3", ",", "1"}], "}"}], "]"}]},
+      "DateObject",
+      Editable->False], ",", 
+     TemplateBox[{RowBox[{"\"Wed 1 Apr 2015\""}],RowBox[{"DateObject", "[", 
+         RowBox[{"{", 
+           RowBox[{"2015", ",", "4", ",", "1"}], "}"}], "]"}]},
+      "DateObject",
+      Editable->False]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     TemplateBox[{RowBox[{"\"Wed 1 Apr 2015\""}],RowBox[{"DateObject", "[", 
+         RowBox[{"{", 
+           RowBox[{"2015", ",", "4", ",", "1"}], "}"}], "]"}]},
+      "DateObject",
+      Editable->False], ",", 
+     TemplateBox[{RowBox[{"\"Fri 1 May 2015\""}],RowBox[{"DateObject", "[", 
+         RowBox[{"{", 
+           RowBox[{"2015", ",", "5", ",", "1"}], "}"}], "]"}]},
+      "DateObject",
+      Editable->False]}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.684547033254837*^9, {3.6845470716278367`*^9, 3.6845471359498606`*^9}, 
+   3.6845473392041845`*^9, 3.684547680560316*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Transpose","nmtx",
+   "\"The first two levels of \\!\\(\\*RowBox[{\\\"{\\\", \
+RowBox[{\\\"Null\\\", \\\",\\\", \\\"Null\\\", \\\",\\\", \\\"Null\\\", \\\",\
+\\\", \\\"Null\\\"}], \\\"}\\\"}]\\) cannot be transposed.\"",2,29,57,
+   26783070139133884616,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.6845471367539415`*^9, 3.684547341552419*^9, 
+  3.684547682876548*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Part","partw",
+   "\"Part \\!\\(\\*RowBox[{\\\"3\\\"}]\\) of \
+\\!\\(\\*RowBox[{\\\"Transpose\\\", \\\"[\\\", RowBox[{\\\"{\\\", \
+RowBox[{\\\"Null\\\", \\\",\\\", \\\"Null\\\", \\\",\\\", \\\"Null\\\", \\\",\
+\\\", \\\"Null\\\"}], \\\"}\\\"}], \\\"]\\\"}]\\) does not exist.\"",2,29,58,
+   26783070139133884616,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.6845471367539415`*^9, 3.684547341552419*^9, 
+  3.68454768319558*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Tally","list",
+   "\"List expected at position \\!\\(\\*RowBox[{\\\"1\\\"}]\\) in \
+\\!\\(\\*RowBox[{\\\"Tally\\\", \\\"[\\\", RowBox[{RowBox[{\\\"Transpose\\\", \
+\\\"[\\\", RowBox[{\\\"{\\\", RowBox[{\\\"Null\\\", \\\",\\\", \\\"Null\\\", \
+\\\",\\\", \\\"Null\\\", \\\",\\\", \\\"Null\\\"}], \\\"}\\\"}], \\\"]\\\"}], \
+\\\"\[LeftDoubleBracket]\\\", \\\"3\\\", \\\"\[RightDoubleBracket]\\\"}], \
+\\\"]\\\"}]\\).\"",2,29,59,26783070139133884616,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.6845471367539415`*^9, 3.684547341552419*^9, 
+  3.6845476835176125`*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"Null", ",", 
+   RowBox[{"{", 
+    RowBox[{"{", 
+     RowBox[{"Tally", "[", 
+      RowBox[{
+       RowBox[{"Transpose", "[", 
+        RowBox[{"{", 
+         RowBox[{"Null", ",", "Null", ",", "Null", ",", "Null"}], "}"}], 
+        "]"}], "\[LeftDoubleBracket]", "3", "\[RightDoubleBracket]"}], "]"}], 
+     "}"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.684547033254837*^9, {3.6845470716278367`*^9, 3.6845471359498606`*^9}, 
+   3.6845473392041845`*^9, 3.6845476835196123`*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Names", "Title",
+ CellChangeTimes->{{3.684547710348295*^9, 3.68454771430069*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"StringCases", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Transpose", "[", "list", "]"}], "[", 
+    RowBox[{"[", "3", "]"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"\"\<@\>\"", "~~", "__", "~~", "\"\<.\>\""}], ",", 
+     RowBox[{"\"\<.\>\"", "~~", "__", "~~", "\"\<.\>\""}]}], "}"}]}], 
+  "]"}]], "Code",
+ CellChangeTimes->{{3.684547739889249*^9, 3.6845478083636355`*^9}, {
+  3.684548225313636*^9, 3.684548233728636*^9}, {3.6845482639726353`*^9, 
+  3.684548294233636*^9}, {3.6845483577086353`*^9, 3.6845484125875216`*^9}, {
+  3.6845485308103423`*^9, 3.684548565510812*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  TagBox[
+   FrameBox[GridBox[{
+      {
+       ItemBox[
+        TagBox[
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", "\<\"@review.openstack.\"\>", "}"}], ",", 
+           RowBox[{"{", "\<\"@lists.openstack.\"\>", "}"}], ",", 
+           RowBox[{"{", "\<\"@fewbar.\"\>", "}"}], ",", 
+           RowBox[{"{", "\<\"@review.openstack.\"\>", "}"}], ",", 
+           RowBox[{"{", "\<\".chachuliya@nttdata.\"\>", "}"}], ",", 
+           RowBox[{"{", "\<\"@review.openstack.\"\>", "}"}], ",", 
+           RowBox[{"{", "\<\".bashmakov@intel.\"\>", "}"}], ",", 
+           RowBox[{"{", "\<\"@review.openstack.\"\>", "}"}], ",", 
+           RowBox[{"{", "\<\"@review.openstack.\"\>", "}"}], ",", 
+           RowBox[{"{", "\<\"@openstack.\"\>", "}"}], ",", 
+           RowBox[{"{", "\<\"@review.openstack.\"\>", "}"}], ",", 
+           RowBox[{"{", "\<\".komawar@gmail.\"\>", "}"}], ",", 
+           RowBox[{"{", "\<\"@review.openstack.\"\>", "}"}], ",", 
+           RowBox[{"{", "\<\"@review.openstack.\"\>", "}"}], ",", 
+           RowBox[{"{", "\<\"@lists.openstack.\"\>", "}"}], ",", 
+           RowBox[{"{", "\<\".poulos@jhuapl.\"\>", "}"}], ",", 
+           RowBox[{"{", "\<\"@review.openstack.\"\>", "}"}], ",", 
+           RowBox[{"{", "\<\".komawar@gmail.\"\>", "}"}], ",", 
+           RowBox[{"{", "\<\"@review.openstack.\"\>", "}"}], ",", 
+           RowBox[{"{", "\<\".komawar@gmail.\"\>", "}"}], ",", 
+           RowBox[{"{", "\<\".komawar@gmail.\"\>", "}"}], ",", 
+           RowBox[{"{", "\<\".komawar@gmail.\"\>", "}"}], ",", 
+           RowBox[{"{", "\<\".kotha@infinite.\"\>", "}"}], ",", 
+           RowBox[{"{", "\<\".komawar@gmail.\"\>", "}"}], ",", 
+           TemplateBox[{"5524"},
+            "OutputSizeLimit`Skeleton",
+            DisplayFunction->(FrameBox[
+              RowBox[{"\" \[CenterEllipsis]\"", #, "\"\[CenterEllipsis] \""}],
+               Background -> GrayLevel[0.75], 
+              BaseStyle -> {
+               "Deploy", FontColor -> GrayLevel[1], FontSize -> Smaller, 
+                ShowStringCharacters -> False}, BaselinePosition -> Baseline, 
+              ContentPadding -> False, FrameMargins -> {{1, 1}, {1, 2}}, 
+              FrameStyle -> None, RoundingRadius -> 7]& )], ",", 
+           RowBox[{"{", "\<\".harris@rackspace.\"\>", "}"}], ",", 
+           RowBox[{"{", "\<\"@slicehost.\"\>", "}"}], ",", 
+           RowBox[{"{", "\<\"@slicehost.\"\>", "}"}], ",", 
+           RowBox[{"{", "\<\".harris@rackspace.\"\>", "}"}], ",", 
+           RowBox[{"{", "\<\".harris@rackspace.\"\>", "}"}], ",", 
+           RowBox[{"{", "\<\".harris@rackspace.\"\>", "}"}], ",", 
+           RowBox[{"{", "\<\"@slicehost.\"\>", "}"}], ",", 
+           RowBox[{"{", "\<\"@slicehost.\"\>", "}"}], ",", 
+           RowBox[{"{", "\<\"@slicehost.\"\>", "}"}], ",", 
+           RowBox[{"{", "\<\".harris@rackspace.\"\>", "}"}], ",", 
+           RowBox[{"{", "}"}], ",", 
+           RowBox[{"{", "}"}], ",", 
+           RowBox[{"{", "\<\"@inaugust.\"\>", "}"}], ",", 
+           RowBox[{"{", "\<\"@inaugust.\"\>", "}"}], ",", 
+           RowBox[{"{", "\<\"@inaugust.\"\>", "}"}], ",", 
+           RowBox[{"{", "}"}], ",", 
+           RowBox[{"{", "}"}], ",", 
+           RowBox[{"{", "}"}], ",", 
+           RowBox[{"{", "}"}], ",", 
+           RowBox[{"{", "\<\".harris@rackspace.\"\>", "}"}], ",", 
+           RowBox[{"{", "\<\".wright@rackspace.\"\>", "}"}], ",", 
+           RowBox[{"{", "\<\".wright@rackspace.\"\>", "}"}], ",", 
+           RowBox[{"{", "\<\".wright@rackspace.\"\>", "}"}], ",", 
+           RowBox[{"{", "\<\"@quasar.racklabs.\"\>", "}"}]}], "}"}],
+         Short[#, 5]& ],
+        BaseStyle->{Deployed -> False},
+        StripOnInput->False]},
+      {GridBox[{
+         {
+          TagBox[
+           TooltipBox[
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource[
+                "FEStrings", "sizeBriefExplanation"], StandardForm],
+               ImageSizeCache->{65., {3., 9.}}],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarCategory",
+             StripOnInput->False],
+            StyleBox[
+             DynamicBox[
+              ToBoxes[
+               FEPrivate`FrontEndResource["FEStrings", "sizeExplanation"], 
+               StandardForm]], DynamicUpdating -> True, StripOnInput -> 
+             False]],
+           Annotation[#, 
+            Style[
+             Dynamic[
+              FEPrivate`FrontEndResource["FEStrings", "sizeExplanation"]], 
+             DynamicUpdating -> True], "Tooltip"]& ], 
+          ButtonBox[
+           PaneSelectorBox[{False->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeShowLess"], 
+                StandardForm],
+               ImageSizeCache->{52., {1., 9.}}],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarControl",
+             StripOnInput->False], True->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeShowLess"], 
+                StandardForm]],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarControlActive",
+             StripOnInput->False]}, Dynamic[
+             CurrentValue["MouseOver"]],
+            Alignment->Center,
+            FrameMargins->0,
+            ImageSize->{Automatic, 25}],
+           Appearance->None,
+           
+           ButtonFunction:>OutputSizeLimit`ButtonFunction[
+            OutputSizeLimit`Defer, 46, 26783070139133884616, 5/2],
+           Enabled->True,
+           Evaluator->Automatic,
+           Method->"Queued"], 
+          ButtonBox[
+           PaneSelectorBox[{False->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeShowMore"], 
+                StandardForm],
+               ImageSizeCache->{62., {1., 9.}}],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarControl",
+             StripOnInput->False], True->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeShowMore"], 
+                StandardForm],
+               ImageSizeCache->{62., {1., 9.}}],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarControlActive",
+             StripOnInput->False]}, Dynamic[
+             CurrentValue["MouseOver"]],
+            Alignment->Center,
+            FrameMargins->0,
+            ImageSize->{Automatic, 25}],
+           Appearance->None,
+           
+           ButtonFunction:>OutputSizeLimit`ButtonFunction[
+            OutputSizeLimit`Defer, 46, 26783070139133884616, 5 2],
+           Enabled->True,
+           Evaluator->Automatic,
+           Method->"Queued"], 
+          ButtonBox[
+           PaneSelectorBox[{False->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeShowAll"], 
+                StandardForm],
+               ImageSizeCache->{44., {1., 9.}}],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarControl",
+             StripOnInput->False], True->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeShowAll"], 
+                StandardForm]],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarControlActive",
+             StripOnInput->False]}, Dynamic[
+             CurrentValue["MouseOver"]],
+            Alignment->Center,
+            FrameMargins->0,
+            ImageSize->{Automatic, 25}],
+           Appearance->None,
+           
+           ButtonFunction:>OutputSizeLimit`ButtonFunction[
+            OutputSizeLimit`Defer, 46, 26783070139133884616, Infinity],
+           Enabled->True,
+           Evaluator->Automatic,
+           Method->"Queued"], 
+          ButtonBox[
+           PaneSelectorBox[{False->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeChangeLimit"], 
+                StandardForm],
+               ImageSizeCache->{78., {1., 9.}}],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarControl",
+             StripOnInput->False], True->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeChangeLimit"], 
+                StandardForm],
+               ImageSizeCache->{78., {1., 9.}}],
+              StripOnInput->False,
+              DynamicUpdating->True], "SuggestionsBarControlActive",
+             StripOnInput->False]}, Dynamic[
+             CurrentValue["MouseOver"]],
+            Alignment->Center,
+            FrameMargins->0,
+            ImageSize->{Automatic, 25}],
+           Appearance->None,
+           ButtonFunction:>FrontEndExecute[{
+              FrontEnd`SetOptions[
+              FrontEnd`$FrontEnd, 
+               FrontEnd`PreferencesSettings -> {"Page" -> "Evaluation"}], 
+              FrontEnd`FrontEndToken["PreferencesDialog"]}],
+           Evaluator->None,
+           Method->"Preemptive"]}
+        },
+        AutoDelete->False,
+        FrameStyle->GrayLevel[0.85],
+        GridBoxDividers->{"Columns" -> {False, {True}}},
+        GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+        GridBoxSpacings->{"Columns" -> {{2}}}]}
+     },
+     DefaultBaseStyle->"Column",
+     GridBoxAlignment->{
+      "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+       "RowsIndexed" -> {}},
+     GridBoxDividers->{
+      "Columns" -> {{False}}, "ColumnsIndexed" -> {}, "Rows" -> {{False}}, 
+       "RowsIndexed" -> {}},
+     GridBoxItemSize->{
+      "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+       "RowsIndexed" -> {}},
+     GridBoxSpacings->{"Columns" -> {
+         Offset[0.27999999999999997`], {
+          Offset[0.5599999999999999]}, 
+         Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+         Offset[0.2], 
+         Offset[1.2], {
+          Offset[0.4]}, 
+         Offset[0.2]}, "RowsIndexed" -> {}}],
+    Background->RGBColor[0.9657, 0.9753, 0.9802],
+    FrameMargins->{{12, 12}, {0, 15}},
+    FrameStyle->GrayLevel[0.85],
+    RoundingRadius->5,
+    StripOnInput->False],
+   Deploy,
+   DefaultBaseStyle->"Deploy"],
+  Out[46]]], "Output",
+ CellChangeTimes->{{3.684547764712731*^9, 3.6845477788191414`*^9}, 
+   3.6845478092686357`*^9, 3.6845480542486353`*^9, {3.684548287398636*^9, 
+   3.684548294818636*^9}, {3.6845483582896357`*^9, 3.6845483796896353`*^9}, 
+   3.684548413580621*^9, 3.684548570820343*^9}]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -226,14 +693,147 @@ Cell[BoxData[
  CellChangeTimes->{{3.6842782111531773`*^9, 3.684278241428397*^9}, {
    3.6842793055759*^9, 3.68427933480974*^9}, 3.68428105482036*^9}],
 
-Cell[BoxData["\<\"/home/anne/Glance_Opensource.csv\"\>"], "Output",
- CellChangeTimes->{3.684280094518301*^9, 3.684281831534892*^9}]
+Cell[BoxData[
+ TemplateBox[{
+  "Transpose","nmtx",
+   "\"The first two levels of \\!\\(\\*RowBox[{\\\"{\\\", \\\"}\\\"}]\\) \
+cannot be transposed.\"",2,6,14,26783070139133884616,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.684543465043733*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Part","partw",
+   "\"Part \\!\\(\\*RowBox[{\\\"3\\\"}]\\) of \
+\\!\\(\\*RowBox[{\\\"Transpose\\\", \\\"[\\\", RowBox[{\\\"{\\\", \
+\\\"}\\\"}], \\\"]\\\"}]\\) does not exist.\"",2,6,15,26783070139133884616,
+   "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.68454346507273*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Tally","list",
+   "\"List expected at position \\!\\(\\*RowBox[{\\\"1\\\"}]\\) in \
+\\!\\(\\*RowBox[{\\\"Tally\\\", \\\"[\\\", RowBox[{RowBox[{\\\"Transpose\\\", \
+\\\"[\\\", RowBox[{\\\"{\\\", \\\"}\\\"}], \\\"]\\\"}], \\\"\
+\[LeftDoubleBracket]\\\", \\\"3\\\", \\\"\[RightDoubleBracket]\\\"}], \\\"]\\\
+\"}]\\).\"",2,6,16,26783070139133884616,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.684543465091728*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Transpose","nmtx",
+   "\"The first two levels of \\!\\(\\*RowBox[{\\\"{\\\", \\\"}\\\"}]\\) \
+cannot be transposed.\"",2,6,17,26783070139133884616,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.6845434651117263`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Part","partw",
+   "\"Part \\!\\(\\*RowBox[{\\\"3\\\"}]\\) of \
+\\!\\(\\*RowBox[{\\\"Transpose\\\", \\\"[\\\", RowBox[{\\\"{\\\", \
+\\\"}\\\"}], \\\"]\\\"}]\\) does not exist.\"",2,6,18,26783070139133884616,
+   "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.6845434651297245`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Tally","list",
+   "\"List expected at position \\!\\(\\*RowBox[{\\\"1\\\"}]\\) in \
+\\!\\(\\*RowBox[{\\\"Tally\\\", \\\"[\\\", RowBox[{RowBox[{\\\"Transpose\\\", \
+\\\"[\\\", RowBox[{\\\"{\\\", \\\"}\\\"}], \\\"]\\\"}], \\\"\
+\[LeftDoubleBracket]\\\", \\\"3\\\", \\\"\[RightDoubleBracket]\\\"}], \\\"]\\\
+\"}]\\).\"",2,6,19,26783070139133884616,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.6845434651487226`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Transpose","nmtx",
+   "\"The first two levels of \\!\\(\\*RowBox[{\\\"{\\\", \\\"}\\\"}]\\) \
+cannot be transposed.\"",2,6,20,26783070139133884616,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.68454346517372*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General","stop",
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"Transpose\\\", \\\"::\\\
+\", \\\"nmtx\\\"}], \\\"MessageName\\\"]\\) will be suppressed during this \
+calculation.\"",2,6,21,26783070139133884616,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.684543465194718*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Part","partw",
+   "\"Part \\!\\(\\*RowBox[{\\\"3\\\"}]\\) of \
+\\!\\(\\*RowBox[{\\\"Transpose\\\", \\\"[\\\", RowBox[{\\\"{\\\", \
+\\\"}\\\"}], \\\"]\\\"}]\\) does not exist.\"",2,6,22,26783070139133884616,
+   "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.684543465212716*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General","stop",
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"Part\\\", \\\"::\\\", \
+\\\"partw\\\"}], \\\"MessageName\\\"]\\) will be suppressed during this \
+calculation.\"",2,6,23,26783070139133884616,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.6845434652307143`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Tally","list",
+   "\"List expected at position \\!\\(\\*RowBox[{\\\"1\\\"}]\\) in \
+\\!\\(\\*RowBox[{\\\"Tally\\\", \\\"[\\\", RowBox[{RowBox[{\\\"Transpose\\\", \
+\\\"[\\\", RowBox[{\\\"{\\\", \\\"}\\\"}], \\\"]\\\"}], \\\"\
+\[LeftDoubleBracket]\\\", \\\"3\\\", \\\"\[RightDoubleBracket]\\\"}], \\\"]\\\
+\"}]\\).\"",2,6,24,26783070139133884616,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.6845434652497125`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General","stop",
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"Tally\\\", \\\"::\\\", \
+\\\"list\\\"}], \\\"MessageName\\\"]\\) will be suppressed during this \
+calculation.\"",2,6,25,26783070139133884616,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.6845434652707105`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Export","nodir",
+   "\"Directory \\!\\(\\*RowBox[{\\\"\\\\\\\"C:\\\\\\\\\\\\\\\\home\\\\\\\\\\\
+\\\\\\anne\\\\\\\\\\\\\\\\\\\\\\\"\\\"}]\\) does not exist.\"",2,6,26,
+   26783070139133884616,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.6845434653766994`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "OpenWrite","noopen",
+   "\"Cannot open \\!\\(\\*RowBox[{\\\"\\\\\\\"C:\\\\\\\\\\\\\\\\home\\\\\\\\\
+\\\\\\\\anne\\\\\\\\\\\\\\\\Glance_Opensource.csv\\\\\\\"\\\"}]\\).\"",2,6,27,
+   26783070139133884616,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.6845434653936977`*^9}],
+
+Cell[BoxData["$Failed"], "Output",
+ CellChangeTimes->{3.684280094518301*^9, 3.684281831534892*^9, 
+  3.6845434654106965`*^9}]
 }, Open  ]]
 }, Open  ]]
 },
-WindowSize->{1855, 1056},
-WindowMargins->{{0, Automatic}, {Automatic, 0}},
-FrontEndVersion->"10.4 for Linux x86 (64-bit) (February 25, 2016)",
+WindowSize->{1920, 1038},
+WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (July 28, 2016)",
 StyleDefinitions->"Default.nb"
 ]
 (* End of Notebook Content *)
@@ -248,27 +848,57 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[580, 22, 92, 1, 93, "Title"],
+Cell[580, 22, 92, 1, 101, "Title"],
 Cell[CellGroupData[{
-Cell[697, 27, 94, 1, 65, "Section"],
-Cell[794, 30, 2289, 60, 148, "Code"]
+Cell[697, 27, 94, 1, 70, "Section"],
+Cell[794, 30, 2294, 59, 141, "Code"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[3120, 95, 99, 1, 65, "Section"],
-Cell[3222, 98, 188, 2, 33, "Text"],
-Cell[3413, 102, 1717, 41, 224, "Code"]
+Cell[3125, 94, 99, 1, 70, "Section"],
+Cell[3227, 97, 188, 2, 30, "Text"],
+Cell[3418, 101, 2034, 45, 177, "Code"],
+Cell[5455, 148, 1677, 44, 267, "Code"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[5179, 149, 91, 1, 93, "Title"],
-Cell[5273, 152, 672, 17, 71, "Code"],
-Cell[5948, 171, 968, 23, 53, "Code"]
+Cell[7181, 198, 91, 1, 101, "Title"],
+Cell[7275, 201, 831, 20, 69, "Code"],
+Cell[8109, 223, 1135, 26, 69, "Code"],
+Cell[CellGroupData[{
+Cell[9269, 253, 856, 20, 69, "Code"],
+Cell[10128, 275, 2066, 53, 41, "Output"],
+Cell[12197, 330, 426, 9, 21, "Message"],
+Cell[12626, 341, 484, 10, 21, "Message"],
+Cell[13113, 353, 622, 11, 21, "Message"],
+Cell[13738, 366, 525, 14, 30, "Output"]
+}, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[6953, 199, 94, 1, 93, "Title"],
+Cell[14312, 386, 87, 1, 101, "Title"],
 Cell[CellGroupData[{
-Cell[7072, 204, 927, 22, 53, "Code"],
-Cell[8002, 228, 131, 1, 32, "Output"]
+Cell[14424, 391, 612, 14, 50, "Code"],
+Cell[15039, 407, 10977, 253, 151, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[26065, 666, 94, 1, 101, "Title"],
+Cell[CellGroupData[{
+Cell[26184, 671, 927, 22, 50, "Code"],
+Cell[27114, 695, 271, 6, 21, "Message"],
+Cell[27388, 703, 333, 8, 21, "Message"],
+Cell[27724, 713, 469, 9, 21, "Message"],
+Cell[28196, 724, 273, 6, 21, "Message"],
+Cell[28472, 732, 336, 8, 21, "Message"],
+Cell[28811, 742, 471, 9, 21, "Message"],
+Cell[29285, 753, 270, 6, 21, "Message"],
+Cell[29558, 761, 341, 7, 21, "Message"],
+Cell[29902, 770, 334, 8, 21, "Message"],
+Cell[30239, 780, 339, 7, 21, "Message"],
+Cell[30581, 789, 471, 9, 21, "Message"],
+Cell[31055, 800, 339, 7, 21, "Message"],
+Cell[31397, 809, 317, 7, 21, "Message"],
+Cell[31717, 818, 329, 7, 21, "Message"],
+Cell[32049, 827, 125, 2, 30, "Output"]
 }, Open  ]]
 }, Open  ]]
 }
