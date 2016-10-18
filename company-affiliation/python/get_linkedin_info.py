@@ -15,7 +15,7 @@ from pyvirtualdisplay import Display
 #Changing the directory so that the headline files are stored in a convenient place
 import os
 
-path = "linkedin_info/"
+path = "../resources/linkedin_info/"
 
 # Check current working directory.
 retval = os.getcwd()
