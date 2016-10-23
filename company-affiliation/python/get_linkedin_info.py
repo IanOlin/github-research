@@ -12,32 +12,19 @@ import pickle
 from selenium import webdriver
 from pyvirtualdisplay import Display
 
-#Changing the directory so that the headline files are stored in a convenient place
 import os
+iport json
 
-path = "../resources/linkedin_info/"
-
-# Check current working directory.
-retval = os.getcwd()
-print "Current working directory %s" % retval
-
-# Now change the directory
-os.chdir( path )
-
-# Check current working directory.
-retval = os.getcwd()
-
-print "Directory changed successfully %s" % retval
-
-print "hello!"
-names = [("Geetika", "Batra") , ("Chmouel", "Boudjnah")]
-
-name_history = [] 
+PATH = "../resources/linkedin_info/"
+DEBUG = True
 
 def findlinkedininfo(name_list): #name is a tuple, predefinedlinkedin is a boolean
+	#TODO: store the list of companies, return at the end
+	#TODO: if invalid name (ie, no first and last name), put a None there
 	for name in name_list:
 		driver = webdriver.Firefox(capabilities=firefox_capabilities)
-		print driver
+		if DEBUG:
+			print driver
 		#What to put in the open() URL area for Geetika Batra: https://www.google.com/#q=Geetika+Batra+linkedin
 		driver.get('https://www.google.com/#q={}+{}+linkedin'.format(name[0], name[1]))
 		time.sleep(2)
@@ -46,7 +33,8 @@ def findlinkedininfo(name_list): #name is a tuple, predefinedlinkedin is a boole
 			if (str(res.text.encode('ascii', 'ignore').decode('ascii'))) == "{} {} | LinkedIn".format(name[0], name[1]):
 				#getting the index that fits the if statement's qualifications
 				index = google_results.index(res)
-				print index;
+				if DEBUG:
+					print index;
 				f = open('{}_{}_linkedin.pickle'.format(name[0], name[1]), 'w')
 				# getting the url of the result:
 				profile_url = driver.find_elements_by_class_name('_Rm')[index].text.encode('ascii', 'ignore').decode('ascii')
@@ -69,7 +57,49 @@ def findlinkedininfo(name_list): #name is a tuple, predefinedlinkedin is a boole
 
 		driver.quit()
 
-findlinkedininfo(names)
+"""
+Changing the directory so that the headline files are stored in a convenient place
+"""
+def changeDirectory():
+	# Check current working directory.
+	retval = os.getcwd()
+	if DEBUG:
+		print "Current working directory %s" % retval
+
+	# Now change the directory
+	os.chdir( PATH )
+
+	# Check current working directory.
+	retval = os.getcwd()
+
+	if DEBUG:
+		print "Directory changed successfully %s" % retval
+
+def commitsToCompanies(filename):
+	#TODO: actually make this method
+	commits = json.load(open(filename, 'r'))
+	shas = []
+	names = []
+	companies = []
+	for c in commits:
+		#TODO:
+		#store sha in shas
+		#store name in names
+		pass
+	#TODO:
+	#call findlinkedininfo on list of names, save in companies
+	#change all Nones to "no company" with a flag of 0, change all other companies to a flag of like 3.
+	#zip shas and companies to a dict or something
+	#save to file
+
+
+if __name__ == '__main__':
+	changeDirectory()
+	print "hello!"
+	names = [("Geetika", "Batra") , ("Chmouel", "Boudjnah")]
+	name_history = [] 
+	findlinkedininfo(names)
+
 
 	# # Block of code to get the contents from the linkedin profile
 	# driver.get(profile_url)
