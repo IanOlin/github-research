@@ -13,7 +13,7 @@ from selenium import webdriver
 from pyvirtualdisplay import Display
 
 import os
-iport json
+import json
 
 PATH = "../resources/linkedin_info/"
 DEBUG = True
