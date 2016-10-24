@@ -30,7 +30,7 @@ retval = os.getcwd()
 print "Directory changed successfully %s" % retval
 
 print "hello!"
-names = [("Geetika", "Batra") , ("Chmouel", "Boudjnah")]
+names = [("Christina", "Tipps") , ("Chmouel", "Boudjnah")]
 
 name_history = [] 
 
