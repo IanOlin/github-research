@@ -10,6 +10,8 @@ from pattern.web import *
 from pattern.web import URL, extension, download
 import json
 from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.keys import Keys
 from pyvirtualdisplay import Display
 from sets import Set
 import os
@@ -18,15 +20,12 @@ import json
 PATH = "../resources/linkedin_info/"
 DEBUG = True
 
-# shas = []
-# names = []
-# dates = []
-# companies = []
 
 problemPeople = []
 indexToStart = 0
-START_AT_INDEX = False
-def findlinkedininfo(name_list): #name is a tuple, predefinedlinkedin is a boolean if we can implement it
+# START_AT_INDEX = False
+
+def findlinkedininfo(name_list, START_AT_INDEX): #name is a tuple, StART_AT_INDEX is a boolean if we can implement it
 	"""
 	Takes in a list of names as a tuple and returns a file for each name if there is linkedin info for that name
 	"""
@@ -34,7 +33,7 @@ def findlinkedininfo(name_list): #name is a tuple, predefinedlinkedin is a boole
 
 	if START_AT_INDEX:
 		with open("index.txt", 'r') as f:
-			s = f.read(indexToStart).strip();
+			s = f.readline() #(indexToStart).strip()
 			global indexToStart
 			indexToStart = int(s)
 
@@ -62,16 +61,19 @@ def findlinkedininfo(name_list): #name is a tuple, predefinedlinkedin is a boole
 				# opening the Linkedin URL
 				driver.get(profile_url)
 				time.sleep(2)
-				title = driver.find_element_by_tag_name('title').text.encode('ascii', 'ignore').decode('ascii')
+				title =  driver.title #driver.find_element_by_tag_name('title').text.encode('ascii', 'ignore').decode('ascii')
 				if (title == "Sign Up | LinkedIn"):
 					indexToStart = j
-					print j
+					print "last index: " + str(j)
 					driver.quit()
 					print problemPeople
-					return allcompanies
+					with open("index.txt", 'w') as f:
+						f.write(str(j))
+
+					time.sleep(480)
+					return findlinkedininfo(name_list, True)
 				orgs_worklife = driver.find_elements_by_class_name("item-subtitle")
 				dateranges = driver.find_elements_by_class_name("date-range")
-
 
 				for i in range(len(dateranges)):
 					try:
@@ -176,7 +178,7 @@ def commitsToCompanies(filename):
 	(dates, shas, names) = obtainDatesShasNames(filename)
 	#Getting one of each name
 	finalnamelist = list(simplifyNameList(names))
-	findlinkedininfo(finalnamelist)
+	findlinkedininfo(finalnamelist, True) #Change value here if you want to start from the middle of the list!
 
 
 def JSON_access(jsonObject, keyTuple):
@@ -200,10 +202,10 @@ if __name__ == '__main__':
 	# print findlinkedininfo(names)
 	# (dates, shas, names) = obtainDatesShasNames(companyfile)
 	commitsToCompanies(companyfile)
-	with open("index.txt", 'w') as f:
-		f.write(str(indexToStart))
-	with open("problempeople.txt", 'w') as f:
-		f.write(str(problemPeople))
+	# with open("index.txt", 'w') as f:
+	# 	f.write(str(indexToStart))
+	# with open("problempeople.txt", 'w') as f:
+	# 	f.write(str(problemPeople))
 
 
 	# # Block of code to get the contents from the linkedin profile
