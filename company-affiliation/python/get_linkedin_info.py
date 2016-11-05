@@ -20,8 +20,6 @@ import json
 PATH = "../resources/linkedin_info/"
 DEBUG = True
 
-
-problemPeople = []
 indexToStart = 0
 # START_AT_INDEX = False
 
@@ -39,6 +37,7 @@ def findlinkedininfo(name_list, START_AT_INDEX): #name is a tuple, StART_AT_INDE
 
 	for j in range(indexToStart, len(name_list)):
 		name = name_list[j]
+		print "{}'s index: ".format(name) + str(j)
 		print name
 		driver = webdriver.Firefox(capabilities=firefox_capabilities)
 		if DEBUG:
@@ -66,7 +65,7 @@ def findlinkedininfo(name_list, START_AT_INDEX): #name is a tuple, StART_AT_INDE
 					indexToStart = j
 					print "last index: " + str(j)
 					driver.quit()
-					print problemPeople
+
 					with open("index.txt", 'w') as f:
 						f.write(str(j))
 
@@ -83,7 +82,6 @@ def findlinkedininfo(name_list, START_AT_INDEX): #name is a tuple, StART_AT_INDE
 						one_org = orgs_worklife[i].text.encode('ascii', 'ignore').decode('ascii')
 						orgsAndCompanies.append((one_org, one_daterange))
 					except IndexError as e:
-						problemPeople.append("{}, {}, {}".format(name, i, orgsAndCompanies))
 						break
 
 				driver.close()
@@ -94,7 +92,6 @@ def findlinkedininfo(name_list, START_AT_INDEX): #name is a tuple, StART_AT_INDE
 		allcompanies.append(orgsAndCompanies)
 		f.close()
 		driver.quit()
-	print problemPeople
 	return allcompanies
 
 """
@@ -197,29 +194,5 @@ if __name__ == '__main__':
 	pathtojsons = "/home/anne/"
 	companyfile = pathtojsons+"glance-openstack-commits.json" # + "filename"
 	print "hello!"
-	# names = [("Christina", "Tipps") , ("Chmouel", "Boudjnah"), ("Geetika", "Batra")]
-	# name_history = [] 
-	# print findlinkedininfo(names)
-	# (dates, shas, names) = obtainDatesShasNames(companyfile)
+
 	commitsToCompanies(companyfile)
-	# with open("index.txt", 'w') as f:
-	# 	f.write(str(indexToStart))
-	# with open("problempeople.txt", 'w') as f:
-	# 	f.write(str(problemPeople))
-
-
-	# # Block of code to get the contents from the linkedin profile
-	# driver.get(profile_url)
-	# 			time.sleep(2)
-	# 			orgs_worklife = driver.find_elements_by_class_name("item-subtitle")
-	# 			dateranges = driver.find_elements_by_class_name("date-range")
-	# 			for daterange in dateranges:
-	# 				one_daterange = daterange.text.encode('ascii', 'ignore').decode('ascii')
-	# 				org_index = dateranges.index(daterange)
-	# 				one_org = orgs_worklife[org_index].text.encode('ascii', 'ignore').decode('ascii')
-	# 				json.dump(one_org, f)
-	# 				json.dump(one_daterange, f)
-	# 			f.close()
-	# 			driver.close()
-	# 			time.sleep(2)
-	# 			break
