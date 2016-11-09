@@ -99,7 +99,7 @@ def findlinkedininfo(name_list, START_AT_INDEX): #name is a tuple, StART_AT_INDE
 
 					driver.close()
 					break
-					return [] #Supposed to break out of everything
+					return name_list #Supposed to break out of everything
 				orgs_worklife = driver.find_elements_by_class_name("item-subtitle")
 				dateranges = driver.find_elements_by_class_name("date-range")
 
