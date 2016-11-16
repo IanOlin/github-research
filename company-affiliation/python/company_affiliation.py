@@ -5,11 +5,18 @@ from datetime import date
 import re
 import json
 
-# flags
+# linkedin flags
 NO_COMPANY = 0
 PARSING_ERROR = 1
 MULTI_COMPANY = 2 
 SINGLE_COMPANY = 3
+
+# company flags
+MANUAL_CERTAIN = 6
+LIKELY_EMAIL = 4
+LIKELY_LINKEDIN = 3
+UNLIKELY = 1
+NO_DATA = 0
 
 # date constants
 CURRENT_DATE = date(2016, 11, 1)
@@ -20,9 +27,20 @@ MONTHS = {"January":1, "February":2, "March":3, "April":4, "May":5, "June":6, "J
 pathToJSON = "/home/anne/MLCommits/"
 pathToLinkedIn = "../resources/linkedin_info/"
 pathToOutput = "../resources/linkedin-csvs/"
+
 rawFileNames = ("caffe-BVLC-commits.json", "CNTK-Microsoft-commits.json", "deeplearning4j-deeplearning4j-commits.json", "tensorflow-tensorflow-commits.json", "Theano-Theano-commits.json", "torch7-torch-commits.json")#("glance-openstack-commits.json", "cinder-openstack-commits.json", "cloudstack-apache-commits.json", "glance-openstack-commits.json",
     #"horizon-openstack-commits.json", "keystone-openstack-commits.json", "neutron-openstack-commits.json", "nova-openstack-commits.json",
     #"swift-openstack-commits.json") #jsons here
+
+
+pathToEmailList = "../../Ian's Trash/Research/companies2.json"
+domainToCompany = json.load(open(pathToEmailList))
+
+rawFileNames = ("glance-openstack-commits.json",)
+ # "cinder-openstack-commits.json", "cloudstack-apache-commits.json", "glance-openstack-commits.json",
+ #    "horizon-openstack-commits.json", "keystone-openstack-commits.json", "neutron-openstack-commits.json", "nova-openstack-commits.json",
+ #    "swift-openstack-commits.json") #jsons here
+
 
 #memoization to cut down on the number of date objects we have to make
 memoizedPeople = {}
@@ -57,57 +75,102 @@ def mapCommits():
             commitdate = parseTimeStamp(unixDate)
             url = commit["commit"]["url"]
             sha = url.split("/")[-1].encode("utf-8")
+            email = commit["commit"]["author"]["email"].encode("utf-8")
             name = commit["commit"]["author"]["name"].encode("utf-8")
 
-            # company list
-            companyList = []
-            if name in memoizedPeople:
-                companyList = memoizedPeople[name]
-            else:
-                try:
-                    companies = openJSON(pathToLinkedIn + "{}_linkedin.json".format(name))
-                    companyList = [(co[0], convertToDates(co[1])) for co in companies]
-                    memoizedPeople[name] = companyList
-                except IOError:
-                    pass
-
-            # pick out the ones that match the date
-            badDataSomewhere = False
-            timeFrameCompanies = []
-            for co in companyList:
-                if co[1] == None:
-                    badDataSomewhere = True
-                else:
-                    dateStart = co[1][0]
-                    dateEnd = co[1][1]
-
-                if commitdate < dateEnd and commitdate > dateStart:
-                    timeFrameCompanies.append(co[0])
-
-            # flag
-            flag = -1
-
-            if badDataSomewhere:
-                flag = PARSING_ERROR
-                numError+=1
-            elif len(timeFrameCompanies) == 1:
-                flag = SINGLE_COMPANY
+            # grab company according to linkedin
+            linkedinFlag, linkedinCompanyList = linkedinCompanies(name, commitdate)
+            if linkedinFlag == SINGLE_COMPANY:
                 numSingle+=1
-            elif len(timeFrameCompanies) > 1:
-                flag = MULTI_COMPANY
+            elif linkedinFlag == MULTI_COMPANY:
                 numMulti+=1
-            elif len(timeFrameCompanies) == 0:
-                flag = NO_COMPANY
+            elif linkedinFlag == PARSING_ERROR:
+                numError+=1
+            elif linkedinFlag == NO_COMPANY:
                 numNone+=1
+
+            # grab company according to email
+            emailFlag, emailCompany = emailCompanies(email)
+
+            # find best match company, with flag for likelihood
+            overallFlag = -1
+            overallCompany = ""
+            if emailFlag == 1:
+                overallFlag = LIKELY_EMAIL
+                overallCompany = emailCompany
+            elif linkedinFlag == SINGLE_COMPANY:
+                overallFlag = LIKELY_LINKEDIN
+                overallCompany = linkedinCompanyList[0]
+            elif linkedinFlag == MULTI_COMPANY:
+                overallFlag = UNLIKELY
+                overallCompany = linkedinCompanyList[0]
             else:
-                raise AttributeError("nonexistent list length? " + str(len(timeFrameCompanies)))
+                overallFlag = NO_DATA
 
             # write to dictionary
-            commitInfo[sha] = (name, unixDate, flag, timeFrameCompanies)
+            commitInfo[sha] = (name, email, unixDate, {"LINKEDIN":(linkedinFlag, linkedinCompanyList), "EMAIL":(emailFlag, emailCompany), "OVERALL":(overallFlag, overallCompany)})
 
         # write to file
         writeJSON(pathToOutput+"linkedin-"+filename, commitInfo)
     print "Single: {} Multi: {} None: {} Error: {}".format(numSingle, numMulti, numNone, numError)
+
+
+def linkedinCompanies(name, dateobject):
+     # company list
+    companyList = []
+    if name in memoizedPeople:
+        companyList = memoizedPeople[name]
+    else:
+        try:
+            companies = openJSON(pathToLinkedIn + "{}_linkedin.json".format(name))
+            companyList = [(co[0], convertToDates(co[1])) for co in companies]
+            memoizedPeople[name] = companyList
+        except IOError:
+            pass
+
+    # pick out the ones that match the date
+    badDataSomewhere = False
+    timeFrameCompanies = []
+    for co in companyList:
+        if co[1] == None:
+            badDataSomewhere = True
+        else:
+            dateStart = co[1][0]
+            dateEnd = co[1][1]
+
+            if dateobject < dateEnd and dateobject > dateStart:
+                timeFrameCompanies.append(co[0])
+
+    # flag
+    flag = -1
+
+    if badDataSomewhere:
+        flag = PARSING_ERROR
+    elif len(timeFrameCompanies) == 1:
+        flag = SINGLE_COMPANY
+    elif len(timeFrameCompanies) > 1:
+        flag = MULTI_COMPANY
+    elif len(timeFrameCompanies) == 0:
+        flag = NO_COMPANY
+    else:
+        raise AttributeError("nonexistent list length? " + str(len(timeFrameCompanies)))
+
+    return flag, timeFrameCompanies
+
+def emailCompanies(email):
+    try:
+        domain = email.split("@")[-1] #get domain--last half of email
+    except IndexError:
+        return 0, ""
+    flag = 0
+    company = ""
+    try:
+        company = domainToCompany[domain]
+        if company != "personal\n":
+            flag = 1
+    except KeyError:
+        pass
+    return flag, company
 
 
 def parseTimeStamp(unixTime):
