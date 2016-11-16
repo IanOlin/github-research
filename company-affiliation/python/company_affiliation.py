@@ -107,6 +107,8 @@ def mapCommits():
             else:
                 overallFlag = NO_DATA
 
+            overallCompany = overallCompany.replace(",","--")
+
             # write to dictionary
             commitInfo[sha] = (name, email, unixDate, {"LINKEDIN":(linkedinFlag, linkedinCompanyList), "EMAIL":(emailFlag, emailCompany), "OVERALL":(overallFlag, overallCompany)})
 
