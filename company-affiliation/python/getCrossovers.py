@@ -17,6 +17,8 @@ from sets import Set
 import os
 import json
 
+from get_linkedin_info import changeDirectory, obtainDatesShasNames, simplifyNameList, filterLists, commitsToCompanies, JSON_access, findlinkedininfo
+
 PATH = "../resources/linkedin_info/"
 DEBUG = True
 
@@ -193,4 +195,4 @@ if __name__ == '__main__':
 		if frequency > 1:
 			crossovers.append(name)
 
-	print crossovers
+	findlinkedininfo(crossovers, True)

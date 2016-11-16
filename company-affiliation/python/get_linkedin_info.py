@@ -195,5 +195,4 @@ if __name__ == '__main__':
 	pathtojsons = "/home/anne/"
 	companyfile = pathtojsons+"glance-openstack-commits.json" # + "filename"
 	print "hello!"
-
 	commitsToCompanies(companyfile)
