@@ -36,7 +36,7 @@ rawFileNames = ("caffe-BVLC-commits.json", "CNTK-Microsoft-commits.json", "deepl
 pathToEmailList = "../../Ian's Trash/Research/companies2.json"
 domainToCompany = json.load(open(pathToEmailList))
 
-rawFileNames = ("glance-openstack-commits.json",)
+# rawFileNames = ("glance-openstack-commits.json",)
  # "cinder-openstack-commits.json", "cloudstack-apache-commits.json", "glance-openstack-commits.json",
  #    "horizon-openstack-commits.json", "keystone-openstack-commits.json", "neutron-openstack-commits.json", "nova-openstack-commits.json",
  #    "swift-openstack-commits.json") #jsons here
