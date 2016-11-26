@@ -42,7 +42,7 @@ def getnames(filename):
 		name = finalnamelist[i]
 		with open(PATH+'{}_linkedin.json'.format(name)) as data_file:
 			data = json.load(data_file)
-			if len(data) ==0:
+			if len(data) == 0:
 				needslinkedIn_list.append(name)
 	return needslinkedIn_list
 
