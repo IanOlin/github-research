@@ -1,0 +1,581 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.4' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     22503,        573]
+NotebookOptionsPosition[     21333,        529]
+NotebookOutlinePosition[     21706,        545]
+CellTagsIndexPosition[     21663,        542]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Repo to ugly time windowed CSV:", "Title",
+ CellChangeTimes->{{3.688275716963671*^9, 3.688275772213196*^9}}],
+
+Cell["\<\
+This tooling will take a JSON representation of all of a repositories \
+commits, and optionally a JSON of commit SHAs to companies, and output an \
+ugly csv windowd by time.
+
+To run, run all function cells, then follow the examples in Output. Batch \
+running can be achieved with a Map.
+
+Run on windows\
+\>", "Text",
+ CellChangeTimes->{{3.6882757849944735`*^9, 3.688275983253298*^9}, {
+  3.6882762097829485`*^9, 3.6882762172756977`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["Functions", "Chapter"]], "Title",
+ CellChangeTimes->{{3.684276113810198*^9, 3.684276136971569*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Filtering:", "Section",
+ CellChangeTimes->{{3.684276142984378*^9, 3.68427615491364*^9}, {
+  3.6877023387417173`*^9, 3.6877023399555764`*^9}}],
+
+Cell["\<\
+Takes in a JSON of commit objects, and turns each commit into a list in the \
+form {DateObject, Sha, Email, Name}\
+\>", "Text",
+ CellChangeTimes->{{3.6877023437815237`*^9, 3.687702383866769*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"filter", "[", 
+   RowBox[{"i_", ",", " ", "list_"}], "]"}], ":=", 
+  RowBox[{"{", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"DateObject", "[", 
+     RowBox[{"\"\<date\>\"", "/.", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"\"\<author\>\"", "/.", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"{", "\"\<commit\>\"", "}"}], "/.", 
+             RowBox[{"list", "[", 
+              RowBox[{"[", "i", "]"}], "]"}]}], ")"}], "[", 
+           RowBox[{"[", "1", "]"}], "]"}], "[", 
+          RowBox[{"[", "2", "]"}], "]"}]}], ")"}], "[", 
+       RowBox[{"[", "2", "]"}], "]"}]}], "]"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"\"\<sha\>\"", "/.", 
+     RowBox[{
+      RowBox[{"list", "[", 
+       RowBox[{"[", "i", "]"}], "]"}], "[", 
+      RowBox[{"[", "5", "]"}], "]"}]}], ",", "\[IndentingNewLine]", 
+    RowBox[{"\"\<email\>\"", "/.", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"\"\<author\>\"", "/.", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"{", "\"\<commit\>\"", "}"}], "/.", 
+            RowBox[{"list", "[", 
+             RowBox[{"[", "i", "]"}], "]"}]}], ")"}], "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "[", 
+         RowBox[{"[", "2", "]"}], "]"}]}], ")"}], "[", 
+      RowBox[{"[", "1", "]"}], "]"}]}], ",", "\[IndentingNewLine]", 
+    RowBox[{"\"\<name\>\"", "/.", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"\"\<author\>\"", "/.", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"{", "\"\<commit\>\"", "}"}], "/.", 
+            RowBox[{"list", "[", 
+             RowBox[{"[", "i", "]"}], "]"}]}], ")"}], "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "[", 
+         RowBox[{"[", "2", "]"}], "]"}]}], ")"}], "[", 
+      RowBox[{"[", "3", "]"}], "]"}]}]}], "\[IndentingNewLine]", 
+   "}"}]}]], "Code",
+ CellChangeTimes->{{3.6842761810806847`*^9, 3.684276181469405*^9}, {
+   3.684276222233746*^9, 3.684276232188002*^9}, 3.6842762912313337`*^9, {
+   3.684276340765143*^9, 3.684276369981408*^9}, {3.684279242859179*^9, 
+   3.684279245190213*^9}, {3.6845478322826357`*^9, 3.6845478410656357`*^9}, {
+   3.6852074652554426`*^9, 3.685207475452462*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Windowing:", "Section",
+ CellChangeTimes->{{3.6842764089214983`*^9, 3.6842764436432333`*^9}}],
+
+Cell["Tallies the number of commits per person per time window. ", "Text",
+ CellChangeTimes->{{3.684276446983285*^9, 3.68427645189007*^9}, {
+  3.684276491709106*^9, 3.684276528321403*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"windowsFor", "[", 
+   RowBox[{
+   "list_", ",", " ", "start_", ",", " ", "end_", ",", " ", "increment_"}], 
+   "]"}], " ", ":=", " ", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"dates", ",", " ", "results", ",", " ", "windowResults"}], "}"}],
+     ",", "\[IndentingNewLine]", "\t", 
+    RowBox[{"Reap", "[", "\[IndentingNewLine]", "\t\t", 
+     RowBox[{
+      RowBox[{"For", "[", 
+       RowBox[{
+        RowBox[{"i", " ", "=", " ", "start"}], ",", " ", 
+        RowBox[{"i", " ", "<", " ", "end"}], ",", " ", 
+        RowBox[{"i", " ", "=", " ", 
+         RowBox[{"DatePlus", "[", 
+          RowBox[{"i", ",", " ", "increment"}], "]"}]}], ",", 
+        "\[IndentingNewLine]", "\t\t\t", 
+        RowBox[{
+         RowBox[{"windowResults", " ", "=", " ", 
+          RowBox[{"Select", "[", 
+           RowBox[{"list", ",", " ", 
+            RowBox[{
+             RowBox[{"i", " ", "<", " ", 
+              RowBox[{"#", "[", 
+               RowBox[{"[", "1", "]"}], "]"}], " ", "<", " ", 
+              RowBox[{"DatePlus", "[", 
+               RowBox[{"i", ",", " ", 
+                RowBox[{"increment", "*", "2"}]}], "]"}]}], " ", "&"}]}], 
+           "]"}]}], ";", "\[IndentingNewLine]", "\t\t\t", 
+         RowBox[{"Sow", "[", 
+          RowBox[{"Tally", "[", 
+           RowBox[{
+            RowBox[{"Transpose", "[", "windowResults", "]"}], "[", 
+            RowBox[{"[", "3", "]"}], "]"}], "]"}], "]"}], ";"}]}], 
+       "\[IndentingNewLine]", "\t\t", "]"}], ";"}], "\[IndentingNewLine]", 
+     "\t", "]"}]}], "\[IndentingNewLine]", "]"}]}]], "Code",
+ CellChangeTimes->{{3.684276458107264*^9, 3.6842764840787153`*^9}, {
+  3.6842770321968946`*^9, 3.684277060726713*^9}, {3.6842787278023157`*^9, 
+  3.6842787914387608`*^9}, {3.684279122529993*^9, 3.6842791663140078`*^9}, {
+  3.68427925287146*^9, 3.684279255411612*^9}, {3.6845441125294123`*^9, 
+  3.684544203441412*^9}, {3.684544255106412*^9, 3.6845443342654123`*^9}, {
+  3.685207588062722*^9, 3.6852075995978756`*^9}}],
+
+Cell["\<\
+windowOp: takes a list of commits and a pair of dates (startdate, enddate) \
+and returns all commits that are within those two dates\
+\>", "Text",
+ CellChangeTimes->{{3.685208420511801*^9, 3.685208468798169*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"windowOp", "[", 
+    RowBox[{"list_", ",", " ", "datePair_"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", "}"}], ",", "\n", 
+     RowBox[{"Select", "[", 
+      RowBox[{"list", ",", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"datePair", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], " ", "<", " ", 
+         RowBox[{"#", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], " ", "<", " ", 
+         RowBox[{"datePair", "[", 
+          RowBox[{"[", "2", "]"}], "]"}]}], " ", "&"}]}], "]"}]}], "\n", 
+    "]"}]}], "\n"}]], "Code",
+ CellChangeTimes->{{3.6845456329575624`*^9, 3.684545757158839*^9}, {
+   3.6845458002698393`*^9, 3.684545862101839*^9}, {3.6845459032338395`*^9, 
+   3.6845460684238396`*^9}, {3.684546671109377*^9, 3.684546782056837*^9}, 
+   3.685207751963111*^9, {3.6852082596341467`*^9, 3.685208265980707*^9}, {
+   3.6852083971764107`*^9, 3.685208414258513*^9}, 3.68520847895525*^9, {
+   3.685221798533881*^9, 3.6852218001285625`*^9}, 3.6852222040491776`*^9}],
+
+Cell["\<\
+windowThread: takes a list of commits and a list of date pairs (where each \
+date pair is (start date, end date)) and tallies the number of commits per \
+datepair (time window)\
+\>", "Text",
+ CellChangeTimes->{{3.685208482398501*^9, 3.68520853668325*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"windowsThread", "[", 
+    RowBox[{"list_", ",", " ", "dates_"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"windowResults", ",", "weird"}], "}"}], ",", "\n", "\t", 
+     RowBox[{
+      RowBox[{"weird", " ", "=", " ", 
+       RowBox[{"Reap", "[", "\n", "\t\t", 
+        RowBox[{"windowResults", " ", "=", " ", 
+         RowBox[{
+          RowBox[{"Map", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"Sow", "[", 
+              RowBox[{"Prepend", "[", 
+               RowBox[{
+                RowBox[{"Tally", "[", 
+                 RowBox[{
+                  RowBox[{"Transpose", "[", 
+                   RowBox[{"windowOp", "[", 
+                    RowBox[{"list", ",", " ", "#"}], "]"}], "]"}], "[", 
+                  RowBox[{"[", "3", "]"}], "]"}], "]"}], ",", "#"}], "]"}], 
+              "]"}], "&"}], ",", " ", "dates"}], "]"}], "[", 
+          RowBox[{"[", "1", "]"}], "]"}]}], "\n", "\t", "]"}]}], ";", "\n", 
+      "\t", 
+      RowBox[{
+       RowBox[{"weird", "[", 
+        RowBox[{"[", "2", "]"}], "]"}], "[", 
+       RowBox[{"[", "1", "]"}], "]"}]}]}], "\n", "]"}]}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"fourth", "[", "x_", "]"}], ":=", 
+   RowBox[{"Part", "[", 
+    RowBox[{"x", ",", "4"}], "]"}]}], " ", 
+  RowBox[{"(*", "shhhhhhhhhhhh", "*)"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{"companyThread", "[", 
+   RowBox[{"list_", ",", " ", "dates_", ",", "dict_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"windowResults", ",", "weird"}], "}"}], ",", "\n", "\t", 
+    RowBox[{
+     RowBox[{"weird", " ", "=", " ", 
+      RowBox[{"Reap", "[", "\n", "\t\t", 
+       RowBox[{"windowResults", " ", "=", " ", 
+        RowBox[{
+         RowBox[{"Map", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"Sow", "[", 
+             RowBox[{"Prepend", "[", 
+              RowBox[{
+               RowBox[{"Tally", "[", 
+                RowBox[{
+                 RowBox[{"Values", "[", 
+                  RowBox[{
+                   RowBox[{"Transpose", "[", 
+                    RowBox[{"Map", "[", 
+                    RowBox[{"fourth", ",", 
+                    RowBox[{"Lookup", "[", 
+                    RowBox[{"dict", ",", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"Transpose", "[", 
+                    RowBox[{"windowOp", "[", 
+                    RowBox[{"list", ",", " ", "#"}], "]"}], "]"}], "[", 
+                    RowBox[{"[", "2", "]"}], "]"}], ")"}]}], "]"}]}], "]"}], 
+                    "]"}], "[", 
+                   RowBox[{"[", "1", "]"}], "]"}], "]"}], "[", 
+                 RowBox[{"[", 
+                  RowBox[{"All", ",", "2"}], "]"}], "]"}], "]"}], ",", "#"}], 
+              "]"}], "]"}], "&"}], ",", " ", "dates"}], "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}]}], "\n", "\t", "]"}]}], ";", "\n", 
+     "\t", 
+     RowBox[{
+      RowBox[{"weird", "[", 
+       RowBox[{"[", "2", "]"}], "]"}], "[", 
+      RowBox[{"[", "1", "]"}], "]"}]}]}], "\n", "]"}]}]}], "Code",
+ CellChangeTimes->{{3.6845456329575624`*^9, 3.684545757158839*^9}, {
+   3.6845458002698393`*^9, 3.684545862101839*^9}, {3.6845459032338395`*^9, 
+   3.6845460684238396`*^9}, {3.684546671109377*^9, 3.684546782056837*^9}, 
+   3.685207751963111*^9, {3.6852082596341467`*^9, 3.685208265980707*^9}, {
+   3.6852083971764107`*^9, 3.685208414258513*^9}, 3.68520847895525*^9, 
+   3.68522172541136*^9, {3.6852220909491777`*^9, 3.6852221240841775`*^9}, {
+   3.6852221759241776`*^9, 3.6852221897921777`*^9}, {3.685222238157178*^9, 
+   3.685222238499178*^9}, {3.6852223125571775`*^9, 3.6852223230951777`*^9}, {
+   3.6852223721471777`*^9, 3.6852223878491774`*^9}, {3.6852224250771775`*^9, 
+   3.6852224812521777`*^9}, 3.685226118304454*^9, {3.685880671670086*^9, 
+   3.6858807482877464`*^9}, {3.685880936120528*^9, 3.685880937401656*^9}, {
+   3.685881030368952*^9, 3.685881072824197*^9}, {3.6858816132363553`*^9, 
+   3.685881711637355*^9}, {3.6858818045583553`*^9, 3.6858818284853554`*^9}, {
+   3.685881892837355*^9, 3.685881894521355*^9}, {3.685882195770355*^9, 
+   3.685882196383355*^9}, {3.685882251675355*^9, 3.6858822523083553`*^9}, {
+   3.68770245650097*^9, 3.6877024613334837`*^9}, {3.68824756072046*^9, 
+   3.6882475669070787`*^9}, {3.688247600187406*^9, 3.6882476002854156`*^9}, {
+   3.688247762349621*^9, 3.688247768296215*^9}, {3.688248292456626*^9, 
+   3.6882483215645366`*^9}, {3.688252195632743*^9, 3.688252196229683*^9}, {
+   3.6882523521230927`*^9, 3.688252365127792*^9}, {3.6882524746774178`*^9, 
+   3.688252476534417*^9}, {3.6882525094204173`*^9, 3.6882525301574173`*^9}, {
+   3.6882525654474173`*^9, 3.688252577180417*^9}, {3.6882528795434175`*^9, 
+   3.6882528840824175`*^9}, {3.688264692845962*^9, 3.6882646939820757`*^9}, {
+   3.688265044672141*^9, 3.688265048133487*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Putting it all together:", "Subsubsection",
+ CellChangeTimes->{{3.6858833969787455`*^9, 3.685883400976745*^9}, {
+  3.6858864980837035`*^9, 3.6858864989817934`*^9}}],
+
+Cell["\<\
+window: takes a path to a repo json, start end and time increment objects, \
+and outputs time window csvs to the csvs folder on public.
+
+NOTE: some paths are going to have to be modified to get this to run not on \
+my machine.\
+\>", "Text",
+ CellChangeTimes->{{3.685886504761371*^9, 3.6858865571796126`*^9}, {
+  3.6882760142243943`*^9, 3.6882761008260536`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"window", "[", 
+    RowBox[{"jsonPath_", ",", "start_", ",", "end_", ",", "increment_"}], 
+    "]"}], ":=", " ", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "currentJSON", ",", "list", ",", "dateList", ",", "finalWindows", ",", 
+       "directory", ",", "exportPath"}], "}"}], ",", "\n", "\t", 
+     RowBox[{
+      RowBox[{"currentJSON", " ", "=", " ", 
+       RowBox[{"Import", "[", 
+        RowBox[{"jsonPath", ",", "\"\<Data\>\""}], "]"}]}], ";", "\n", "\t", 
+      RowBox[{"list", " ", "=", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"filter", "[", 
+          RowBox[{"#", ",", " ", "currentJSON"}], "]"}], "&"}], " ", "/@", 
+        " ", 
+        RowBox[{"Range", "[", 
+         RowBox[{"Length", "@", "currentJSON"}], "]"}]}]}], ";", "\n", "\t", 
+      RowBox[{"dateList", " ", "=", " ", 
+       RowBox[{"Partition", "[", 
+        RowBox[{
+         RowBox[{"DateRange", "[", 
+          RowBox[{"start", ",", " ", "end", ",", " ", "increment"}], "]"}], 
+         ",", "2", ",", "1"}], "]"}]}], ";", "\n", "\t", 
+      RowBox[{"finalWindows", " ", "=", " ", 
+       RowBox[{"windowsThread", "[", 
+        RowBox[{"list", ",", " ", "dateList"}], "]"}]}], ";", "\n", "\t", 
+      RowBox[{
+      "directory", " ", "=", " ", 
+       "\"\<\\\\\\\\fsvs01\\\\Public\\\\+Research\\\\GitWood\\\\Csvs\\\\\>\""}\
+], ";", " ", 
+      RowBox[{"(*", "export", "*)"}], "\n", "\t", 
+      RowBox[{"exportPath", " ", "=", " ", 
+       RowBox[{"StringJoin", "[", 
+        RowBox[{"directory", ",", 
+         RowBox[{"StringJoin", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"StringSplit", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"StringSplit", "[", 
+                RowBox[{"jsonPath", ",", "\"\<\\\\\>\""}], "]"}], "[", 
+               RowBox[{"[", 
+                RowBox[{"-", "1"}], "]"}], "]"}], ",", "\"\<.\>\""}], "]"}], 
+            "[", 
+            RowBox[{"[", "1", "]"}], "]"}], ",", "\"\<.csv\>\""}], "]"}]}], 
+        "]"}]}], ";", "\n", "\t", 
+      RowBox[{"Export", "[", 
+       RowBox[{"exportPath", ",", "finalWindows"}], "]"}]}]}], "\n", "]"}]}], 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{"companyWindow", "[", 
+   RowBox[{"jsonPath_", ",", "start_", ",", "end_", ",", "increment_"}], 
+   "]"}], ":=", " ", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "dict", ",", "name", ",", "currentJSON", ",", "list", ",", "dateList", 
+      ",", "finalWindows", ",", "directory", ",", "exportPath"}], "}"}], ",", 
+    "\n", "\t", 
+    RowBox[{
+     RowBox[{"currentJSON", " ", "=", " ", 
+      RowBox[{"Import", "[", 
+       RowBox[{"jsonPath", ",", "\"\<Data\>\""}], "]"}]}], ";", "\n", "\t", 
+     RowBox[{"name", "=", 
+      RowBox[{
+       RowBox[{"StringSplit", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"StringSplit", "[", 
+           RowBox[{"jsonPath", ",", "\"\<\\\\\>\""}], "]"}], "[", 
+          RowBox[{"[", 
+           RowBox[{"-", "1"}], "]"}], "]"}], ",", "\"\<.\>\""}], "]"}], "[", 
+       RowBox[{"[", "1", "]"}], "]"}]}], ";", "\n", "\t", 
+     RowBox[{"dict", "=", 
+      RowBox[{"Association", "[", 
+       RowBox[{"Import", "[", 
+        RowBox[{
+        "\"\<C:\\\\Users\\\\jbriskman\\\\Documents\\\\Research\\\\github-\
+research\\\\company-affiliation\\\\resources\\\\linkedin-csvs\\\\linkedin-\>\"\
+", "<>", "name", "<>", "\"\<.json\>\""}], "]"}], "]"}]}], ";", " ", 
+     RowBox[{"(*", 
+      RowBox[{
+      "Wherever", " ", "the", " ", "shaToCompany", " ", "thing", " ", "is"}], 
+      "*)"}], "\n", "\t", 
+     RowBox[{"list", " ", "=", " ", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"filter", "[", 
+         RowBox[{"#", ",", " ", "currentJSON"}], "]"}], "&"}], " ", "/@", " ", 
+       RowBox[{"Range", "[", 
+        RowBox[{"Length", "@", "currentJSON"}], "]"}]}]}], ";", "\n", "\t", 
+     RowBox[{"dateList", " ", "=", " ", 
+      RowBox[{"Partition", "[", 
+       RowBox[{
+        RowBox[{"DateRange", "[", 
+         RowBox[{"start", ",", " ", "end", ",", " ", "increment"}], "]"}], 
+        ",", "2", ",", "1"}], "]"}]}], ";", "\n", "\t", 
+     RowBox[{"finalWindows", " ", "=", " ", 
+      RowBox[{
+       RowBox[{"companyThread", "[", 
+        RowBox[{"list", ",", " ", "dateList", ",", "dict"}], "]"}], "/.", 
+       RowBox[{"{", 
+        RowBox[{"\"\<\>\"", "\[Rule]", "\"\<??\>\""}], "}"}]}]}], ";", "\n", 
+     "\t", 
+     RowBox[{
+     "directory", "=", 
+      "\"\<P:\\\\+Research\\\\GitWood\\\\Companies\\\\\>\""}], ";", " ", 
+     RowBox[{"(*", "export", "*)"}], "\n", "\t", 
+     RowBox[{"exportPath", " ", "=", " ", 
+      RowBox[{"StringJoin", "[", 
+       RowBox[{"directory", ",", 
+        RowBox[{"StringJoin", "[", 
+         RowBox[{"name", ",", "\"\<.csv\>\""}], "]"}]}], "]"}]}], ";", "\n", 
+     "\t", 
+     RowBox[{"Export", "[", 
+      RowBox[{"exportPath", ",", "finalWindows"}], "]"}]}]}], "\n", 
+   "]"}]}]}], "Code",
+ CellChangeTimes->{{3.685883419944745*^9, 3.685883851515064*^9}, {
+   3.6858843082097287`*^9, 3.685884378577555*^9}, {3.685884708585555*^9, 
+   3.6858848240495553`*^9}, {3.685884926590555*^9, 3.685884928667555*^9}, {
+   3.6858850575165553`*^9, 3.6858850625165553`*^9}, {3.688248436389018*^9, 
+   3.68824845241262*^9}, {3.688248510235402*^9, 3.6882485228616643`*^9}, {
+   3.6882530023964176`*^9, 3.688253005001417*^9}, {3.6882530996364174`*^9, 
+   3.6882531030984173`*^9}, {3.688253230159417*^9, 3.6882532325284176`*^9}, {
+   3.6882570173004274`*^9, 3.6882570548641834`*^9}, 3.6882642050130253`*^9, {
+   3.6882642624400253`*^9, 3.6882643415540247`*^9}, {3.688264499600025*^9, 
+   3.688264544984025*^9}, {3.688264581717025*^9, 3.688264699157593*^9}, 
+   3.6882649793076053`*^9, {3.6882761159225636`*^9, 3.6882761768096514`*^9}}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["Output", "Chapter"]], "Title",
+ CellChangeTimes->{{3.684276542254936*^9, 3.6842765475843267`*^9}}],
+
+Cell["\<\
+If the time window is outside of when data exists, warnings will be thrown, \
+but everything\[CloseCurlyQuote]s peachy-keen.\
+\>", "Text",
+ CellChangeTimes->{{3.688274054714133*^9, 3.688274080120673*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"window", "[", 
+   RowBox[{
+   "\"\<P:\\\\+Research\\\\GitWood\\\\mlCommits\\\\Theano-Theano-commits.json\
+\>\"", ",", 
+    RowBox[{"DateObject", "[", 
+     RowBox[{"{", 
+      RowBox[{"2012", ",", "5"}], "}"}], "]"}], ",", 
+    RowBox[{"DateObject", "[", 
+     RowBox[{"{", 
+      RowBox[{"2016", ",", "9"}], "}"}], "]"}], ",", 
+    RowBox[{"Quantity", "[", 
+     RowBox[{"1", ",", "\"\<month\>\""}], "]"}]}], "]"}], "\n"}], "\n", 
+ RowBox[{"companyWindow", "[", 
+  RowBox[{
+  "\"\<P:\\\\+Research\\\\GitWood\\\\mlCommits\\\\Theano-Theano-commits.json\>\
+\"", ",", 
+   RowBox[{"DateObject", "[", 
+    RowBox[{"{", 
+     RowBox[{"2012", ",", "5"}], "}"}], "]"}], ",", 
+   RowBox[{"DateObject", "[", 
+    RowBox[{"{", 
+     RowBox[{"2016", ",", "9"}], "}"}], "]"}], ",", 
+   RowBox[{"Quantity", "[", 
+    RowBox[{"1", ",", "\"\<month\>\""}], "]"}]}], "]"}]}], "Code",
+ CellChangeTimes->{{3.685884858153555*^9, 3.685884906070555*^9}, {
+   3.685885232515164*^9, 3.68588523557847*^9}, {3.685885406877652*^9, 
+   3.6858854076578083`*^9}, {3.6858859239462957`*^9, 
+   3.6858859254414454`*^9}, {3.685886252758174*^9, 3.6858863191118083`*^9}, {
+   3.685887249869875*^9, 3.68588725782467*^9}, {3.6882486099813757`*^9, 
+   3.6882486204924264`*^9}, 3.6882531464844174`*^9, {3.688253244954417*^9, 
+   3.6882532463074174`*^9}, {3.6882570681405115`*^9, 
+   3.6882570692016172`*^9}, {3.688265192893962*^9, 3.6882651983995123`*^9}, 
+   3.68826742489914*^9, {3.688267548546606*^9, 3.688267669642606*^9}, {
+   3.688273309923661*^9, 3.688273330175686*^9}, {3.6882734073594036`*^9, 
+   3.6882734212837963`*^9}, {3.6882760541753893`*^9, 
+   3.6882760706030316`*^9}, {3.6882761853275027`*^9, 3.68827619169914*^9}}]
+}, Open  ]]
+},
+WindowSize->{1920, 1038},
+WindowMargins->{{-8, Automatic}, {Automatic, 0}},
+Magnification:>1.1 Inherited,
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (July 28, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 114, 1, 111, "Title"],
+Cell[697, 25, 447, 11, 114, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1181, 41, 123, 1, 96, "Title"],
+Cell[CellGroupData[{
+Cell[1329, 46, 147, 2, 78, "Section"],
+Cell[1479, 50, 205, 4, 32, "Text"],
+Cell[1687, 56, 2294, 59, 150, "Code"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4018, 120, 99, 1, 78, "Section"],
+Cell[4120, 123, 188, 2, 32, "Text"],
+Cell[4311, 127, 2034, 45, 188, "Code"],
+Cell[6348, 174, 222, 4, 32, "Text"],
+Cell[6573, 180, 1056, 24, 112, "Code"],
+Cell[7632, 206, 265, 5, 32, "Text"],
+Cell[7900, 213, 4917, 106, 321, "Code"],
+Cell[CellGroupData[{
+Cell[12842, 323, 170, 2, 43, "Subsubsection"],
+Cell[13015, 327, 371, 8, 73, "Text"],
+Cell[13389, 337, 5798, 136, 435, "Code"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[19248, 480, 122, 1, 96, "Title"],
+Cell[19373, 483, 214, 4, 32, "Text"],
+Cell[19590, 489, 1727, 37, 93, "Code"]
+}, Open  ]]
+}
+]
+*)
+
