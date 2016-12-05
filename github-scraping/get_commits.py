@@ -4,7 +4,7 @@ import json
 ML = 0
 STACKS = 1
 
-currentRepos = CLOUD_STACK
+currentRepos = ML
 
 #directory
 dirName = ''
