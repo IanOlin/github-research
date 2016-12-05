@@ -166,7 +166,7 @@ def emailCompanies(email):
     company = ""
     try:
         company = domainToCompany[domain]
-        if company != "personal\n":
+        if company != "personal":
             flag = 1
     except KeyError:
         pass
