@@ -1,5 +1,6 @@
 # Open Source Software and Strategy
-Jared Briskman, Serena Chen, Anne Ku, Ian Paul (Olin College)
+[Jared Briskman](https://github.com/jaredbriskman), [Serena Chen](https://github.com/poosomooso), [Anne Ku](https://github.com/kuannie1), [Ian Paul](https://github.com/IanOlin) (Olin College)
+
 Under the direction of Jason Woodard (Olin College) and Jonathan Sims (Babson College).
 
 This repo houses two separate, but related research projects:
