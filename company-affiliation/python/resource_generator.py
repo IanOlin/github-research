@@ -1,1 +1,0 @@
-# one day, this will be a script to get a database of sorts for {login:company affiliations}
