@@ -24,12 +24,12 @@ CURRENT_DATE_STR = "Present"
 MONTHS = {"January":1, "February":2, "March":3, "April":4, "May":5, "June":6, "July":7, "August":8, "September":9, "October":10, "November":11, "December":12}
 
 # file pathing
-pathToJSON = "/home/anne/"
+pathToJSON = "/home/serena/GithubResearch/mlCommits-new/"
 pathToLinkedIn = "../resources/linkedin_info/"
 pathToOutput = "../resources/linkedin-csvs/"
 
-rawFileNames = ("glance-openstack-commits.json", "cinder-openstack-commits.json", "cloudstack-apache-commits.json", "glance-openstack-commits.json", "horizon-openstack-commits.json", "keystone-openstack-commits.json", "neutron-openstack-commits.json", "nova-openstack-commits.json", "swift-openstack-commits.json") #jsons here
-#("caffe-BVLC-commits.json", "CNTK-Microsoft-commits.json", "deeplearning4j-deeplearning4j-commits.json", "tensorflow-tensorflow-commits.json", "Theano-Theano-commits.json", "torch7-torch-commits.json")
+#("glance-openstack-commits.json", "cinder-openstack-commits.json", "cloudstack-apache-commits.json", "glance-openstack-commits.json", "horizon-openstack-commits.json", "keystone-openstack-commits.json", "neutron-openstack-commits.json", "nova-openstack-commits.json", "swift-openstack-commits.json") #jsons here
+rawFileNames = ("caffe-BVLC-commits.json", "CNTK-Microsoft-commits.json", "deeplearning4j-deeplearning4j-commits.json", "tensorflow-tensorflow-commits.json", "Theano-Theano-commits.json", "torch7-torch-commits.json", "incubator-systemml-apache-commits.json")
 
 pathToEmailList = "../../Ian's Trash/Research/companies2.json"
 domainToCompany = json.load(open(pathToEmailList))

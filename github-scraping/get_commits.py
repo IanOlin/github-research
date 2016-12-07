@@ -4,6 +4,7 @@ import json
 ML = 0
 STACKS = 1
 
+#which set of repos to hit
 currentRepos = ML
 
 #directory
@@ -21,7 +22,7 @@ if not os.path.exists(dirName):
 repo_dict = {}
 if currentRepos == ML:
     repo_dict = mlRepos
-elif currentRepos == OPEN_STACK:
+elif currentRepos == STACKS:
     repo_dict = stackRepos
 
 #getting commits

@@ -21,7 +21,8 @@ mlRepos = {'Theano' : 'Theano',
     'CNTK' : 'Microsoft',
     'tensorflow' : 'tensorflow', 
     'torch7' : 'torch', 
-    'deeplearning4j': 'deeplearning4j'}
+    'deeplearning4j': 'deeplearning4j',
+    'incubator-systemml' : 'apache'}
 stackRepos = {'cinder' : 'openstack', 
     'glance' : 'openstack', 
     'horizon' : 'openstack', 
