@@ -9,6 +9,7 @@ from datetime import datetime, time
 from pattern.web import * 
 from pattern.web import URL, extension, download
 import json
+import pickle
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
@@ -16,17 +17,24 @@ from pyvirtualdisplay import Display
 from sets import Set
 import os
 import json
+import sys 
+from unidecode import unidecode 
 
 PATH = "../resources/linkedin_info/"
 DEBUG = True
 
 indexToStart = 0
 # START_AT_INDEX = False
+signup = 0
+stubbornpeople = []
+
 
 def findlinkedininfo(name_list, START_AT_INDEX): #name is a tuple, StART_AT_INDEX is a boolean if we can implement it
 	"""
 	Takes in a list of names as a tuple and returns a file for each name if there is linkedin info for that name
 	"""
+	global signup
+	global stubbornpeople
 	allcompanies = []
 
 	if START_AT_INDEX:
@@ -37,20 +45,19 @@ def findlinkedininfo(name_list, START_AT_INDEX): #name is a tuple, StART_AT_INDE
 
 	for j in range(indexToStart, len(name_list)):
 		name = name_list[j]
-		print "{}'s index: ".format(name) + str(j)
-		print name
+		print "{}'s index: ".format(name.encode("utf-8")) + str(j)
 		driver = webdriver.Firefox(capabilities=firefox_capabilities)
 		if DEBUG:
 			print driver
-		#What to put in the open() URL area for Geetika Batra: https://www.google.com/#q=Geetika+Batra+linkedin
-		driver.get('https://www.google.com/#q={}+linkedin'.format(name))
+		#example: What to put in the open() URL area for Geetika Batra: https://www.google.com/#q=Geetika+Batra+linkedin
+		driver.get('https://www.google.com/#q={}+linkedin'.format(name.encode("utf-8")))
 		time.sleep(2)
 		google_results = driver.find_elements_by_class_name("r") # should get the headlines/main title of each google result
 
 		orgsAndCompanies = []
 		for res in google_results:
 			googleresult_headline = str(res.text.encode('ascii', 'ignore').decode('ascii')) #The headline you see in each google result
-			if (str(res.text.encode('ascii', 'ignore').decode('ascii'))) == "{} | LinkedIn".format(name): #slice the string from -10 to -1 to get  "| LinkedIn"
+			if (str(res.text.encode('ascii', 'ignore').decode('ascii'))[-10:]) == "| LinkedIn": #slice the string from -10 to -1 to get  "| LinkedIn"
 				#getting the index that fits the if statement's qualifications
 				index = google_results.index(res)
 				if DEBUG:
@@ -61,17 +68,36 @@ def findlinkedininfo(name_list, START_AT_INDEX): #name is a tuple, StART_AT_INDE
 				# opening the Linkedin URL
 				driver.get(profile_url)
 				time.sleep(2)
-				title =  driver.title #driver.find_element_by_tag_name('title').text.encode('ascii', 'ignore').decode('ascii')
+				title = driver.title #driver.find_element_by_tag_name('title').text.encode('ascii', 'ignore').decode('ascii')
 				if (title == "Sign Up | LinkedIn"):
-					indexToStart = j
-					print "last index: " + str(j)
+					#Adding this name to the stubbornpeople list, incrementing the times we encounter this signup page
+					signup = signup + 1
+					#commenting out all the index related functions because I'm planning to remove
+					# some problem people to a different file
+					# indexToStart = j
+					# print "last index: " + str(j)
 					driver.quit()
 
-					with open("index.txt", 'w') as f:
-						f.write(str(j))
+					# with open("index.txt", 'w') as f:
+					# 	f.write(str(j + 1))
 
-					time.sleep(480)
-					return findlinkedininfo(name_list, True)
+					with open("stubbornpeoplefile.json", 'r') as f:						
+						current_stubbornpeople_file = json.load(f)
+						current_stubbornpeople_file["glance-openstack"].append(name)
+						name_list.remove(name) #removing because we already added the name ot the stubborn people list
+
+					with open("stubbornpeoplefile.json", 'w') as f:
+						json.dump(current_stubbornpeople_file, f)
+
+					# If we get this 1-2 times, then let's try again:
+					if (signup < 4):
+						time.sleep(60) #wait 1 minute and try again.
+						return findlinkedininfo(name_list, False)
+					else: #Stop this program
+						sys.exit(0)
+
+
+				#Messy lines that help find the text in the item-subtitle and date-range classes				
 				orgs_worklife = driver.find_elements_by_class_name("item-subtitle")
 				dateranges = driver.find_elements_by_class_name("date-range")
 
@@ -88,7 +114,7 @@ def findlinkedininfo(name_list, START_AT_INDEX): #name is a tuple, StART_AT_INDE
 				driver.close()
 				time.sleep(2)
 				break
-		f = open(PATH+'{}_linkedin.json'.format(name), 'w')
+		f = open(PATH+'{}_linkedin.json'.format(name.encode("utf-8")), 'w')
 		json.dump(orgsAndCompanies, f)
 		allcompanies.append(orgsAndCompanies)
 		f.close()
@@ -134,7 +160,7 @@ def obtainDatesShasNames(filename):
 		commiturl_list = commiturl.split("/")
 		shas.append(commiturl_list[-1].encode("utf-8"))
 		#store name in names
-		names.append(c["commit"]["author"]["name"].encode("utf-8"))
+		names.append(c["commit"]["author"]["name"])
 		pass
 	filterLists(dates, shas, names)
 	return (dates, shas, names)
@@ -169,14 +195,55 @@ def filterLists(dates, shas, names):
 	#save to file
 
 
-def commitsToCompanies(filename):
+def getFinalNameList(filename):
 	"""
-	returns the element or json object from the tuple of keys
+	returns the final list of names to run
 	"""
+	# get the file name of the filename path variable here:
+
+
 	(dates, shas, names) = obtainDatesShasNames(filename)
 	#Getting one of each name
-	finalnamelist = list(simplifyNameList(names))
-	findlinkedininfo(finalnamelist, True) #Change True to False if you want to start at the beginning? 
+	finalcompletenamelist = list(simplifyNameList(names))
+	# get the ones without linkedin profiles so far:
+	finalnamelist = []
+	for i in range(len(finalcompletenamelist)):
+		name = finalcompletenamelist[i]
+		with open(PATH+'{}_linkedin.json'.format(name.encode("utf-8"))) as data_file:
+			data = json.load(data_file)
+			if len(data) == 0: #if we don't have data on this person, append him/her to the new list
+				finalnamelist.append(name)
+
+	#remove any names that appear in the stubbornpeoplefile file:
+	with open("stubbornpeoplefile.json", 'r') as f:						
+		current_stubbornpeople_file = json.load(f)
+
+	#get right versions of names in finalnamelist in here:
+	stubbornpeoplelist = current_stubbornpeople_file["glance-openstack"]
+	for i in range(len(stubbornpeoplelist)):
+		stubbornperson = stubbornpeoplelist[i]
+		rightversion = unidecode(stubbornperson)
+		stubbornpeoplelist.remove(stubbornperson)
+		stubbornpeoplelist.append(rightversion)
+
+		current_stubbornpeople_file["glance-openstack"] = stubbornpeoplelist
+		# print current_stubbornpeople_file["glance-openstack"]
+
+
+	for i in range(len(finalnamelist) - 1):
+		print i
+		name = finalnamelist[i]
+			
+		if name in current_stubbornpeople_file["glance-openstack"]:
+			finalnamelist.remove(name)
+	return finalnamelist
+	
+def runLinkedinProcess(filename):
+	"""
+	runs everything
+	"""
+	finalnamelist = getFinalNameList(filename) #Change True to False if you want to start at the beginning
+	findlinkedininfo(finalnamelist, False)
 
 
 def JSON_access(jsonObject, keyTuple):
@@ -192,7 +259,7 @@ def JSON_access(jsonObject, keyTuple):
 
 
 if __name__ == '__main__':
-	pathtojsons = "/home/anne/"
+	pathtojsons = "/home/jwb/research/"
 	companyfile = pathtojsons+"glance-openstack-commits.json" # + "filename"
 	print "hello!"
-	commitsToCompanies(companyfile)
+	runLinkedinProcess(companyfile)
