@@ -20,7 +20,7 @@ from sets import Set
 import os
 import json
 import sys 
-from unidecode import unidecode 
+# from unidecode import unidecode 
 from collections import defaultdict
 
 PATH = "../resources/linkedin_info/"
@@ -174,9 +174,9 @@ for name in resultingdict:
 print needslinkedIn_list
 
 
-# for key in needslinkedIn_list:
-# 	print key
-# 	getLinkedInInfo(key, resultingdict[key])
+for key in needslinkedIn_list:
+	print key
+	getLinkedInInfo(key, resultingdict[key])
 
 # if __name__ == '__main__':
 # 	pathtojsons = "/home/jwb/research/"
