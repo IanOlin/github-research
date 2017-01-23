@@ -2,6 +2,7 @@ from datetime import date
 import json
 
 CURRENT_DATE = date(2016, 11, 1)
+EARLIEST_DATE = date(2008, 1, 1) #Theano's first commit
 
 pathToJSON = "/home/serena/GithubResearch/mlCommits-new/"
 fileList = ("caffe-BVLC-commits.json", "CNTK-Microsoft-commits.json", "deeplearning4j-deeplearning4j-commits.json", "tensorflow-tensorflow-commits.json", "Theano-Theano-commits.json", "torch7-torch-commits.json", "incubator-systemml-apache-commits.json")
@@ -26,7 +27,7 @@ def calculateYear():
         year = CURRENT_DATE.year
         userCommitHist, commitCount = countCommitsByYear(file)
 
-        while(year >= 2008):
+        while(year >= EARLIEST_DATE.year):
             index = 0
             commitHist = userCommitHist.get(year, {})
             commitNum = float(commitCount.get(year, 0))
@@ -37,12 +38,36 @@ def calculateYear():
             year-=1
     return herfindahlIndices
 
+def calculateMonth():
+    herfindahlIndices = {}
+    for file in fileList:
+        repo = getRepoID(file)
+        herfindahlIndices[repo] = {}
+        currentMonth = getMonthID(CURRENT_DATE)
+        userCommitHist, commitCount = countCommitsByMonth(file)
+
+        while(currentMonth >= getMonthID(EARLIEST_DATE)):
+            index = 0
+            commitHist = userCommitHist.get(currentMonth, {})
+            commitNum = float(commitCount.get(currentMonth, 0))
+
+            for user, commits in commitHist.items():
+                index += (commits/commitNum)**2
+            herfindahlIndices[repo][currentMonth] = index
+
+            #decrement a month
+            currentMonth -= 10000
+            if(currentMonth < 0):
+                currentMonth += 12000 # one year
+                currentMonth -= 1
+    return herfindahlIndices
+
 def getRepoID(fname):
     filePieces = fname.split("-")
     repo = filePieces[0]+"-"+filePieces[1]
     return repo
 
-def countCommits(rawFileName, startUnix, endUnix):
+def countCommits(rawFileName, startDate=date.min, endDate=date.max):
     raw = openJSON(pathToJSON + rawFileName)
     userCommitHist = {}
     commitCount = 0
@@ -50,12 +75,9 @@ def countCommits(rawFileName, startUnix, endUnix):
         # simple fields
         unixDate = commit["commit"]["author"]["date"].encode("utf-8")
         commitdate = parseTimeStamp(unixDate)
-        # url = commit["commit"]["url"]
-        # sha = url.split("/")[-1].encode("utf-8")
-        # email = commit["commit"]["author"]["email"].encode("utf-8")
         name = commit["commit"]["author"]["name"].encode("utf-8")
 
-        if commitdate < endUnix and commitdate >= startUnix:
+        if commitdate < endDate and commitdate >= startDate:
             userCommitHist[name] = userCommitHist.get(name, 0) + 1
             commitCount+=1
 
@@ -79,6 +101,28 @@ def countCommitsByYear(rawFileName):
         commitCount[year] = commitCount.get(year, 0) + 1
 
     return userCommitHist, commitCount
+
+def countCommitsByMonth(rawFileName):
+    raw = openJSON(pathToJSON + rawFileName)
+    userCommitHist = {}
+    commitCount = {}
+    for commit in raw:
+        # simple fields
+        unixDate = commit["commit"]["author"]["date"].encode("utf-8")
+        commitdate = parseTimeStamp(unixDate)
+        name = commit["commit"]["author"]["name"].encode("utf-8")
+
+        actualMonth = getMonthID(commitdate)
+        if actualMonth not in userCommitHist:
+            userCommitHist[actualMonth] = {}
+
+        userCommitHist[actualMonth][name] = userCommitHist[actualMonth].get(name, 0) + 1
+        commitCount[actualMonth] = commitCount.get(actualMonth, 0) + 1
+
+    return userCommitHist, commitCount
+
+def getMonthID(dateObj):
+    return dateObj.month*10000 + dateObj.year
 
 def parseTimeStamp(unixTime):
     """
@@ -109,5 +153,7 @@ if __name__ == "__main__":
     doctest.testmod()
     print 'Overall Herfindahl Indices'
     print calculateOverall()
-    print 'Per Year'
+    print '\nPer Year'
     print calculateYear()
+    print '\nPer Month'
+    print calculateMonth()
