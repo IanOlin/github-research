@@ -56,10 +56,11 @@ def calculateMonth():
             herfindahlIndices[repo][currentMonth] = index
 
             #decrement a month
-            currentMonth -= 10000
-            if(currentMonth < 0):
-                currentMonth += 12000 # one year
-                currentMonth -= 1
+            currentMonth -= 1
+            if(currentMonth%100 == 0):
+                currentMonth-=100
+                currentMonth+=12
+
     return herfindahlIndices
 
 def getRepoID(fname):
@@ -122,7 +123,7 @@ def countCommitsByMonth(rawFileName):
     return userCommitHist, commitCount
 
 def getMonthID(dateObj):
-    return dateObj.month*10000 + dateObj.year
+    return  dateObj.year*100 + dateObj.month
 
 def parseTimeStamp(unixTime):
     """
@@ -152,8 +153,34 @@ if __name__ == "__main__":
     import doctest
     doctest.testmod()
     print 'Overall Herfindahl Indices'
-    print calculateOverall()
+    for item in sorted(calculateOverall().items()):
+        print "{:<30}\t{}".format(item[0], item[1])
+
     print '\nPer Year'
-    print calculateYear()
+    hiSortedByYear = sorted(calculateYear().items())
+    index = 0
+    sortedYears = sorted(hiSortedByYear[0][1].keys())
+    print "{:<12}".format("Year"),
+    for item in hiSortedByYear:
+        print "{:<30}".format(item[0]),
+    while(index < len(sortedYears)):
+        currYear = sortedYears[index]
+        print "\n{:<12}".format(currYear),
+        for item in hiSortedByYear:
+            print "{:<30}".format(item[1][currYear]),
+        index+=1
+    print ''
+
     print '\nPer Month'
-    print calculateMonth()
+    hiSortedByMonth = sorted(calculateMonth().items())
+    index = 0
+    sortedMonths = sorted(hiSortedByMonth[0][1].keys())
+    print "{:<12}".format("Month"),
+    for item in hiSortedByMonth:
+        print "{:<30}".format(item[0]),
+    while(index < len(sortedMonths)):
+        currMonth = sortedMonths[index]
+        print "\n{} {:<7}".format(currMonth/100, currMonth%100),
+        for item in hiSortedByMonth:
+            print "{:<30}".format(item[1][currMonth]),
+        index+=1
