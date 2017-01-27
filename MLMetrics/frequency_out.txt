@@ -17,10 +17,192 @@ tensorflow-tensorflow:  5708
 torch7-torch7:  221
 
 Top 25 contributors for each repo:
-CNTK-Microsoft:  [('Yongqiang Wang', 45), ('Yinggong ZHAO', 45), ('REDMOND\\sayanpa', 55), ('erw', 70), ('Cha Zhang', 77), ('Emad Barsoum', 93), ('Alexey Kamenev', 105), ('Alexey Orlov', 110), ('frankseide', 114), ('KeDengMS', 119), ('bmitra', 119), ('Yu', 120), ('Clemens Marschner', 149), ('Zhou Wang', 150), ('Nikos Karampatziakis', 158), ('Ivan Rodriguez', 183), ('Amit Agarwal', 225), ('Dong Yu', 240), ('kaisheny', 255), ('Thilo Will', 263), ('William Darling', 350), ('Project Philly', 394), ('jeanfad', 522), ('Willi Richert', 734), ('Frank Seide', 1141)]
-Theano-Theano:  [('desjagui@atchoum.iro.umontreal.ca', 64), ('Nicolas Ballas', 68), ('Amjad Almahairi', 72), ('David Warde-Farley', 74), ('Pierre Luc Carrier', 78), ('Eric Larsen', 87), ('Joseph Turian', 104), ('Nicolas Bouchard', 106), ('abalkin', 109), ('Hengjean', 111), ('slefrancois', 112), ('Tanjay94', 118), ('lamblin', 122), ('Frederic Bastien', 123), ('sentient07', 138), ('bergstrj@iro.umontreal.ca', 140), ('ChienliMa', 149), ('abergeron', 170), ('carriepl', 188), ('--global', 234), ('Pascal Lamblin', 279), ('Fr\xc3\xa9d\xc3\xa9ric Bastien', 315), ('Iban Harlouchet', 372), ('Arnaud Bergeron', 559), ('Frederic', 757)]
-caffe-BLVC:  [('Rob Hess', 8), ('Tea', 8), ('bhack', 8), ('T.E.A de Souza', 9), ('Anatoly Baksheev', 9), ('Cyprien Noel', 9), ('longjon', 10), ('Takuya Narihira', 11), ('Sergio Guadarrama', 11), ('James Thewlis', 12), ('Ross Girshick', 14), ('sguada', 16), ('linmin', 16), ('Adam Kosiorek', 17), ('Felix Abecassis', 18), ('philkr', 18), ('Luke Yeager', 21), ('Kevin James Matzen', 27), ('qipeng', 42), ('Jon Long', 44), ('Jonathan L Long', 68), ('Ronghang Hu', 76), ('Sergio', 82), ('Jeff Donahue', 165), ('Evan Shelhamer', 266)]
-deeplearning4j-deeplearning4j:  [('mossaab0', 11), ('raver119', 11), ('DH', 11), ('turambar', 12), ('lewuathe', 12), ('Benjamin', 13), ('Ayman Elkfrawy', 19), ('Carsten Schnober', 19), ('raver119@gmail.com', 25), ('raver', 28), ('sonaliii', 30), ('ejunprung', 32), ('Suneel Marthi', 37), ('Justin Long', 38), ('MJK', 46), ('Josh Patterson', 47), ('Melanie Warrick', 81), ('jyt109', 82), ('Samuel Audet', 85), ('fartovii', 89), ('Eron Wright', 132), ('agibsonccc', 158), ('Alex Black', 337), ('nyghtowl', 343), ('Adam Gibson', 852)]
-incubator-systemml:  [('Pei-Yu Wang', 9), ('Berthold Reinwald', 9), ('Arvind Surve', 12), ('Alok Singh', 12), ('Tian Zhang', 12), ('Nakul Jindal', 14), ('AMOL N. GHOTING', 14), ('NARINE KOKHLIKYAN', 17), ('Deepak Kumar', 17), ('frreiss', 18), ('imcbbld', 18), ('mboehm7', 20), ('Glenn Weidner', 20), ('HAOJUN WANG', 25), ('shirisht', 25), ('Mario E. Inchiosa', 26), ('Luciano Resende', 35), ('Niketan Pansare', 38), ('Deron Eriksson', 42), ('FREDERICK R. REISS', 47), ('SHIRISH TATIKONDA', 62), ('Faraz Makari Manshadi', 77), ('NIKETAN PANSARE', 95), ('Matthias Boehm', 213), ('MATTHIAS BOEHM', 563)]
-tensorflow-tensorflow:  [('A. Unique TensorFlower', 46), ('terrytangyuan', 49), ('Daniel W Mane', 50), ('Suharsh Sivakumar', 52), ('Sukriti Ramesh', 56), ('Asim Shankar', 59), ('Rohan Jain', 61), ('Patrick Nguyen', 62), ('Nikhil Thorat', 66), ('Jonathan Hseu', 69), ('Yifei Feng', 78), ('Charles Nicholson', 81), ('caisq', 81), ('Mustafa Ispir', 83), ('Yuan Yu', 90), ('gunan', 95), ('Pete Warden', 99), ('Vijay Vasudevan', 119), ('Gunhan Gulsoy', 119), ('Zongheng Yang', 120), ('Geoffrey Irving', 134), ('Dan Man\xc3\xa9', 162), ('Illia Polosukhin', 183), ('Eugene Brevdo', 198), ('Shanqing Cai', 249)]
-torch7-torch7:  [('Jeff Rose', 3), ('Julien Cornebise', 4), ('Taewoo Lee', 4), ('Srinivasan Sriram', 4), ('liboyue', 4), ('Andreas Fidjeland', 4), ('\xc3\x89lie Michel', 4), ('Thomas K\xc3\xb6ppe', 5), ('GeorgOstrovski', 6), ('Tim Harley', 6), ('Rui Guo', 7), ('C\xc3\xa9dric Deltheil', 7), ('Sam Gross', 7), ('Hugh Perkins', 7), ('Adam Lerer', 8), ('Leon Bottou', 9), ('ztaylor', 10), ('Julien', 11), ('Georg Ostrovski', 12), ('Yori Zwols', 12), ('Ronan Collobert', 13), ('koray kavukcuoglu', 15), ('Clement Farabet', 15), ('Dominik Grewe', 22), ('Soumith Chintala', 183)]
+
+CNTK-Microsoft:
+'Yongqiang Wang', 45
+'Yinggong ZHAO', 45
+'REDMOND\\sayanpa', 55
+'erw', 70
+'Cha Zhang', 77
+'Emad Barsoum', 93
+'Alexey Kamenev', 105
+'Alexey Orlov', 110
+'frankseide', 114
+'KeDengMS', 119
+'bmitra', 119
+'Yu', 120
+'Clemens Marschner', 149
+'Zhou Wang', 150
+'Nikos Karampatziakis', 158
+'Ivan Rodriguez', 183
+'Amit Agarwal', 225
+'Dong Yu', 240
+'kaisheny', 255
+'Thilo Will', 263
+'William Darling', 350
+'Project Philly', 394
+'jeanfad', 522
+'Willi Richert', 734
+'Frank Seide', 1141
+
+Theano-Theano: 
+'desjagui@atchoum.iro.umontreal.ca', 64
+'Nicolas Ballas', 68
+'Amjad Almahairi', 72
+'David Warde-Farley', 74
+'Pierre Luc Carrier', 78
+'Eric Larsen', 87
+'Joseph Turian', 104
+'Nicolas Bouchard', 106
+'abalkin', 109
+'Hengjean', 111
+'slefrancois', 112
+'Tanjay94', 118
+'lamblin', 122
+'Frederic Bastien', 123
+'sentient07', 138
+'bergstrj@iro.umontreal.ca', 140
+'ChienliMa', 149
+'abergeron', 170
+'carriepl', 188
+'--global', 234
+'Pascal Lamblin', 279
+'Fr\xc3\xa9d\xc3\xa9ric Bastien', 315
+'Iban Harlouchet', 372
+'Arnaud Bergeron', 559
+'Frederic', 757
+
+caffe-BLVC:  
+'Rob Hess', 8
+'Tea', 8
+'bhack', 8
+'T.E.A de Souza', 9
+'Anatoly Baksheev', 9
+'Cyprien Noel', 9
+'longjon', 10
+'Takuya Narihira', 11
+'Sergio Guadarrama', 11
+'James Thewlis', 12
+'Ross Girshick', 14
+'sguada', 16
+'linmin', 16
+'Adam Kosiorek', 17
+'Felix Abecassis', 18
+'philkr', 18
+'Luke Yeager', 21
+'Kevin James Matzen', 27
+'qipeng', 42
+'Jon Long', 44
+'Jonathan L Long', 68
+'Ronghang Hu', 76
+'Sergio', 82
+'Jeff Donahue', 165
+'Evan Shelhamer', 266
+
+deeplearning4j-deeplearning4j:
+'mossaab0', 11
+'raver119', 11
+'DH', 11
+'turambar', 12
+'lewuathe', 12
+'Benjamin', 13
+'Ayman Elkfrawy', 19
+'Carsten Schnober', 19
+'raver119@gmail.com', 25
+'raver', 28
+'sonaliii', 30
+'ejunprung', 32
+'Suneel Marthi', 37
+'Justin Long', 38
+'MJK', 46
+'Josh Patterson', 47
+'Melanie Warrick', 81
+'jyt109', 82
+'Samuel Audet', 85
+'fartovii', 89
+'Eron Wright', 132
+'agibsonccc', 158
+'Alex Black', 337
+'nyghtowl', 343
+'Adam Gibson', 852
+
+incubator-systemml: 
+'Pei-Yu Wang', 9
+'Berthold Reinwald', 9
+'Arvind Surve', 12
+'Alok Singh', 12
+'Tian Zhang', 12
+'Nakul Jindal', 14
+'AMOL N. GHOTING', 14
+'NARINE KOKHLIKYAN', 17
+'Deepak Kumar', 17
+'frreiss', 18
+'imcbbld', 18
+'mboehm7', 20
+'Glenn Weidner', 20
+'HAOJUN WANG', 25
+'shirisht', 25
+'Mario E. Inchiosa', 26
+'Luciano Resende', 35
+'Niketan Pansare', 38
+'Deron Eriksson', 42
+'FREDERICK R. REISS', 47
+'SHIRISH TATIKONDA', 62
+'Faraz Makari Manshadi', 77
+'NIKETAN PANSARE', 95
+'Matthias Boehm', 213
+'MATTHIAS BOEHM', 563
+
+tensorflow-tensorflow
+'A. Unique TensorFlower', 46
+'terrytangyuan', 49
+'Daniel W Mane', 50
+'Suharsh Sivakumar', 52
+'Sukriti Ramesh', 56
+'Asim Shankar', 59
+'Rohan Jain', 61
+'Patrick Nguyen', 62
+'Nikhil Thorat', 66
+'Jonathan Hseu', 69
+'Yifei Feng', 78
+'Charles Nicholson', 81
+'caisq', 81
+'Mustafa Ispir', 83
+'Yuan Yu', 90
+'gunan', 95
+'Pete Warden', 99
+'Vijay Vasudevan', 119
+'Gunhan Gulsoy', 119
+'Zongheng Yang', 120
+'Geoffrey Irving', 134
+'Dan Man\xc3\xa9', 162
+'Illia Polosukhin', 183
+'Eugene Brevdo', 198
+'Shanqing Cai', 249
+
+torch7-torch7: 
+'Jeff Rose', 3
+'Julien Cornebise', 4
+'Taewoo Lee', 4
+'Srinivasan Sriram', 4
+'liboyue', 4
+'Andreas Fidjeland', 4
+'\xc3\x89lie Michel', 4
+'Thomas K\xc3\xb6ppe', 5
+'GeorgOstrovski', 6
+'Tim Harley', 6
+'Rui Guo', 7
+'C\xc3\xa9dric Deltheil', 7
+'Sam Gross', 7
+'Hugh Perkins', 7
+'Adam Lerer', 8
+'Leon Bottou', 9
+'ztaylor', 10
+'Julien', 11
+'Georg Ostrovski', 12
+'Yori Zwols', 12
+'Ronan Collobert', 13
+'koray kavukcuoglu', 15
+'Clement Farabet', 15
+'Dominik Grewe', 22
+'Soumith Chintala', 183
