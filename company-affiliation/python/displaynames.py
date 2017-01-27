@@ -174,9 +174,9 @@ for name in resultingdict:
 print needslinkedIn_list
 
 
-for key in needslinkedIn_list:
-	print key
-	getLinkedInInfo(key, resultingdict[key])
+# for key in needslinkedIn_list:
+# 	print key
+# 	getLinkedInInfo(key, resultingdict[key])
 
 # if __name__ == '__main__':
 # 	pathtojsons = "/home/jwb/research/"
