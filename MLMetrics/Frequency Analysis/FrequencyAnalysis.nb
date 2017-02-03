@@ -3,10 +3,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[         0,          0]
-NotebookDataLength[    284357,       4901]
-NotebookOptionsPosition[    282360,       4824]
-NotebookOutlinePosition[    282700,       4839]
-CellTagsIndexPosition[    282657,       4836]
+NotebookDataLength[    287101,       4972]
+NotebookOptionsPosition[    284982,       4891]
+NotebookOutlinePosition[    285322,       4906]
+CellTagsIndexPosition[    285279,       4903]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -101,7 +101,7 @@ Cell[BoxData[{
       RowBox[{"(", 
        RowBox[{
         RowBox[{"Length", "[", "n", "]"}], "/", "2"}], ")"}]}]}], "]"}]}], 
-  "\n"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]"}], "\n", 
  RowBox[{
   RowBox[{
    RowBox[{"fftPlot", "[", "n_", "]"}], ":=", 
@@ -1873,12 +1873,18 @@ Cell["Stack", "Subsubsection",
 
 Cell[CellGroupData[{
 
-Cell[BoxData[
+Cell[BoxData[{
  RowBox[{"fftVis", "[", 
   RowBox[{
    RowBox[{"avgFFT", "/@", "data`bigStack"}], ",", "stackLabels"}], 
-  "]"}]], "Input",
- CellChangeTimes->{{3.694529954941779*^9, 3.694529967160966*^9}}],
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Export", "[", 
+   RowBox[{
+    RowBox[{"exportdir", "<>", "\"\<UnnormalizedStack.png\>\""}], ",", "%"}], 
+   "]"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.694529954941779*^9, 3.694529967160966*^9}, {
+   3.69453141507541*^9, 3.694531420034255*^9}, 3.694531450735623*^9}],
 
 Cell[BoxData[
  GraphicsBox[RasterBox[CompressedData["
@@ -2762,7 +2768,7 @@ P/QqHCw=
   ImageSize->{695, 368},
   PlotRange->{{0, 695}, {0, 368}}]], "Output",
  CellChangeTimes->{{3.694529956745327*^9, 3.694529967709503*^9}, 
-   3.694530798132751*^9}]
+   3.694530798132751*^9, {3.694531421679805*^9, 3.69453145129466*^9}}]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]],
@@ -2780,13 +2786,19 @@ Cell["ML", "Subsubsection",
 
 Cell[CellGroupData[{
 
-Cell[BoxData[
+Cell[BoxData[{
  RowBox[{"fftVis", "[", 
   RowBox[{
    RowBox[{"avgFFTnorm", "/@", "data`bigML"}], ",", "mlLabels"}], 
-  "]"}]], "Input",
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Export", "[", 
+   RowBox[{
+    RowBox[{"exportdir", "<>", "\"\<NormalizedML.png\>\""}], ",", "%"}], 
+   "]"}], ";"}]}], "Input",
  CellChangeTimes->{{3.694530254186322*^9, 3.694530267313496*^9}, {
-  3.6945305950501204`*^9, 3.694530595448978*^9}}],
+  3.6945305950501204`*^9, 3.694530595448978*^9}, {3.694531425924633*^9, 
+  3.694531447122987*^9}}],
 
 Cell[BoxData[
  GraphicsBox[RasterBox[CompressedData["
@@ -3698,7 +3710,8 @@ YAqsawkAAACmQFoAAAAAUyAzAAAAgCmQGQAAAAAAAAAAAAAAmrL/B3R0lsQ=
    ColorFunction->RGBColor],
   ImageSize->{700, 352},
   PlotRange->{{0, 700}, {0, 352}}]], "Output",
- CellChangeTimes->{{3.694530596066821*^9, 3.694530619980245*^9}}]
+ CellChangeTimes->{{3.694530596066821*^9, 3.694530619980245*^9}, {
+  3.694531430301914*^9, 3.69453144760371*^9}}]
 }, Open  ]]
 }, Open  ]],
 
@@ -3709,12 +3722,18 @@ Cell["Stack", "Subsubsection",
 
 Cell[CellGroupData[{
 
-Cell[BoxData[
+Cell[BoxData[{
  RowBox[{"fftVis", "[", 
   RowBox[{
    RowBox[{"avgFFTnorm", "/@", "data`bigStack"}], ",", "stackLabels"}], 
-  "]"}]], "Input",
- CellChangeTimes->{{3.694530646571169*^9, 3.69453065144739*^9}}],
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Export", "[", 
+   RowBox[{
+    RowBox[{"exportdir", "<>", "\"\<NormalizedStack.png\>\""}], ",", "%"}], 
+   "]"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.694530646571169*^9, 3.69453065144739*^9}, {
+  3.694531432457493*^9, 3.6945314433289843`*^9}}],
 
 Cell[BoxData[
  GraphicsBox[RasterBox[CompressedData["
@@ -4816,14 +4835,62 @@ AHghEgAAAIAXIgEAAAB4IRIAAAAAAAAAAAAAAP5k/g+/iz3A
    ColorFunction->RGBColor],
   ImageSize->{695, 352},
   PlotRange->{{0, 695}, {0, 352}}]], "Output",
- CellChangeTimes->{3.694530652305027*^9}]
+ CellChangeTimes->{
+  3.694530652305027*^9, {3.694531440367529*^9, 3.6945314441675177`*^9}}]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Histogram Function", "Section",
+ CellChangeTimes->{{3.695135923927347*^9, 3.695135924771071*^9}, {
+  3.695136954023676*^9, 3.695136958571477*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"Export", "[", 
+     RowBox[{
+      RowBox[{"exportdir", "<>", "\"\<Histograms/\>\"", "<>", 
+       RowBox[{"mlLabels", "[", 
+        RowBox[{"[", "n", "]"}], "]"}], "<>", "\"\<Histogram.png\>\""}], ",", 
+      
+      RowBox[{"Histogram", "[", 
+       RowBox[{
+        RowBox[{"Map", "[", 
+         RowBox[{"Total", ",", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"data`bigML", "[", 
+             RowBox[{"[", "n", "]"}], "]"}], "[", 
+            RowBox[{"[", 
+             RowBox[{"2", ";;"}], "]"}], "]"}], "[", 
+           RowBox[{"[", 
+            RowBox[{"All", ",", 
+             RowBox[{"2", ";;"}]}], "]"}], "]"}]}], "]"}], ",", 
+        RowBox[{"AxesLabel", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{"\"\<People\>\"", ",", "\"\<Commits\>\""}], "}"}]}], ",", 
+        RowBox[{"PlotLabel", "\[Rule]", 
+         RowBox[{"mlLabels", "[", 
+          RowBox[{"[", "n", "]"}], "]"}]}], ",", 
+        RowBox[{"ImageSize", "\[Rule]", "Large"}], ",", 
+        RowBox[{"LabelStyle", "\[Rule]", 
+         RowBox[{"Directive", "[", "Bold", "]"}]}]}], "]"}]}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"n", ",", "7"}], "}"}]}], "]"}], ";"}]], "Input",
+ CellChangeTimes->{{3.695135964745391*^9, 3.695136152946941*^9}, {
+  3.6951362173630047`*^9, 3.695136235145452*^9}, {3.695136280397328*^9, 
+  3.6951363123135157`*^9}, {3.695136409504456*^9, 3.695136441071148*^9}, {
+  3.695136527502717*^9, 3.695136689059951*^9}, {3.6951367477632103`*^9, 
+  3.695136756545443*^9}, {3.695136789583314*^9, 3.6951369293576927`*^9}}]
 }, Open  ]]
 },
 WindowSize->{808, 911},
-WindowMargins->{{556, Automatic}, {48, Automatic}},
+WindowMargins->{{556, Automatic}, {11, Automatic}},
 FrontEndVersion->"11.0 for Linux x86 (64-bit) (September 21, 2016)",
 StyleDefinitions->"Default.nb"
 ]
@@ -4840,7 +4907,7 @@ CellTagsIndex->{}
 Notebook[{
 Cell[CellGroupData[{
 Cell[422, 15, 91, 1, 65, "Section"],
-Cell[516, 18, 584, 17, 137, "Input"],
+Cell[516, 18, 584, 17, 80, "Input"],
 Cell[1103, 37, 358, 8, 100, "Input"],
 Cell[1464, 47, 1401, 36, 148, "Input"]
 }, Open  ]],
@@ -4867,34 +4934,38 @@ Cell[CellGroupData[{
 Cell[42776, 831, 95, 1, 35, "Subsubsection"],
 Cell[CellGroupData[{
 Cell[42896, 836, 612, 14, 57, "Input"],
-Cell[43511, 852, 61557, 1012, 414, "Output"]
+Cell[43511, 852, 61557, 1012, 381, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
 Cell[105117, 1870, 98, 1, 35, "Subsubsection"],
 Cell[CellGroupData[{
-Cell[105240, 1875, 203, 5, 34, "Input"],
-Cell[105446, 1882, 53610, 882, 383, "Output"]
+Cell[105240, 1875, 444, 11, 57, "Input"],
+Cell[105687, 1888, 53655, 882, 383, "Output"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[159117, 2771, 169, 2, 45, "Subsection"],
+Cell[159403, 2777, 169, 2, 45, "Subsection"],
 Cell[CellGroupData[{
-Cell[159311, 2777, 95, 1, 35, "Subsubsection"],
+Cell[159597, 2783, 95, 1, 35, "Subsubsection"],
 Cell[CellGroupData[{
-Cell[159431, 2782, 252, 6, 34, "Input"],
-Cell[159686, 2790, 55345, 910, 367, "Output"]
+Cell[159717, 2788, 466, 12, 57, "Input"],
+Cell[160186, 2802, 55393, 911, 367, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[215080, 3706, 92, 1, 35, "Subsubsection"],
+Cell[215628, 3719, 92, 1, 35, "Subsubsection"],
 Cell[CellGroupData[{
-Cell[215197, 3711, 206, 5, 34, "Input"],
-Cell[215406, 3718, 66902, 1100, 367, "Output"]
+Cell[215745, 3724, 425, 11, 57, "Input"],
+Cell[216173, 3737, 66953, 1101, 367, "Output"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[283199, 4846, 152, 2, 65, "Section"],
+Cell[283354, 4850, 1612, 38, 103, "Input"]
 }, Open  ]]
 }
 ]
