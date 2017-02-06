@@ -1,8 +1,9 @@
 import json
 import requests
+import os
 
 #grab api keys -- there are multiple, each key on a line
-keyfile = open('keyfile.txt')
+keyfile = open(os.path.join(os.path.dirname(__file__), 'keyfile.txt'))
 KEY_LIST = keyfile.readlines()
 for k in range(len(KEY_LIST)):
     KEY_LIST[k] = KEY_LIST[k].strip()
@@ -11,7 +12,7 @@ print KEY
 keyfile.close()
 indexOfFirstKey = None #necessary for remembering whether or not we've already checked the number of calls for a key, later
 
-#no idea if this is right, complete shot in the dark. the only one that should 
+#no idea if this is right, complete shot in the dark. the only one that should
 #matter is 200
 STATUS_CODES_SUCCESSFUL = set([200])
 
@@ -30,7 +31,7 @@ def api_get(baseURL, parameters = {}, minAPICallsNeeded=1):
             else:
                 parameters['access_token'] = KEY
                 intendedResponse = requests.get(baseURL, params=parameters)
-                return intendedResponse                
+                return intendedResponse
 
         except requests.exceptions.ConnectionError:
             print 'ConnectionError, trying again'
@@ -114,10 +115,10 @@ def get_more_calls():
             KEY = KEY_LIST[currIndex]
             print 'KEYSWITCH '+str(KEY)
         else:
-            print 'waiting', 
+            print 'waiting',
             sys.stdout.flush() #write to stdout immediately
             #sleep for the suggested amount of time
             time_sec = int(JSON_access(responseJSON, ('resources', 'core', 'reset')))
             time.sleep(abs(time_sec+5-int(time.time())))
-            print 'done waiting', 
+            print 'done waiting',
             sys.stdout.flush()

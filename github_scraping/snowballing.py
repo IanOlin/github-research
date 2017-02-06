@@ -117,7 +117,7 @@ fileset = set(mlFileNames)
 for repo in projects.keys():
     if repo not in fileset:
         usefulConributors = get_actual_contributors(repo)
-        
+
         for person in usefulConributors:
             matrix[projects[repo]][allContributors[person]] = 1
 

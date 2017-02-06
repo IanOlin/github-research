@@ -1,7 +1,9 @@
 import json
-import os
+import sys, os
+sys.path.insert(0, os.path.abspath(os.path.join('..', '..')))
+from github_scraping.get_pull_requests import is_merged_systemml
 
-directory = '../../github-scraping/mlpulls/'
+directory = '../../github_scraping/mlpulls/'
 # /home/serena/GithubResearch/github-research/github-scraping/mlpulls/CNTK_pulls.json
 
 # hard copied from repo_info
@@ -12,6 +14,7 @@ mlRepos = {'Theano' : 'Theano',
     'torch7' : 'torch',
     'deeplearning4j': 'deeplearning4j',
     'incubator-systemml' : 'apache'}
+systemml_name = 'incubator-systemml'
 
 """
 Metrics overall
@@ -29,6 +32,9 @@ for repo, owner in mlRepos.items():
         merged_at = p["merged_at"]
         closed_at = p["closed_at"]
         username = p["user"]["login"]
+        if closed_at != None and repo == systemml_name:
+            merged_at = 1 if is_merged_systemml(p) else None
+
         if merged_at != None:
             merged += 1
             merged_users[username] = merged_users.get(username, 0) + 1
