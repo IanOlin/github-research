@@ -1,8 +1,7 @@
 """
-With a given list of repos, has methods to extract the list of collaborators, contributors, or forks
+Methods to get certain kinds of data from the Github API.
 Writes each repo's data to a separate file in a given directory
 """
-import pattern.web
 import json
 import os
 from mimetools import Message
@@ -11,7 +10,7 @@ from github_util import *
 import time
 import sys
 
-##### 
+#####
 # CONSTANTS
 #####
 
@@ -19,16 +18,16 @@ import sys
 mlRepos = {'Theano' : 'Theano',
     'caffe' : 'BVLC',
     'CNTK' : 'Microsoft',
-    'tensorflow' : 'tensorflow', 
-    'torch7' : 'torch', 
+    'tensorflow' : 'tensorflow',
+    'torch7' : 'torch',
     'deeplearning4j': 'deeplearning4j',
     'incubator-systemml' : 'apache'}
-stackRepos = {'cinder' : 'openstack', 
-    'glance' : 'openstack', 
-    'horizon' : 'openstack', 
-    'keystone' : 'openstack', 
-    'nova' : 'openstack', 
-    'neutron' : 'openstack', 
+stackRepos = {'cinder' : 'openstack',
+    'glance' : 'openstack',
+    'horizon' : 'openstack',
+    'keystone' : 'openstack',
+    'nova' : 'openstack',
+    'neutron' : 'openstack',
     'swift' : 'openstack',
     'cloudstack' : 'apache'}
 
@@ -81,10 +80,10 @@ def get_repos(users, forks=False):
             except:
                 error_dump("{}\n{}\n{}".format(response, URLstr, response.text))
                 raise e
-                
+
             for repo in repo_data:
                 #get name of the repo
-                repoName = JSON_access(repo, ('name',))           
+                repoName = JSON_access(repo, ('name',))
                 #split forks and non-forks, if necessary
                 isFork = JSON_access(repo, ('fork',))
                 if forks and isFork:
@@ -96,13 +95,13 @@ def get_repos(users, forks=False):
             all_repos[u] = (repos,forked)
         else:
             all_repos[u] = repos
-    
+
     return all_repos
 
 """
 list of repos with the format (reponame, ownername)
 """
-def repoPeople(repos,group=CONTRIBUTORS,dirName=None):
+def repoPeople(repos,group=CONTRIBUTORS):
     all_repos = {}
     for collabs in repos:
         people = []
@@ -132,8 +131,33 @@ def repoPeople(repos,group=CONTRIBUTORS,dirName=None):
                     people.append(username)
 
         all_repos[collabs] = people
-    
+
     return all_repos
+
+"""
+Gets all the pull requests for a repo
+"""
+def get_pulls(repo_name, repo_owner):
+    URLstr = "https://api.github.com/repos/{}/{}/pulls".format(repo_owner, repo_name)
+    page = 1
+    pulls = []
+    while page>0:
+        response = api_get(baseURL=URLstr, parameters={'page':page, 'per_page':100, "state":"all"})
+        if not is_successful_response(response):
+            print "{}\n{}\n{}\n".format(URLstr, response.status_code, response.text)
+            break
+        if has_next_page(response):
+            page += 1
+        else:
+            page = -1
+        try:
+            responsePage = json.loads(response.text)
+        except:
+            error_dump("{}\n{}\n{}".format(response, URLstr, response.text))
+            raise e
+        pulls.extend(responsePage)
+    return pulls
+
 
 """
 check if a repo is forked, and if so, return the parent repo in a tuple (reponame, ownername)
@@ -199,4 +223,7 @@ if __name__=='__main__':
     repos = get_repos(("sindresorhus", )) #guy's got a lot of repos
     print len(repos["sindresorhus"]) #over 700
     print len(get_all_commits('CNTK', 'Microsoft')) #check on github for actual number; as of 9/22/16 7899
+    ai_pulls = get_pulls("ToolBox-AI", "sd16fall")
+    print len(ai_pulls) #4
+    # print ai_pulls[0]
     pass
