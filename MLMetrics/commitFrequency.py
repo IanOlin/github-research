@@ -175,7 +175,7 @@ if __name__ == "__main__":
 	print "tensorflow-tensorflow: ", avgcommitperyear('tensorflow')
 	print "torch7-torch7: ", avgcommitperyear('torch7')
 	print ""
-	print "Top contributors for each repo"
+	print "Top 25 contributors for each repo"
 	print "CNTK-Microsoft: ", findTop10Contributors('CNTK')
 	print "Theano-Theano: ", findTop10Contributors('theano')
 	print "caffe-BLVC: ", findTop10Contributors('caffe')
