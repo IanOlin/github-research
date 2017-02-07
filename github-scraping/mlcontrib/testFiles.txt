@@ -1,2 +1,0 @@
-CNTKcontributors.txt
-Theanocontributors.txt
