@@ -1,3 +1,5 @@
+# This Python file uses the following encoding: utf-8
+import os, sys
 # So... I already got the names of all the committers
 # Next, find out if they work in that company
 	# If they currently do, then flag that person as a 2
@@ -13,7 +15,7 @@ from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
 from datetime import datetime, time
-from pattern.web import * 
+from pattern.web import *
 from pattern.web import URL, extension, download
 from sets import Set
 import json
@@ -34,7 +36,7 @@ def obtainDatesShasNames(filename):
 	names = []
 	dates = []
 	companies = []
-	for c in commits: 
+	for c in commits:
 		#TODO:
 		#store dates in dates
 		dates.append(c["commit"]["author"]["date"].encode("utf-8"))
@@ -55,7 +57,7 @@ def simplifyNameList(comprehensiveNameList):
 	newNameSet = Set()
 	for name in comprehensiveNameList:
 		newNameSet.add(name)
-	return newNameSet
+	return list(newNameSet)
 """
 Gets the number of commits this person has for this particular project
 """
@@ -67,7 +69,7 @@ def findNumCommits(name, companyfile):
 			numcommits += 1
 	return numcommits
 
-""" 
+"""
 eliminate Jenkins, OpenStack Proposal Bot, and Openstack Jenkins
 """
 def filterLists(dates, shas, names):
@@ -79,6 +81,7 @@ def filterLists(dates, shas, names):
 			del shas[index_location]
 			del dates[index_location]
 
+# Find this person's work history if it's saved. If not, save it to a file called "pending"
 def findHistory(name):
 	global pending
 	personalHistory = []
@@ -90,6 +93,8 @@ def findHistory(name):
 			fileOpener += PATHtoLinkedInJSONs+'{}{}{}_linkedin.json'.format(readablename[0], readablename[1], readablename[2])
 		elif len(readablename) == 2:
 			fileOpener += PATHtoLinkedInJSONs+'{}{}_linkedin.json'.format(readablename[0], readablename[1])
+		elif len(readablename) == 1:
+			fileOpener += PATHtoLinkedInJSONs+'{}_linkedin.json'.format(readablename[0])
 		with open(fileOpener) as data_file:
 			data = json.load(data_file)
 			if len(data) == 0: #if we don't have data on this person
@@ -113,8 +118,10 @@ def frequentcommitters(companyfile):
 	uniquenames = simplifyNameList(names)
 	frequentcommitters = []
 	# print "the committers:"
-	for name in uniquenames:
-		# print name
+	print "going through {}'s committers. progress: \n".format(companyfile)
+	for name_index in range(len(uniquenames)):
+		name = uniquenames[name_index]
+		print name_index + 1, "out of ", len(uniquenames), " total committers"
 		if (findNumCommits(name, companyfile) > 2):
 			frequentcommitters.append(name)
 	return frequentcommitters
@@ -155,9 +162,8 @@ def getLinkedInInfo(name, url):
 
 #Given company & work history, look for the word "Tensorflow", or "Google" for the tensorflow project
 #Look for "CNTK" or "Microsoft" for the CNTK project
-def findNumEmployees(project):
+def findNumEmployees(project, committers):
 	numEmployees = 0
-	committers = frequentcommitters(project)
 	company = ""
 	if (project == "/home/anne/ResearchJSONs/tensorflow-tensorflow-commits.json"):
 		company += "Google"
@@ -166,17 +172,21 @@ def findNumEmployees(project):
 	elif (project == "/home/anne/ResearchJSONs/deeplearning4j-deeplearning4j-commits.json"):
 		company += "Skymind"
 	elif (project == "/home/anne/ResearchJSONs/Theano-Theano-commits.json"):
-		company += "Montreal"
+		company += "Montr"
 	elif (project == "/home/anne/ResearchJSONs/caffe-BVLC-commits.json"):
 		company += "Berkeley"
-	
+
 	#looping through frequentcommitters to see if this person has worked at the company
-	for name in committers:
+	for name_index in range(len(committers)):
+		name = committers[name_index] 
+		# print name
+		print name_index, " out of ", len(committers), "frequent committers"
 		try:
 			personalHistory = findHistory(name) #pulls up the personal work history of this person
 			for alist_index in range(len(personalHistory)):
 				currentCompany = personalHistory[alist_index] #a list in the form of [company, dates]
 				if (company in currentCompany[0]):
+					# print " worked at Montreal"
 					numEmployees += 1
 					alist_index += 1
 		except IOError, Argument:
@@ -188,17 +198,15 @@ def findNumEmployees(project):
 	return numEmployees
 
 if __name__ == '__main__':
-	companyfile = "/home/anne/ResearchJSONs/" + "caffe-BVLC-commits.json" # + "filename"
-	print "Caffe, Berkeley: ", findNumEmployees("/home/anne/ResearchJSONs/" + "caffe-BVLC-commits.json")
-	print "Tensorflow, Google: ", findNumEmployees("/home/anne/ResearchJSONs/" + "tensorflow-tensorflow-commits.json")
-	print "CNTK-Microsoft: ", findNumEmployees("/home/anne/ResearchJSONs/" + "CNTK-Microsoft-commits.json")
-	print "Theano, Montreal: ", findNumEmployees("/home/anne/ResearchJSONs/" + "Theano-Theano-commits.json")
-	print "deeplearning4j, Skymind: ", findNumEmployees("/home/anne/ResearchJSONs/" + "deeplearning4j-deeplearning4j-commits.json")
-	# pendinglist = {u'Lukasz Kaiser': "https://www.linkedin.com/in/lukaszkaiser", u'A. Rosenberg Johansen': "https://www.linkedin.com/in/alexander-rosenberg-johansen/en", u'SeongJae Park': "https://kr.linkedin.com/in/seongjae-park-1a5b9954", u'Manjunath Kudlur': "https://www.linkedin.com/in/keveman", u'Sung Kim': "https://hk.linkedin.com/in/hunkim", u'Di Zeng': "https://www.linkedin.com/in/dizeng", u'Zakaria Haque': "https://www.linkedin.com/in/zakariahaque", u'Igor Babuschkin': "https://uk.linkedin.com/in/igor-babuschkin-9bb5bab6", u'Noah Fiedel': "https://www.linkedin.com/in/noahfiedel", u'Alexander Rosenberg Johansen': "https://www.linkedin.com/in/alexander-rosenberg-johansen/en", u'Yuan (Terry) Tang': "https://www.linkedin.com/in/yuan-terry-tang-117ba962", u'Andrew Selle': "https://www.linkedin.com/in/andrew-selle-849a6b3", u'Craig Citro': "https://www.linkedin.com/in/craig-citro-54822651", u'luke iwanski': "https://uk.linkedin.com/in/lukeiwanski", u'Vinu Rajashekhar': "https://www.linkedin.com/in/vinu-rajashekhar-61377341", u'Ali Elqursh': "https://www.linkedin.com/in/ali-elqursh-57909324", u'Sergio Guadarrama': "https://www.linkedin.com/in/sergio-guadarrama-1724379", u'Martin Wicke': "https://www.linkedin.com/in/martin-wicke-a7b70514", u'Robert DiPietro': "https://www.linkedin.com/in/robert-dipietro-6910565a", u'Liangliang He': "https://www.linkedin.com/in/lianglianghe", u'Sukriti Ramesh': "https://www.linkedin.com/in/sukritiramesh", u'Vijay Vasudevan': "https://www.linkedin.com/in/vijay-vasudevan-a5062434", u'Martin Englund': "https://www.linkedin.com/in/pmenglund", u'Nikhil Thorat': "https://www.linkedin.com/in/nikhil-thorat-58a18232", u'Shanqing Cai': "https://www.linkedin.com/in/shanqingcai"}
-	# for name in pendinglist:
+	# frequentcommitterslist = frequentcommitters(companyfile)
+	# theanocommitterprofiles = {u'Alexandre de Brebisson': "https://ca.linkedin.com/in/adbrebs/en", u'Bryn Keller': "https://www.linkedin.com/in/bryn-keller-bb77493", u'Yann N. Dauphin': "https://www.linkedin.com/in/yann-n-dauphin-5267a58", u'Razvan Pascanu': "https://uk.linkedin.com/in/razvan-pascanu-67abb215", u'Sander Dieleman': "https://uk.linkedin.com/in/sanderdieleman", u'Roy Xue': "https://www.linkedin.com/in/royxue", u'Xavier Bouthillier': "https://ca.linkedin.com/in/bouthilx", u'James Bergstra': "https://ca.linkedin.com/in/james-bergstra-64a7b15", u'medakk': "https://in.linkedin.com/in/karthik-karanth", u'Gokula Krishnan': "https://ch.linkedin.com/in/sgokula"}
+	# for name in theanocommitterprofiles:
 	# 	print name
-	# 	url = pendinglist[name]
-	# 	getLinkedInInfo(name, url)
-	# for name in frequentcommitterslist:
-	# 	print findHistory(name)
-	# print pending
+	# 	getLinkedInInfo(name, theanocommitterprofiles[name])
+
+	companyfile = "/home/anne/ResearchJSONs/" + "deeplearning4j-deeplearning4j-commits.json" # + "filename"
+	committers = frequentcommitters(companyfile)
+	print "deeplearning4j, Skymind: ", findNumEmployees(companyfile, committers)
+	print "list of people who still need linkedins: \n", pending
+	print "# of people I can't get linkedins for: \n ", len(pending)
+	# print "Number of people who still need linkedin profiles: ", len(pending)
