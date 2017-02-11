@@ -1,11 +1,5 @@
 # This Python file uses the following encoding: utf-8
 import os, sys
-# So... I already got the names of all the committers
-# Next, find out if they work in that company
-	# If they currently do, then flag that person as a 2
-	# If they used to but currently don't, then flag him/her as a 1
-	# If they haven't worked there at all, then flag him/her as a 0
-# Tally up all the 2s, 1s, and 0s and print them out
 
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 firefox_capabilities = DesiredCapabilities.FIREFOX
@@ -95,6 +89,8 @@ def findHistory(name):
 			fileOpener += PATHtoLinkedInJSONs+'{}{}_linkedin.json'.format(readablename[0], readablename[1])
 		elif len(readablename) == 1:
 			fileOpener += PATHtoLinkedInJSONs+'{}_linkedin.json'.format(readablename[0])
+		elif len(readablename) == 4:
+			fileOpener += PATHtoLinkedInJSONs+'{}_linkedin.json'.format(readablename[0], readablename[1], readablename[2], readablename[3])
 		with open(fileOpener) as data_file:
 			data = json.load(data_file)
 			if len(data) == 0: #if we don't have data on this person
@@ -150,12 +146,16 @@ def getLinkedInInfo(name, url):
 	driver.quit()
 	time.sleep(2)
 	readablename = name.encode("utf-8").split(" ")
+	fileOpener = ""
 	if (len(readablename) == 1):
-		f = open(PATHtoLinkedInJSONs + '{}_linkedin.json'.format(readablename[0]), 'w')
-	if (len(readablename) == 2):
-		f = open(PATHtoLinkedInJSONs + '{}{}_linkedin.json'.format(readablename[0], readablename[1]), 'w')
-	if (len(readablename) == 3):
-		f = open(PATHtoLinkedInJSONs + '{}{}{}_linkedin.json'.format(readablename[0], readablename[1], readablename[2]), 'w')
+		fileOpener += PATHtoLinkedInJSONs + '{}_linkedin.json'.format(readablename[0])
+	elif (len(readablename) == 2):
+		fileOpener += PATHtoLinkedInJSONs + '{}{}_linkedin.json'.format(readablename[0], readablename[1])
+	elif (len(readablename) == 3):
+		fileOpener += PATHtoLinkedInJSONs + '{}{}{}_linkedin.json'.format(readablename[0], readablename[1], readablename[2])
+	elif (len(readablename) == 4):
+		fileOpener += PATHtoLinkedInJSONs + '{}{}{}_linkedin.json'.format(readablename[0], readablename[1], readablename[2], readablename[3])
+	f = open(fileOpener, 'w')
 	json.dump(orgsAndCompanies, f)
 	f.close()
 	return name + str(orgsAndCompanies)
@@ -164,6 +164,7 @@ def getLinkedInInfo(name, url):
 #Look for "CNTK" or "Microsoft" for the CNTK project
 def findNumEmployees(project, committers):
 	numEmployees = 0
+	employeeList = []
 	company = ""
 	if (project == "/home/anne/ResearchJSONs/tensorflow-tensorflow-commits.json"):
 		company += "Google"
@@ -186,7 +187,7 @@ def findNumEmployees(project, committers):
 			for alist_index in range(len(personalHistory)):
 				currentCompany = personalHistory[alist_index] #a list in the form of [company, dates]
 				if (company in currentCompany[0]):
-					# print " worked at Montreal"
+					employeeList.append(name)
 					numEmployees += 1
 					alist_index += 1
 		except IOError, Argument:
@@ -195,18 +196,22 @@ def findNumEmployees(project, committers):
 		except UnicodeEncodeError, Argument:
 			pending.append(name)
 			# print "we can't decode this name", Argument
-	return numEmployees
+	return employeeList, numEmployees
 
 if __name__ == '__main__':
 	# frequentcommitterslist = frequentcommitters(companyfile)
-	# theanocommitterprofiles = {u'Alexandre de Brebisson': "https://ca.linkedin.com/in/adbrebs/en", u'Bryn Keller': "https://www.linkedin.com/in/bryn-keller-bb77493", u'Yann N. Dauphin': "https://www.linkedin.com/in/yann-n-dauphin-5267a58", u'Razvan Pascanu': "https://uk.linkedin.com/in/razvan-pascanu-67abb215", u'Sander Dieleman': "https://uk.linkedin.com/in/sanderdieleman", u'Roy Xue': "https://www.linkedin.com/in/royxue", u'Xavier Bouthillier': "https://ca.linkedin.com/in/bouthilx", u'James Bergstra': "https://ca.linkedin.com/in/james-bergstra-64a7b15", u'medakk': "https://in.linkedin.com/in/karthik-karanth", u'Gokula Krishnan': "https://ch.linkedin.com/in/sgokula"}
-	# for name in theanocommitterprofiles:
-	# 	print name
-	# 	getLinkedInInfo(name, theanocommitterprofiles[name])
+	
+	committerprofiles = {u'Diogo Moitinho de Almeida': "https://www.linkedin.com/in/diogomda", u'David Warde-Farley': "https://uk.linkedin.com/in/david-warde-farley-55a0825", u'Matthew Willson': "https://uk.linkedin.com/in/matthew-willson-6a1b422"}
+	for name in committerprofiles:
+		print name
+		getLinkedInInfo(name, committerprofiles[name])
 
-	companyfile = "/home/anne/ResearchJSONs/" + "deeplearning4j-deeplearning4j-commits.json" # + "filename"
+	companyfile = "/home/anne/ResearchJSONs/" + "Theano-Theano-commits.json" # + "filename"
 	committers = frequentcommitters(companyfile)
-	print "deeplearning4j, Skymind: ", findNumEmployees(companyfile, committers)
+	(employeeList, numEmployees) = findNumEmployees(companyfile, committers)
+	print "number of employees: ", numEmployees
+	print employeeList
+
+	#For getting the people who still need linkedins
 	print "list of people who still need linkedins: \n", pending
 	print "# of people I can't get linkedins for: \n ", len(pending)
-	# print "Number of people who still need linkedin profiles: ", len(pending)
