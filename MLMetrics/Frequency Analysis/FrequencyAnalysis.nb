@@ -3,10 +3,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[         0,          0]
-NotebookDataLength[    407287,       8857]
-NotebookOptionsPosition[    404762,       8764]
-NotebookOutlinePosition[    405101,       8779]
-CellTagsIndexPosition[    405058,       8776]
+NotebookDataLength[    409453,       8908]
+NotebookOptionsPosition[    406778,       8810]
+NotebookOutlinePosition[    407115,       8825]
+CellTagsIndexPosition[    407072,       8822]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -52,8 +52,14 @@ Cell[BoxData[{
     RowBox[{
      RowBox[{"Import", "[", 
       RowBox[{"#", ",", "\"\<Data\>\""}], "]"}], "&"}], "/@", 
-    RowBox[{"FileNames", "[", 
-     RowBox[{"\"\<*.csv\>\"", ",", "mldir"}], "]"}]}]}], 
+    RowBox[{"Cases", "[", 
+     RowBox[{
+      RowBox[{"FileNames", "[", 
+       RowBox[{"\"\<*.csv\>\"", ",", "mldir"}], "]"}], ",", 
+      RowBox[{"x_", "/;", 
+       RowBox[{"!", 
+        RowBox[{"StringContainsQ", "[", 
+         RowBox[{"x", ",", "\"\<ystem\>\""}], "]"}]}]}]}], "]"}]}]}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"data`bigStack", "=", 
@@ -69,8 +75,8 @@ Cell[BoxData[{
    RowBox[{"{", 
     RowBox[{
     "\"\<Caffe\>\"", ",", "\"\<CNTK\>\"", ",", "\"\<DL4J\>\"", ",", 
-     "\"\<SystemML\>\"", ",", "\"\<TensorFlow\>\"", ",", "\"\<Theano\>\"", 
-     ",", "\"\<Torch7\>\""}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+     "\"\<TensorFlow\>\"", ",", "\"\<Theano\>\"", ",", "\"\<Torch7\>\""}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"stackLabels", "=", 
    RowBox[{"{", 
@@ -81,7 +87,22 @@ Cell[BoxData[{
   ";"}], "\[IndentingNewLine]"}], "Input",
  CellChangeTimes->{{3.694529300581102*^9, 3.6945293023498983`*^9}, {
   3.694529358786441*^9, 3.694529424068965*^9}, {3.694529770171483*^9, 
-  3.694529801518605*^9}, {3.694529896157421*^9, 3.6945298983486633`*^9}}]
+  3.694529801518605*^9}, {3.694529896157421*^9, 3.6945298983486633`*^9}, {
+  3.695837402032166*^9, 3.6958374187575607`*^9}, {3.695837476759239*^9, 
+  3.695837521808359*^9}, {3.695837564273193*^9, 3.6958376047602873`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Dimensions", "[", "data`bigML", "]"}]], "Input",
+ CellChangeTimes->{{3.695837527482923*^9, 3.695837557718103*^9}, {
+  3.695837587790256*^9, 3.695837589651969*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", "6", "}"}]], "Output",
+ CellChangeTimes->{{3.695837536064357*^9, 3.695837558145452*^9}, {
+  3.695837590052326*^9, 3.6958376082386503`*^9}}]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -8661,12 +8682,12 @@ Cell[BoxData[
     RowBox[{"Export", "[", 
      RowBox[{
       RowBox[{
-      "exportdir", "<>", "\"\<Histograms/LongForm/\>\"", "<>", 
-       "\"\<Stack/\>\"", "<>", 
-       RowBox[{"stackLabels", "[", 
-        RowBox[{"[", "n", "]"}], "]"}], "<>", "\"\<Histogram.png\>\""}], ",", 
-      "\[IndentingNewLine]", 
-      RowBox[{"ListLogPlot", "[", "\[IndentingNewLine]", 
+      "exportdir", "<>", "\"\<Histograms/LongForm/\>\"", "<>", "\"\<ML/\>\"", 
+       "<>", 
+       RowBox[{"mlLabels", "[", 
+        RowBox[{"[", "n", "]"}], "]"}], "<>", "\"\<LogLogHistogram.png\>\""}],
+       ",", "\[IndentingNewLine]", 
+      RowBox[{"ListLogLogPlot", "[", "\[IndentingNewLine]", 
        RowBox[{
         RowBox[{"Sort", "[", "\[IndentingNewLine]", 
          RowBox[{
@@ -8674,7 +8695,7 @@ Cell[BoxData[
            RowBox[{"Total", ",", 
             RowBox[{
              RowBox[{
-              RowBox[{"data`bigStack", "[", 
+              RowBox[{"data`bigML", "[", 
                RowBox[{"[", "n", "]"}], "]"}], "[", 
               RowBox[{"[", 
                RowBox[{"2", ";;"}], "]"}], "]"}], "[", 
@@ -8685,23 +8706,27 @@ Cell[BoxData[
          "\[IndentingNewLine]", "]"}], ",", 
         RowBox[{"PlotRange", "\[Rule]", "Full"}], ",", 
         RowBox[{"PlotLabel", "\[Rule]", 
-         RowBox[{"stackLabels", "[", 
+         RowBox[{"mlLabels", "[", 
           RowBox[{"[", "n", "]"}], "]"}]}], ",", 
         RowBox[{"AxesLabel", "\[Rule]", 
          RowBox[{"{", 
-          RowBox[{"\"\<Index\>\"", ",", "\"\<Number of Commits\>\""}], 
+          RowBox[{
+          "\"\<Contributor Rank\>\"", ",", "\"\<Number of Commits\>\""}], 
           "}"}]}], ",", 
-        RowBox[{"ImageSize", "\[Rule]", "Medium"}]}], "]"}]}], 
+        RowBox[{"PlotStyle", "\[Rule]", "colorMap"}], ",", 
+        RowBox[{"ImageSize", "\[Rule]", "Large"}], ",", 
+        RowBox[{"Joined", "\[Rule]", "True"}]}], "]"}]}], 
      "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", ",", 
     RowBox[{"{", 
      RowBox[{"n", ",", 
-      RowBox[{"Length", "@", "stackLabels"}]}], "}"}]}], "]"}], 
-  ";"}]], "Input",
+      RowBox[{"Length", "@", "mlLabels"}]}], "}"}]}], "]"}], ";"}]], "Input",
  CellChangeTimes->{{3.695138142457835*^9, 3.695138310408208*^9}, {
   3.69513835885472*^9, 3.695138486445696*^9}, {3.695138532049732*^9, 
   3.695138552692028*^9}, {3.695138648496377*^9, 3.695138792788179*^9}, {
   3.695138825087716*^9, 3.695138856810452*^9}, {3.6951388936759787`*^9, 
-  3.6951390064452972`*^9}}],
+  3.6951390064452972`*^9}, {3.69583733911025*^9, 3.695837346199992*^9}, {
+  3.6958376277524567`*^9, 3.69583768441877*^9}, {3.695838448243874*^9, 
+  3.695838479426655*^9}, {3.695838522583568*^9, 3.695838616895124*^9}}],
 
 Cell[BoxData[""], "Input",
  CellChangeTimes->{{3.695138414380145*^9, 3.695138415133526*^9}, {
@@ -8716,7 +8741,7 @@ Cell[BoxData[
     RowBox[{
      RowBox[{
      "exportdir", "<>", 
-      "\"\<Histograms/LongForm/Stack/FullRawHistogram.png\>\""}], ",", 
+      "\"\<Histograms/LongForm/ML/FullNormalizedHistogram.png\>\""}], ",", 
      RowBox[{"ListLogPlot", "[", 
       RowBox[{
        RowBox[{"Table", "[", "\[IndentingNewLine]", 
@@ -8727,7 +8752,7 @@ Cell[BoxData[
             RowBox[{"Total", ",", 
              RowBox[{
               RowBox[{
-               RowBox[{"data`bigStack", "[", 
+               RowBox[{"data`bigML", "[", 
                 RowBox[{"[", "n", "]"}], "]"}], "[", 
                RowBox[{"[", 
                 RowBox[{"2", ";;"}], "]"}], "]"}], "[", 
@@ -8738,32 +8763,53 @@ Cell[BoxData[
           "\[IndentingNewLine]", "]"}], ",", 
          RowBox[{"{", 
           RowBox[{"n", ",", 
-           RowBox[{"Length", "@", "stackLabels"}]}], "}"}]}], "]"}], ",", 
+           RowBox[{"Length", "@", "mlLabels"}]}], "}"}]}], "]"}], ",", 
        RowBox[{"PlotRange", "\[Rule]", "Full"}], ",", 
-       RowBox[{"PlotLegends", "\[Rule]", "stackLabels"}], ",", 
+       RowBox[{"PlotLegends", "\[Rule]", "mlLabels"}], ",", 
        RowBox[{"AxesLabel", "\[Rule]", 
         RowBox[{"{", 
-         RowBox[{"\"\<Index\>\"", ",", "\"\<Number of Commits\>\""}], "}"}]}],
-        ",", 
+         RowBox[{
+         "\"\<Contributor Rank\>\"", ",", "\"\<Number of Commits\>\""}], 
+         "}"}]}], ",", 
+       RowBox[{"PlotStyle", "\[Rule]", "colorMap"}], ",", 
        RowBox[{"ImageSize", "\[Rule]", "Large"}], ",", 
-       RowBox[{"Joined", "\[Rule]", "True"}]}], "]"}]}], "]"}], 
+       RowBox[{"Joined", "\[Rule]", "True"}], ",", 
+       RowBox[{"DataRange", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1000"}], "}"}]}]}], "]"}]}], "]"}], 
    "\[IndentingNewLine]"}]}]], "Input",
  CellChangeTimes->{{3.695139025540659*^9, 3.6951390998658323`*^9}, {
   3.695139178907909*^9, 3.695139376744162*^9}, {3.695139415178925*^9, 
-  3.695139486025041*^9}}],
+  3.695139486025041*^9}, {3.695837735021791*^9, 3.695837830378467*^9}, {
+  3.695837987984865*^9, 3.695838001652124*^9}, {3.695838040547887*^9, 
+  3.695838048695056*^9}, {3.6958381157952957`*^9, 3.695838117543272*^9}, {
+  3.695838398846405*^9, 3.69583843207614*^9}, {3.6958386219152527`*^9, 
+  3.695838666370184*^9}}],
 
 Cell[BoxData["\<\"/home/jwb/repos/github-research/MLMetrics/Frequency \
-Analysis/Histograms/LongForm/Stack/FullRawHistogram.png\"\>"], "Output",
+Analysis/Histograms/LongForm/ML/FullNormalizedHistogram.png\"\>"], "Output",
  CellChangeTimes->{
   3.695139059995963*^9, 3.695139103503468*^9, {3.695139187343053*^9, 
    3.6951392151575212`*^9}, 3.695139291018734*^9, {3.695139322381214*^9, 
    3.6951393501913977`*^9}, {3.695139420657241*^9, 3.695139443204667*^9}, {
-   3.6951394764525967`*^9, 3.6951394868873777`*^9}}]
-}, Open  ]]
+   3.6951394764525967`*^9, 3.6951394868873777`*^9}, {3.6958377610981073`*^9, 
+   3.695837831117145*^9}, 3.695838118341195*^9, {3.6958384116668587`*^9, 
+   3.695838434152287*^9}, {3.6958386433842297`*^9, 3.695838668127603*^9}}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"colorMap", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<Purple\>\"", ",", "\"\<Brown\>\"", ",", "\"\<Green\>\"", ",", 
+     "\"\<Yellow\>\"", ",", "\"\<Blue\>\"", ",", "\"\<Red\>\""}], "}"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.695838058541787*^9, 3.6958381123737288`*^9}}]
 }, Open  ]]
 },
-WindowSize->{808, 911},
-WindowMargins->{{556, Automatic}, {0, Automatic}},
+WindowSize->{960, 1016},
+WindowMargins->{{556, 404}, {-105, Automatic}},
 FrontEndVersion->"11.0 for Linux x86 (64-bit) (September 21, 2016)",
 StyleDefinitions->"Default.nb"
 ]
@@ -8782,75 +8828,80 @@ Cell[CellGroupData[{
 Cell[422, 15, 91, 1, 65, "Section"],
 Cell[516, 18, 584, 17, 80, "Input"],
 Cell[1103, 37, 358, 8, 100, "Input"],
-Cell[1464, 47, 1401, 36, 148, "Input"]
-}, Open  ]],
+Cell[1464, 47, 1729, 44, 171, "Input"],
 Cell[CellGroupData[{
-Cell[2902, 88, 96, 1, 65, "Section"],
-Cell[3001, 91, 1417, 36, 126, "Input"],
-Cell[4421, 129, 6640, 181, 1099, "Input"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[11098, 315, 210, 3, 65, "Section"],
-Cell[CellGroupData[{
-Cell[11333, 322, 997, 23, 103, "Input"],
-Cell[12333, 347, 14879, 247, 373, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[27249, 599, 357, 8, 58, "Input"],
-Cell[27609, 609, 16208, 268, 372, "Output"]
+Cell[3218, 95, 187, 3, 32, "Input"],
+Cell[3408, 100, 167, 3, 89, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[43866, 883, 143, 2, 65, "Section"],
+Cell[3624, 109, 96, 1, 65, "Section"],
+Cell[3723, 112, 1417, 36, 126, "Input"],
+Cell[5143, 150, 6640, 181, 1066, "Input"]
+}, Open  ]],
 Cell[CellGroupData[{
-Cell[44034, 889, 119, 1, 45, "Subsection"],
+Cell[11820, 336, 210, 3, 65, "Section"],
 Cell[CellGroupData[{
-Cell[44178, 894, 95, 1, 35, "Subsubsection"],
+Cell[12055, 343, 997, 23, 103, "Input"],
+Cell[13055, 368, 14879, 247, 373, "Output"]
+}, Open  ]],
 Cell[CellGroupData[{
-Cell[44298, 899, 716, 15, 57, "Input"],
-Cell[45017, 916, 53467, 879, 375, "Output"]
+Cell[27971, 620, 357, 8, 58, "Input"],
+Cell[28331, 630, 16208, 268, 372, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[98533, 1801, 98, 1, 35, "Subsubsection"],
+Cell[44588, 904, 143, 2, 65, "Section"],
 Cell[CellGroupData[{
-Cell[98656, 1806, 506, 12, 57, "Input"],
-Cell[99165, 1820, 48221, 793, 379, "Output"]
-}, Open  ]]
-}, Open  ]]
-}, Open  ]],
+Cell[44756, 910, 119, 1, 45, "Subsection"],
 Cell[CellGroupData[{
-Cell[147447, 2620, 169, 2, 45, "Subsection"],
+Cell[44900, 915, 95, 1, 35, "Subsubsection"],
 Cell[CellGroupData[{
-Cell[147641, 2626, 95, 1, 35, "Subsubsection"],
-Cell[CellGroupData[{
-Cell[147761, 2631, 522, 12, 57, "Input"],
-Cell[148286, 2645, 48695, 801, 395, "Output"]
+Cell[45020, 920, 716, 15, 57, "Input"],
+Cell[45739, 937, 53467, 879, 375, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[197030, 3452, 92, 1, 35, "Subsubsection"],
+Cell[99255, 1822, 98, 1, 35, "Subsubsection"],
 Cell[CellGroupData[{
-Cell[197147, 3457, 486, 12, 57, "Input"],
-Cell[197636, 3471, 53946, 888, 362, "Output"]
-}, Open  ]]
+Cell[99378, 1827, 506, 12, 57, "Input"],
+Cell[99887, 1841, 48221, 793, 379, "Output"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[251655, 4367, 152, 2, 65, "Section"],
+Cell[148169, 2641, 169, 2, 45, "Subsection"],
 Cell[CellGroupData[{
-Cell[251832, 4373, 1480, 34, 80, "Input"],
-Cell[253315, 4409, 146699, 4232, 2759, "Output"]
-}, Open  ]],
-Cell[400029, 8644, 69, 1, 32, "Input"],
-Cell[400101, 8647, 327, 7, 34, "Input"],
-Cell[400431, 8656, 1972, 47, 281, "Input"],
-Cell[402406, 8705, 164, 2, 32, "Input"],
+Cell[148363, 2647, 95, 1, 35, "Subsubsection"],
 Cell[CellGroupData[{
-Cell[402595, 8711, 1699, 41, 258, "Input"],
-Cell[404297, 8754, 437, 6, 55, "Output"]
+Cell[148483, 2652, 522, 12, 57, "Input"],
+Cell[149008, 2666, 48695, 801, 362, "Output"]
 }, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[197752, 3473, 92, 1, 35, "Subsubsection"],
+Cell[CellGroupData[{
+Cell[197869, 3478, 486, 12, 57, "Input"],
+Cell[198358, 3492, 53946, 888, 362, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[252377, 4388, 152, 2, 65, "Section"],
+Cell[CellGroupData[{
+Cell[252554, 4394, 1480, 34, 80, "Input"],
+Cell[254037, 4430, 146699, 4232, 2759, "Output"]
+}, Open  ]],
+Cell[400751, 8665, 69, 1, 32, "Input"],
+Cell[400823, 8668, 327, 7, 34, "Input"],
+Cell[401153, 8677, 2287, 51, 282, "Input"],
+Cell[403443, 8730, 164, 2, 32, "Input"],
+Cell[CellGroupData[{
+Cell[403632, 8736, 2181, 50, 259, "Input"],
+Cell[405816, 8788, 615, 8, 55, "Output"]
+}, Open  ]],
+Cell[406446, 8799, 316, 8, 34, "Input"]
 }, Open  ]]
 }
 ]
