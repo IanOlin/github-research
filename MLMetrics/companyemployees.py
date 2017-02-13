@@ -201,16 +201,16 @@ def findNumEmployees(project, committers):
 if __name__ == '__main__':
 	# frequentcommitterslist = frequentcommitters(companyfile)
 	
-	committerprofiles = {u'Diogo Moitinho de Almeida': "https://www.linkedin.com/in/diogomda", u'David Warde-Farley': "https://uk.linkedin.com/in/david-warde-farley-55a0825", u'Matthew Willson': "https://uk.linkedin.com/in/matthew-willson-6a1b422"}
-	for name in committerprofiles:
-		print name
-		getLinkedInInfo(name, committerprofiles[name])
+	# committerprofiles = {u'thuyenvn': "https://www.linkedin.com/in/thuyen-ngo-36905216",  u'Dan Becker': "https://www.linkedin.com/in/dansbecker", u'Vu Pham': "https://vn.linkedin.com/in/vuphoai", u'b0noI': "https://www.linkedin.com/in/b0noi", u'Gunhan Gulsoy': "https://www.linkedin.com/in/günhan-gülsoy-04110b30", u'Daniel Man\xe9': "https://www.linkedin.com/in/danmane", u'Alan Wu': "https://ca.linkedin.com/in/alanyushengwu", u'haosdent': "https://sg.linkedin.com/in/haosdent", u'Wang Yang': "https://www.linkedin.com/in/wangyangtc", u'RJ Ryan': "https://www.linkedin.com/in/rjryan", u'Yutaka Leon': "https://www.linkedin.com/in/yutaka-leon-suematsu-3125163", u'Xiaoqiang Zheng': "https://www.linkedin.com/in/xiaoqiang-zheng-4234556", u'Wei Ho': "https://www.linkedin.com/in/weiho"}
+	# for name in committerprofiles:
+	# 	print name
+	# 	getLinkedInInfo(name, committerprofiles[name])
 
-	companyfile = "/home/anne/ResearchJSONs/" + "Theano-Theano-commits.json" # + "filename"
+	companyfile = "/home/anne/ResearchJSONs/" + "deeplearning4j-deeplearning4j-commits.json" # + "filename"
 	committers = frequentcommitters(companyfile)
 	(employeeList, numEmployees) = findNumEmployees(companyfile, committers)
 	print "number of employees: ", numEmployees
-	print employeeList
+	# print employeeList
 
 	#For getting the people who still need linkedins
 	print "list of people who still need linkedins: \n", pending
