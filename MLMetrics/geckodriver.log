@@ -8997,3 +8997,27 @@ ATTENTION: default value of option force_s3tc_enable overridden by environment.
 [Child 14296] WARNING: pipe error (3): Connection reset by peer: file /build/firefox-sdnpce/firefox-51.0.1+build2/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 323
 [Child 14296] ###!!! ABORT: Aborting on channel error.: file /build/firefox-sdnpce/firefox-51.0.1+build2/ipc/glue/MessageChannel.cpp, line 2056
 [Child 14296] ###!!! ABORT: Aborting on channel error.: file /build/firefox-sdnpce/firefox-51.0.1+build2/ipc/glue/MessageChannel.cpp, line 2056
+1487704898890	geckodriver	INFO	Listening on 127.0.0.1:59863
+1487704899883	mozprofile::profile	INFO	Using profile path /tmp/rust_mozprofile.AluQwEPk12xL
+1487704899884	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox
+1487704899886	geckodriver::marionette	INFO	Connecting to Marionette on localhost:35514
+
+(firefox:4282): GLib-GObject-CRITICAL **: g_object_ref: assertion 'object->ref_count > 0' failed
+
+(firefox:4282): GLib-GObject-CRITICAL **: g_object_unref: assertion 'object->ref_count > 0' failed
+
+(firefox:4282): GLib-GObject-CRITICAL **: g_object_ref: assertion 'object->ref_count > 0' failed
+
+(firefox:4282): GLib-GObject-CRITICAL **: g_object_unref: assertion 'object->ref_count > 0' failed
+1487704900485	Marionette	INFO	Listening on port 35514
+
+(/usr/lib/firefox/plugin-container:4346): GLib-GObject-CRITICAL **: g_object_ref: assertion 'object->ref_count > 0' failed
+
+(/usr/lib/firefox/plugin-container:4346): GLib-GObject-CRITICAL **: g_object_unref: assertion 'object->ref_count > 0' failed
+
+(/usr/lib/firefox/plugin-container:4346): GLib-GObject-CRITICAL **: g_object_ref: assertion 'object->ref_count > 0' failed
+
+(/usr/lib/firefox/plugin-container:4346): GLib-GObject-CRITICAL **: g_object_unref: assertion 'object->ref_count > 0' failed
+[Child 4346] WARNING: pipe error (17): Connection reset by peer: file /build/firefox-sdnpce/firefox-51.0.1+build2/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 323
+[Child 4346] ###!!! ABORT: Aborting on channel error.: file /build/firefox-sdnpce/firefox-51.0.1+build2/ipc/glue/MessageChannel.cpp, line 2056
+[Child 4346] ###!!! ABORT: Aborting on channel error.: file /build/firefox-sdnpce/firefox-51.0.1+build2/ipc/glue/MessageChannel.cpp, line 2056
