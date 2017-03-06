@@ -5,7 +5,10 @@ CURRENT_DATE = date(2016, 11, 1)
 EARLIEST_DATE = date(2008, 1, 1) #Theano's first commit
 
 pathToJSON = "/home/serena/GithubResearch/mlCommits-new/"
+# pathToJSON = "/home/anne/ResearchJSONs/"
 fileList = ("caffe-BVLC-commits.json", "CNTK-Microsoft-commits.json", "deeplearning4j-deeplearning4j-commits.json", "tensorflow-tensorflow-commits.json", "Theano-Theano-commits.json", "torch7-torch-commits.json", "incubator-systemml-apache-commits.json")
+
+TENSORFLOWER_GARDENER_NAME = "A. Unique TensorFlower"
 
 def calculateOverall():
     herfindahlIndices = {}
@@ -14,7 +17,8 @@ def calculateOverall():
         index = 0
         commitCount = float(commitCount)
         for user, commits in userCommitHist.items():
-            index += (commits/commitCount)**2
+            if(user != TENSORFLOWER_GARDENER_NAME):
+                index += (commits/commitCount)**2
         repo = getRepoID(file)
         herfindahlIndices[repo] = index
     return herfindahlIndices
@@ -33,7 +37,8 @@ def calculateYear():
             commitNum = float(commitCount.get(year, 0))
 
             for user, commits in commitHist.items():
-                index += (commits/commitNum)**2
+                if(user != TENSORFLOWER_GARDENER_NAME):
+                    index += (commits/commitNum)**2
             herfindahlIndices[repo][year] = index
             year-=1
     return herfindahlIndices
@@ -52,7 +57,8 @@ def calculateMonth():
             commitNum = float(commitCount.get(currentMonth, 0))
 
             for user, commits in commitHist.items():
-                index += (commits/commitNum)**2
+                if(user != TENSORFLOWER_GARDENER_NAME):
+                    index += (commits/commitNum)**2
             herfindahlIndices[repo][currentMonth] = index
 
             #decrement a month
