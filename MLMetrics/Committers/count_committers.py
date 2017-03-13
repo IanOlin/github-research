@@ -1,6 +1,7 @@
 import json
+import csv
 
-pathToJSON = "/home/serena/GithubResearch/mlCommits-new/"
+pathToJSON = "/home/jwb/Documents/Json/"
 # pathToJSON = "/home/anne/ResearchJSONs/"
 fileList = ("caffe-BVLC-commits.json", "CNTK-Microsoft-commits.json", "deeplearning4j-deeplearning4j-commits.json", "tensorflow-tensorflow-commits.json", "Theano-Theano-commits.json", "torch7-torch-commits.json", "incubator-systemml-apache-commits.json")
 
@@ -29,6 +30,10 @@ def openJSON(fname):
 
 if __name__ == "__main__":
     for fn in fileList:
-        print fn
+        #print fn
         commit_dict = count_commits_per_user(fn)
-        print len(commit_dict.keys())
+        #print len(commit_dict.keys())
+        with open(pathToJSON + "csvs/"+fn[:-5]+'-dict.csv', 'w') as csv_file:
+            writer = csv.writer(csv_file)
+            for k, v in commit_dict.items():
+                writer.writerow([k.decode('utf8'), v])
