@@ -3,10 +3,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[         0,          0]
-NotebookDataLength[    409453,       8908]
-NotebookOptionsPosition[    406778,       8810]
-NotebookOutlinePosition[    407115,       8825]
-CellTagsIndexPosition[    407072,       8822]
+NotebookDataLength[    415744,       9048]
+NotebookOptionsPosition[    412701,       8938]
+NotebookOutlinePosition[    413044,       8953]
+CellTagsIndexPosition[    413001,       8950]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -31,9 +31,15 @@ Cell[BoxData[{
   RowBox[{
   "exportdir", "=", 
    "\"\</home/jwb/repos/github-research/MLMetrics/Frequency Analysis/\>\""}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+  "newdir", " ", "=", " ", 
+   "\"\</home/jwb/repos/github-research/MLMetrics/Committers/csvs/\>\""}], 
   ";"}]}], "Input",
  CellChangeTimes->{{3.694529319850852*^9, 3.6945293555630207`*^9}, {
-  3.694531295707302*^9, 3.694531308688593*^9}}],
+  3.694531295707302*^9, 3.694531308688593*^9}, {3.698417590545926*^9, 
+  3.698417636382358*^9}}],
 
 Cell[BoxData[
  RowBox[{
@@ -71,6 +77,21 @@ Cell[BoxData[{
      RowBox[{"\"\<*.csv\>\"", ",", "stackdir"}], "]"}]}]}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
+  RowBox[{"data`bigNew", " ", "=", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Import", "[", 
+      RowBox[{"#", ",", "\"\<Data\>\""}], "]"}], "&"}], "/@", 
+    RowBox[{"Cases", "[", 
+     RowBox[{
+      RowBox[{"FileNames", "[", 
+       RowBox[{"\"\<*.csv\>\"", ",", "newdir"}], "]"}], ",", 
+      RowBox[{"x_", "/;", 
+       RowBox[{"!", 
+        RowBox[{"StringContainsQ", "[", 
+         RowBox[{"x", ",", "\"\<ystem\>\""}], "]"}]}]}]}], "]"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
   RowBox[{"mlLabels", "=", 
    RowBox[{"{", 
     RowBox[{
@@ -89,19 +110,22 @@ Cell[BoxData[{
   3.694529358786441*^9, 3.694529424068965*^9}, {3.694529770171483*^9, 
   3.694529801518605*^9}, {3.694529896157421*^9, 3.6945298983486633`*^9}, {
   3.695837402032166*^9, 3.6958374187575607`*^9}, {3.695837476759239*^9, 
-  3.695837521808359*^9}, {3.695837564273193*^9, 3.6958376047602873`*^9}}],
+  3.695837521808359*^9}, {3.695837564273193*^9, 3.6958376047602873`*^9}, {
+  3.6984176625750732`*^9, 3.6984177349804497`*^9}}],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"Dimensions", "[", "data`bigML", "]"}]], "Input",
+ RowBox[{"Dimensions", "[", "data`bigNew", "]"}]], "Input",
  CellChangeTimes->{{3.695837527482923*^9, 3.695837557718103*^9}, {
-  3.695837587790256*^9, 3.695837589651969*^9}}],
+  3.695837587790256*^9, 3.695837589651969*^9}, {3.698417721571693*^9, 
+  3.698417722759961*^9}}],
 
 Cell[BoxData[
  RowBox[{"{", "6", "}"}]], "Output",
  CellChangeTimes->{{3.695837536064357*^9, 3.695837558145452*^9}, {
-  3.695837590052326*^9, 3.6958376082386503`*^9}}]
+  3.695837590052326*^9, 3.6958376082386503`*^9}, {3.6984177232026367`*^9, 
+  3.698417737598751*^9}}]
 }, Open  ]]
 }, Open  ]],
 
@@ -8805,11 +8829,115 @@ Cell[BoxData[
     "\"\<Purple\>\"", ",", "\"\<Brown\>\"", ",", "\"\<Green\>\"", ",", 
      "\"\<Yellow\>\"", ",", "\"\<Blue\>\"", ",", "\"\<Red\>\""}], "}"}]}], 
   ";"}]], "Input",
- CellChangeTimes->{{3.695838058541787*^9, 3.6958381123737288`*^9}}]
+ CellChangeTimes->{{3.695838058541787*^9, 3.6958381123737288`*^9}}],
+
+Cell["", "Subsection",
+ CellChangeTimes->{{3.698417755734557*^9, 3.6984177584969797`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["New", "Section",
+ CellChangeTimes->{{3.6984177660875874`*^9, 3.698417766413018*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"data`bigNew", "[", 
+   RowBox[{"[", "1", "]"}], "]"}], "[", 
+  RowBox[{"[", 
+   RowBox[{"All", ",", "2"}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.698417868842862*^9, 3.698417902259287*^9}, {
+  3.698417944545821*^9, 3.698417959842664*^9}, {3.698418013963015*^9, 
+  3.698418056608983*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "1", ",", "1", ",", "5", ",", "1", ",", "2", ",", "17", ",", "1", ",", "1", 
+   ",", "1", ",", "1", ",", "1", ",", "1", ",", "1", ",", "1", ",", "1", ",", 
+   "1", ",", "5", ",", "1", ",", "5", ",", "2", ",", "1", ",", "3", ",", "1", 
+   ",", "1", ",", "42", ",", "1", ",", "16", ",", "1", ",", "3", ",", "5", 
+   ",", "1", ",", "27", ",", "1", ",", "1", ",", "1", ",", "5", ",", "145", 
+   ",", "6", ",", "1", ",", "2", ",", "1", ",", "2", ",", "1", ",", "3", ",", 
+   "2", ",", "1", ",", "1", ",", "4", ",", "2", ",", "2", ",", "23", ",", "1",
+    ",", "1", ",", "1", ",", "1", ",", "1", ",", "1", ",", "1", ",", "1", ",",
+    "1", ",", "1", ",", "3", ",", "1", ",", "1", ",", "2", ",", "2", ",", "1",
+    ",", "2", ",", "1", ",", "1", ",", "1", ",", "1", ",", "793", ",", "1", 
+   ",", "1", ",", "1", ",", "8", ",", "2", ",", "6", ",", "1", ",", "82", ",",
+    "1", ",", "7", ",", "1", ",", "1", ",", "7", ",", "4", ",", "1", ",", "1",
+    ",", "10", ",", "1", ",", "2", ",", "1", ",", "1", ",", "1", ",", "8", 
+   ",", "1", ",", "2", ",", "1", ",", "3", ",", "1", ",", "6", ",", "1", ",", 
+   "1", ",", "1", ",", "1", ",", "1", ",", "1", ",", "2", ",", "1", ",", "1", 
+   ",", "9", ",", "1", ",", "1", ",", "1", ",", "10", ",", "1", ",", "3", ",",
+    "1", ",", "23", ",", "2", ",", "9", ",", "1", ",", "4", ",", "1", ",", 
+   "1", ",", "1", ",", "2", ",", "2", ",", "5", ",", "2", ",", "117", ",", 
+   "1", ",", "1", ",", "2", ",", "2", ",", "1", ",", "1", ",", "2", ",", "1", 
+   ",", "6", ",", "1", ",", "7", ",", "1", ",", "3", ",", "16", ",", "78", 
+   ",", "5", ",", "3", ",", "2", ",", "7", ",", "2", ",", "1", ",", "1", ",", 
+   "1", ",", "2", ",", "1", ",", "1", ",", "1", ",", "3", ",", "1", ",", "1", 
+   ",", "3", ",", "6", ",", "2", ",", "1", ",", "1", ",", "1", ",", "1", ",", 
+   "12", ",", "2", ",", "2", ",", "3", ",", "4", ",", "17", ",", "1", ",", 
+   "2", ",", "1", ",", "1", ",", "1", ",", "1", ",", "2", ",", "2", ",", "6", 
+   ",", "2", ",", "1", ",", "1", ",", "4", ",", "1", ",", "1", ",", "2", ",", 
+   "3", ",", "1016", ",", "1", ",", "1", ",", "10", ",", "1", ",", "1", ",", 
+   "2", ",", "1", ",", "79", ",", "2", ",", "1", ",", "2", ",", "1", ",", "1",
+    ",", "7", ",", "1", ",", "1", ",", "3", ",", "12", ",", "1", ",", "1", 
+   ",", "1", ",", "21", ",", "2", ",", "1", ",", "1", ",", "2", ",", "39", 
+   ",", "3", ",", "3", ",", "409", ",", "1", ",", "1", ",", "2", ",", "1", 
+   ",", "2", ",", "8", ",", "2", ",", "1", ",", "12", ",", "1", ",", "90", 
+   ",", "1", ",", "1", ",", "1", ",", "1", ",", "1", ",", "2", ",", "2", ",", 
+   "1", ",", "262", ",", "1", ",", "1", ",", "1", ",", "11", ",", "1", ",", 
+   "1", ",", "1"}], "}"}]], "Output",
+ CellChangeTimes->{{3.6984179538575907`*^9, 3.6984179602016163`*^9}, {
+  3.698418015026742*^9, 3.698418056892065*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Export", "[", 
+  RowBox[{
+   RowBox[{"exportdir", "<>", "\"\<Histograms/New/LogLogFull.png\>\""}], ",", 
+   
+   RowBox[{"ListLogLogPlot", "[", 
+    RowBox[{
+     RowBox[{"Table", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Sort", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"data`bigNew", "[", 
+           RowBox[{"[", "n", "]"}], "]"}], "[", 
+          RowBox[{"[", 
+           RowBox[{"All", ",", "2"}], "]"}], "]"}], "\[IndentingNewLine]", 
+         ",", "Greater"}], "\[IndentingNewLine]", "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"n", ",", 
+         RowBox[{"Length", "@", "mlLabels"}]}], "}"}]}], "]"}], ",", 
+     RowBox[{"PlotRange", "\[Rule]", "Full"}], ",", 
+     RowBox[{"PlotLegends", "\[Rule]", "mlLabels"}], ",", 
+     RowBox[{"AxesLabel", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"\"\<Contributor Rank\>\"", ",", "\"\<Number of Commits\>\""}],
+        "}"}]}], ",", 
+     RowBox[{"PlotStyle", "\[Rule]", "colorMap"}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Full"}], ",", 
+     RowBox[{"Joined", "\[Rule]", "True"}]}], "]"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.698418140698107*^9, 3.69841821483875*^9}, {
+  3.698418265375499*^9, 3.698418267517344*^9}, {3.698418300924798*^9, 
+  3.6984183801643333`*^9}}],
+
+Cell[BoxData["\<\"/home/jwb/repos/github-research/MLMetrics/Frequency \
+Analysis/Histograms/New/LogLogFull.png\"\>"], "Output",
+ CellChangeTimes->{{3.6984182580241632`*^9, 3.6984182686243134`*^9}, 
+   3.69841830654185*^9, {3.6984183559379387`*^9, 3.698418382139345*^9}}]
+}, Open  ]]
 }, Open  ]]
 },
 WindowSize->{960, 1016},
-WindowMargins->{{556, 404}, {-105, Automatic}},
+WindowMargins->{{Automatic, 151}, {-233, Automatic}},
 FrontEndVersion->"11.0 for Linux x86 (64-bit) (September 21, 2016)",
 StyleDefinitions->"Default.nb"
 ]
@@ -8826,82 +8954,94 @@ CellTagsIndex->{}
 Notebook[{
 Cell[CellGroupData[{
 Cell[422, 15, 91, 1, 65, "Section"],
-Cell[516, 18, 584, 17, 80, "Input"],
-Cell[1103, 37, 358, 8, 100, "Input"],
-Cell[1464, 47, 1729, 44, 171, "Input"],
+Cell[516, 18, 791, 23, 103, "Input"],
+Cell[1310, 43, 358, 8, 79, "Input"],
+Cell[1671, 53, 2279, 60, 193, "Input"],
 Cell[CellGroupData[{
-Cell[3218, 95, 187, 3, 32, "Input"],
-Cell[3408, 100, 167, 3, 89, "Output"]
+Cell[3975, 117, 237, 4, 32, "Input"],
+Cell[4215, 123, 218, 4, 32, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[3624, 109, 96, 1, 65, "Section"],
-Cell[3723, 112, 1417, 36, 126, "Input"],
-Cell[5143, 150, 6640, 181, 1066, "Input"]
+Cell[4482, 133, 96, 1, 65, "Section"],
+Cell[4581, 136, 1417, 36, 103, "Input"],
+Cell[6001, 174, 6640, 181, 1021, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[11820, 336, 210, 3, 65, "Section"],
+Cell[12678, 360, 210, 3, 65, "Section"],
 Cell[CellGroupData[{
-Cell[12055, 343, 997, 23, 103, "Input"],
-Cell[13055, 368, 14879, 247, 373, "Output"]
+Cell[12913, 367, 997, 23, 103, "Input"],
+Cell[13913, 392, 14879, 247, 373, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[27971, 620, 357, 8, 58, "Input"],
-Cell[28331, 630, 16208, 268, 372, "Output"]
+Cell[28829, 644, 357, 8, 58, "Input"],
+Cell[29189, 654, 16208, 268, 372, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[44588, 904, 143, 2, 65, "Section"],
+Cell[45446, 928, 143, 2, 65, "Section"],
 Cell[CellGroupData[{
-Cell[44756, 910, 119, 1, 45, "Subsection"],
+Cell[45614, 934, 119, 1, 45, "Subsection"],
 Cell[CellGroupData[{
-Cell[44900, 915, 95, 1, 35, "Subsubsection"],
+Cell[45758, 939, 95, 1, 35, "Subsubsection"],
 Cell[CellGroupData[{
-Cell[45020, 920, 716, 15, 57, "Input"],
-Cell[45739, 937, 53467, 879, 375, "Output"]
+Cell[45878, 944, 716, 15, 57, "Input"],
+Cell[46597, 961, 53467, 879, 375, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[99255, 1822, 98, 1, 35, "Subsubsection"],
+Cell[100113, 1846, 98, 1, 35, "Subsubsection"],
 Cell[CellGroupData[{
-Cell[99378, 1827, 506, 12, 57, "Input"],
-Cell[99887, 1841, 48221, 793, 379, "Output"]
-}, Open  ]]
-}, Open  ]]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[148169, 2641, 169, 2, 45, "Subsection"],
-Cell[CellGroupData[{
-Cell[148363, 2647, 95, 1, 35, "Subsubsection"],
-Cell[CellGroupData[{
-Cell[148483, 2652, 522, 12, 57, "Input"],
-Cell[149008, 2666, 48695, 801, 362, "Output"]
-}, Open  ]]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[197752, 3473, 92, 1, 35, "Subsubsection"],
-Cell[CellGroupData[{
-Cell[197869, 3478, 486, 12, 57, "Input"],
-Cell[198358, 3492, 53946, 888, 362, "Output"]
-}, Open  ]]
+Cell[100236, 1851, 506, 12, 57, "Input"],
+Cell[100745, 1865, 48221, 793, 379, "Output"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[252377, 4388, 152, 2, 65, "Section"],
+Cell[149027, 2665, 169, 2, 45, "Subsection"],
 Cell[CellGroupData[{
-Cell[252554, 4394, 1480, 34, 80, "Input"],
-Cell[254037, 4430, 146699, 4232, 2759, "Output"]
-}, Open  ]],
-Cell[400751, 8665, 69, 1, 32, "Input"],
-Cell[400823, 8668, 327, 7, 34, "Input"],
-Cell[401153, 8677, 2287, 51, 282, "Input"],
-Cell[403443, 8730, 164, 2, 32, "Input"],
+Cell[149221, 2671, 95, 1, 35, "Subsubsection"],
 Cell[CellGroupData[{
-Cell[403632, 8736, 2181, 50, 259, "Input"],
-Cell[405816, 8788, 615, 8, 55, "Output"]
+Cell[149341, 2676, 522, 12, 57, "Input"],
+Cell[149866, 2690, 48695, 801, 362, "Output"]
+}, Open  ]]
 }, Open  ]],
-Cell[406446, 8799, 316, 8, 34, "Input"]
+Cell[CellGroupData[{
+Cell[198610, 3497, 92, 1, 35, "Subsubsection"],
+Cell[CellGroupData[{
+Cell[198727, 3502, 486, 12, 57, "Input"],
+Cell[199216, 3516, 53946, 888, 362, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[253235, 4412, 152, 2, 65, "Section"],
+Cell[CellGroupData[{
+Cell[253412, 4418, 1480, 34, 80, "Input"],
+Cell[254895, 4454, 146699, 4232, 2759, "Output"]
+}, Open  ]],
+Cell[401609, 8689, 69, 1, 32, "Input"],
+Cell[401681, 8692, 327, 7, 34, "Input"],
+Cell[402011, 8701, 2287, 51, 282, "Input"],
+Cell[404301, 8754, 164, 2, 32, "Input"],
+Cell[CellGroupData[{
+Cell[404490, 8760, 2181, 50, 259, "Input"],
+Cell[406674, 8812, 615, 8, 55, "Output"]
+}, Open  ]],
+Cell[407304, 8823, 316, 8, 34, "Input"],
+Cell[407623, 8833, 90, 1, 44, "Subsection"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[407750, 8839, 90, 1, 65, "Section"],
+Cell[CellGroupData[{
+Cell[407865, 8844, 329, 8, 34, "Input"],
+Cell[408197, 8854, 2845, 39, 195, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[411079, 8898, 1321, 31, 170, "Input"],
+Cell[412403, 8931, 270, 3, 89, "Output"]
+}, Open  ]]
 }, Open  ]]
 }
 ]
