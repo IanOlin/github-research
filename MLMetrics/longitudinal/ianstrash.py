@@ -1,9 +1,10 @@
 from datetime import date
 from collections import defaultdict
+import csv
 import json
 CURRENT_DATE = date(2016, 11, 1)
 EARLIEST_DATE = date(2008, 1, 1) #Theano's first commit
-pathToJSON = "/home/jwb/Documents/json/"
+pathToJSON = "/home/jwb/Documents/Json/"
 fileList = ("caffe-BVLC-commits.json", "CNTK-Microsoft-commits.json", "deeplearning4j-deeplearning4j-commits.json", "tensorflow-tensorflow-commits.json", "Theano-Theano-commits.json", "torch7-torch-commits.json")
 def calculateOverall():
     # herfindahlIndices = {}
@@ -134,7 +135,7 @@ def countCommitsByMonth(rawFileName):
             userCommitHist[actualMonth] = {}
         userCommitHist[actualMonth][name] = userCommitHist[actualMonth].get(name, 0) + 1
         commitCount[actualMonth] = commitCount.get(actualMonth, 0) + 1
-    return userCommitHist, commitCount
+    return commitCount
 def getMonthID(dateObj):
     return  dateObj.year*100 + dateObj.month
 def parseTimeStamp(unixTime):
@@ -157,11 +158,13 @@ def parseTimeStamp(unixTime):
 def openJSON(fname):
     return json.load(open(fname, "r"))
 if __name__ == "__main__":
-    import doctest
-    doctest.testmod()
-    print 'Overall Average Time Delay'
-    for item in sorted(calculateOverall().items()):
-        print "{:<30}\t{}".format(item[0], item[1])
+    for fn in fileList:
+        commit_counts = countCommitsByMonth(fn)
+        with open(pathToJSON + "longitudinal/"+fn[:-5]+'-count.csv', 'w') as csv_file:
+            writer = csv.writer(csv_file)
+            for k, v in commit_counts.items():
+                writer.writerow([k, v])
+
     # print '\nPer Year'
     # hiSortedByYear = sorted(calculateYear().items())
     # index = 0
