@@ -1,7 +1,6 @@
-# flags
-ML = 0
-STACK = 1
+from datetime import date
 
+### PRIVATE -------------------------------------------------------------
 # Dictionaries of constants; use the `return_constants()` function
 # to access
 __ML_CONSTANTS = {}
@@ -34,6 +33,14 @@ __ST_CONSTANTS["repos"] = ml_repos
 # Jenkins names
 __ML_CONSTANTS["jenkins"] = ("A. Unique TensorFlower")
 __ST_CONSTANTS["jenkins"] = ("Jenkins", 'OpenStack Proposal Bot')
+
+__ML_CONSTANTS["earliest-commit"] = 
+
+### PUBLIC --------------------------------------------------------------
+
+# flags
+ML = 0
+STACK = 1
 
 def return_constants(flag):
     """

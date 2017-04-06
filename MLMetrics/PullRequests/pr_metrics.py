@@ -2,7 +2,7 @@ import json
 import sys, os
 sys.path.insert(0, os.path.abspath(os.path.join('..', '..')))
 from github_scraping.get_pull_requests import is_merged_systemml
-from constants import ML, STACK, return_constants
+from misc_info.constants import ML, STACK, return_constants
 
 directory = '../../github_scraping/mlpulls/'
 
