@@ -41,8 +41,9 @@ __ST_CONSTANTS["earliest-commit"] = date(2010, 5, 1)
 
 # absolute filepath to the directory with commit jsons
 # "/home/anne/ResearchJSONs/"
+# "/home/serena/GithubResearch/mlCommits-new/"
 # "/home/jwb/Documents/Json/"
-__ML_CONSTANTS["commits-fpath"] = "/home/serena/GithubResearch/mlCommits-new/"
+__ML_CONSTANTS["commits-fpath"] = "/home/anne/ResearchJSONs/"
 __ST_CONSTANTS["commits-fpath"] = "/home/serena/GithubResearch/stackCommits-new/"
 
 ### PUBLIC --------------------------------------------------------------
@@ -50,6 +51,10 @@ __ST_CONSTANTS["commits-fpath"] = "/home/serena/GithubResearch/stackCommits-new/
 # flags
 ML = 0
 STACK = 1
+
+def return_filename(repo):
+    return "{}-{}-commits.json".format(repo["name"], repo["user"])
+
 
 # misc constants
 CURRENT_DATE = date(2016, 11, 1)    # current date according to the github things;
