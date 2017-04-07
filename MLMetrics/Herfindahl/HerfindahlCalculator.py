@@ -1,67 +1,89 @@
 from datetime import date
 import json
+import os, sys
+sys.path.insert(0, os.path.abspath(os.path.join('..', '..')))
+from misc_info.constants import ML, STACK, CURRENT_DATE, return_constants
 
-CURRENT_DATE = date(2016, 11, 1)
-EARLIEST_DATE = date(2008, 1, 1) #Theano's first commit
 
-pathToJSON = "/home/serena/GithubResearch/mlCommits-new/"
+pathToJSON = "/home/serena/GithubResearch/mlCommits-new/" #TODO: change this one day also
 # pathToJSON = "/home/anne/ResearchJSONs/"
-fileList = ("caffe-BVLC-commits.json", "CNTK-Microsoft-commits.json", "deeplearning4j-deeplearning4j-commits.json", "tensorflow-tensorflow-commits.json", "Theano-Theano-commits.json", "torch7-torch-commits.json", "incubator-systemml-apache-commits.json")
+# fileList = ("caffe-BVLC-commits.json", "CNTK-Microsoft-commits.json", "deeplearning4j-deeplearning4j-commits.json", "tensorflow-tensorflow-commits.json", "Theano-Theano-commits.json", "torch7-torch-commits.json", "incubator-systemml-apache-commits.json")
 
-TENSORFLOWER_GARDENER_NAME = "A. Unique TensorFlower"
+constants_dict = {}
 
 def calculateOverall():
+    global constants_dict
     herfindahlIndices = {}
-    for file in fileList:
-        userCommitHist, commitCount = countCommits(file, date.min, date.max)
+
+    for repo in constants_dict["repos"]:
+        userCommitHist, commitCount = countCommits(repo, date.min, date.max)
+
+        #actual calculation
         index = 0
-        commitCount = float(commitCount)
         for user, commits in userCommitHist.items():
-            if(user != TENSORFLOWER_GARDENER_NAME):
-                index += (commits/commitCount)**2
-        repo = getRepoID(file)
-        herfindahlIndices[repo] = index
+            index += herfRatio(user, commits, commitCount)
+
+        # record HI
+        repo_key = "{}-{}".format(repo["name"], repo["user"])
+        herfindahlIndices[repo_key] = index
+
     return herfindahlIndices
 
-def calculateYear():
-    herfindahlIndices = {}
-    for file in fileList:
-        repo = getRepoID(file)
-        herfindahlIndices[repo] = {}
-        year = CURRENT_DATE.year
-        userCommitHist, commitCount = countCommitsByYear(file)
 
-        while(year >= EARLIEST_DATE.year):
+def calculateYear():
+    global constants_dict
+    herfindahlIndices = {}
+
+    for repo in constants_dict["repos"]:
+        repo_key = "{}-{}".format(repo["name"], repo["user"])
+        herfindahlIndices[repo_key] = {}
+
+        userCommitHist, commitCount = countCommitsByYear(repo)
+
+        # calculation by year
+        year = CURRENT_DATE.year
+        while(year >= constants_dict["earliest-commit"].year):
             index = 0
+            # data for this particular year
             commitHist = userCommitHist.get(year, {})
             commitNum = float(commitCount.get(year, 0))
 
+            # adding it all up
             for user, commits in commitHist.items():
-                if(user != TENSORFLOWER_GARDENER_NAME):
-                    index += (commits/commitNum)**2
-            herfindahlIndices[repo][year] = index
+                index += herfRatio(user, commits, commitNum)
+
+            # record HI
+            herfindahlIndices[repo_key][year] = index
             year-=1
+
     return herfindahlIndices
 
 def calculateMonth():
+    global constants_dict
     herfindahlIndices = {}
-    for file in fileList:
-        repo = getRepoID(file)
-        herfindahlIndices[repo] = {}
-        currentMonth = getMonthID(CURRENT_DATE)
-        userCommitHist, commitCount = countCommitsByMonth(file)
 
-        while(currentMonth >= getMonthID(EARLIEST_DATE)):
+    for repo in constants_dict["repos"]:
+        repo_key = "{}-{}".format(repo["name"], repo["user"])
+        herfindahlIndices[repo_key] = {}
+
+        userCommitHist, commitCount = countCommitsByMonth(repo)
+
+        # calculation by month
+        currentMonth = getMonthID(CURRENT_DATE)
+        while(currentMonth >= getMonthID(constants_dict["earliest-commit"])):
             index = 0
+            #data for this particular month
             commitHist = userCommitHist.get(currentMonth, {})
             commitNum = float(commitCount.get(currentMonth, 0))
 
+            # adding it up
             for user, commits in commitHist.items():
-                if(user != TENSORFLOWER_GARDENER_NAME):
-                    index += (commits/commitNum)**2
-            herfindahlIndices[repo][currentMonth] = index
+                index += herfRatio(user, commits, commitNum)
 
-            #decrement a month
+            # record HI
+            herfindahlIndices[repo_key][currentMonth] = index
+
+            #decrement a months
             currentMonth -= 1
             if(currentMonth%100 == 0):
                 currentMonth-=100
@@ -69,13 +91,15 @@ def calculateMonth():
 
     return herfindahlIndices
 
-def getRepoID(fname):
-    filePieces = fname.split("-")
-    repo = filePieces[0]+"-"+filePieces[1]
-    return repo
+def herfRatio(user, commits, totalCommitCount):
+    global constants_dict
 
-def countCommits(rawFileName, startDate=date.min, endDate=date.max):
-    raw = openJSON(pathToJSON + rawFileName)
+    if user not in constants_dict["jenkins"]:
+        return (float(commits)/totalCommitCount)**2 # the ratio
+    return 0
+
+def countCommits(repo, startDate=date.min, endDate=date.max):
+    raw = openJSON(repo)
     userCommitHist = {}
     commitCount = 0
     for commit in raw:
@@ -90,8 +114,8 @@ def countCommits(rawFileName, startDate=date.min, endDate=date.max):
 
     return userCommitHist, commitCount
 
-def countCommitsByYear(rawFileName):
-    raw = openJSON(pathToJSON + rawFileName)
+def countCommitsByYear(repo):
+    raw = openJSON(repo)
     userCommitHist = {}
     commitCount = {}
     for commit in raw:
@@ -100,6 +124,7 @@ def countCommitsByYear(rawFileName):
         commitdate = parseTimeStamp(unixDate)
         name = commit["commit"]["author"]["name"].encode("utf-8")
 
+        # get the year
         year = commitdate.year
         if year not in userCommitHist:
             userCommitHist[year] = {}
@@ -109,8 +134,8 @@ def countCommitsByYear(rawFileName):
 
     return userCommitHist, commitCount
 
-def countCommitsByMonth(rawFileName):
-    raw = openJSON(pathToJSON + rawFileName)
+def countCommitsByMonth(repo):
+    raw = openJSON(repo)
     userCommitHist = {}
     commitCount = {}
     for commit in raw:
@@ -152,12 +177,16 @@ def parseTimeStamp(unixTime):
     day = int(parts[2])
     return date(year, month, day)
 
-def openJSON(fname):
+def openJSON(repo):
+    fname = pathToJSON + "{}-{}-commits.json".format(repo["name"], repo["user"])
     return json.load(open(fname, "r"))
 
 if __name__ == "__main__":
+    constants_dict = return_constants(ML)
+
     import doctest
     doctest.testmod()
+
     print 'Overall Herfindahl Indices'
     for item in sorted(calculateOverall().items()):
         print "{:<30}\t{}".format(item[0], item[1])

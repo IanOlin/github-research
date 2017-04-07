@@ -1,6 +1,7 @@
 from datetime import date
 
 ### PRIVATE -------------------------------------------------------------
+
 # Dictionaries of constants; use the `return_constants()` function
 # to access
 __ML_CONSTANTS = {}
@@ -14,7 +15,7 @@ ml_repos.append({"name": 'CNTK',                "user": 'Microsoft'})
 ml_repos.append({"name": 'tensorflow',          "user": 'tensorflow'})
 ml_repos.append({"name": 'torch7',              "user": 'torch'})
 ml_repos.append({"name": 'deeplearning4j',      "user": 'deeplearning4j'})
-ml_repos.append({"name": 'incubator-systemml',  "user": 'apache'})
+# ml_repos.append({"name": 'incubator-systemml',  "user": 'apache'})
 
 __ML_CONSTANTS["repos"] = ml_repos
 
@@ -31,16 +32,25 @@ stack_repos.append({"name": 'cloudstack',       "user": 'apache'})
 __ST_CONSTANTS["repos"] = ml_repos
 
 # Jenkins names
-__ML_CONSTANTS["jenkins"] = ("A. Unique TensorFlower")
-__ST_CONSTANTS["jenkins"] = ("Jenkins", 'OpenStack Proposal Bot')
+__ML_CONSTANTS["jenkins"] = set(("A. Unique TensorFlower",))
+__ST_CONSTANTS["jenkins"] = set(("Jenkins", 'OpenStack Proposal Bot'))
 
-__ML_CONSTANTS["earliest-commit"] = 
+# date of the first commit of any of the repos in the category
+__ML_CONSTANTS["earliest-commit"] = date(2008, 1, 1)
+__ST_CONSTANTS["earliest-commit"] = date(2010, 5, 1)
 
 ### PUBLIC --------------------------------------------------------------
 
 # flags
 ML = 0
 STACK = 1
+
+# misc constants
+CURRENT_DATE = date(2016, 11, 1)    # current date according to the github things;
+                                    # may change it to the actual current date
+                                    # after we automate github scraping also
+
+
 
 def return_constants(flag):
     """
