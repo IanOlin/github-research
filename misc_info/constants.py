@@ -41,6 +41,7 @@ __ST_CONSTANTS["earliest-commit"] = date(2010, 5, 1)
 
 # absolute filepath to the directory with commit jsons
 # "/home/anne/ResearchJSONs/"
+# "/home/jwb/Documents/Json/"
 __ML_CONSTANTS["commits-fpath"] = "/home/serena/GithubResearch/mlCommits-new/"
 __ST_CONSTANTS["commits-fpath"] = "/home/serena/GithubResearch/stackCommits-new/"
 
