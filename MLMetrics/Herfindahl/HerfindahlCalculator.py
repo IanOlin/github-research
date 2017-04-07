@@ -2,7 +2,7 @@ from datetime import date
 import json
 import os, sys
 sys.path.insert(0, os.path.abspath(os.path.join('..', '..')))
-from misc_info.constants import ML, STACK, CURRENT_DATE, return_constants
+from misc_info.constants import ML, STACK, CURRENT_DATE, return_constants, return_filename
 
 constants_dict = {}
 
@@ -175,8 +175,7 @@ def parseTimeStamp(unixTime):
 def openJSON(repo):
     global constants_dict
 
-    fname = "{}-{}-commits.json".format(repo["name"], repo["user"])
-    path = constants_dict["commits-fpath"] + fname
+    path = constants_dict["commits-fpath"] + return_filename(repo)
     return json.load(open(path, "r"))
 
 if __name__ == "__main__":
