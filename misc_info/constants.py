@@ -29,7 +29,7 @@ stack_repos.append({"name": 'neutron',          "user": 'openstack'})
 stack_repos.append({"name": 'swift',            "user": 'openstack'})
 stack_repos.append({"name": 'cloudstack',       "user": 'apache'})
 
-__ST_CONSTANTS["repos"] = ml_repos
+__ST_CONSTANTS["repos"] = stack_repos
 
 # Jenkins names
 __ML_CONSTANTS["jenkins"] = set(("A. Unique TensorFlower",))
@@ -38,6 +38,11 @@ __ST_CONSTANTS["jenkins"] = set(("Jenkins", 'OpenStack Proposal Bot'))
 # date of the first commit of any of the repos in the category
 __ML_CONSTANTS["earliest-commit"] = date(2008, 1, 1)
 __ST_CONSTANTS["earliest-commit"] = date(2010, 5, 1)
+
+# absolute filepath to the directory with commit jsons
+# "/home/anne/ResearchJSONs/"
+__ML_CONSTANTS["commits-fpath"] = "/home/serena/GithubResearch/mlCommits-new/"
+__ST_CONSTANTS["commits-fpath"] = "/home/serena/GithubResearch/stackCommits-new/"
 
 ### PUBLIC --------------------------------------------------------------
 
