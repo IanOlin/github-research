@@ -16,3 +16,5 @@ Goes through each commit from the API output and, using the commit author and th
 * obtain_remaining_linkedins.py
 
 * python_findtitle.py
+
+*arrayify.ipynb
