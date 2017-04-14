@@ -19,6 +19,7 @@ PATHtoLinkedInJSONs = "/home/anne/github-research/company-affiliation/resources/
 DEBUG = True
 pending = []
 
+
 """
 Takes in all the results of the json file and returns the info we really need in a tuple
 returns: (date list, sha list, name list)
@@ -52,6 +53,12 @@ def simplifyNameList(comprehensiveNameList):
 	for name in comprehensiveNameList:
 		newNameSet.add(name)
 	return list(newNameSet)
+
+def num_of_10percent(companyfile):
+	(dates, shas, names) = obtainDatesShasNames(companyfile)
+	total_committer_list = simplifyNameList(names)
+	return len(total_committer_list)*.1
+
 """
 Gets the number of commits this person has for this particular project
 """
@@ -69,7 +76,7 @@ eliminate Jenkins, OpenStack Proposal Bot, and Openstack Jenkins
 def filterLists(dates, shas, names):
 	for i in range(len(names) - 1, -1, -1):
 		n = names[i]
-		if (n == 'OpenStack Proposal Bot') or (n == 'Jenkins') or (n == 'OpenStack Jenkins'):
+		if (n == 'OpenStack Proposal Bot') or (n == 'Jenkins') or (n == 'OpenStack Jenkins') or (n == "A Unique TensorFlower"):
 			index_location = names.index(n)
 			del names[index_location]
 			del shas[index_location]
@@ -100,27 +107,49 @@ def findHistory(name):
 					personalHistory.append(line)
 	except IOError, Argument:
 		pending.append(name)
-		# print "this person's file doesn't exist yet", Argument
+		# print "{}'s file doesn't exist yet".format(name), Argument
 	except UnicodeEncodeError, Argument:
 		pending.append(name)
-		# print "we can't decode this name", Argument
+		# print "we can't decode {}".format(name), Argument
 	return personalHistory
 
 """
-Helper function: get the people with 3+ commits for this company
+Helper function: get the top 10% of committers at a company
 """
 def frequentcommitters(companyfile):
+	# Obtain info for all commits
 	(dates, shas, names) = obtainDatesShasNames(companyfile)
+	# Obtain list of names with each name only once
 	uniquenames = simplifyNameList(names)
-	frequentcommitters = []
-	# print "the committers:"
+	frequentcommitters = {}
 	print "going through {}'s committers. progress: \n".format(companyfile)
 	for name_index in range(len(uniquenames)):
 		name = uniquenames[name_index]
 		print name_index + 1, "out of ", len(uniquenames), " total committers"
 		if (findNumCommits(name, companyfile) > 2):
-			frequentcommitters.append(name)
-	return frequentcommitters
+			frequentcommitters[name] = findNumCommits(name, companyfile)
+	# For debugging:
+	# print frequentcommitters
+	# Sort the frequent committers by making a histogram:	
+	num_10percent = num_of_10percent(companyfile)
+	resultinglist = []
+	# We do this every time until we get 10% of the committers for this companyfile
+	while (num_10percent > 0):
+		committer_name = ""
+		max_commits = 3
+		# Getting the top committer in this list
+		for name in frequentcommitters:
+			if frequentcommitters[name] > max_commits:
+				committer_name = name
+				max_commits = frequentcommitters[name]
+		# add the name to the resulting list
+		resultinglist.append(committer_name)
+		# delete the highest # of commits result to get the next one
+		del(frequentcommitters[committer_name])
+		# Decrement the num_10percent so the while loop doesn't last forever
+		num_10percent -= 1
+	# Returns resulting list, which contains the top 10% of repo's contributors
+	return resultinglist
 
 #Emergency linkedin processing. if we ever need this method again
 def getLinkedInInfo(name, url):
@@ -201,16 +230,18 @@ def findNumEmployees(project, committers):
 if __name__ == '__main__':
 	# frequentcommitterslist = frequentcommitters(companyfile)
 	
-	committerprofiles = {u'sonaliii': "https://www.linkedin.com/in/sonali-dayal"}
-	for name in committerprofiles:
-		print name
-		getLinkedInInfo(name, committerprofiles[name])
+	# committerprofiles = {u'sonaliii': "https://www.linkedin.com/in/sonali-dayal"}
+	# for name in committerprofiles:
+	# 	print name
+	# 	getLinkedInInfo(name, committerprofiles[name])
 
-	# companyfile = "/home/anne/ResearchJSONs/" + "deeplearning4j-deeplearning4j-commits.json" # + "filename"
-	# committers = frequentcommitters(companyfile)
+	companyfile = "/home/anne/ResearchJSONs/" + "deeplearning4j-deeplearning4j-commits.json" # + "filename"
+	committers = frequentcommitters(companyfile)
+	print committers
 	# (employeeList, numEmployees) = findNumEmployees(companyfile, committers)
 	# print "number of employees: ", numEmployees
-	# # print employeeList
+	# print "number 10 percent of employees: ", num_of_10percent(companyfile)
+	# print employeeList
 
 	# #For getting the people who still need linkedins
 	# print "list of people who still need linkedins: \n", pending
