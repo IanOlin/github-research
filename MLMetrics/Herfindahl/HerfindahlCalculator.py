@@ -189,6 +189,7 @@ def get_data_retrieval_date():
 
 
 def herf(flag):
+    global constants_dict
     constants_dict = return_constants(flag)
 
     import doctest

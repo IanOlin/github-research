@@ -23,7 +23,8 @@ def count_commits_per_user(filename):
 def openJSON(fname):
     return json.load(open(fname, "r"))
 
-def count(flag)
+def count(flag):
+    global constants_dict
     constants_dict = return_constants(flag)
     for repo in constants_dict["repos"]:
         #print fn
@@ -33,6 +34,7 @@ def count(flag)
         output_file = "csvs_new/{}-{}-dict.csv".format(repo["name"], repo["user"])
         with open(output_file, 'w') as csv_file:
             writer = csv.writer(csv_file)
+            print "\n {} - {} \n".format(repo["name"], repo["user"])
             for k, v in commit_dict.items():
                 writer.writerow([k, v])
-                print k + "," + v
+                print k + "," + str(v)

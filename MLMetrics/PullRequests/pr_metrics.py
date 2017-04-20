@@ -72,5 +72,3 @@ def print_prs(project_flag):
         print 'num_closed,{}'.format(closed)
         print 'closed_users,{}'.format(closed_users_str)
         print ''
-
-print_prs(STACK)
