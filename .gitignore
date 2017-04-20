@@ -1,3 +1,5 @@
 keyfile.txt
 *.pyc
 ERROR.txt
+*.~lock.*
+*.swp
