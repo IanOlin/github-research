@@ -23,8 +23,8 @@ def count_commits_per_user(filename):
 def openJSON(fname):
     return json.load(open(fname, "r"))
 
-if __name__ == "__main__":
-    constants_dict = return_constants(ML)
+def count(flag)
+    constants_dict = return_constants(flag)
     for repo in constants_dict["repos"]:
         #print fn
         # obtain a dictionary of commiters: # commits :
@@ -35,3 +35,4 @@ if __name__ == "__main__":
             writer = csv.writer(csv_file)
             for k, v in commit_dict.items():
                 writer.writerow([k, v])
+                print k + "," + v
