@@ -188,8 +188,8 @@ def get_data_retrieval_date():
     return data_ret_date
 
 
-if __name__ == "__main__":
-    constants_dict = return_constants(ML)
+def herf(flag):
+    constants_dict = return_constants(flag)
 
     import doctest
     doctest.testmod()

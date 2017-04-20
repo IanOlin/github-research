@@ -1,6 +1,6 @@
 from datetime import date
 import os
-
+import time
 ### PRIVATE -------------------------------------------------------------
 
 # Dictionaries of constants; use the `return_constants()` function
@@ -47,7 +47,10 @@ __ST_CONSTANTS["earliest-commit"] = date(2010, 5, 1)
 # reeeeeeeeaaaaaally jank solution to set the path to the data correctly, no 
 # matter where the calling module may be within 'github-research'
 path = ""
-while(not os.path.exists(os.path.join(path, "github_data"))):
+timeout = time.time() + 5 #5 second timeout
+while((not os.path.exists(os.path.join(path, "github_data")))):
+    if (time.time() > timeout):
+        raise IOError("No data here, boss")
     path = os.path.join(path, "..")
 
 __ML_CONSTANTS["data-fpath"] = os.path.abspath(os.path.join(path, "github_data", "ml"))
