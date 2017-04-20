@@ -175,11 +175,11 @@ def parseTimeStamp(unixTime):
 def openJSON(repo):
     global constants_dict
 
-    path = constants_dict["commits-fpath"] + return_filename(repo)
+    path = os.path.join(constants_dict["commits-fpath"], return_filename(repo))
     return json.load(open(path, "r"))
 
 if __name__ == "__main__":
-    constants_dict = return_constants(STACK)
+    constants_dict = return_constants(ML)
 
     import doctest
     doctest.testmod()

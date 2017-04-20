@@ -4,8 +4,6 @@ import os, sys
 sys.path.insert(0, os.path.abspath(os.path.join('..', '..')))
 from misc_info.constants import ML, STACK, CURRENT_DATE, return_constants, return_filename
 
-# fileList = ("caffe-BVLC-commits.json", "CNTK-Microsoft-commits.json", "deeplearning4j-deeplearning4j-commits.json", "tensorflow-tensorflow-commits.json", "Theano-Theano-commits.json", "torch7-torch-commits.json", "incubator-systemml-apache-commits.json")
-
 constants_dict = {}
 
 """
@@ -13,7 +11,7 @@ Returns a dict of {committer name : number of commits}
 """
 def count_commits_per_user(filename):
     global constants_dict
-    raw = openJSON(constants_dict["commits-fpath"] + filename)
+    raw = openJSON(os.path.join(constants_dict["commits-fpath"], filename))
     userCommitHist = {}
     for commit in raw:
         # simple fields

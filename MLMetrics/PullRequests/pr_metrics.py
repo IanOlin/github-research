@@ -4,7 +4,6 @@ sys.path.insert(0, os.path.abspath(os.path.join('..', '..')))
 from github_scraping.get_pull_requests import is_merged_systemml
 from misc_info.constants import ML, STACK, return_constants
 
-directory = '../../github_scraping/mlpulls/' # TODO: change this one day
 
 systemml_name = 'incubator-systemml'
 
@@ -24,14 +23,16 @@ def print_prs(project_flag):
     frequency pull requesters, and prints to stdout. Takes in a flag, defined by
     constants.py, that determines whether to look at stack repos or ml repos.
     """
-    repos = return_constants(project_flag)["repos"]
+    constants = return_constants(project_flag)
+    repos = constants["repos"]
+    directory = constants["pulls-fpath"]
     for repo_dict in repos:
         repo = repo_dict["name"]
         owner = repo_dict["user"]
         print repo, owner
 
         # grab pull requests
-        pulls = json.load(open(directory + "{}_pulls.json".format(repo)))
+        pulls = json.load(open(os.path.join(directory, "{}_pulls.json".format(repo))))
         print 'num_pulls,{}'.format(len(pulls))
 
         # sort
@@ -72,4 +73,4 @@ def print_prs(project_flag):
         print 'closed_users,{}'.format(closed_users_str)
         print ''
 
-print_prs(ML)
+print_prs(STACK)

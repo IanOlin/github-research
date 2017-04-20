@@ -3,33 +3,16 @@ Methods to get certain kinds of data from the Github API.
 Writes each repo's data to a separate file in a given directory
 """
 import json
-import os
 from mimetools import Message
 from StringIO import StringIO
 from github_util import *
 import time
-import sys
+import sys, os
+
 
 #####
 # CONSTANTS
 #####
-
-# the repos we are looking at
-mlRepos = {'Theano' : 'Theano',
-    'caffe' : 'BVLC',
-    'CNTK' : 'Microsoft',
-    'tensorflow' : 'tensorflow',
-    'torch7' : 'torch',
-    'deeplearning4j': 'deeplearning4j',
-    'incubator-systemml' : 'apache'}
-stackRepos = {'cinder' : 'openstack',
-    'glance' : 'openstack',
-    'horizon' : 'openstack',
-    'keystone' : 'openstack',
-    'nova' : 'openstack',
-    'neutron' : 'openstack',
-    'swift' : 'openstack',
-    'cloudstack' : 'apache'}
 
 #constants to specify parameters when calling methods
 CONTRIBUTORS = 0
@@ -99,16 +82,17 @@ def get_repos(users, forks=False):
     return all_repos
 
 """
-list of repos with the format (reponame, ownername)
+grabs a list of all (contributors|collaborators|forkers) of all the repos
+returns a dict of {repo_name : list of people}
 """
-def repoPeople(repos,group=CONTRIBUTORS):
+def repoPeople(repo_list,group=CONTRIBUTORS):
     all_repos = {}
-    for collabs in repos:
+    for repo in repo_list:
         people = []
         page = 1
 
         while page>0:
-            URLstr = 'https://api.github.com/repos/{}/{}/{}'.format(collabs[1], collabs[0], URL_PATH[group])
+            URLstr = 'https://api.github.com/repos/{}/{}/{}'.format(repo["user"], repo["name"], URL_PATH[group])
             response = api_get(baseURL=URLstr, parameters={'page':page,'per_page':100})
             if not is_successful_response(response):
                 print "{}\n{}\n{}\n".format(URLstr, response.status_code, response.text)
@@ -130,15 +114,15 @@ def repoPeople(repos,group=CONTRIBUTORS):
                 if username != None:
                     people.append(username)
 
-        all_repos[collabs] = people
+        all_repos[repo["name"]] = people
 
     return all_repos
 
 """
 Gets all the pull requests for a repo
 """
-def get_pulls(repo_name, repo_owner):
-    URLstr = "https://api.github.com/repos/{}/{}/pulls".format(repo_owner, repo_name)
+def get_pulls(repo):
+    URLstr = "https://api.github.com/repos/{}/{}/pulls".format(repo["user"], repo["name"])
     page = 1
     pulls = []
     while page>0:
@@ -186,8 +170,8 @@ def parent_repo(repo,user):
 """
 Returns all the commits of a given repo
 """
-def get_all_commits(repo, user):
-    URLstr = "https://api.github.com/repos/{}/{}/commits".format(user, repo)
+def get_all_commits(repo):
+    URLstr = "https://api.github.com/repos/{}/{}/commits".format(repo["user"], repo["name"])
     commits = []
     page = 1
     while page>0:
@@ -217,13 +201,13 @@ def get_all_commits(repo, user):
 if __name__=='__main__':
     print parent_repo('ReadingJournal', 'poosomooso')
     print parent_repo('QingTingCheat', "felixonmars") #should return None and print error because DMCA takedown
-    print repoPeople([('EmptyTest','poosomooso')], group=CONTRIBUTORS) #print error code and also empty list in dict
-    print repoPeople([('Codestellation2015', 'IanOlin')], group=CONTRIBUTORS)
+    print repoPeople([{"name":'EmptyTest', "user":'poosomooso'}], group=CONTRIBUTORS) #print error code and also empty list in dict
+    print repoPeople([{"name":'Codestellation2015', "user":'IanOlin'}], group=CONTRIBUTORS)
     print get_repos(("poosomooso", ))
     repos = get_repos(("sindresorhus", )) #guy's got a lot of repos
     print len(repos["sindresorhus"]) #over 700
-    print len(get_all_commits('CNTK', 'Microsoft')) #check on github for actual number; as of 9/22/16 7899
-    ai_pulls = get_pulls("ToolBox-AI", "sd16fall")
+    print len(get_all_commits({"name":'CNTK', "user":'Microsoft'})) #check on github for actual number; as of 9/22/16 7899
+    ai_pulls = get_pulls({"name":"ToolBox-AI", "user":"sd16fall"})
     print len(ai_pulls) #4
     # print ai_pulls[0]
     pass
