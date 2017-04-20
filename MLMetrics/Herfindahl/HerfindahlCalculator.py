@@ -1,8 +1,8 @@
-from datetime import date
+from datetime import date, datetime
 import json
 import os, sys
 sys.path.insert(0, os.path.abspath(os.path.join('..', '..')))
-from misc_info.constants import ML, STACK, CURRENT_DATE, return_constants, return_filename
+from misc_info.constants import ML, STACK, return_constants, return_filename
 
 constants_dict = {}
 
@@ -36,7 +36,8 @@ def calculateYear():
         userCommitHist, commitCount = countCommitsByYear(repo)
 
         # calculation by year
-        year = CURRENT_DATE.year
+        data_ret_date = get_data_retrieval_date()
+        year = data_ret_date.year
         while(year >= constants_dict["earliest-commit"].year):
             index = 0
             # data for this particular year
@@ -64,7 +65,8 @@ def calculateMonth():
         userCommitHist, commitCount = countCommitsByMonth(repo)
 
         # calculation by month
-        currentMonth = getMonthID(CURRENT_DATE)
+        data_ret_date = get_data_retrieval_date()
+        currentMonth = getMonthID(data_ret_date)
         while(currentMonth >= getMonthID(constants_dict["earliest-commit"])):
             index = 0
             #data for this particular month
@@ -174,9 +176,17 @@ def parseTimeStamp(unixTime):
 
 def openJSON(repo):
     global constants_dict
-
     path = os.path.join(constants_dict["commits-fpath"], return_filename(repo))
     return json.load(open(path, "r"))
+
+def get_data_retrieval_date():
+    global constants_dict
+    path = os.path.join(constants_dict["commits-fpath"], "date.txt")
+    datestr = open(path).read()
+    datetimedate = datetime.strptime(datestr, "%b %d, %Y")
+    data_ret_date = datetimedate.date()
+    return data_ret_date
+
 
 if __name__ == "__main__":
     constants_dict = return_constants(ML)
