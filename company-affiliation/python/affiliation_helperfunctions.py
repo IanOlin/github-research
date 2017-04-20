@@ -240,7 +240,6 @@ if __name__ == '__main__':
 	print committers
 	# (employeeList, numEmployees) = findNumEmployees(companyfile, committers)
 	# print "number of employees: ", numEmployees
-	# print "number 10 percent of employees: ", num_of_10percent(companyfile)
 	# print employeeList
 
 	# #For getting the people who still need linkedins
