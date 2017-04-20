@@ -19,8 +19,8 @@ def is_merged_systemml(pull_request):
             return True
     return False
 
-if __name__ == "__main__":
-    constants = return_constants(ML)
+def get_pull_requests(project=ML):
+    constants = return_constants(project)
     repo_list = constants["repos"]
     output_dir = constants["pulls-fpath"]
 

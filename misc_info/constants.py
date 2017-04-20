@@ -40,10 +40,7 @@ __ST_CONSTANTS["jenkins"] = set(("Jenkins", 'OpenStack Proposal Bot'))
 __ML_CONSTANTS["earliest-commit"] = date(2008, 1, 1)
 __ST_CONSTANTS["earliest-commit"] = date(2010, 5, 1)
 
-# absolute filepath to the directory with commit jsons
-# "/home/anne/ResearchJSONs/"
-# "/home/serena/GithubResearch/mlCommits-new/"
-# "/home/jwb/Documents/Json/"
+# absolute filepath to the directory with commit jsons & pull request jsons
 # reeeeeeeeaaaaaally jank solution to set the path to the data correctly, no 
 # matter where the calling module may be within 'github-research'
 path = ""

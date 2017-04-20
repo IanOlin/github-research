@@ -31,7 +31,7 @@ def count(flag):
         # obtain a dictionary of commiters: # commits :
         commit_dict = count_commits_per_user(return_filename(repo))
         #print len(commit_dict.keys())
-        output_file = "csvs_new/{}-{}-dict.csv".format(repo["name"], repo["user"])
+        output_file = "committer_csvs/{}-{}-dict.csv".format(repo["name"], repo["user"])
         with open(output_file, 'w') as csv_file:
             writer = csv.writer(csv_file)
             print "\n {} - {} \n".format(repo["name"], repo["user"])
