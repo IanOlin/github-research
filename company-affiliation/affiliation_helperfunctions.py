@@ -102,7 +102,6 @@ def findHistory(name):
 			name_key += '{}'.format(readablename[0])
 		elif len(readablename) == 4:
 			name_key += '{}{}{}{}'.format(readablename[0], readablename[1], readablename[2], readablename[3])
-		print name_key
 		with open('companyaffiliation.json', 'r') as data_file:
 			data = json.load(data_file)
 			# print data_file
@@ -118,7 +117,7 @@ def findHistory(name):
 
 
 """
-Helper function: get the top 10% of committers at a company
+Helper function: get the top 10% of committers at a company and saves it to a file
 """
 def frequentcommitters(companyfile, company):
 	# Obtain info for all commits
@@ -135,10 +134,10 @@ def frequentcommitters(companyfile, company):
 	# For debugging:
 	# print frequentcommitters
 	# Sort the frequent committers by making a histogram:	
-	num_10percent = num_of_20percent(companyfile)
+	num_20percent = num_of_20percent(companyfile)
 	resultinglist = []
 	# We do this every time until we get 10% of the committers for this companyfile
-	while (num_10percent > 0):
+	while (num_20percent > 0):
 		committer_name = ""
 		max_commits = 3
 		# Getting the top committer in this list
@@ -150,11 +149,11 @@ def frequentcommitters(companyfile, company):
 		resultinglist.append(committer_name)
 		# delete the highest # of commits result to get the next one
 		del(frequentcommitters[committer_name])
-		# Decrement the num_10percent so the while loop doesn't last forever
-		num_10percent -= 1
+		# Decrement the num_20percent so the while loop doesn't last forever
+		num_20percent -= 1
 	# save resultinglist into a json file with companyfile as the key
 	jsondict = {}
-	jsondict[company] = resultinglist
+	jsondict["overall"] = resultinglist
 	with open('{}_frequentcommitters.json'.format(company), 'w') as f:
 		json.dump(jsondict, f)
 	return resultinglist
@@ -215,11 +214,10 @@ def findNumEmployees(project, committers_list):
 	elif (project == "/home/anne/ResearchJSONs/caffe-BVLC-commits.json"):
 		company += "Berkeley"
 
+	print "frequent committers: ", committers_list
 	#looping through frequentcommitters to see if this person has worked at the company
 	for name_index in range(len(committers_list)):
-		print name_index
 		name = committers_list[name_index] 
-		# print name
 		# print name_index, " out of ", len(committers_list), "frequent committers"
 		try:
 			# Find this person's linkedin history
@@ -232,36 +230,40 @@ def findNumEmployees(project, committers_list):
 					if (company in currentCompany):
 						employeeList.append(name)
 						numEmployees += 1
-						alist_index += 1
+						# So we don't double count:
+						break
 		except IOError, Argument:
 			pending.append(name)
 			# print "this person's file doesn't exist yet", Argument
 		except UnicodeEncodeError, Argument:
 			pending.append(name)
 			# print "we can't decode this name", Argument
-	print "Committers with affiliation: ", employeeList
-	print "Number of committers with affiliation: ", numEmployees
-	return numEmployees
+	return employeeList, numEmployees
 
 if __name__ == '__main__':
 	# frequentcommitterslist = frequentcommitters(companyfile)
-	
+	# Getting last minute linkedin data
 	# committerprofiles = {u'sonaliii': "https://www.linkedin.com/in/sonali-dayal"}
 	# for name in committerprofiles:
 	# 	print name
 	# 	getLinkedInInfo(name, committerprofiles[name])
 
-	companyfilepath = "/home/anne/ResearchJSONs/" + "Theano-Theano-commits.json"
-	company = 'Theano'
-	with open('{}_frequentcommitters.json'.format(company), 'r') as data_file:
-			committers = json.load(data_file)[company]
-	print committers
-	print findNumEmployees(companyfilepath, committers)
-	# print findHistory('Alex Black')
-	# (employeeList, numEmployees) = findNumEmployees(companyfile, committers)
-	# print "number of employees: ", numEmployees
-	# print employeeList
+	companyfilepath = "/home/anne/ResearchJSONs/" + "deeplearning4j-deeplearning4j-commits.json"
+	repo = 'deeplearning4j'
+	
+	# frequentcommitters(companyfilepath, repo)
 
-	# #For getting the people who still need linkedins
-	# print "list of people who still need linkedins: \n", pending
-	# print "# of people I can't get linkedins for: \n ", len(pending)
+
+	resultingfile = '{}_frequentcommitters.json'.format(repo)
+	with open(resultingfile, 'r') as data_file:
+		jsondict = json.load(data_file)
+		committers = jsondict["overall"]
+
+	affiliatedcommitters = findNumEmployees(companyfilepath, committers)[0]
+	print affiliatedcommitters
+
+	jsondict["affiliated"] = affiliatedcommitters
+
+	f = open(resultingfile, 'w')
+	json.dump(jsondict, f)
+	f.close()
