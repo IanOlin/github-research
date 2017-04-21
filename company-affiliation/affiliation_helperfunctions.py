@@ -58,6 +58,10 @@ def num_of_10percent(companyfile):
 	(dates, shas, names) = obtainDatesShasNames(companyfile)
 	total_committer_list = simplifyNameList(names)
 	return len(total_committer_list)*.1
+def num_of_20percent(companyfile):
+	(dates, shas, names) = obtainDatesShasNames(companyfile)
+	total_committer_list = simplifyNameList(names)
+	return len(total_committer_list)*.2
 
 """
 Gets the number of commits this person has for this particular project
@@ -99,30 +103,24 @@ def findHistory(name):
 		elif len(readablename) == 4:
 			name_key += '{}{}{}{}'.format(readablename[0], readablename[1], readablename[2], readablename[3])
 		print name_key
-		with open('companyaffiliation.json') as data_file:
+		with open('companyaffiliation.json', 'r') as data_file:
 			data = json.load(data_file)
-			print data_file
+			# print data_file
 			try:
-				personalHistory.append(data[name_key])
+				return data[name_key]
 			except KeyError, Argument:
 				pending.append(name)
-			# if len(data) == 0: #if we don't have data on this person
-			# 	pending.append(name)
-			# else:
-			# 	for line in data:
-			# 		personalHistory.append(line)
 	except IOError, Argument:
-		pending.append(name)
-		# print "{}'s file doesn't exist yet".format(name), Argument
+		print "companyaffiliation.json doesn't exist yet", Argument
 	except UnicodeEncodeError, Argument:
 		pending.append(name)
-		# print "we can't decode {}".format(name), Argument
-	return personalHistory
+		print "we can't decode {}".format(name), Argument
+
 
 """
 Helper function: get the top 10% of committers at a company
 """
-def frequentcommitters(companyfile):
+def frequentcommitters(companyfile, company):
 	# Obtain info for all commits
 	(dates, shas, names) = obtainDatesShasNames(companyfile)
 	# Obtain list of names with each name only once
@@ -137,7 +135,7 @@ def frequentcommitters(companyfile):
 	# For debugging:
 	# print frequentcommitters
 	# Sort the frequent committers by making a histogram:	
-	num_10percent = num_of_10percent(companyfile)
+	num_10percent = num_of_20percent(companyfile)
 	resultinglist = []
 	# We do this every time until we get 10% of the committers for this companyfile
 	while (num_10percent > 0):
@@ -154,7 +152,11 @@ def frequentcommitters(companyfile):
 		del(frequentcommitters[committer_name])
 		# Decrement the num_10percent so the while loop doesn't last forever
 		num_10percent -= 1
-	# Returns resulting list, which contains the top 10% of repo's contributors
+	# save resultinglist into a json file with companyfile as the key
+	jsondict = {}
+	jsondict[company] = resultinglist
+	with open('{}_frequentcommitters.json'.format(company), 'w') as f:
+		json.dump(jsondict, f)
 	return resultinglist
 
 #Emergency linkedin processing. if we ever need this method again
@@ -215,34 +217,31 @@ def findNumEmployees(project, committers_list):
 
 	#looping through frequentcommitters to see if this person has worked at the company
 	for name_index in range(len(committers_list)):
+		print name_index
 		name = committers_list[name_index] 
 		# print name
 		# print name_index, " out of ", len(committers_list), "frequent committers"
 		try:
-
-
-
-
 			# Find this person's linkedin history
 			personalHistory = findHistory(name) #pulls up the personal work history of this person
-			for alist_index in range(len(personalHistory)):
-				currentCompany = personalHistory[alist_index] #a list in the form of [company, dates]
-				if (company in currentCompany[0]):
-					employeeList.append(name)
-					numEmployees += 1
-					alist_index += 1
-
-
-
-
-
+			if personalHistory == None:
+				pending.append(name)
+			else:
+				for alist_index in range(len(personalHistory)):
+					currentCompany = personalHistory[alist_index] #a list in the form of [company, dates]
+					if (company in currentCompany):
+						employeeList.append(name)
+						numEmployees += 1
+						alist_index += 1
 		except IOError, Argument:
 			pending.append(name)
 			# print "this person's file doesn't exist yet", Argument
 		except UnicodeEncodeError, Argument:
 			pending.append(name)
 			# print "we can't decode this name", Argument
-	return employeeList, numEmployees
+	print "Committers with affiliation: ", employeeList
+	print "Number of committers with affiliation: ", numEmployees
+	return numEmployees
 
 if __name__ == '__main__':
 	# frequentcommitterslist = frequentcommitters(companyfile)
@@ -252,10 +251,13 @@ if __name__ == '__main__':
 	# 	print name
 	# 	getLinkedInInfo(name, committerprofiles[name])
 
-	# companyfile = "/home/anne/ResearchJSONs/" + "deeplearning4j-deeplearning4j-commits.json" # + "filename"
-	# committers = frequentcommitters(companyfile)
-	# print committers
-	print findHistory('Alex Black')
+	companyfilepath = "/home/anne/ResearchJSONs/" + "Theano-Theano-commits.json"
+	company = 'Theano'
+	with open('{}_frequentcommitters.json'.format(company), 'r') as data_file:
+			committers = json.load(data_file)[company]
+	print committers
+	print findNumEmployees(companyfilepath, committers)
+	# print findHistory('Alex Black')
 	# (employeeList, numEmployees) = findNumEmployees(companyfile, committers)
 	# print "number of employees: ", numEmployees
 	# print employeeList
