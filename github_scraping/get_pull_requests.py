@@ -1,7 +1,10 @@
 
-from repo_info import get_pulls, mlRepos
+from repo_info import get_pulls
 import json
 from github_util import api_get, JSON_access, is_successful_response
+import sys, os
+sys.path.insert(0, os.path.abspath(os.path.join('..')))
+from misc_info.constants import ML, STACK, return_constants, CURRENT_DATE
 
 def is_merged_systemml(pull_request):
     url = JSON_access(pull_request,("comments_url",))
@@ -16,9 +19,18 @@ def is_merged_systemml(pull_request):
             return True
     return False
 
-if __name__ == "__main__":
-    for repo, owner in mlRepos.items():
-        f = open("mlpulls/{}_pulls.json".format(repo), "w")
-        pull_req = get_pulls(repo, owner)
+def get_pull_requests(project=ML):
+    constants = return_constants(project)
+    repo_list = constants["repos"]
+    output_dir = constants["pulls-fpath"]
+
+    # record the date of data retrieval
+    date_file = open(os.path.join(output_dir, "date.txt"), 'w')
+    date_file.write(CURRENT_DATE.strftime("%b %d, %Y"))
+    date_file.close()
+
+    for repo in repo_list:
+        f = open(os.path.join(output_dir, "{}_pulls.json".format(repo["name"])), "w")
+        pull_req = get_pulls(repo)
         json.dump(pull_req, f)
         f.close()

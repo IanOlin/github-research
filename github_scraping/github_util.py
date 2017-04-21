@@ -107,12 +107,13 @@ def get_rate_limit():
         raise e
 
 def get_more_calls():
+    global KEY, indexOfFirstKey
     if indexOfFirstKey == None:
         indexOfFirstKey = KEY_LIST.index(KEY)
     else:
         nextIndex = (KEY_LIST.index(KEY)+1)%len(KEY_LIST)
         if nextIndex!=indexOfFirstKey:
-            KEY = KEY_LIST[currIndex]
+            KEY = KEY_LIST[nextIndex]
             print 'KEYSWITCH '+str(KEY)
         else:
             print 'waiting',
