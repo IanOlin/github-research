@@ -26,8 +26,15 @@ $ pip install requests
 
 #### Step 1: Clone this repository
 Navigate to the desired local location for the repository and clone via:
-HTTP - ` $ git clone https://github.com/IanOlin/github-research.git `
-SSH - ` $ git clone git@github.com:IanOlin/github-research.git `
+HTTP - 
+```
+$ git clone https://github.com/IanOlin/github-research.git 
+```
+
+SSH - 
+```
+$ git clone git@github.com:IanOlin/github-research.git 
+```
 
 
 #### Step 2: Add the keyfile
@@ -52,7 +59,7 @@ From the top level, run:
 $ python run_metrics.py
 ``` 
 in order to print all calculated metrics to STDOUT. 
-Redirecting to a text file may be useful, and can be acommplished via:
+Redirecting to a text file may be useful, and can be accomplished via:
 ```
 $ python run_metrics.py > yourpath/yourfile.txt
 ```
