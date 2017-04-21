@@ -1,5 +1,6 @@
 from datetime import date
-
+import os
+import time
 ### PRIVATE -------------------------------------------------------------
 
 # Dictionaries of constants; use the `return_constants()` function
@@ -39,12 +40,22 @@ __ST_CONSTANTS["jenkins"] = set(("Jenkins", 'OpenStack Proposal Bot'))
 __ML_CONSTANTS["earliest-commit"] = date(2008, 1, 1)
 __ST_CONSTANTS["earliest-commit"] = date(2010, 5, 1)
 
-# absolute filepath to the directory with commit jsons
-# "/home/anne/ResearchJSONs/"
-# "/home/serena/GithubResearch/mlCommits-new/"
-# "/home/jwb/Documents/Json/"
-__ML_CONSTANTS["commits-fpath"] = "/home/anne/ResearchJSONs/"
-__ST_CONSTANTS["commits-fpath"] = "/home/serena/GithubResearch/stackCommits-new/"
+# absolute filepath to the directory with commit jsons & pull request jsons
+# reeeeeeeeaaaaaally jank solution to set the path to the data correctly, no 
+# matter where the calling module may be within 'github-research'
+path = ""
+timeout = time.time() + 5 #5 second timeout
+while((not os.path.exists(os.path.join(path, "github_data")))):
+    if (time.time() > timeout):
+        raise IOError("No data here, boss")
+    path = os.path.join(path, "..")
+
+__ML_CONSTANTS["data-fpath"] = os.path.abspath(os.path.join(path, "github_data", "ml"))
+__ML_CONSTANTS["commits-fpath"] = os.path.join(__ML_CONSTANTS["data-fpath"], "commits")
+__ML_CONSTANTS["pulls-fpath"] = os.path.join(__ML_CONSTANTS["data-fpath"], "pulls")
+__ST_CONSTANTS["data-fpath"] = os.path.abspath(os.path.join(path, "github_data", "stack"))
+__ST_CONSTANTS["commits-fpath"] = os.path.join(__ST_CONSTANTS["data-fpath"], "commits")
+__ST_CONSTANTS["pulls-fpath"] = os.path.join(__ST_CONSTANTS["data-fpath"], "pulls")
 
 ### PUBLIC --------------------------------------------------------------
 
@@ -57,7 +68,7 @@ def return_filename(repo):
 
 
 # misc constants
-CURRENT_DATE = date(2016, 11, 1)    # current date according to the github things;
+CURRENT_DATE = date.today() #date(2016, 11, 1)    # current date according to the github things;
                                     # may change it to the actual current date
                                     # after we automate github scraping also
 

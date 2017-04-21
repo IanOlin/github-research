@@ -3,3 +3,4 @@ keyfile.txt
 ERROR.txt
 *.~lock.*
 *.swp
+github_data/*
