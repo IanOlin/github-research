@@ -49,6 +49,8 @@ g`full =
   PlotLegends->labels,
   AxesLabel->{"Contributor Rank","Number of Commits"},
   ImageSize->Full,
+  PlotLabel->"Unnormalized Histogram",
+  LabelStyle->Bold,
   Joined->True]
 
 
@@ -64,6 +66,8 @@ g`fullLogLog =
   PlotLegends->labels,
   AxesLabel->{"Contributor Rank","Number of Commits"},
   ImageSize->Full,
+  PlotLabel->"Unnormalized Log Log Histogram",
+  LabelStyle->Bold,
   Joined->True]
 
 
@@ -80,6 +84,8 @@ g`fullNorm =
   AxesLabel->{"Contributor Rank","Number of Commits"},
   ImageSize->Full,
   Joined->True,
+  PlotLabel->"Normalized Histogram",
+  LabelStyle->Bold,
   DataRange->{1,normalizationN}]
 
 
@@ -96,6 +102,8 @@ g`fullLogLogNorm =
   AxesLabel->{"Contributor Rank","Number of Commits"},
   ImageSize->Full,
   Joined->True,
+  PlotLabel->"Normalized LogLog Histogram",
+  LabelStyle->Bold,
   DataRange->{1,normalizationN}]
 
 
