@@ -30,7 +30,9 @@ def get_pull_requests(project=ML):
     date_file.close()
 
     for repo in repo_list:
-        f = open(os.path.join(output_dir, "{}_pulls.json".format(repo["name"])), "w")
         pull_req = get_pulls(repo)
+        print "writing data..."
+        f = open(os.path.join(output_dir, "{}_pulls.json".format(repo["name"])), "w")
         json.dump(pull_req, f)
         f.close()
+        print "done writing data."

@@ -20,11 +20,13 @@ def get_commits(projects=ML):
 
     #getting commits
     for repo_data in repo_list:
-        output_file = open(os.path.join(dirName, return_filename(repo_data)), 'w')
-
         commits = get_all_commits(repo_data)
+
+        print "writing data..."
+        output_file = open(os.path.join(dirName, return_filename(repo_data)), 'w')
         json.dump(commits, output_file)
         output_file.close()
+        print "done writing data."
 
 if __name__ == '__main__':
     get_commits(STACK)
