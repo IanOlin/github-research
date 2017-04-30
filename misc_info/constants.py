@@ -1,6 +1,8 @@
+# coding: utf-8
 from datetime import date
 import os
 import time
+
 ### PRIVATE -------------------------------------------------------------
 
 # Dictionaries of constants; use the `return_constants()` function
@@ -76,25 +78,25 @@ CURRENT_DATE = date.today() #date(2016, 11, 1)    # current date according to th
                                     # after we automate github scraping also
 
 # dict of name merging
-DUP_DICT = {"Frederic" : "Frederic Bastien", "Frédéric Bastien":"Frederic Bastien", "nouiz" : "Frederic Bastien",
-        "lamblin" : "Pascal Lamblin", 
-        "abergeron" : "Arnaud Bergeron",
-        "carriepl" : "Pierre Luc Carrier",
-        "Jon Long" : "Jonathan L Long", "longjon" : "Jonathan L Long",
-        "Sergio" : "Sergio Guadarrama",
-        "frankseide" : "Frank Seide",
-        "terrytangyuan" : "Yuan (Terry) Tang",
-        "caisq" : "Shanqing Cai",
-        "yifeif" : "Yifei Feng",
-        "Daniel W Mane" : "Dan Mané",
-        "soumith" : "Soumith Chintala",
-        "Nicholas Léonard" : "Nicholas Leonard", "nicholas-leonard" : "Nicholas Leonard",
-        "GeorgOstrovski" : "Georg Ostrovski",
-        "agibsonccc" : "Adam Gibson",
-        "raver" : "raver119", "raver119@gmail.com" : "raver119",
-        "nyghtowl" : "Melanie Warrick", 
-        "jyt109" : "Jeffrey Tang",
-        "bergstrj@iro.umontreal.ca" :"James Bergstra", "bergstra@ip05.m" : "James Bergstra" }
+DUP_DICT = {u"Frederic" : u"Frederic Bastien", u"Frédéric Bastien": u"Frederic Bastien", u"nouiz" : u"Frederic Bastien",
+        u"lamblin" : u"Pascal Lamblin", 
+        u"abergeron" : u"Arnaud Bergeron",
+        u"carriepl" : u"Pierre Luc Carrier",
+        u"Jon Long" : u"Jonathan L Long", u"longjon" : u"Jonathan L Long",
+        u"Sergio" : u"Sergio Guadarrama",
+        u"frankseide" : u"Frank Seide",
+        u"terrytangyuan" : u"Yuan (Terry) Tang",
+        u"caisq" : u"Shanqing Cai",
+        u"yifeif" : u"Yifei Feng",
+        u"Daniel W Mane" : u"Dan Mané",
+        u"soumith" : u"Soumith Chintala",
+        u"Nicholas Léonard" : u"Nicholas Leonard", u"nicholas-leonard" : u"Nicholas Leonard",
+        u"GeorgOstrovski" : u"Georg Ostrovski",
+        u"agibsonccc" : u"Adam Gibson",
+        u"raver" : u"raver119", u"raver119@gmail.com" : u"raver119",
+        u"nyghtowl" : u"Melanie Warrick", 
+        u"jyt109" : u"Jeffrey Tang",
+        u"bergstrj@iro.umontreal.ca" :u"James Bergstra", u"bergstra@ip05.m" : u"James Bergstra" }
  
 def return_constants(flag):
     """

@@ -18,7 +18,7 @@ def count_commits_per_user(filename):
         name = commit["commit"]["author"]["name"].encode("utf-8")
         if(name not in constants_dict["jenkins"]):
             if (name in DUP_DICT):
-                name = DUP_DICT[name]
+                name = DUP_DICT[name].encode("utf-8")
             userCommitHist[name] = userCommitHist.get(name, 0) + 1
     return userCommitHist
 
