@@ -2,7 +2,7 @@ from datetime import date, datetime
 import json
 import os, sys
 sys.path.insert(0, os.path.abspath(os.path.join('..', '..')))
-from misc_info.constants import ML, STACK, return_constants, return_filename
+from misc_info.constants import ML, STACK, return_constants, return_filename, DUP_DICT
 
 constants_dict = {}
 
@@ -106,6 +106,8 @@ def countCommits(repo, startDate=date.min, endDate=date.max):
         name = commit["commit"]["author"]["name"].encode("utf-8")
 
         if commitdate < endDate and commitdate >= startDate:
+            if (name in DUP_DICT):
+                name = DUP_DICT[name]
             userCommitHist[name] = userCommitHist.get(name, 0) + 1
             commitCount+=1
 
@@ -120,7 +122,8 @@ def countCommitsByYear(repo):
         unixDate = commit["commit"]["author"]["date"].encode("utf-8")
         commitdate = parseTimeStamp(unixDate)
         name = commit["commit"]["author"]["name"].encode("utf-8")
-
+        if (name in DUP_DICT):
+            name = DUP_DICT[name]
         # get the year
         year = commitdate.year
         if year not in userCommitHist:
@@ -140,7 +143,8 @@ def countCommitsByMonth(repo):
         unixDate = commit["commit"]["author"]["date"].encode("utf-8")
         commitdate = parseTimeStamp(unixDate)
         name = commit["commit"]["author"]["name"].encode("utf-8")
-
+        if (name in DUP_DICT):
+            name = DUP_DICT[name]
         actualMonth = getMonthID(commitdate)
         if actualMonth not in userCommitHist:
             userCommitHist[actualMonth] = {}

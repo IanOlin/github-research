@@ -2,7 +2,7 @@ import json
 import csv
 import os, sys
 sys.path.insert(0, os.path.abspath(os.path.join('..', '..')))
-from misc_info.constants import ML, STACK, CURRENT_DATE, return_constants, return_filename
+from misc_info.constants import ML, STACK, CURRENT_DATE, return_constants, return_filename, DUP_DICT
 
 constants_dict = {}
 
@@ -17,6 +17,8 @@ def count_commits_per_user(filename):
         # simple fields
         name = commit["commit"]["author"]["name"].encode("utf-8")
         if(name not in constants_dict["jenkins"]):
+            if (name in DUP_DICT):
+                name = DUP_DICT[name]
             userCommitHist[name] = userCommitHist.get(name, 0) + 1
     return userCommitHist
 

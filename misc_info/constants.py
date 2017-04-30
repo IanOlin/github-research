@@ -57,6 +57,9 @@ __ST_CONSTANTS["data-fpath"] = os.path.abspath(os.path.join(path, "github_data",
 __ST_CONSTANTS["commits-fpath"] = os.path.join(__ST_CONSTANTS["data-fpath"], "commits")
 __ST_CONSTANTS["pulls-fpath"] = os.path.join(__ST_CONSTANTS["data-fpath"], "pulls")
 
+        
+
+
 ### PUBLIC --------------------------------------------------------------
 
 # flags
@@ -72,8 +75,27 @@ CURRENT_DATE = date.today() #date(2016, 11, 1)    # current date according to th
                                     # may change it to the actual current date
                                     # after we automate github scraping also
 
-
-
+# dict of name merging
+DUP_DICT = {"Frederic" : "Frederic Bastien", "Frédéric Bastien":"Frederic Bastien", "nouiz" : "Frederic Bastien",
+        "lamblin" : "Pascal Lamblin", 
+        "abergeron" : "Arnaud Bergeron",
+        "carriepl" : "Pierre Luc Carrier",
+        "Jon Long" : "Jonathan L Long", "longjon" : "Jonathan L Long",
+        "Sergio" : "Sergio Guadarrama",
+        "frankseide" : "Frank Seide",
+        "terrytangyuan" : "Yuan (Terry) Tang",
+        "caisq" : "Shanqing Cai",
+        "yifeif" : "Yifei Feng",
+        "Daniel W Mane" : "Dan Mané",
+        "soumith" : "Soumith Chintala",
+        "Nicholas Léonard" : "Nicholas Leonard", "nicholas-leonard" : "Nicholas Leonard",
+        "GeorgOstrovski" : "Georg Ostrovski",
+        "agibsonccc" : "Adam Gibson",
+        "raver" : "raver119", "raver119@gmail.com" : "raver119",
+        "nyghtowl" : "Melanie Warrick", 
+        "jyt109" : "Jeffrey Tang",
+        "bergstrj@iro.umontreal.ca" :"James Bergstra", "bergstra@ip05.m" : "James Bergstra" }
+ 
 def return_constants(flag):
     """
     Given a flag, returns the correct dictionary of constants
