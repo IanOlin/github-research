@@ -78,7 +78,7 @@ CURRENT_DATE = date.today() #date(2016, 11, 1)    # current date according to th
                                     # after we automate github scraping also
 
 # dict of name merging
-DUP_DICT = {u"Frederic" : u"Frederic Bastien", u"Frédéric Bastien": u"Frederic Bastien", u"nouiz" : u"Frederic Bastien",
+DUP_DICT = {u"Frederic" : u"Frédéric Bastien", u"Frederic Bastien" : u"Frédéric Bastien", u"nouiz" : u"Frédéric Bastien",
         u"lamblin" : u"Pascal Lamblin", 
         u"abergeron" : u"Arnaud Bergeron",
         u"carriepl" : u"Pierre Luc Carrier",
