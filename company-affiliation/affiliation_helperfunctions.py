@@ -1,4 +1,5 @@
 # This Python file uses the following encoding: utf-8
+#-*- coding: utf-8 -*-
 import os, sys
 
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
@@ -14,77 +15,47 @@ from pattern.web import URL, extension, download
 from sets import Set
 import json
 import re
+import csv
+import unicodedata
 
-PATHtoLinkedInJSONs = "/home/anne/github-research/company-affiliation/resources/linkedin_info/"
+# PATHtoLinkedInJSONs = "/home/anne/github-research/company-affiliation/resources/linkedin_info/"
+
 DEBUG = True
 pending = []
 
+def obtainCommittersandCount(companyfile): 
+	filepath = "/home/anne/github-research/committer_csvs"
+	name_commits_dict = {}
+	for root, _, files in os.walk(filepath):
+		for f in files:
+			fullpath = os.path.join(root, f)
+			if (f == companyfile):
+				try:
+					with open(fullpath, "rt") as f_obj:
+						reader = csv.reader(f_obj)
+						for row in reader:
+							name = row[0].decode('utf-8')
+							commitcount = int(row[1])
+							name_commits_dict[name] = commitcount
+				except ValueError:
+					print fullpath, " has this error: ", ValueError
+				except TypeError:
+					print fullpath, " has this error: ", TypeError
+	return name_commits_dict
 
-"""
-Takes in all the results of the json file and returns the info we really need in a tuple
-returns: (date list, sha list, name list)
-Keep in mind the names aren't in their final, simplified form. There are duplicates in this names list.
-"""
-def obtainDatesShasNames(filename):
-	commits = json.load(open(filename, 'r'))
-	shas = []
-	names = []
-	dates = []
-	companies = []
-	for c in commits:
-		#TODO:
-		#store dates in dates
-		dates.append(c["commit"]["author"]["date"].encode("utf-8"))
-		#store sha in shas
-		commiturl = c["commit"]["url"]
-		commiturl_list = commiturl.split("/")
-		shas.append(commiturl_list[-1].encode("utf-8"))
-		#store name in names
-		names.append(c["commit"]["author"]["name"])
-		pass
-	filterLists(dates, shas, names)
-	return (dates, shas, names)
-
-"""
-Gets one of each name and stores the results into a list
-"""
-def simplifyNameList(comprehensiveNameList):
-	newNameSet = Set()
-	for name in comprehensiveNameList:
-		newNameSet.add(name)
-	return list(newNameSet)
-
-def num_of_10percent(companyfile):
-	(dates, shas, names) = obtainDatesShasNames(companyfile)
-	total_committer_list = simplifyNameList(names)
-	return len(total_committer_list)*.1
-def num_of_20percent(companyfile):
-	(dates, shas, names) = obtainDatesShasNames(companyfile)
-	total_committer_list = simplifyNameList(names)
-	return len(total_committer_list)*.2
+def num_of_percent(companyfile, percent):
+	name_commits_dict = obtainCommittersandCount(companyfile)
+	if (percent > 100):
+		print "\ninvalid percentage. Try again\n"
+		return 0
+	return int(len(name_commits_dict)*(percent*.01))
 
 """
 Gets the number of commits this person has for this particular project
 """
 def findNumCommits(name, companyfile):
-	numcommits = 0
-	(dates, shas, names) = obtainDatesShasNames(companyfile)
-	for currentname in names:
-		if name == currentname:
-			numcommits += 1
-	return numcommits
-
-"""
-eliminate Jenkins, OpenStack Proposal Bot, and Openstack Jenkins
-"""
-def filterLists(dates, shas, names):
-	for i in range(len(names) - 1, -1, -1):
-		n = names[i]
-		if (n == 'OpenStack Proposal Bot') or (n == 'Jenkins') or (n == 'OpenStack Jenkins') or (n == "A Unique TensorFlower"):
-			index_location = names.index(n)
-			del names[index_location]
-			del shas[index_location]
-			del dates[index_location]
+	name_commits_dict = obtainCommittersandCount(companyfile)
+	return name_commits_dict[name]
 
 # Find this person's work history if it's saved. If not, save it to a file called "pending"
 def findHistory(name):
@@ -106,6 +77,9 @@ def findHistory(name):
 			data = json.load(data_file)
 			# print data_file
 			try:
+				# print data[name_key]
+				print data
+				print name_key
 				return data[name_key]
 			except KeyError, Argument:
 				pending.append(name)
@@ -115,48 +89,26 @@ def findHistory(name):
 		pending.append(name)
 		print "we can't decode {}".format(name), Argument
 
-
 """
 Helper function: get the top 10% of committers at a company and saves it to a file
 """
-def frequentcommitters(companyfile, company):
-	# Obtain info for all commits
-	(dates, shas, names) = obtainDatesShasNames(companyfile)
-	# Obtain list of names with each name only once
-	uniquenames = simplifyNameList(names)
-	frequentcommitters = {}
-	print "going through {}'s committers. progress: \n".format(companyfile)
-	for name_index in range(len(uniquenames)):
-		name = uniquenames[name_index]
-		print name_index + 1, "out of ", len(uniquenames), " total committers"
-		if (findNumCommits(name, companyfile) > 2):
-			frequentcommitters[name] = findNumCommits(name, companyfile)
-	# For debugging:
-	# print frequentcommitters
-	# Sort the frequent committers by making a histogram:	
-	num_20percent = num_of_20percent(companyfile)
-	resultinglist = []
-	# We do this every time until we get 10% of the committers for this companyfile
-	while (num_20percent > 0):
-		committer_name = ""
-		max_commits = 3
-		# Getting the top committer in this list
-		for name in frequentcommitters:
-			if frequentcommitters[name] > max_commits:
-				committer_name = name
-				max_commits = frequentcommitters[name]
-		# add the name to the resulting list
-		resultinglist.append(committer_name)
-		# delete the highest # of commits result to get the next one
-		del(frequentcommitters[committer_name])
-		# Decrement the num_20percent so the while loop doesn't last forever
-		num_20percent -= 1
-	# save resultinglist into a json file with companyfile as the key
-	jsondict = {}
-	jsondict["overall"] = resultinglist
+def frequentcommitters(companyfile, company, percent):
+	name_commits_dict = obtainCommittersandCount(companyfile)
+	num_percent = num_of_percent(companyfile, percent)
+	# Loop through name_commits_dict num_percent times. (Inefficient, I know)
+	committers = []
+	count_max = 1
+	# get the values (commit count) of the dictionary
+	commit_number_list = sorted(name_commits_dict.values())[-1*num_percent:]
+	print commit_number_list
+	for name in name_commits_dict:
+		count = name_commits_dict[name]
+		if (count in commit_number_list):
+			committers.append(name)
+	jsondict = {"frequent": committers}
 	with open('{}_frequentcommitters.json'.format(company), 'w') as f:
 		json.dump(jsondict, f)
-	return resultinglist
+	return jsondict
 
 #Emergency linkedin processing. if we ever need this method again
 def getLinkedInInfo(name, url):
@@ -198,27 +150,26 @@ def getLinkedInInfo(name, url):
 
 #Given company & work history, look for the word "Tensorflow", or "Google" for the tensorflow project
 #Look for "CNTK" or "Microsoft" for the CNTK project
-def findNumEmployees(project, committers_list):
+def findNumEmployees(companyfile, repo, percent):
 	numEmployees = 0
 	employeeList = []
 	company = ""
 	# company is the phrase to look for in the linkedin data or email domain association
-	if (project == "/home/anne/ResearchJSONs/tensorflow-tensorflow-commits.json"):
+	if (repo == "tensorflow"):
 		company += "Google"
-	elif (project == "/home/anne/ResearchJSONs/CNTK-Microsoft-commits.json"):
+	elif (repo == "CNTK"):
 		company += "Microsoft"
-	elif (project == "/home/anne/ResearchJSONs/deeplearning4j-deeplearning4j-commits.json"):
+	elif (repo == "deeplearning4j"):
 		company += "Skymind"
-	elif (project == "/home/anne/ResearchJSONs/Theano-Theano-commits.json"):
+	elif (repo == "Theano"):
 		company += "Montr"
-	elif (project == "/home/anne/ResearchJSONs/caffe-BVLC-commits.json"):
+	elif (repo == "caffe"):
 		company += "Berkeley"
 
-	print "frequent committers: ", committers_list
+	committers_list = frequentcommitters(companyfile, repo, percent)["frequent"]
 	#looping through frequentcommitters to see if this person has worked at the company
 	for name_index in range(len(committers_list)):
 		name = committers_list[name_index] 
-		# print name_index, " out of ", len(committers_list), "frequent committers"
 		try:
 			# Find this person's linkedin history
 			personalHistory = findHistory(name) #pulls up the personal work history of this person
@@ -241,29 +192,19 @@ def findNumEmployees(project, committers_list):
 	return employeeList, numEmployees
 
 if __name__ == '__main__':
-	# frequentcommitterslist = frequentcommitters(companyfile)
-	# Getting last minute linkedin data
-	# committerprofiles = {u'sonaliii': "https://www.linkedin.com/in/sonali-dayal"}
-	# for name in committerprofiles:
-	# 	print name
-	# 	getLinkedInInfo(name, committerprofiles[name])
+	repo = "Theano"
+	csv_file = "Theano-Theano-dict.csv"
+	percent = 10
 
-	companyfilepath = "/home/anne/ResearchJSONs/" + "deeplearning4j-deeplearning4j-commits.json"
-	repo = 'deeplearning4j'
-	
-	# frequentcommitters(companyfilepath, repo)
+	# print obtainCommittersandCount(csv_file)
+	# print frequentcommitters(csv_file, repo, percent)
 
+	print findNumEmployees(csv_file, repo, percent)[0]
+	print findHistory("Frédéric Bastien")
+	# json_file = '{}_frequentcommitters.json'.format(repo)
+	# with open(json_file, 'r') as data_file:
+	# 	jsondict = json.load(json_file)
+	# 	committers = jsondict["frequent"]
 
-	resultingfile = '{}_frequentcommitters.json'.format(repo)
-	with open(resultingfile, 'r') as data_file:
-		jsondict = json.load(data_file)
-		committers = jsondict["overall"]
-
-	affiliatedcommitters = findNumEmployees(companyfilepath, committers)[0]
-	print affiliatedcommitters
-
-	jsondict["affiliated"] = affiliatedcommitters
-
-	f = open(resultingfile, 'w')
-	json.dump(jsondict, f)
-	f.close()
+	# affiliatedcommitters = findNumEmployees(csv_file, repo, percent)[0]
+	# print "affiliated, ", affiliatedcommitters
