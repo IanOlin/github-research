@@ -1,0 +1,185 @@
+1494390694651	geckodriver	INFO	Listening on 127.0.0.1:46160
+1494390695632	mozprofile::profile	INFO	Using profile path /tmp/rust_mozprofile.wynlxkP6BPkv
+1494390695633	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox
+1494390695636	geckodriver::marionette	INFO	Connecting to Marionette on localhost:34064
+
+(firefox:8334): GLib-GObject-CRITICAL **: g_object_ref: assertion 'object->ref_count > 0' failed
+
+(firefox:8334): GLib-GObject-CRITICAL **: g_object_unref: assertion 'object->ref_count > 0' failed
+
+(firefox:8334): GLib-GObject-CRITICAL **: g_object_ref: assertion 'object->ref_count > 0' failed
+
+(firefox:8334): GLib-GObject-CRITICAL **: g_object_unref: assertion 'object->ref_count > 0' failed
+1494390697952	Marionette	INFO	Listening on port 34064
+
+(/usr/lib/firefox/firefox:8406): GLib-GObject-CRITICAL **: g_object_ref: assertion 'object->ref_count > 0' failed
+
+(/usr/lib/firefox/firefox:8406): GLib-GObject-CRITICAL **: g_object_unref: assertion 'object->ref_count > 0' failed
+
+(/usr/lib/firefox/firefox:8406): GLib-GObject-CRITICAL **: g_object_ref: assertion 'object->ref_count > 0' failed
+
+(/usr/lib/firefox/firefox:8406): GLib-GObject-CRITICAL **: g_object_unref: assertion 'object->ref_count > 0' failed
+JavaScript error: https://static.licdn.com/sc/h/bfujzpfzk9bvfrwcnbea0qswy,bwkq2t7thanqo5lqys5wnoflj,8kp2w6rpcln18ko53h2318oog, line 2: SyntaxError: JSON.parse: unexpected character at line 1 column 2 of the JSON data
+JavaScript error: https://static.licdn.com/sc/h/bfujzpfzk9bvfrwcnbea0qswy,bwkq2t7thanqo5lqys5wnoflj,8kp2w6rpcln18ko53h2318oog, line 2: SyntaxError: JSON.parse: unexpected character at line 1 column 2 of the JSON data
+1494390702423	Marionette	INFO	New connections will no longer be accepted
+[Child 8406] WARNING: pipe error (17): Connection reset by peer: file /build/firefox-FVkZSl/firefox-53.0+build6/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 346
+1494390728483	geckodriver	INFO	Listening on 127.0.0.1:51804
+1494390729483	mozprofile::profile	INFO	Using profile path /tmp/rust_mozprofile.eFGFImS5Jbls
+1494390729483	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox
+1494390729488	geckodriver::marionette	INFO	Connecting to Marionette on localhost:45824
+
+(firefox:8483): GLib-GObject-CRITICAL **: g_object_ref: assertion 'object->ref_count > 0' failed
+
+(firefox:8483): GLib-GObject-CRITICAL **: g_object_unref: assertion 'object->ref_count > 0' failed
+
+(firefox:8483): GLib-GObject-CRITICAL **: g_object_ref: assertion 'object->ref_count > 0' failed
+
+(firefox:8483): GLib-GObject-CRITICAL **: g_object_unref: assertion 'object->ref_count > 0' failed
+1494390731672	Marionette	INFO	Listening on port 45824
+
+(/usr/lib/firefox/firefox:8561): GLib-GObject-CRITICAL **: g_object_ref: assertion 'object->ref_count > 0' failed
+
+(/usr/lib/firefox/firefox:8561): GLib-GObject-CRITICAL **: g_object_unref: assertion 'object->ref_count > 0' failed
+
+(/usr/lib/firefox/firefox:8561): GLib-GObject-CRITICAL **: g_object_ref: assertion 'object->ref_count > 0' failed
+
+(/usr/lib/firefox/firefox:8561): GLib-GObject-CRITICAL **: g_object_unref: assertion 'object->ref_count > 0' failed
+JavaScript error: https://static.licdn.com/sc/h/bfujzpfzk9bvfrwcnbea0qswy,bwkq2t7thanqo5lqys5wnoflj,8kp2w6rpcln18ko53h2318oog, line 2: SyntaxError: JSON.parse: unexpected character at line 1 column 2 of the JSON data
+JavaScript error: https://static.licdn.com/sc/h/bfujzpfzk9bvfrwcnbea0qswy,bwkq2t7thanqo5lqys5wnoflj,8kp2w6rpcln18ko53h2318oog, line 2: SyntaxError: JSON.parse: unexpected character at line 1 column 2 of the JSON data
+1494390735989	Marionette	INFO	New connections will no longer be accepted
+[Child 8561] WARNING: pipe error (17): Connection reset by peer: file /build/firefox-FVkZSl/firefox-53.0+build6/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 346
+[Child 8561] WARNING: pipe error (3): Connection reset by peer: file /build/firefox-FVkZSl/firefox-53.0+build6/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 346
+1494390759734	geckodriver	INFO	Listening on 127.0.0.1:56651
+1494390760734	mozprofile::profile	INFO	Using profile path /tmp/rust_mozprofile.zh7Ux4DR32Dx
+1494390760734	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox
+1494390760736	geckodriver::marionette	INFO	Connecting to Marionette on localhost:36311
+
+(firefox:8656): GLib-GObject-CRITICAL **: g_object_ref: assertion 'object->ref_count > 0' failed
+
+(firefox:8656): GLib-GObject-CRITICAL **: g_object_unref: assertion 'object->ref_count > 0' failed
+
+(firefox:8656): GLib-GObject-CRITICAL **: g_object_ref: assertion 'object->ref_count > 0' failed
+
+(firefox:8656): GLib-GObject-CRITICAL **: g_object_unref: assertion 'object->ref_count > 0' failed
+1494390763014	Marionette	INFO	Listening on port 36311
+
+(/usr/lib/firefox/firefox:8723): GLib-GObject-CRITICAL **: g_object_ref: assertion 'object->ref_count > 0' failed
+
+(/usr/lib/firefox/firefox:8723): GLib-GObject-CRITICAL **: g_object_unref: assertion 'object->ref_count > 0' failed
+
+(/usr/lib/firefox/firefox:8723): GLib-GObject-CRITICAL **: g_object_ref: assertion 'object->ref_count > 0' failed
+
+(/usr/lib/firefox/firefox:8723): GLib-GObject-CRITICAL **: g_object_unref: assertion 'object->ref_count > 0' failed
+JavaScript error: https://static.licdn.com/sc/h/bfujzpfzk9bvfrwcnbea0qswy,bwkq2t7thanqo5lqys5wnoflj,8kp2w6rpcln18ko53h2318oog, line 2: SyntaxError: JSON.parse: unexpected character at line 1 column 2 of the JSON data
+JavaScript error: https://static.licdn.com/sc/h/bfujzpfzk9bvfrwcnbea0qswy,bwkq2t7thanqo5lqys5wnoflj,8kp2w6rpcln18ko53h2318oog, line 2: SyntaxError: JSON.parse: unexpected character at line 1 column 2 of the JSON data
+1494390767382	Marionette	INFO	New connections will no longer be accepted
+[Child 8723] WARNING: pipe error (3): Connection reset by peer: file /build/firefox-FVkZSl/firefox-53.0+build6/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 346
+1494390835098	geckodriver	INFO	Listening on 127.0.0.1:41369
+1494390836097	mozprofile::profile	INFO	Using profile path /tmp/rust_mozprofile.SR4h4IxuSpI9
+1494390836098	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox
+1494390836100	geckodriver::marionette	INFO	Connecting to Marionette on localhost:41125
+
+(firefox:8822): GLib-GObject-CRITICAL **: g_object_ref: assertion 'object->ref_count > 0' failed
+
+(firefox:8822): GLib-GObject-CRITICAL **: g_object_unref: assertion 'object->ref_count > 0' failed
+
+(firefox:8822): GLib-GObject-CRITICAL **: g_object_ref: assertion 'object->ref_count > 0' failed
+
+(firefox:8822): GLib-GObject-CRITICAL **: g_object_unref: assertion 'object->ref_count > 0' failed
+1494390838233	Marionette	INFO	Listening on port 41125
+
+(/usr/lib/firefox/firefox:8889): GLib-GObject-CRITICAL **: g_object_ref: assertion 'object->ref_count > 0' failed
+
+(/usr/lib/firefox/firefox:8889): GLib-GObject-CRITICAL **: g_object_unref: assertion 'object->ref_count > 0' failed
+
+(/usr/lib/firefox/firefox:8889): GLib-GObject-CRITICAL **: g_object_ref: assertion 'object->ref_count > 0' failed
+
+(/usr/lib/firefox/firefox:8889): GLib-GObject-CRITICAL **: g_object_unref: assertion 'object->ref_count > 0' failed
+JavaScript error: https://static.licdn.com/sc/h/bfujzpfzk9bvfrwcnbea0qswy,bwkq2t7thanqo5lqys5wnoflj,8kp2w6rpcln18ko53h2318oog, line 2: SyntaxError: JSON.parse: unexpected character at line 1 column 2 of the JSON data
+1494390842027	Marionette	INFO	New connections will no longer be accepted
+[Child 8889] WARNING: pipe error (3): Connection reset by peer: file /build/firefox-FVkZSl/firefox-53.0+build6/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 346
+1494390978942	geckodriver	INFO	Listening on 127.0.0.1:44089
+1494390979940	mozprofile::profile	INFO	Using profile path /tmp/rust_mozprofile.lXSCbczzpVQL
+1494390979940	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox
+1494390979943	geckodriver::marionette	INFO	Connecting to Marionette on localhost:34841
+
+(firefox:9039): GLib-GObject-CRITICAL **: g_object_ref: assertion 'object->ref_count > 0' failed
+
+(firefox:9039): GLib-GObject-CRITICAL **: g_object_unref: assertion 'object->ref_count > 0' failed
+
+(firefox:9039): GLib-GObject-CRITICAL **: g_object_ref: assertion 'object->ref_count > 0' failed
+
+(firefox:9039): GLib-GObject-CRITICAL **: g_object_unref: assertion 'object->ref_count > 0' failed
+1494390981759	Marionette	INFO	Listening on port 34841
+
+(/usr/lib/firefox/firefox:9110): GLib-GObject-CRITICAL **: g_object_ref: assertion 'object->ref_count > 0' failed
+
+(/usr/lib/firefox/firefox:9110): GLib-GObject-CRITICAL **: g_object_unref: assertion 'object->ref_count > 0' failed
+
+(/usr/lib/firefox/firefox:9110): GLib-GObject-CRITICAL **: g_object_ref: assertion 'object->ref_count > 0' failed
+
+(/usr/lib/firefox/firefox:9110): GLib-GObject-CRITICAL **: g_object_unref: assertion 'object->ref_count > 0' failed
+JavaScript error: https://static.licdn.com/sc/h/bfujzpfzk9bvfrwcnbea0qswy,bwkq2t7thanqo5lqys5wnoflj,8kp2w6rpcln18ko53h2318oog, line 2: SyntaxError: JSON.parse: unexpected character at line 1 column 2 of the JSON data
+JavaScript error: https://static.licdn.com/sc/h/bfujzpfzk9bvfrwcnbea0qswy,bwkq2t7thanqo5lqys5wnoflj,8kp2w6rpcln18ko53h2318oog, line 2: SyntaxError: JSON.parse: unexpected character at line 1 column 2 of the JSON data
+1494390985695	Marionette	INFO	New connections will no longer be accepted
+[Child 9110] WARNING: pipe error (3): Connection reset by peer: file /build/firefox-FVkZSl/firefox-53.0+build6/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 346
+1494391345903	geckodriver	INFO	Listening on 127.0.0.1:35193
+1494391346902	mozprofile::profile	INFO	Using profile path /tmp/rust_mozprofile.7HHPB4XF6fiK
+1494391346902	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox
+1494391346904	geckodriver::marionette	INFO	Connecting to Marionette on localhost:44142
+
+(firefox:9417): GLib-GObject-CRITICAL **: g_object_ref: assertion 'object->ref_count > 0' failed
+
+(firefox:9417): GLib-GObject-CRITICAL **: g_object_unref: assertion 'object->ref_count > 0' failed
+
+(firefox:9417): GLib-GObject-CRITICAL **: g_object_ref: assertion 'object->ref_count > 0' failed
+
+(firefox:9417): GLib-GObject-CRITICAL **: g_object_unref: assertion 'object->ref_count > 0' failed
+1494391348709	Marionette	INFO	Listening on port 44142
+
+(/usr/lib/firefox/firefox:9489): GLib-GObject-CRITICAL **: g_object_ref: assertion 'object->ref_count > 0' failed
+
+(/usr/lib/firefox/firefox:9489): GLib-GObject-CRITICAL **: g_object_unref: assertion 'object->ref_count > 0' failed
+
+(/usr/lib/firefox/firefox:9489): GLib-GObject-CRITICAL **: g_object_ref: assertion 'object->ref_count > 0' failed
+
+(/usr/lib/firefox/firefox:9489): GLib-GObject-CRITICAL **: g_object_unref: assertion 'object->ref_count > 0' failed
+JavaScript error: https://static.licdn.com/sc/h/bfujzpfzk9bvfrwcnbea0qswy,bwkq2t7thanqo5lqys5wnoflj,8kp2w6rpcln18ko53h2318oog, line 2: SyntaxError: JSON.parse: unexpected character at line 1 column 2 of the JSON data
+JavaScript error: https://static.licdn.com/sc/h/bfujzpfzk9bvfrwcnbea0qswy,bwkq2t7thanqo5lqys5wnoflj,8kp2w6rpcln18ko53h2318oog, line 2: SyntaxError: JSON.parse: unexpected character at line 1 column 2 of the JSON data
+1494391352639	Marionette	INFO	New connections will no longer be accepted
+[Child 9489] WARNING: pipe error (17): Connection reset by peer: file /build/firefox-FVkZSl/firefox-53.0+build6/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 346
+
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+[Child 9489] WARNING: pipe error (3): Connection reset by peer: file /build/firefox-FVkZSl/firefox-53.0+build6/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 346
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x880008,name=PLayerTransaction::Msg_ReleaseCompositable) Channel error: cannot send/recv
+
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x880007,name=PLayerTransaction::Msg_ReleaseLayer) Channel error: cannot send/recv
+
+1494394114740	geckodriver	INFO	Listening on 127.0.0.1:38903
+1494394115739	mozprofile::profile	INFO	Using profile path /tmp/rust_mozprofile.8go4hGVcewZd
+1494394115739	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox
+1494394115745	geckodriver::marionette	INFO	Connecting to Marionette on localhost:42181
+
+(firefox:10488): GLib-GObject-CRITICAL **: g_object_ref: assertion 'object->ref_count > 0' failed
+
+(firefox:10488): GLib-GObject-CRITICAL **: g_object_unref: assertion 'object->ref_count > 0' failed
+
+(firefox:10488): GLib-GObject-CRITICAL **: g_object_ref: assertion 'object->ref_count > 0' failed
+
+(firefox:10488): GLib-GObject-CRITICAL **: g_object_unref: assertion 'object->ref_count > 0' failed
+1494394117832	Marionette	INFO	Listening on port 42181
+
+(/usr/lib/firefox/firefox:10561): GLib-GObject-CRITICAL **: g_object_ref: assertion 'object->ref_count > 0' failed
+
+(/usr/lib/firefox/firefox:10561): GLib-GObject-CRITICAL **: g_object_unref: assertion 'object->ref_count > 0' failed
+
+(/usr/lib/firefox/firefox:10561): GLib-GObject-CRITICAL **: g_object_ref: assertion 'object->ref_count > 0' failed
+
+(/usr/lib/firefox/firefox:10561): GLib-GObject-CRITICAL **: g_object_unref: assertion 'object->ref_count > 0' failed
+JavaScript error: https://static.licdn.com/sc/h/bfujzpfzk9bvfrwcnbea0qswy,bwkq2t7thanqo5lqys5wnoflj,8kp2w6rpcln18ko53h2318oog, line 2: SyntaxError: JSON.parse: unexpected character at line 1 column 2 of the JSON data
+JavaScript error: https://static.licdn.com/sc/h/bfujzpfzk9bvfrwcnbea0qswy,bwkq2t7thanqo5lqys5wnoflj,8kp2w6rpcln18ko53h2318oog, line 2: SyntaxError: JSON.parse: unexpected character at line 1 column 2 of the JSON data
+1494394121827	Marionette	INFO	New connections will no longer be accepted
+[Child 10561] WARNING: pipe error (3): Connection reset by peer: file /build/firefox-FVkZSl/firefox-53.0+build6/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 346

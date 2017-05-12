@@ -3,18 +3,24 @@ Finding what contributors are affiliated with what company.
 
 ### Code
 
-* get_linkedin_info.py
+* affiliation_calculation.py
 
-Grabs each of the commits from the API output (stored in files), and takes the commit author and scrapes the author's linkedin profile. Writes the results of the scraping to a file in "company-affiliation/resources/linkedin_info" that is specific to that commit author. Requires Selenium Webdriver and Firefox.
+Contains a variety of helper functions that help us determine the percentage of top committers are affiliated with the organization that hosts the repository. 
 
-* company_affiliation.py
+```
+$ cd ~/github-research/company-affiliation
+$ python affiliation_calculation.py
+Out of top 100 percent of deeplearning4j's committers, at least 6.92307692308 percent of them are affiliated with Skymind.io
+Out of top 100 percent of Theano's committers, at least 13.539192399 percent of them are affiliated with Univ. of Montreal
+Out of top 100 percent of caffe's committers, at least 1.0752688172 percent of them are affiliated with Berkeley Vision and Learning Center
+Out of top 100 percent of CNTK's committers, at least 15.9090909091 percent of them are affiliated with Microsoft
+Out of top 100 percent of tensorflow's committers, at least 8.75576036866 percent of them are affiliated with Google
+```
 
-Goes through each commit from the API output and, using the commit author and the linkedin data generated from get_linkedin_info.py, finds the company or organization(s) the user was involved in at the time of the commit. Also generates a company that the user is affiliated with using the email domain. Writes a json for each repo, with the commit's sha mapped to the commit's author, email, timestamp, and list of companies/organizations, along with a flag that denotes how likely that company is to be the actual company the user is affiliated with.
+* companyaffiliation.json
+A large JSON file that contains the work histories we have of the Stack and ML repositories. 
 
-* getCrossovers.py
+There's a small disclaimer: Most of the entries in this file is manually done, with some help from the getLinkedInInfo() function in affiliation_calculation.py. If you want to run this code on other repositories, you may have to add more entries
 
-* obtain_remaining_linkedins.py
-
-* python_findtitle.py
-
-*arrayify.ipynb
+* geckodriver.log
+File needed to use the function getLinkedInInfo() in affiliation_calculation.py
