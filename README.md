@@ -14,6 +14,8 @@ Tooling is written in Python 2.7, with a little bit of Mathematica 11.
 
 Tooling is tested stable on Ubuntu 14.04 and 16.04, if running on windows, YMMV.
 
+Licensed under the MIT License. 
+
 ### Dependencies
 
 Dependencies include Requests, an HTTP library for python. Installation is as simple as:
@@ -51,7 +53,7 @@ From the top level, run:
 ```
 $ python run_scraping.py
 ```
-to generate a dataset for the ML repositories studied in the research project.
+to generate a dataset for the ML repositories studied in the research project. Be warned, this may take several hours.
 
 #### Step 4: Run metrics
 From the top level, run:
@@ -66,6 +68,18 @@ $ python run_metrics.py > yourpath/yourfile.txt
 
 ### Usage notes
 If one desires to add other repositories for analysis, extend `Config/constants.py`, adding another flag for the set of repositories, then running scraping and analysis with that flag.
+
+Scraping and Metrics for Stack repositories can be acquired by passing a command line flag like so:
+```
+$ python run_scraping.py Stack
+``` 
+
+or 
+
+```
+$ python run_metrics.py Stack
+``` 
+
 
 
 
