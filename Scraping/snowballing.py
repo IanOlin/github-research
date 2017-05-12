@@ -12,7 +12,7 @@ import repo_info
 import json
 import sys, os
 sys.path.insert(0, os.path.abspath(os.path.join('..')))
-from misc_info.constants import ML, STACK, return_constants
+from Config.constants import ML, STACK, return_constants
 
 
 dir = 'mlcontrib/'

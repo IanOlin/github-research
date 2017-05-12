@@ -2,7 +2,7 @@ import json
 import csv
 import os, sys
 sys.path.insert(0, os.path.abspath(os.path.join('..', '..')))
-from misc_info.constants import ML, STACK, CURRENT_DATE, return_constants, return_filename, DUP_DICT
+from Config.constants import ML, STACK, CURRENT_DATE, return_constants, return_filename, DUP_DICT
 
 constants_dict = {}
 

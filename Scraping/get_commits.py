@@ -2,7 +2,7 @@ from repo_info import *
 import json
 import sys, os
 sys.path.insert(0, os.path.abspath(os.path.join('..')))
-from misc_info.constants import ML, STACK, return_constants, return_filename, CURRENT_DATE
+from Config.constants import ML, STACK, return_constants, return_filename, CURRENT_DATE
 
 def get_commits(projects=ML):
     constants = return_constants(projects) #change this if necessary

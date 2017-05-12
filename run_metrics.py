@@ -1,10 +1,10 @@
 import os, sys
 sys.path.insert(0, os.path.abspath(os.path.join('..', '..')))
-from misc_info.constants import ML, STACK
+from Config.constants import ML, STACK
 
-from MLMetrics.Committers import count_committers
-from MLMetrics.Herfindahl import HerfindahlCalculator
-from MLMetrics.PullRequests import pr_metrics
+from Metrics.Committers import count_committers
+from Metrics.Herfindahl import HerfindahlCalculator
+from Metrics.PullRequests import pr_metrics
 
 def get_flag():
     project_str = "ml"

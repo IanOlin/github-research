@@ -4,7 +4,7 @@ import json
 from github_util import api_get, JSON_access, is_successful_response
 import sys, os
 sys.path.insert(0, os.path.abspath(os.path.join('..')))
-from misc_info.constants import ML, STACK, return_constants, CURRENT_DATE
+from Config.constants import ML, STACK, return_constants, CURRENT_DATE
 
 def is_merged_systemml(pull_request):
     url = JSON_access(pull_request,("comments_url",))

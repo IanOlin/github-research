@@ -2,7 +2,7 @@ from datetime import date, datetime
 import json
 import os, sys
 sys.path.insert(0, os.path.abspath(os.path.join('..', '..')))
-from misc_info.constants import ML, STACK, return_constants, return_filename, DUP_DICT
+from Config.constants import ML, STACK, return_constants, return_filename, DUP_DICT
 
 constants_dict = {}
 

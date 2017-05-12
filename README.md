@@ -38,7 +38,7 @@ $ git clone git@github.com:IanOlin/github-research.git
 
 
 #### Step 2: Add the keyfile
-Use of the software requires a keyfile, `keyfile.txt`, in the `github_scraping/` directory. 
+Use of the software requires a keyfile, `keyfile.txt`, in the `Scraping/` directory. 
 This should be a plain text document, with at least one github OAuth token in it. More tokens may be added, separated by newlines.
 
 Create a keyfile in an editor of your choice, and generate github oauth tokens with the following instructions:
@@ -65,7 +65,7 @@ $ python run_metrics.py > yourpath/yourfile.txt
 ```
 
 ### Usage notes
-If one desires to add other repositories for analysis, extend `misc_info/constants.py`, adding another flag for the set of repositories, then running scraping and analysis with that flag.
+If one desires to add other repositories for analysis, extend `Config/constants.py`, adding another flag for the set of repositories, then running scraping and analysis with that flag.
 
 
 

@@ -1,8 +1,8 @@
 import json
 import sys, os
 sys.path.insert(0, os.path.abspath(os.path.join('..', '..')))
-from github_scraping.get_pull_requests import is_merged_systemml
-from misc_info.constants import ML, STACK, return_constants
+from Scraping.get_pull_requests import is_merged_systemml
+from Config.constants import ML, STACK, return_constants
 
 
 systemml_name = 'incubator-systemml'

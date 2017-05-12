@@ -1,8 +1,8 @@
 import os, sys
 sys.path.insert(0, os.path.abspath(os.path.join('..', '..')))
-from misc_info.constants import ML, STACK
+from Config.constants import ML, STACK
 
-from github_scraping import get_commits, get_pull_requests
+from Scraping import get_commits, get_pull_requests
 
 def get_flag():
     project_str = "ml"
