@@ -4,4 +4,3 @@ ERROR.txt
 *.~lock.*
 *.swp
 github_data/*
-committer_csvs/*
