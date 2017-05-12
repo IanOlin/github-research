@@ -96,7 +96,12 @@ DUP_DICT = {u"Frederic" : u"Frédéric Bastien", u"Frederic Bastien" : u"Frédé
         u"raver" : u"raver119", u"raver119@gmail.com" : u"raver119",
         u"nyghtowl" : u"Melanie Warrick", 
         u"jyt109" : u"Jeffrey Tang",
-        u"bergstrj@iro.umontreal.ca" :u"James Bergstra", u"bergstra@ip05.m" : u"James Bergstra" }
+        u"bergstrj@iro.umontreal.ca" :u"James Bergstra", u"bergstra@ip05.m" : u"James Bergstra",
+        u"john-griffith" : u"John Griffith",
+        u"xing-yang" : u"Xing Yang",
+        u"jaypipes@gmail.com" : u"Jay Pipes",
+        u"lin-hua-cheng" : u"Lin Hua Cheng",
+        u"alena": u"Alena Prokharchyk" }
  
 def return_constants(flag):
     """
